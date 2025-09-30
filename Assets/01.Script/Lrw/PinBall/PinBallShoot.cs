@@ -1,20 +1,28 @@
+using Lrw_Input;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Lrw_PinBall
 {
     public class PinBallShoot : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField] private InputSO inputSO;
+        private LineRenderer _lineRenderer;
+
+        private void Awake()
         {
+            _lineRenderer = GetComponent<LineRenderer>();
 
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-
+            _lineRenderer.SetPosition(0,transform.position);
+            Vector2 MousePos = Camera.main.ScreenToWorldPoint(inputSO.MousePos); 
+            _lineRenderer.SetPosition(1, MousePos);
         }
+
+
     }
 }
 

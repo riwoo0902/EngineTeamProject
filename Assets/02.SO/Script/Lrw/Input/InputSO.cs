@@ -24,7 +24,7 @@ namespace Lrw_Input
             }
             _inputSystem_Actions.Player.Enable();
         }
-
+        
         private void OnDisable()
         {
             _inputSystem_Actions.Player.Disable();
