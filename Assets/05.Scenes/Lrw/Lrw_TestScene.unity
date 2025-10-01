@@ -971,11 +971,11 @@ LineRenderer:
       - serializedVersion: 3
         time: 1
         value: 0.4285717
-        inSlope: 1.9207875
-        outSlope: 1.9207875
+        inSlope: 0.11506303
+        outSlope: 0.11506303
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.21485937
+        inWeight: 0.45983934
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
