@@ -1,25 +1,26 @@
-using Lrw_Input;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Lrw_PinBall
 {
+    [RequireComponent(typeof(PinBall))]
     public class PinBallShoot : MonoBehaviour
     {
-        [SerializeField] private InputSO inputSO;
-        private LineRenderer _lineRenderer;
+        [SerializeField] private float ShootPower = 10;
+        private PinBall _pinBall;
 
         private void Awake()
         {
-            _lineRenderer = GetComponent<LineRenderer>();
-
+            _pinBall = GetComponent<PinBall>();
         }
 
-        private void Update()
+        public void Shoot()
         {
-            _lineRenderer.SetPosition(0,transform.position);
-            Vector2 MousePos = Camera.main.ScreenToWorldPoint(inputSO.MousePos); 
-            _lineRenderer.SetPosition(1, MousePos);
+            _pinBall._rigid.AddForce((_pinBall.inputSO.MousePos - (Vector2)transform.position).normalized * ShootPower * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        }
+
+        private void FixedUpdate()
+        {
+            Shoot();
         }
 
 
