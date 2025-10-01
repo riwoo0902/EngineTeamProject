@@ -59,7 +59,7 @@ namespace Lrw_Input
 
         public void OnMouse(InputAction.CallbackContext context)
         {
-            MousePos = context.ReadValue<Vector2>();
+            MousePos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
         }
 
     }
