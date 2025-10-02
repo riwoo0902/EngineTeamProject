@@ -9,8 +9,8 @@ namespace Lrw_Test
 
         private void Update()
         {
-
             Debug.Log($"x : {inputSO.MousePos.x}\n y : {inputSO.MousePos.y}");
+
         }
 
     }
