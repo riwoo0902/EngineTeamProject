@@ -6,28 +6,28 @@ using UnityEngine.InputSystem;
 namespace Lrw_Input
 {
     [CreateAssetMenu(fileName = "InputSO", menuName = "Input/InputSO")]
-    public class InputSO : ScriptableObject, InputSystem_Actions.IPlayerActions
+    public class InputSO : ScriptableObject, Controler.IPlayerActions
     {
         public Vector2 MousePos { get; private set; }
         public Vector2 MoveDir { get; private set; }
         public event Action OnJumpKeyPress;
-        public event Action OnAttackKeyPress;
-
-        private InputSystem_Actions _inputSystem_Actions;
-
+        public event Action OnMousePress;
+        public event Action OnMouseReleas;
+        private Controler _controler;
+        public bool MouseClick { get; private set; } = false;
         private void OnEnable()
         {
-            if (_inputSystem_Actions == null)
+            if (_controler == null)
             {
-                _inputSystem_Actions = new InputSystem_Actions();
-                _inputSystem_Actions.Player.SetCallbacks(this);
+                _controler = new Controler();
+                _controler.Player.SetCallbacks(this);
             }
-            _inputSystem_Actions.Player.Enable();
+            _controler.Player.Enable();
         }
-
+        
         private void OnDisable()
         {
-            _inputSystem_Actions.Player.Disable();
+            _controler.Player.Disable();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -47,13 +47,19 @@ namespace Lrw_Input
         {
             if (context.performed)
             {
-                OnAttackKeyPress?.Invoke();
+                OnMousePress?.Invoke();
+                MouseClick = true;
+            }
+            if (context.canceled)
+            {
+                OnMouseReleas?.Invoke();
+                MouseClick = false;
             }
         }
 
         public void OnMouse(InputAction.CallbackContext context)
         {
-            MousePos = context.ReadValue<Vector2>();
+            MousePos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
         }
 
     }
