@@ -1,10 +1,11 @@
 using Lrw_PinBall;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PinBall_Explanation : MonoBehaviour
 {
-    public static PinBall_Explanation Instance;
+    public static PinBall_Explanation Instance { get; private set; }
     [SerializeField] private TMP_Text pinBallName;
     [SerializeField] private TMP_Text pinBall_Explanation;
     
@@ -13,14 +14,16 @@ public class PinBall_Explanation : MonoBehaviour
     [SerializeField] private TMP_Text pinBall_Mass;
     [SerializeField] private TMP_Text pinBall_Friction;
     [SerializeField] private TMP_Text pinBall_Bounciless;
-
+    [SerializeField] private float spaceDistance = 5f;
     
     private string _pinBallName;
     private string _pinBall_Explanation;
     private float _pinBall_Mass;
     private float _pinBall_Friction;
     private float _pinBall_Bounciless;
-    private void Start()
+
+    private RectTransform _rectCompo;
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -30,16 +33,22 @@ public class PinBall_Explanation : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        _rectCompo = GetComponent<RectTransform>();
+        PointerOnExit();
     }
 
     public void PointerOnEnter(PinBallSO pinball)
     {
         SettingSOinUi(pinball);
+        _rectCompo.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        _rectCompo.position = new Vector3(_rectCompo.position.x + spaceDistance, _rectCompo.position.y, 0);
+
     }
 
     public void PointerOnExit()
     {
-
+        _rectCompo.position = new Vector3(10000, 10000, 0);
     }
 
     private void SettingSOinUi(PinBallSO pinball)
