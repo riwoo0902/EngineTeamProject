@@ -1,29 +1,29 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewMonster", menuName = "Scriptable Object / Monster Data", order = int.MaxValue)]
+[CreateAssetMenu(fileName = "NewMonster", menuName = "Scriptable Object/Monster Data", order = int.MaxValue)]
 public class MonsterDataSO : ScriptableObject
 {
-    [SerializeField] private int monsterTribe;
-    [SerializeField] private string monsterType;
-    [SerializeField] private int monsterHealth;
-    [SerializeField] private int monsterAttack;
-    [SerializeField] private int monsterDamage;
-    [SerializeField] private MonsterSpecialEffectSO specialEffects;
+    [SerializeField] private string monsterTribe;       // 종족
+    [SerializeField] private string monsterType;        // 속성/타입
+    [SerializeField] private string monsterHealth;      // 체력
+    [SerializeField] private string monsterAttack;      // 공격력
+    [SerializeField] private string monsterDamage;      // 데미지
+    [SerializeField] private string specialEffect;      // 특수효과
 
-     public int MonsterTribe => monsterTribe;
+    public string MonsterTribe => monsterTribe;
     public string MonsterType => monsterType;
-    public int MonsterHealth => monsterHealth;
-    public int MonsterAttack => monsterAttack;
-    public int MonsterDamage => monsterDamage;
-    public MonsterSpecialEffectSO SpecialEffects => specialEffects;
+    public string MonsterHealth => monsterHealth;
+    public string MonsterAttack => monsterAttack;
+    public string MonsterDamage => monsterDamage;
+    public string SpecialEffect => specialEffect;
 
-    public void SetData(int Tribe, string Type, int Health, int Attack, int Damage, MonsterSpecialEffectSO specialEffects)
+    public void SetData(string tribe, string type, string health, string attack, string damage, string effect)
     {
-        this.monsterTribe = Tribe;
-        this.monsterType = Type;
-        this.monsterHealth = Health;
-        this.monsterAttack = Attack;
-        this.monsterDamage = Damage;
-        this.specialEffects = specialEffects;
+        monsterTribe = tribe;
+        monsterType = type;
+        monsterHealth = health;
+        monsterAttack = attack;
+        monsterDamage = damage;
+        specialEffect = effect;
     }
 }
