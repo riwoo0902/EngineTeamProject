@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: E_Square
   m_EditorClassIdentifier: 
   Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  EnemyName: Square
+  Name: Square
   MaxHP: 11
   Attack: 14

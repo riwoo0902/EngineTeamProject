@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: E_Circle
   m_EditorClassIdentifier: 
   Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  EnemyName: Circle
+  Name: Circle
   MaxHP: 10
   Attack: 11

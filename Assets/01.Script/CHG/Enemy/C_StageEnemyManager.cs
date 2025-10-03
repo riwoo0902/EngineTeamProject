@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,11 +14,10 @@ namespace Assets._01.Script.CHG.Enemy
         private C_StageDataSO _stageData;
         //private Transform _playerSpawnPoint; 플레이어 스크립트로 찾기
         private C_Enemy[] EnemySpawnPoints; //나중에 Transform으로 바꿔야할듯
-
         //생성되는 애들의 EnemyScript에 정보 넣어주기
         public void Init(C_StageDataSO stageData)
         {
-            //처음 시작 할 때
+            //처음 시작 할 때 Enemy 세팅
             bool flowControl = EnemySetting(stageData);
             if (!flowControl) return;
 
@@ -40,28 +40,41 @@ namespace Assets._01.Script.CHG.Enemy
 
                 Console.WriteLine(CurEnemy.Count);
 
+                //씬의 Enemy 스크립트에 EnemyData 넣어주기 + 죽었을 때 이벤트 등록
                 for (int i = 0; i < EnemySpawnPoints.Length; i++)
                 {
                     if (CurEnemy.Count == 0) break;
                     EnemySpawnPoints[i].Init(CurEnemy.Pop());
+
+                    EnemySpawnPoints[i].OnEnemyDead += EnemyRePlace;
                 }
             }
             catch (NullReferenceException n)
             {
                 Debug.Log("Enemy 생성 및 적용 실패");
-                Debug.LogError(n);
                 return false;
             }
 
             return true;
         }
 
+        //스테이지 데이터 리셋
         public void ClearData()
         {
             _stageData = null;
             EnemySpawnPoints = null;
             Array.Clear(EnemySpawnPoints, 0, EnemySpawnPoints.Length);
+
+            for (int i = 0; i < EnemySpawnPoints.Length; i++)
+                EnemySpawnPoints[i].OnEnemyDead -= EnemyRePlace;
+
         }
 
+        //죽은 Enemy 채워넣기
+        private void EnemyRePlace(C_Enemy enemy)
+        {
+            if (CurEnemy.Count == 0) return;
+            enemy.Init(CurEnemy.Pop());
+        }
     }
 }
