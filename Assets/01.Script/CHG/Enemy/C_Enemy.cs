@@ -3,40 +3,34 @@ using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(C_Enemy))]
-public class C_Enemy : MonoBehaviour
+public class C_Enemy : Agent
 {
-    private SpriteRenderer _spriteRen;
-    private int _maxHp;
-    private int _curHp;
-    private int _attack;
     public Action<C_Enemy> OnEnemyDead;
-    private void Awake()
+    
+    private SpriteRenderer _spriteRen;
+    private int _attack;
+
+    protected override void Awake()
     {
+        base.Awake();
         _spriteRen = GetComponent<SpriteRenderer>();
     }
     //health, attack따로 두기
     public void Init(C_EnemyDataSO enemyData)
     {
+        if (HealthCompo == null || enemyData == null) return;
+
         gameObject.name = enemyData.Name;
         _spriteRen.sprite = enemyData.Sprite;
-        _maxHp = enemyData.MaxHP;
-        _attack = enemyData.Attack;
-        _curHp = _maxHp;
-        _spriteRen.DOFade(1, 0.4f);
+        HealthCompo.Init(enemyData);
+        HealthCompo.OnDead += EnemyDead;
+
+        _spriteRen.DOFade(1, 0.7f);
     }
 
-    [ContextMenu("InitCheack")]
-    private void InitCheack()
+    public void EnemyDead()
     {
-        Debug.Log($"Health: {_curHp}");
-        Debug.Log($"Attack: {_attack}");
+        _spriteRen.DOFade(0f, 0.7f).OnComplete(() => OnEnemyDead?.Invoke(this));
+        HealthCompo.OnDead -= EnemyDead;
     }
-
-    [ContextMenu("EnemyDead")]
-    private void EnemyDead()
-    {
-        _spriteRen.DOFade(0f, 0.4f);
-        OnEnemyDead?.Invoke(this);
-    }
-
 }

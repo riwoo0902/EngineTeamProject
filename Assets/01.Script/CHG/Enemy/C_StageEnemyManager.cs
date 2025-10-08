@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Assets._01.Script.CHG.Enemy
@@ -10,10 +11,14 @@ namespace Assets._01.Script.CHG.Enemy
 
     public class StageEnemyManager : MonoBehaviour
     {
-        public Stack<C_EnemyDataSO> CurEnemy = new Stack<C_EnemyDataSO>();
+        [SerializeField] private Image NextEnemyUI;
+        public Stack<C_EnemyDataSO> StageEnemy = new Stack<C_EnemyDataSO>(); //다음 나올 Enemy Stack
+
         private C_StageDataSO _stageData;
         //private Transform _playerSpawnPoint; 플레이어 스크립트로 찾기
         private C_Enemy[] EnemySpawnPoints; //나중에 Transform으로 바꿔야할듯
+        private Stack<Image> _NextEnemyUIStack = new Stack<Image>(); //현재 생성된 UIList
+
         //생성되는 애들의 EnemyScript에 정보 넣어주기
         public void Init(C_StageDataSO stageData)
         {
@@ -21,12 +26,27 @@ namespace Assets._01.Script.CHG.Enemy
             bool flowControl = EnemySetting(stageData);
             if (!flowControl) return;
 
-            //Enemy스크립트에 CurEnemy에 있는 EnemyData넣어주기
+            //EnemyUI 생성
+            NextEnemyUISetting();
 
+        }
+
+        private void NextEnemyUISetting()
+        {
+            Transform NextEnemyGroup = GameObject.Find("NextEnemyGroup").transform;
+
+            foreach (C_EnemyDataSO enemyData in StageEnemy)
+            {
+                Image image = Instantiate(NextEnemyUI, NextEnemyGroup);
+                image.sprite = enemyData.Sprite;
+                _NextEnemyUIStack.Push(image);
+            }
         }
 
         private bool EnemySetting(C_StageDataSO stageData)
         {
+            //Enemy스크립트에 CurEnemy에 있는 EnemyData넣어주기
+
             this._stageData = stageData;
             try
             {
@@ -36,22 +56,20 @@ namespace Assets._01.Script.CHG.Enemy
 
                 //출현 에너미중 랜덤으로 골라 스테이지 등장 Enemy에 푸쉬
                 for (int i = 0; i < _stageData.EmergeCount; i++)
-                    CurEnemy.Push(_stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)]);
+                    StageEnemy.Push(_stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)]);
 
-                Console.WriteLine(CurEnemy.Count);
 
                 //씬의 Enemy 스크립트에 EnemyData 넣어주기 + 죽었을 때 이벤트 등록
                 for (int i = 0; i < EnemySpawnPoints.Length; i++)
                 {
-                    if (CurEnemy.Count == 0) break;
-                    EnemySpawnPoints[i].Init(CurEnemy.Pop());
-
+                    EnemySpawnPoints[i].Init(StageEnemy.Pop());
+                    
                     EnemySpawnPoints[i].OnEnemyDead += EnemyRePlace;
                 }
             }
             catch (NullReferenceException n)
             {
-                Debug.Log("Enemy 생성 및 적용 실패");
+                Debug.LogWarning($"Enemy 생성 및 적용 실패: {n}");
                 return false;
             }
 
@@ -73,8 +91,18 @@ namespace Assets._01.Script.CHG.Enemy
         //죽은 Enemy 채워넣기
         private void EnemyRePlace(C_Enemy enemy)
         {
-            if (CurEnemy.Count == 0) return;
-            enemy.Init(CurEnemy.Pop());
+            //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제
+            if (StageEnemy.Count == 0) return;
+            enemy.Init(StageEnemy.Pop());
+            
+            //생성된 EnemyUI 투명화 
+            if (_NextEnemyUIStack.Count > 0)
+            {
+                Image img = _NextEnemyUIStack.Pop();
+                Color color = img.color;
+                color.a = 0f;
+                img.color = color;
+            }
         }
     }
 }
