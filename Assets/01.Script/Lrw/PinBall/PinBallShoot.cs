@@ -15,12 +15,7 @@ namespace Lrw_PinBall
 
         public void Shoot()
         {
-            _pinBall._rigid.AddForce((_pinBall.inputSO.MousePos - (Vector2)transform.position).normalized * ShootPower * Time.fixedDeltaTime, ForceMode2D.Impulse);
-        }
-
-        private void FixedUpdate()
-        {
-            Shoot();
+            _pinBall._rigid.AddForce((_pinBall.inputSO.MousePos - (Vector2)transform.position).normalized * ShootPower, ForceMode2D.Impulse);
         }
 
 

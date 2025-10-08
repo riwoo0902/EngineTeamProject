@@ -7,11 +7,11 @@ namespace Lrw_PinBall
     {
         private PinBall _pinBall;
         private LineRenderer _lineRenderer;
-        private SpriteRenderer _SpriteRenderer;
+        private SpriteRenderer _spriteRenderer;
         private bool ShowShootingUI = false;
         private void Awake()
         {
-            _SpriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _lineRenderer = GetComponent<LineRenderer>();
             _pinBall = transform.parent.GetComponent<PinBall>();
         }
@@ -47,7 +47,10 @@ namespace Lrw_PinBall
             ShowShootingUI = value;
         }
 
-
+        public void SetSprite(Sprite a)
+        {
+            _spriteRenderer.sprite = a;
+        }
 
 
     }
