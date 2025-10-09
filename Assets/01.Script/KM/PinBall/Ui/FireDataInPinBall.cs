@@ -15,6 +15,11 @@ public class FireDataInPinBall : MonoBehaviour
         nameText.text = NowPinBall.BallName;
     }
 
+    public void SetData()
+    {
+        nameText.text = NowPinBall.BallName;
+    }
+
     public void FireOnEnter()
     {
         _pinball_Ex.PointerOnEnter(NowPinBall);
