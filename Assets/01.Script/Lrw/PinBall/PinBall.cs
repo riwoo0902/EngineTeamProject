@@ -62,8 +62,9 @@ namespace Lrw_PinBall
             _pinBallRenderer.SetSprite(a.PinBallImage);
             _rigid.sharedMaterial.friction = a.Friction;
             _rigid.sharedMaterial.bounciness = a.Bounciness;
+            _rigid.linearDamping = a.BallLinearDamping;
         }
-
+        
 
 
     }
