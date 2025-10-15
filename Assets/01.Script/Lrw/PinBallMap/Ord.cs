@@ -15,7 +15,7 @@ namespace Lrw_Ord
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            EventBus.Invoke("");
+            
 
             HP--;
             if(HP <= 0) Destroy(gameObject);
