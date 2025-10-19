@@ -14,13 +14,12 @@ namespace Assets._01.Script.CHG.Enemy
         [SerializeField] private Image EnemyUIPrefab;
         public Stack<C_EnemyDataSO> StageEnemy = new Stack<C_EnemyDataSO>(); //다음 나올 Enemy Stack
 
-        private C_StageDataSO _stageData;
-        //private Transform _playerSpawnPoint; 플레이어 스크립트로 찾기
+        private C_EnemyStageDataSO _stageData;
         private C_Enemy[] sqawnEnemy; //나중에 Transform으로 바꿔야할듯
         private Stack<Image> _nextEnemyUI = new Stack<Image>(); //현재 생성된 UIStack
 
         //생성되는 애들의 EnemyScript에 정보 넣어주기
-        public void Init(C_StageDataSO stageData)
+        public void Init(C_EnemyStageDataSO stageData)
         {
             //처음 시작 할 때 Enemy 세팅
             bool flowControl = EnemySetting(stageData);
@@ -33,14 +32,13 @@ namespace Assets._01.Script.CHG.Enemy
 
 
         //Enemy스크립트에 Stagenemy에 있는 EnemyData넣어주기
-        private bool EnemySetting(C_StageDataSO stageData)
+        private bool EnemySetting(C_EnemyStageDataSO stageData)
         {
 
             this._stageData = stageData;
             try
             {
                 Transform posGroup = GameObject.Find("PosGroup").transform;
-                //_playerSpawnPoint = posGroup.GetComponentInChildren<Transform>();  //일단 Enemy 먼저
                 sqawnEnemy = posGroup.GetComponentsInChildren<C_Enemy>();
 
                 //출현 에너미중 랜덤으로 골라 스테이지 등장 Enemy에 푸쉬
@@ -96,17 +94,6 @@ namespace Assets._01.Script.CHG.Enemy
                 color.a = 0f;
                 img.color = color;
             }
-        }
-        //스테이지 데이터 리셋
-        public void ClearData()
-        {
-            _stageData = null;
-            sqawnEnemy = null;
-            Array.Clear(sqawnEnemy, 0, sqawnEnemy.Length);
-
-            for (int i = 0; i < sqawnEnemy.Length; i++)
-                sqawnEnemy[i].OnEnemyDead -= EnemyRePlace;
-
         }
     }
 }

@@ -29,11 +29,11 @@ public class EnemyTargeting : MonoBehaviour
                 rayHit.collider.TryGetComponent<C_Enemy>(out C_Enemy enemy);
                 TargetSet(enemy);
             }
-            else 
-            {
-                _sprenColor.a = 0;
-                _spren.color = _sprenColor;
-            }
+            //else 
+            //{
+            //    _sprenColor.a = 0;
+            //    _spren.color = _sprenColor;
+            //}
         }
     }
 

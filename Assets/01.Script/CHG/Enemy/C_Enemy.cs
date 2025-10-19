@@ -20,7 +20,7 @@ public class C_Enemy : Agent
 
         gameObject.name = enemyData.Name;
         _spriteRen.sprite = enemyData.Sprite;
-        HealthCompo.Init(enemyData);
+        HealthCompo.Init(enemyData.MaxHP);
         HealthCompo.OnDead += EnemyDead;
 
         _spriteRen.DOFade(1, 0.7f);

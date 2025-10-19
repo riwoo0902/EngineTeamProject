@@ -7,17 +7,22 @@ namespace Assets._01.Script.CHG
 {
     public class C_StageManager : MonoBehaviour
     {
-        //스테이지가 시작하면 -> 적 생성 ->  적 수 UI 정리 
-        //나중에 씬마다 배치할지, 게임 매니저에 붙여둘지에 따라 바꿔야함
-        private  int _curLevel;
-        [SerializeField] private C_StageDataSO[] _stageData;
+        private PlayerManager _playerManager;
+        private int _curLevel;
+        
         //테스트용
-        [ContextMenu("TestSceneLoad")]
-        private void SceneLoad()
+        [SerializeField] private C_EnemyStageDataSO[] _stageData;
+
+        private void Awake()
+        {
+            _playerManager = GetComponentInChildren<PlayerManager>();
+        }
+
+        [ContextMenu("BattleStageLoad")]
+        private void BattleStageLoad()
         {
             Debug.Assert(_stageData != null, "StageData is null!");
-            StageEnemyManager enemyManager = GameObject.Find("EnemyManager").GetComponent<StageEnemyManager>();
-            enemyManager.Init(_stageData[0]); 
+            GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(_stageData[0], _playerManager);
         }
 
         private void SceneUnLoad()
