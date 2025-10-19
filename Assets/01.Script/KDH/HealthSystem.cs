@@ -11,6 +11,9 @@ public class HealthSystem : MonoBehaviour
     private float Ad = 10f;
     private float Ap = 5f;
 
+    public event Action OnDamageTaken;
+    public event Action OnHeal;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -29,7 +32,7 @@ public class HealthSystem : MonoBehaviour
             break;
         }
 
-        Debug.Log($"{damage.type} 공격 {damage.amount} 피해, (남은 체력 : {currentHealth})");
+        Debug.Log($"{damage.type} 공격으로 {damage.amount} 피해를 받음! (남은 체력: {currentHealth})");
 
     }
 
@@ -37,5 +40,6 @@ public class HealthSystem : MonoBehaviour
     {
         currentHealth += amount;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
+        OnHeal?.Invoke();
     }
 }
