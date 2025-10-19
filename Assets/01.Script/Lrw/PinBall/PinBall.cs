@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Lrw_PinBall
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PinBall : MonoBehaviour
+    public class PinBall : MonoBehaviour,ICanTriggerEvent
     {
         [SerializeField] private PinBallSO pinBallSO;
         [field:SerializeField] public InputSO inputSO { get; private set; }
@@ -17,7 +17,6 @@ namespace Lrw_PinBall
             _rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
             _pinBallShoot = GetComponent<PinBallShoot>();
-
             
         }
 
@@ -64,8 +63,13 @@ namespace Lrw_PinBall
             _rigid.sharedMaterial.bounciness = a.Bounciness;
             _rigid.linearDamping = a.BallLinearDamping;
         }
+
+        public float Score { get; set; }
+
+        public float GetScore()
+        {
+            return Score;
+        }
         
-
-
     }
 }
