@@ -686,6 +686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 128310728}
+  - component: {fileID: 128310729}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -710,6 +711,21 @@ Transform:
   - {fileID: 1192700519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &128310729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128310727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3accadbc71564fb9a088ee84b7b514df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBallScoreTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &136628864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2269,6 +2285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372722249}
+  - component: {fileID: 372722250}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -2293,6 +2310,18 @@ Transform:
   - {fileID: 1387930345}
   m_Father: {fileID: 128310728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372722250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372722248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3513017b6c9e41ada3df0d7a84705691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &379058815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9808,9 +9837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd3549982694014f80400930afd742d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTriggerEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1396056965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10640,9 +10666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd3549982694014f80400930afd742d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTriggerEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1478710261
 PrefabInstance:
   m_ObjectHideFlags: 0
