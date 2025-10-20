@@ -9,8 +9,6 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
         private float _finalScore = 0;
         public int NeedAddScoreCounter { get; set; }
         
-        
-        
         private void Awake()
         {
             BallTrigger[] ballTriggers = GetComponentsInChildren<BallTrigger>();
@@ -18,9 +16,8 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             {
                 trigger.OnBallScoreTrigger += AddFinalScore;
             }
-            
         }
-        public void AddFinalScore(float value)
+        private void AddFinalScore(float value)
         {
             _finalScore += value;
             NeedAddScoreCounter--;
@@ -30,10 +27,9 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
 #if UNITYEDITOR
                 Debug.Log("FinalScore : " + FinalScore);
 #endif
-                
             }
         }
-        
+
         
     }
 }
