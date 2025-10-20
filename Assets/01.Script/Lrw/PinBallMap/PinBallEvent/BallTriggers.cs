@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace _01.Script.Lrw.PinBallMap.PinBallEvent
 {
     public class BallTriggers : MonoBehaviour
     {
         public event Action<float> OnBallScoreTrigger;
-        private float FinalScore = 0;
+        private float _finalScore = 0;
         public int NeedAddScoreCounter { get; set; }
         
         
@@ -23,11 +22,15 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
         }
         public void AddFinalScore(float value)
         {
-            FinalScore += value;
+            _finalScore += value;
             NeedAddScoreCounter--;
             if (NeedAddScoreCounter <= 0)
             {
-                OnBallScoreTrigger?.Invoke(FinalScore);
+                OnBallScoreTrigger?.Invoke(_finalScore);
+#if UNITYEDITOR
+                Debug.Log("FinalScore : " + FinalScore);
+#endif
+                
             }
         }
         

@@ -16,18 +16,13 @@ namespace _01.Script.Lrw.PinBallMap
         {
             _ballTriggers = GetComponentInChildren<BallTriggers>();
             _ballTriggers.OnBallScoreTrigger += OnInvokeBallScoreTrigger;
-#if  UNITY_EDITOR
-            _ballTriggers.OnBallScoreTrigger += DebugBallScore;
-#endif
+
             
         }
 
         private void OnInvokeBallScoreTrigger(float ballScore)  => onBallScoreTrigger?.Invoke(ballScore);
 
-        private void DebugBallScore(float ballScore)
-        {  
-            Debug.Log(ballScore);
-        }
+
         
         
         
