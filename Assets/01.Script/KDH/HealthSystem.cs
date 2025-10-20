@@ -4,9 +4,12 @@ using UnityEngine.InputSystem;
 
 public class HealthSystem : MonoBehaviour
 {
-    public int currentHealth {  get; private set; }
-    public int maxHealth { get; private set; } = 7;
-    public int minHealth { get; private set; }
+    public float currentHealth {  get; private set; }
+    public float maxHealth { get; private set; } = 7;
+    public float minHealth { get; private set; }
+
+    private float Ad = 10f;
+    private float Ap = 5f;
 
     public event Action OnDamageTaken;
     public event Action OnHeal;
@@ -16,11 +19,21 @@ public class HealthSystem : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Deal(int damage)
+    public void Deal(DamageData damage)
     {
-        currentHealth -= damage;
-        if (currentHealth < minHealth) currentHealth = minHealth;
-        OnDamageTaken?.Invoke();
+        switch (damage.type)
+        {
+            case DamageTypeEnum.AD:
+            currentHealth -= Ad;
+            break;
+
+            case DamageTypeEnum.AP:
+            currentHealth -= Ap;
+            break;
+        }
+
+        Debug.Log($"{damage.type} 공격으로 {damage.amount} 피해를 받음! (남은 체력: {currentHealth})");
+
     }
 
     public void Heal(int amount)
@@ -29,19 +42,4 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth > maxHealth) currentHealth = maxHealth;
         OnHeal?.Invoke();
     }
-
-    private void Update()
-    {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
-        {
-            Deal(1);
-        }
-
-        if (Keyboard.current.wKey.wasPressedThisFrame)
-        {
-            Heal(1);
-        }
-    }
-
-
 }
