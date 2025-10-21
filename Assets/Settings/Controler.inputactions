@@ -1,5 +1,5 @@
 {
-    "name": "InputSystem_Actions",
+    "name": "Controler",
     "maps": [
         {
             "name": "Player",
@@ -280,7 +280,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
