@@ -15,17 +15,8 @@ namespace _01.Script.Lrw.PinBallMap
         private void Awake()
         {
             _ballTriggers = GetComponentInChildren<BallTriggers>();
-            _ballTriggers.OnBallScoreTrigger += OnInvokeBallScoreTrigger;
-
-            
+            _ballTriggers.OnBallScoreTrigger += (float ballScore) => onBallScoreTrigger?.Invoke(ballScore);
         }
-
-        private void OnInvokeBallScoreTrigger(float ballScore)  => onBallScoreTrigger?.Invoke(ballScore);
-
-
-        
-        
-        
         
     }
 }

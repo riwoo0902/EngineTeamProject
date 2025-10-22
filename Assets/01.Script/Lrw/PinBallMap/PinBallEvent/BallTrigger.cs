@@ -1,7 +1,6 @@
 using System;
 using Lrw_PinBall;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace _01.Script.Lrw.PinBallMap.PinBallEvent
 {
@@ -19,8 +18,6 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
                 Debug.Log("Event Invoke");
 #endif
             }
-            
         }
-
     }
 }
