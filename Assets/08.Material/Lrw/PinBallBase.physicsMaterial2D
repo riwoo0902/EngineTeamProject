@@ -9,6 +9,6 @@ PhysicsMaterial2D:
   m_Name: PinBallBase
   serializedVersion: 2
   friction: 0.2
-  bounciness: 1.2
+  bounciness: 0.8
   m_FrictionCombine: 0
   m_BounceCombine: 0
