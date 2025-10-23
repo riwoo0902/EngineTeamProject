@@ -1,22 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Lrw_Ord;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Ords : MonoBehaviour
 {
-    public static UnityEvent OrdCollisionEvent;
+    private Dictionary<Collider2D,IOrd> _ords = new Dictionary<Collider2D,IOrd>();
     private void Awake()
     {
-        OrdCollisionEvent = null;
-    }
-    private void OnEnable()
-    {
+        OrdBase[] a = GetComponentsInChildren<OrdBase>(true);
+        
         
     }
-
-    private void OnDisable()
-    {
-        
-    }
-
-
 }
