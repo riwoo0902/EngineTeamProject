@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float currentHealth {  get; private set; }
+    public float currentHealth { get; private set; }
 
     [SerializeField] private CharacterData characterData;
 
@@ -23,15 +23,22 @@ public class HealthSystem : MonoBehaviour
     {
         float finalDamage = damage.amount;
 
-        // 공격 타입이 AD라면 AD 방어력으로 나눔
         if (damage.type == DamageTypeEnum.AD)
         {
-            finalDamage /= characterData.adDefense;
+            finalDamage -= characterData.adDefense;
+            if (finalDamage < 0)
+            {
+                finalDamage = 0;
+            }
         }
-        // 공격 타입이 AP라면 AP 방어력으로 나눔
+
         else if (damage.type == DamageTypeEnum.AP)
         {
-            finalDamage /= characterData.apDefense;
+            finalDamage -= characterData.apDefense;
+            if (finalDamage < 0)
+            {
+                finalDamage = 0;
+            }
         }
 
         // 체력 차감

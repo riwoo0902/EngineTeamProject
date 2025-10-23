@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: rlaals
   maxHealth: 100
-  adDefense: 5
-  apDefense: 2
+  adDefense: 10
+  apDefense: -1

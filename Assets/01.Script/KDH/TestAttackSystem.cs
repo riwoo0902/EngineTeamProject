@@ -9,6 +9,8 @@ public class TestAttackSystem : MonoBehaviour
     public GameObject adEffectPrefab;  // AD 공격용 이펙트
     public GameObject apEffectPrefab;  // AP 공격용 이펙트
 
+    GameObject effectPrefab;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -26,13 +28,10 @@ public class TestAttackSystem : MonoBehaviour
     {
         if (target == null) return;
 
-        // 1. 데미지 생성 후 전달
-        DamageData damage = new DamageData(amount, type);
+        DamageData damage = new DamageData(amount, type); // 데미지 생성 후 전달 
         target.Deal(damage);
 
-        // 2. 타입별 이펙트 재생
-        GameObject effectPrefab = null;
-        switch (type)
+        switch (type) // 타입에 맞춰 파티클 재생
         {
             case DamageTypeEnum.AD:
                 effectPrefab = adEffectPrefab;
@@ -41,12 +40,8 @@ public class TestAttackSystem : MonoBehaviour
                 effectPrefab = apEffectPrefab;
                 break;
         }
-
-        if (effectPrefab != null)
-        {
             GameObject effect = Instantiate(effectPrefab, target.transform.position, Quaternion.identity);
             effect.GetComponent<ParticleSystem>()?.Play();
             Destroy(effect, 2f);
-        }
     }
 }
