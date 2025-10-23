@@ -14,8 +14,6 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
-        particleAd.gameObject.SetActive(false);
-        particleAp.gameObject.SetActive(false);
         currentHealth = characterData.maxHealth;
     }
 
