@@ -24,9 +24,8 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             if (NeedAddScoreCounter <= 0)
             {
                 OnBallScoreTrigger?.Invoke(_finalScore);
-#if UNITYEDITOR
-                Debug.Log("FinalScore : " + FinalScore);
-#endif
+                Debug.Log("FinalScore : " + _finalScore);
+                _finalScore = 0;
             }
         }
     }

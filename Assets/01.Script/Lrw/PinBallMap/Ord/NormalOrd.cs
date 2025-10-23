@@ -1,7 +1,7 @@
 
 namespace Lrw_Ord
 {
-    public class NotmalOrd : Ord
+    public class NormalOrd : OrdBase
     {
         
     }

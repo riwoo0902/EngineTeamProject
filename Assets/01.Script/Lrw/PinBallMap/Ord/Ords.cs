@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OrdManager : MonoBehaviour
+public class Ords : MonoBehaviour
 {
     public static UnityEvent OrdCollisionEvent;
     private void Awake()
