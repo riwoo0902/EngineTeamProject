@@ -1,6 +1,6 @@
-using _01.Script.Lrw.EventBus.CoreSystem;
 
-namespace _01.Script.Lrw.EventBus.EventBus.CoreSystem
+
+namespace _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem
 {
     public static class EventBus<T> where T : IEvent
     {

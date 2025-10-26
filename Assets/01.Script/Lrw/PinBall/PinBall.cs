@@ -1,6 +1,5 @@
-using _01.Script.Lrw.EventBus.CoreSystem;
-using _01.Script.Lrw.EventBus.CoreSystem.Events;
-using _01.Script.Lrw.EventBus.EventBus.CoreSystem;
+using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
+using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using Lrw_CustomReadonly;
 using Lrw_Input;
 using UnityEngine;
@@ -16,7 +15,7 @@ namespace Lrw_PinBall
         public Rigidbody2D _rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;
         private PinBallShoot _pinBallShoot;
-        [SerializeField,ReadOnly] public float Damage { get; private set; }
+        [field:SerializeField,ReadOnly] public float Damage { get; private set; }
         
         private void Awake()
         {
@@ -30,6 +29,7 @@ namespace Lrw_PinBall
         private void Start()
         {
             SetPinBallSo(pinBallSO);
+            EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
         private void OnEnable()
         {

@@ -1,6 +1,7 @@
+using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using UnityEngine;
 
-namespace _01.Script.Lrw.EventBus.CoreSystem.Events
+namespace _01.Script.Lrw.EventBus.EventBusSystem.Events
 {
     public class OrdHitEvent : IEvent
     {
