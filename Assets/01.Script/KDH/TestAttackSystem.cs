@@ -42,6 +42,5 @@ public class TestAttackSystem : MonoBehaviour
         }
             GameObject effect = Instantiate(effectPrefab, target.transform.position, Quaternion.identity);
             effect.GetComponent<ParticleSystem>()?.Play();
-            Destroy(effect, 2f);
     }
 }
