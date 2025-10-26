@@ -9,13 +9,11 @@ namespace Lrw_Ord
         protected Action OnHitEvent;
         protected Action OnDestroyEvent;
         public Collider2D Collider { get; set; }
-        protected virtual void Awake()
+        protected void Awake()
         {
             Collider = gameObject.GetComponent<Collider2D>();
         }
-
         
-
         public void Hit(float a)
         {
             HP -= a;
