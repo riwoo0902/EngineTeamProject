@@ -11,6 +11,7 @@ public class AgentHealth : MonoBehaviour
 
     public void Init(int value)
     {
+        Debug.Log(value);
         _maxHp = value;
         _curHp = _maxHp;
     }

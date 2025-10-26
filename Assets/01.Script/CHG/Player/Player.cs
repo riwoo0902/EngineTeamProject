@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class Player : Agent
 {
-    
+    [HideInInspector]
     public C_Enemy PlayerTarget; 
 
 
 
     protected override void Awake()
     {
-        base.Awake();
         
     }
     public void Init(PlayerManager playerManager)
     {
+        base.Awake();
+        Debug.Assert(playerManager != null, "PlayerManager is Null");
         HealthCompo.Init(playerManager.MaxHealth);
-
 
     }
     

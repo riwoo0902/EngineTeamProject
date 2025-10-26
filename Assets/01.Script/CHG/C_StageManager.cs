@@ -7,16 +7,12 @@ namespace Assets._01.Script.CHG
 {
     public class C_StageManager : MonoBehaviour
     {
+        [SerializeField]
         private PlayerManager _playerManager;
         private int _curLevel;
         
         //테스트용
         [SerializeField] private C_EnemyStageDataSO[] _stageData;
-
-        private void Awake()
-        {
-            _playerManager = GetComponentInChildren<PlayerManager>();
-        }
 
         [ContextMenu("BattleStageLoad")]
         private void BattleStageLoad()
