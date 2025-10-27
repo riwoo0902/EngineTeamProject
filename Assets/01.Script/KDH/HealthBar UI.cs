@@ -4,7 +4,7 @@ public class HealthBarUI : MonoBehaviour
 {
     [SerializeField] private HealthSystem healthSystem; // 체력 시스템 연결
     [SerializeField] private Transform healthBar;       // 체력바 오브젝트 (스케일 변경할 것)
-
+    [SerializeField] private CharacterData characterData;
     private float originalScaleX;
 
     private void Start()
@@ -14,8 +14,6 @@ public class HealthBarUI : MonoBehaviour
         originalScaleX = healthBar.localScale.x;
 
         // 이벤트 등록
-        healthSystem.OnDamageTaken += UpdateHealthBar;
-        healthSystem.OnHeal += UpdateHealthBar;
 
         // 초기 체력 표시
         UpdateHealthBar();
@@ -23,7 +21,7 @@ public class HealthBarUI : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        float healthPercent = (float)healthSystem.currentHealth / healthSystem.maxHealth;
+        float healthPercent = (float)healthSystem.currentHealth / characterData.maxHealth;
         Vector3 newScale = healthBar.localScale;
         newScale.x = originalScaleX * healthPercent;
         healthBar.localScale = newScale;
@@ -33,8 +31,7 @@ public class HealthBarUI : MonoBehaviour
     {
         if (healthSystem != null)
         {
-            healthSystem.OnDamageTaken -= UpdateHealthBar;
-            healthSystem.OnHeal -= UpdateHealthBar;
+
         }
     }
 }

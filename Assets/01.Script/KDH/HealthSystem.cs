@@ -4,42 +4,55 @@ using UnityEngine.InputSystem;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float currentHealth {  get; private set; }
-    public float maxHealth { get; private set; } = 7;
-    public float minHealth { get; private set; }
+    public float currentHealth { get; private set; }
 
-    private float Ad = 10f;
-    private float Ap = 5f;
+    [SerializeField] private CharacterData characterData;
 
-    public event Action OnDamageTaken;
-    public event Action OnHeal;
+    [SerializeField] private ParticleSystem particleAp;
+    [SerializeField] private ParticleSystem particleAd;
+
+    public static Action<DamageData, Transform> OnDeal;
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = characterData.maxHealth;
     }
 
     public void Deal(DamageData damage)
     {
-        switch (damage.type)
-        {
-            case DamageTypeEnum.AD:
-            currentHealth -= Ad;
-            break;
+        OnDeal?.Invoke(damage, transform);
+        float finalDamage = damage.amount;
 
-            case DamageTypeEnum.AP:
-            currentHealth -= Ap;
-            break;
+        if (damage.type == DamageTypeEnum.AD)
+        {
+            finalDamage -= characterData.adDefense;
+            if (finalDamage < 0)
+            {
+                finalDamage = 0;
+            }
         }
 
-        Debug.Log($"{damage.type} 공격으로 {damage.amount} 피해를 받음! (남은 체력: {currentHealth})");
+        else if (damage.type == DamageTypeEnum.AP)
+        {
+            finalDamage -= characterData.apDefense;
+            if (finalDamage < 0)
+            {
+                finalDamage = 0;
+            }
+        }
 
+        // 체력 차감
+        currentHealth -= finalDamage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, characterData.maxHealth);
+
+        Debug.Log($"{damage.type} 공격으로 {finalDamage} 피해를 받음 (남은 체력: {currentHealth})");
     }
+
 
     public void Heal(int amount)
     {
         currentHealth += amount;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;
-        OnHeal?.Invoke();
+        if (currentHealth > characterData.maxHealth) currentHealth = characterData.maxHealth;
+        Mathf.Clamp(currentHealth, 0, characterData.maxHealth);
     }
 }
