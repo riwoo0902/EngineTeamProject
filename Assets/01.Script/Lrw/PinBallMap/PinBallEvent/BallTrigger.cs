@@ -14,9 +14,6 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             if (collision.TryGetComponent<ICanTriggerEvent>(out ICanTriggerEvent iCanTriggerEvent))
             {
                 OnBallScoreTrigger?.Invoke(iCanTriggerEvent.GetScore());
-#if UNITY_EDITOR
-                Debug.Log("Event Invoke");
-#endif
             }
         }
     }

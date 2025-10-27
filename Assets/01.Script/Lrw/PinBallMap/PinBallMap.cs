@@ -1,4 +1,5 @@
 
+using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.PinBallMap.PinBallEvent;
@@ -9,7 +10,7 @@ namespace _01.Script.Lrw.PinBallMap
 {
     public class PinBallMap : MonoBehaviour
     {
-        private BallTriggers  _ballTriggers;
+        public BallTriggers  _ballTriggers { get; private set; }
         
         public void AddNeedTriggerCounter(AddNeedTriggerCountEvent a) => _ballTriggers.NeedAddScoreCounter += a.AddAmount;
         
@@ -20,9 +21,9 @@ namespace _01.Script.Lrw.PinBallMap
             EventBus<AddNeedTriggerCountEvent>.OnEvent += AddNeedTriggerCounter;
         }
 
-        public void SetBallTriggers(UnityEvent<float> a)
+        private void OnDestroy()
         {
-            _ballTriggers.OnBallScoreTrigger += (float ballScore) => a?.Invoke(ballScore);
+            EventBus<AddNeedTriggerCountEvent>.OnEvent -= AddNeedTriggerCounter;
         }
     }
 }

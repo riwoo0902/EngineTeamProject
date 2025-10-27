@@ -36,7 +36,7 @@ namespace _01.Script.Lrw.PinBallMap
         {
             GameObject a = Instantiate(prefab, transform);
             CurrentPinBallMap = a.GetComponent<PinBallMap>();
-            CurrentPinBallMap.SetBallTriggers(onBallScoreTrigger);
+            CurrentPinBallMap._ballTriggers.OnBallScoreTrigger += (f) => { onBallScoreTrigger?.Invoke(f); };
         }
         
     }
