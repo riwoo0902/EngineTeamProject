@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lrw_Ord
+namespace _01.Script.Lrw.PinBallMap.Ord
 {
     public interface IOrd
     {

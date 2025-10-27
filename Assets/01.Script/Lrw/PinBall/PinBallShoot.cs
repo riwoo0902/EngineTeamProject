@@ -1,23 +1,23 @@
 using UnityEngine;
 
-namespace Lrw_PinBall
+namespace _01.Script.Lrw.PinBall
 {
-    [RequireComponent(typeof(PinBall))]
+    [RequireComponent(typeof(Lrw_PinBall.PinBall))]
     public class PinBallShoot : MonoBehaviour
     {
-        [SerializeField] private float ShootPower = 10;
-        public bool CanShoot = true;
-        private PinBall _pinBall;
+        [SerializeField] private float shootPower = 10;
+        public bool canShoot = true;
+        private Lrw_PinBall.PinBall _pinBall;
 
         private void Awake()
         {
-            _pinBall = GetComponent<PinBall>();
+            _pinBall = GetComponent<Lrw_PinBall.PinBall>();
         }
 
         public void Shoot()
         {
-            if (CanShoot)
-                _pinBall._rigid.AddForce((_pinBall.inputSO.MousePos - (Vector2)transform.position).normalized * ShootPower, ForceMode2D.Impulse);
+            if (canShoot)
+                _pinBall._rigid.AddForce((_pinBall.inputSO.MousePos - (Vector2)transform.position).normalized * shootPower, ForceMode2D.Impulse);
         }
 
 

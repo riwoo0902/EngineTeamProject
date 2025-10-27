@@ -23,20 +23,19 @@ namespace _01.Script.Lrw.PinBallMap
                 Destroy(gameObject);
                 return;
             }
-
-            
         }
 
         private void Start()
         {
             CreatPinBallMap(TestPrefab);
+            CurrentPinBallMap.BallTriggers.NeedAddScoreCounter = 5;//테스트
         }
 
         public void CreatPinBallMap(GameObject prefab)
         {
             GameObject a = Instantiate(prefab, transform);
             CurrentPinBallMap = a.GetComponent<PinBallMap>();
-            CurrentPinBallMap._ballTriggers.OnBallScoreTrigger += (f) => { onBallScoreTrigger?.Invoke(f); };
+            CurrentPinBallMap.SetBallTriggerEvent(onBallScoreTrigger);
         }
         
     }

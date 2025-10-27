@@ -1,19 +1,18 @@
-using Lrw_Input;
 using UnityEngine;
 
-namespace Lrw_PinBall
+namespace _01.Script.Lrw.PinBall
 {
     public class PinBallRenderer : MonoBehaviour
     {
-        private PinBall _pinBall;
+        private Lrw_PinBall.PinBall _pinBall;
         private LineRenderer _lineRenderer;
         private SpriteRenderer _spriteRenderer;
-        private bool ShowShootingUI = false;
+        private bool _showShootingUI = false;
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _lineRenderer = GetComponent<LineRenderer>();
-            _pinBall = transform.parent.GetComponent<PinBall>();
+            _pinBall = transform.parent.GetComponent<Lrw_PinBall.PinBall>();
         }
 
         private void Update()
@@ -31,7 +30,7 @@ namespace Lrw_PinBall
 
         private void DrawLine()
         {
-            if (ShowShootingUI)
+            if (_showShootingUI)
             {
                 _lineRenderer.SetPosition(0, transform.position);
                 _lineRenderer.SetPosition(1, _pinBall.inputSO.MousePos);
@@ -44,7 +43,7 @@ namespace Lrw_PinBall
 
         public void SetShowShootingUI(bool value)
         {
-            ShowShootingUI = value;
+            _showShootingUI = value;
         }
 
         public void SetSprite(Sprite a)
