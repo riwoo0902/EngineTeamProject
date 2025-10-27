@@ -24,7 +24,7 @@ public class TestAttackSystem : MonoBehaviour
         }
     }
 
-    private void Attack(DamageTypeEnum type, float amount)
+    public void Attack(DamageTypeEnum type, float amount)
     {
         if (target == null) return;
 

@@ -1,26 +1,27 @@
 using UnityEngine;
 using TMPro;
+using System;
+using UnityEngine.Events;
 
 public class DamageUI : MonoBehaviour
 {
-    [SerializeField] private GameObject hudDamageText; // 프리팹 연결
-    private Transform playerTransform;
+    [SerializeField] private TextMeshProUGUI hudDamageText; // 프리팹 연결
 
     private void Start()
     {
-        playerTransform.Find("player").GetComponent<Transform>();
+        HealthSystem.OnDeal += TakeDamageUI;
     }
 
-    public void TakeDamage(DamageData damageData)
+    public void TakeDamageUI(DamageData damageData, Transform targetTransform)
     {
-        GameObject hudTextObj = Instantiate(hudDamageText);
+        TextMeshProUGUI hudTextObj = Instantiate(hudDamageText);
         HudDamageText hud = hudTextObj.GetComponent<HudDamageText>();
 
         // 데미지 값 설정
         hud.damage = damageData.amount.ToString();
 
         // 위치 설정
-        hudTextObj.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + 0.5f);
+        hudTextObj.transform.position = new Vector3(targetTransform.position.x, targetTransform.position.y + 0.5f);
 
         // 텍스트 색상 변경
         switch (damageData.type)
@@ -30,7 +31,7 @@ public class DamageUI : MonoBehaviour
                 break;
 
             case DamageTypeEnum.AP:
-                hud.text.color = Color.green;
+                hud.text.color = Color.blue;
                 break;
         }
     }

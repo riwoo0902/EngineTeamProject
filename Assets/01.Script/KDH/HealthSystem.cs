@@ -11,6 +11,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private ParticleSystem particleAp;
     [SerializeField] private ParticleSystem particleAd;
 
+    public static Action<DamageData, Transform> OnDeal;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class HealthSystem : MonoBehaviour
 
     public void Deal(DamageData damage)
     {
+        OnDeal?.Invoke(damage, transform);
         float finalDamage = damage.amount;
 
         if (damage.type == DamageTypeEnum.AD)
