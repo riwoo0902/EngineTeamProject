@@ -14,7 +14,7 @@ public class BattleStageContext : MonoBehaviour
         Player player = GameObject.Find("Player").GetComponent<Player>();
 
 
-        EnemyManager.Init(enemyData);
+        EnemyManager.Init(enemyData, player);
         player.Init(PlayerManager);
     }
 

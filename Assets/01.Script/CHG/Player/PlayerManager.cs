@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class    PlayerManager : MonoBehaviour
 {
-    private int _maxHealth = 0;
+    [SerializeField] private int _maxHealth = 0;
     private int _curGold;
-
     private Player _stagePlayer;
+    private PlayerTurnManager _playerTurnManager;
     public int MaxHealth
     {
         get => _maxHealth;
@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     public void SceneLoaded()
     {
         _stagePlayer = GameObject.Find("Player").GetComponent<Player>();
+       
 
     }
 

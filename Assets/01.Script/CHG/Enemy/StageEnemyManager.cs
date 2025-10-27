@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,19 +18,25 @@ namespace Assets._01.Script.CHG.Enemy
         private C_EnemyStageDataSO _stageData;
         private C_Enemy[] sqawnEnemy; //나중에 Transform으로 바꿔야할듯
         private Stack<Image> _nextEnemyUI = new Stack<Image>(); //현재 생성된 UIStack
-
-        //생성되는 애들의 EnemyScript에 정보 넣어주기
-        public void Init(C_EnemyStageDataSO stageData)
+        public Player Player { get; private set; }
+        private EnemyTurnManager _turnManager;
+        //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
+        public void Init(C_EnemyStageDataSO stageData, Player player)
         {
+            Player = player;
+
             //처음 시작 할 때 Enemy 세팅
             bool flowControl = EnemySetting(stageData);
             if (!flowControl) return;
 
+            _turnManager = GetComponentInChildren<EnemyTurnManager>();
+            _turnManager.Init(this);
+
             //EnemyUI 생성
             NextEnemyUISetting();
 
-        }
 
+        }
 
         //Enemy스크립트에 Stagenemy에 있는 EnemyData넣어주기
         private bool EnemySetting(C_EnemyStageDataSO stageData)
@@ -77,7 +84,6 @@ namespace Assets._01.Script.CHG.Enemy
                 _nextEnemyUI.Push(image);
             }
         }
-
 
         //죽은 Enemy 채워넣기
         private void EnemyRePlace(C_Enemy enemy)
