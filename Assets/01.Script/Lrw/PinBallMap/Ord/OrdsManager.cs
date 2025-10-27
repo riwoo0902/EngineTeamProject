@@ -27,7 +27,6 @@ namespace _01.Script.Lrw.PinBallMap.Ord
             if(_ords.TryGetValue(ordHitEvent.MyCollider2D,out IOrd ord))
             {
                 ord.Hit(ordHitEvent.Damage);
-                Debug.Log(ordHitEvent.MyCollider2D.name + " hit\n" + ordHitEvent.Damage);
             }
         }
     

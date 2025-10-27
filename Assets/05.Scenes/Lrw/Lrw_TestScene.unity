@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPower: 10
-  CanShoot: 1
+  shootPower: 10
+  canShoot: 1
 --- !u!114 &82127840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinBallSO: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
   <inputSO>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
+  <Damage>k__BackingField: 0
 --- !u!50 &82127841
 Rigidbody2D:
   serializedVersion: 5
@@ -1279,6 +1280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinBallSO: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
   <inputSO>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
+  <Damage>k__BackingField: 0
 --- !u!50 &1232389647
 Rigidbody2D:
   serializedVersion: 5
@@ -1370,8 +1372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPower: 10
-  CanShoot: 1
+  shootPower: 10
+  canShoot: 1
 --- !u!1 &1273173367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,8 +1406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPower: 10
-  CanShoot: 1
+  shootPower: 10
+  canShoot: 1
 --- !u!114 &1273173369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,6 +1422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinBallSO: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
   <inputSO>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
+  <Damage>k__BackingField: 0
 --- !u!50 &1273173370
 Rigidbody2D:
   serializedVersion: 5
@@ -1531,8 +1534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPower: 10
-  CanShoot: 1
+  shootPower: 10
+  canShoot: 1
 --- !u!114 &1498250339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,6 +1550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinBallSO: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
   <inputSO>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
+  <Damage>k__BackingField: 0
 --- !u!50 &1498250340
 Rigidbody2D:
   serializedVersion: 5
@@ -2304,7 +2308,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onBallScoreTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2092038609}
+        m_TargetAssemblyTypeName: _01.Script.Lrw.Test.TestDebug, Assembly-CSharp
+        m_MethodName: BallTriggerEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   TestPrefab: {fileID: 440758252238060653, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
 --- !u!4 &1934593849
 Transform:
@@ -2353,8 +2369,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPower: 10
-  CanShoot: 1
+  shootPower: 10
+  canShoot: 1
 --- !u!114 &1988617152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2369,6 +2385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pinBallSO: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
   <inputSO>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
+  <Damage>k__BackingField: 0
 --- !u!50 &1988617153
 Rigidbody2D:
   serializedVersion: 5
@@ -2448,6 +2465,50 @@ Transform:
   - {fileID: 997346508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2092038608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2092038610}
+  - component: {fileID: 2092038609}
+  m_Layer: 0
+  m_Name: TestDebug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2092038609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092038608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547dc68890b3489d8cd7638f46525d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2092038610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092038608}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6975436, y: -1.5904284, z: -0.13998392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2462,3 +2523,4 @@ SceneRoots:
   - {fileID: 1737717333}
   - {fileID: 530559971}
   - {fileID: 1934593849}
+  - {fileID: 2092038610}
