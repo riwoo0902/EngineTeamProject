@@ -16,14 +16,14 @@ namespace _01.Script.Lrw.PinBallCompo
         
         public Rigidbody2D _rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;
-        private PinBallShoot _pinBallShoot;
+        private PinBallDrawShootLine _pinBallDrawShootLine;
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
         
         private void Awake()
         {
             _rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
-            _pinBallShoot = GetComponent<PinBallShoot>();
+            _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
             
             Damage = pinBallSO.BaseDamage;//임시
         }
@@ -36,7 +36,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void Update()
         {
-            EventBus<MousePosEvent>.Raise(new MousePosEvent(inputSO.));
+            EventBus<MousePosEvent>.Raise(new MousePosEvent(inputSO.MouseScreenPos));
         }
 
         public void SetPinBallSo(PinBallSO a)
