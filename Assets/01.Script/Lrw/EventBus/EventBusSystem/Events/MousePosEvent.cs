@@ -5,10 +5,10 @@ namespace _01.Script.Lrw.EventBus.EventBusSystem.Events
 {
     public class MousePosEvent : IEvent
     {
-        public MousePosEvent(Vector2 mousePos)
+        public MousePosEvent(Vector2 a,Vector2 b)
         {
-            RealPos = Camera.current.ScreenToWorldPoint(mousePos);
-            ScreenPos = mousePos;
+            ScreenPos = a;
+            RealPos = b;
         }
         public Vector2 RealPos {get; private set;}
         public Vector2 ScreenPos {get; private set;}

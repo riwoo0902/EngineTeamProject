@@ -23,7 +23,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void RotationSprite()
         {
-            float a = Mathf.Atan2(_pinBall._rigid.linearVelocity.y, _pinBall._rigid.linearVelocity.x) * Mathf.Rad2Deg;
+            float a = Mathf.Atan2(_pinBall.Rigid.linearVelocity.y, _pinBall.Rigid.linearVelocity.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0,0,a);
 
         }
@@ -33,7 +33,7 @@ namespace _01.Script.Lrw.PinBallCompo
             if (_showShootingUI)
             {
                 _lineRenderer.SetPosition(0, transform.position);
-                _lineRenderer.SetPosition(1, _pinBall.inputSO.MousePos);
+                _lineRenderer.SetPosition(1, _pinBall.InputSo.MousePos);
             }
             else
             {

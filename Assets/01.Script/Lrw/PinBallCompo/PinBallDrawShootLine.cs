@@ -17,11 +17,16 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void DrawLine(MousePosEvent mousePos)
         {
+            Vector2 mouseDir = (mousePos.RealPos - (Vector2)transform.position);
             
+
+
+
+
+
         }
         
 
 
     }
 }
-
