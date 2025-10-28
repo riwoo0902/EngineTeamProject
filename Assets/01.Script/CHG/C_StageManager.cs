@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets._01.Script.CHG.Enemy;
+﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets._01.Script.CHG
 {
     public class C_StageManager : MonoSingleton<C_StageManager>
     {
+        [SerializeField] private Image TurnImage;
+
         [SerializeField]
         private PlayerManager _playerManager;
         private int _curLevel;
@@ -19,12 +20,22 @@ namespace Assets._01.Script.CHG
         private void BattleStageLoad()
         {
             Debug.Assert(_stageData != null, "StageData is null!");
-            CurTurn = true; //플레이어 턴으로 시작
+            PlayerTurnSet(); //플레이어 턴으로 시작
             GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(_stageData[0], _playerManager);
         }
 
-        public void EnemyTurnSet() => CurTurn = false;
-        public void PlayerTurnSet() => CurTurn = true;
+        public void EnemyTurnSet()
+        {
+            CurTurn = false;
+            TurnImage.DOColor(Color.red, 0);
+            
+        }
+        public void PlayerTurnSet()
+        {
+            CurTurn = true;
+            TurnImage.DOColor(Color.blue, 0);
+            
+        }
 
         private void SceneUnLoad()
         {

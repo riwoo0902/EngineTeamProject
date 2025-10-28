@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Assets._01.Script.CHG;
 using UnityEngine;
 
 
@@ -10,7 +11,7 @@ public class PlayerTurnManager : MonoBehaviour
     {
         _player = player;
         AttachPerformer();
-        SubscribeReaction();
+        Debug.Log("Player 구독");
     }
 
     private void AttachPerformer()
@@ -18,16 +19,17 @@ public class PlayerTurnManager : MonoBehaviour
         ActionSystem.AttachPerformer<PlayerTurnGA>(EnemyAttack);
     }
 
-    private void SubscribeReaction()
-    {
-
-    }
-
     private IEnumerator EnemyAttack(PlayerTurnGA playerTurnGA)
     {
+        Debug.Assert(_player.PlayerTarget != null, "PlayerTarget is Null");
+
+        Debug.Log("Player Turn");
         _player.PlayerTarget.HealthCompo.TakeDamage(10);
-        yield return new WaitForSeconds(1f);
-        EnemyTurnGA enemyTurnGA = new();
-        ActionSystem.Instance.Perform(enemyTurnGA);
+
+        yield return new WaitForEndOfFrame();
+
+        //EnemyTurnGA enemyTurnGA = new();
+        //ActionSystem.Instance.Perform(enemyTurnGA);
+        C_StageManager.Instance.EnemyTurnSet();
     }
 }
