@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +8,7 @@ namespace _01.Script.Lrw.PinBallMap
         public UnityEvent<float> onBallScoreTrigger;
         public PinBallMap CurrentPinBallMap{get; private set;}
         
-        public GameObject TestPrefab;
+        public GameObject testPrefab;
         
         public static PinBallStageCreateManager Instance { get; private set; }
         private void Awake()
@@ -21,13 +20,12 @@ namespace _01.Script.Lrw.PinBallMap
             else
             {
                 Destroy(gameObject);
-                return;
             }
         }
 
         private void Start()
         {
-            CreatPinBallMap(TestPrefab);
+            CreatPinBallMap(testPrefab);
             CurrentPinBallMap.BallTriggers.NeedAddScoreCounter = 5;//테스트
         }
 
