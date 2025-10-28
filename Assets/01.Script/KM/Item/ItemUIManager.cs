@@ -8,6 +8,8 @@ public class ItemUIManager : MonoBehaviour
 
     public Transform ItemParent;
     public GameObject ItemPrefab;
+
+    public ItemSO TestItem;
     public void Start()
     {
         AddItem += Add;
@@ -16,7 +18,13 @@ public class ItemUIManager : MonoBehaviour
 
     private void Add(ItemSO item)
     {
-        Instantiate(ItemPrefab, ItemParent);
+        Instantiate(ItemPrefab, ItemParent).GetComponent<ItemSetting>().MyitemSO = item;
+    }
+
+    [ContextMenu("Test Add Items")]
+    private void TestAdd()
+    {
+        AddItem?.Invoke(TestItem);
     }
     
     private void Remove(ItemSO item)

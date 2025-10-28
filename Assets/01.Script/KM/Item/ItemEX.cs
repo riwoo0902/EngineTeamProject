@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class ItemEX : MonoBehaviour
     public TMP_Text ExText;
     public GameObject Values;
     public GameObject GridParent;
+    public Action<ItemSO> EnterAC;
+    public Action ExitAC;
     public Dictionary<ItemType, Sprite> TypeSprites = new Dictionary<ItemType, Sprite>();
     public Dictionary<ItemType, string> TypeShortText = new Dictionary<ItemType, string>();
     [Header("Lists Order")]
@@ -28,11 +31,13 @@ public class ItemEX : MonoBehaviour
         {
             Instance = this;
         }
-        for(int i = 0; i < typeSpriteList.Count; i++)
+        for (int i = 0; i < typeSpriteList.Count; i++)
         {
             TypeSprites.Add((ItemType)i, typeSpriteList[i]);
             TypeShortText.Add((ItemType)i, typeToText[i]);
         }
+        EnterAC += Enter;
+        ExitAC += Exit;
     }
 
     public void Enter(ItemSO item)
@@ -44,6 +49,7 @@ public class ItemEX : MonoBehaviour
         }
         NameText.text = item.itemName;
         ExText.text = item.itemDescription;
+        Debug.Log(NameText.text);
     }
 
     public void Exit()

@@ -11,10 +11,10 @@ public class ItemSetting : MonoBehaviour
     }
     public void Enter()
     {
-        ItemEX.Instance.Enter(MyitemSO);
+        ItemEX.Instance.EnterAC?.Invoke(MyitemSO);
     }
     public void Exit()
     {
-        ItemEX.Instance.Exit();
+        ItemEX.Instance.ExitAC.Invoke();
     }
 }
