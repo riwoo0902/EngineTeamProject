@@ -9,6 +9,7 @@ namespace Lrw_Input
     public class InputSO : ScriptableObject, Controler.IPlayerActions
     {
         public Vector2 MousePos { get; private set; }
+        public Vector2 MouseScreenPos { get; private set; }
         public Vector2 MoveDir { get; private set; }
         public event Action OnJumpKeyPress;
         public event Action OnMousePress;
@@ -59,7 +60,8 @@ namespace Lrw_Input
 
         public void OnMouse(InputAction.CallbackContext context)
         {
-            MousePos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
+            MouseScreenPos = context.ReadValue<Vector2>();
+            MousePos = Camera.main.ScreenToWorldPoint(MouseScreenPos);
         }
 
     }

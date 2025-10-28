@@ -1,11 +1,12 @@
+using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
-using _01.Script.Lrw.PinBall;
 using Lrw_CustomReadonly;
 using Lrw_Input;
+using Lrw_PinBall;
 using UnityEngine;
 
-namespace Lrw_PinBall
+namespace _01.Script.Lrw.PinBallCompo
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PinBall : MonoBehaviour,ICanTriggerEvent
@@ -32,21 +33,11 @@ namespace Lrw_PinBall
             SetPinBallSo(pinBallSO);
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
-        private void OnEnable()
-        {
-            #region OnEnableMouseEvent
-            inputSO.OnMousePress += () =>
-            {
-                _pinBallRenderer.SetShowShootingUI(true);
-            };
-            inputSO.OnMouseReleas += () =>
-            {
-                _pinBallRenderer.SetShowShootingUI(false);
-                _pinBallShoot.Shoot();
-            };
-            #endregion 
-        }
 
+        private void Update()
+        {
+            EventBus<MousePosEvent>.Raise(new MousePosEvent(inputSO.));
+        }
 
         public void SetPinBallSo(PinBallSO a)
         {

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace _01.Script.Lrw.PinBall
+namespace _01.Script.Lrw.PinBallCompo
 {
     public class PinBallRenderer : MonoBehaviour
     {
-        private Lrw_PinBall.PinBall _pinBall;
+        private PinBallCompo.PinBall _pinBall;
         private LineRenderer _lineRenderer;
         private SpriteRenderer _spriteRenderer;
         private bool _showShootingUI = false;
@@ -12,7 +12,7 @@ namespace _01.Script.Lrw.PinBall
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _lineRenderer = GetComponent<LineRenderer>();
-            _pinBall = transform.parent.GetComponent<Lrw_PinBall.PinBall>();
+            _pinBall = transform.parent.GetComponent<PinBallCompo.PinBall>();
         }
 
         private void Update()
