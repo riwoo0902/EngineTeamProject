@@ -1,14 +1,19 @@
+using _01.Script.Lrw.PinBallCompo.FSM.Interface;
+using UnityEngine;
+
 namespace _01.Script.Lrw.PinBallCompo.FSM
 {
-    public abstract class PinBallStateBase
+    public abstract class PinBallStateBase : IState
     {
-        protected PinBall pinBall;
-        protected PinBallBrain ballBrain;
-        protected PinBallStateBase(PinBall ball,PinBallBrain brain)
+        protected Transform transform;
+        protected Rigidbody2D rigidbody2D;
+        
+        protected PinBallStateBase(IPinBallContext ball)
         {
-            pinBall =  ball;
-            ballBrain =  brain;
+            transform = ball.PinBallContextTransform;
+            rigidbody2D = ball.PinBallContextRigidbody;
         }
+        
         public void Enter()
         {
             

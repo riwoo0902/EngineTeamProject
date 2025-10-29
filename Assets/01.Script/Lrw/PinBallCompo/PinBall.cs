@@ -2,6 +2,8 @@ using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.PinBallCompo.FSM;
+using _01.Script.Lrw.PinBallCompo.FSM.Interface;
+using _01.Script.Lrw.PinBallCompo.FSM.PinBallState;
 using Lrw_CustomReadonly;
 using Lrw_Input;
 using Lrw_PinBall;
@@ -10,7 +12,7 @@ using UnityEngine;
 namespace _01.Script.Lrw.PinBallCompo
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PinBall : MonoBehaviour,ICanTriggerEvent
+    public class PinBall : MonoBehaviour,ICanTriggerEvent,IPinBallContext
     {
         [SerializeField] private PinBallSO pinBallSo;
         [field:SerializeField] public InputSO InputSo { get; private set; }
@@ -20,14 +22,33 @@ namespace _01.Script.Lrw.PinBallCompo
         private PinBallDrawShootLine _pinBallDrawShootLine;
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
         private PinBallBrain pinBallBrain;
+
+        
+        
         private void Awake()
         {
-            pinBallBrain = new PinBallBrain(this);
+            CreatPinBAllBrain();
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
             _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
             
             Damage = pinBallSo.BaseDamage;//임시
+        }
+        
+        
+        #region IPinBallContext
+        public Transform PinBallContextTransform { get; private set; }
+        public Rigidbody2D PinBallContextRigidbody { get; private set;}
+        #endregion
+        private void CreatPinBAllBrain()
+        {
+            pinBallBrain = new PinBallBrain();
+            PinBallContextTransform = transform;
+            PinBallContextRigidbody = gameObject.GetComponent<Rigidbody2D>();
+            
+            pinBallBrain.AddState(PinBallStates.Idle,new PinBallIdleState(this));
+            pinBallBrain.AddState(PinBallStates.Shooting,new PinBallShootingState(this));
+            pinBallBrain.SetState(PinBallStates.Idle);
         }
 
         private void Start()
@@ -67,5 +88,7 @@ namespace _01.Script.Lrw.PinBallCompo
         {
             EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
         }
+
+        
     }
 }
