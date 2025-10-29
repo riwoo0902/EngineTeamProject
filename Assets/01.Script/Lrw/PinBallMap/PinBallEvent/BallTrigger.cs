@@ -1,7 +1,7 @@
 using System;
+using _01.Script.Lrw.PinBallCompo;
 using Lrw_PinBall;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace _01.Script.Lrw.PinBallMap.PinBallEvent
 {
@@ -15,12 +15,7 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             if (collision.TryGetComponent<ICanTriggerEvent>(out ICanTriggerEvent iCanTriggerEvent))
             {
                 OnBallScoreTrigger?.Invoke(iCanTriggerEvent.GetScore());
-#if UNITY_EDITOR
-                Debug.Log("Event Invoke");
-#endif
             }
-            
         }
-
     }
 }
