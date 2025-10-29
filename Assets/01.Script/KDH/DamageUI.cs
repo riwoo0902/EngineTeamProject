@@ -5,7 +5,19 @@ using UnityEngine.Events;
 
 public class DamageUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI hudDamageText; // 프리팹 연결
+    [SerializeField] private GameObject hudDamageText; // 프리팹
+    [SerializeField] private Canvas mainCanvas; // UI 캔버스 연결
+
+
+    private void Awake()
+    {
+        if (mainCanvas == null)
+        {
+            mainCanvas = FindAnyObjectByType<Canvas>();
+        }
+
+
+    }
 
     private void Start()
     {
@@ -14,24 +26,25 @@ public class DamageUI : MonoBehaviour
 
     public void TakeDamageUI(DamageData damageData, Transform targetTransform)
     {
-        TextMeshProUGUI hudTextObj = Instantiate(hudDamageText);
+        GameObject hudTextObj = Instantiate(hudDamageText, mainCanvas.transform);
+
         HudDamageText hud = hudTextObj.GetComponent<HudDamageText>();
+        TextMeshProUGUI tmp = hudTextObj.GetComponentInChildren<TextMeshProUGUI>(true);
 
-        // 데미지 값 설정
-        hud.damage = damageData.amount.ToString();
+        hud.SetDamage(damageData.amount);
 
-        // 위치 설정
-        hudTextObj.transform.position = new Vector3(targetTransform.position.x, targetTransform.position.y + 0.5f);
+        hudTextObj.transform.position = Camera.main.WorldToScreenPoint(
+            targetTransform.position + Vector3.up * 0.5f
+        );
 
-        // 텍스트 색상 변경
+        // 6. 색상 변경
         switch (damageData.type)
         {
             case DamageTypeEnum.AD:
-                hud.text.color = Color.red;
+                tmp.color = Color.red;
                 break;
-
             case DamageTypeEnum.AP:
-                hud.text.color = Color.blue;
+                tmp.color = Color.blue;
                 break;
         }
     }
