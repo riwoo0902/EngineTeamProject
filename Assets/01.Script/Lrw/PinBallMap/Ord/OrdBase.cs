@@ -6,24 +6,35 @@ namespace Lrw_Ord
 {
     public abstract class OrdBase : MonoBehaviour,IOrd
     {
-        [SerializeField] protected float HP = 2;
+        [SerializeField] protected float hp;
+        protected float currentHp = 2;
         protected Action OnHitEvent;
         protected Action OnDestroyEvent;
         public Collider2D Collider { get; set; }
+        
+        
         protected void Awake()
         {
+            currentHp = hp;
             Collider = gameObject.GetComponent<Collider2D>();
         }
         
         public void Hit(float a)
         {
-            HP -= a;
+            currentHp -= a;
             OnHitEvent?.Invoke();
-            if (HP <= 0)
+            if (currentHp <= 0)
             {
                 OnDestroyEvent?.Invoke();
+                gameObject.SetActive(false);
                 Destroy(gameObject);
             }
+        }
+
+        public void ReSet()
+        {
+            gameObject.SetActive(true);
+            currentHp = hp;
         }
         
     }

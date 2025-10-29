@@ -29,6 +29,14 @@ namespace _01.Script.Lrw.PinBallMap.Ord
                 ord.Hit(ordHitEvent.Damage);
             }
         }
+
+        public void ReSet()
+        {
+            foreach (IOrd ord in _ords.Values)
+            {
+                ord.ReSet();
+            }
+        }
     
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
+using _01.Script.Lrw.PinBallCompo.FSM;
 using Lrw_CustomReadonly;
 using Lrw_Input;
 using Lrw_PinBall;
@@ -17,9 +19,10 @@ namespace _01.Script.Lrw.PinBallCompo
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
-        
+        private PinBallBrain pinBallBrain;
         private void Awake()
         {
+            pinBallBrain = new PinBallBrain(this);
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
             _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
@@ -35,7 +38,13 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void Update()
         {
+            pinBallBrain.Update();
             EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
+        }
+
+        private void FixedUpdate()
+        {
+            pinBallBrain.FixedUpdate();
         }
 
         public void SetPinBallSo(PinBallSO a)

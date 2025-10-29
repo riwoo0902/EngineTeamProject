@@ -29,6 +29,11 @@ namespace _01.Script.Lrw.PinBallMap
             CurrentPinBallMap.SetBallTriggerEvent(onBallScoreTrigger);
         }
 
+        [ContextMenu("ReSet")]
+        private void ReSet()
+        {
+            CurrentPinBallMap.OrdsReSet();
+        }
         
     }
 }
