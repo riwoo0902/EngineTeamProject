@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ItemEX : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class ItemEX : MonoBehaviour
     [Header("Ya_Re")]
     [SerializeField] private List<Sprite> typeSpriteList = new List<Sprite>();
     [SerializeField] private List<string> typeToText = new List<string>();
+    [SerializeField] private float spaceDistance = 50f;
+
+    private RectTransform _rectCompo;
     private void Start()
     {
         if (Instance)
@@ -38,11 +42,14 @@ public class ItemEX : MonoBehaviour
         }
         EnterAC += Enter;
         ExitAC += Exit;
+        _rectCompo = GetComponent<RectTransform>();
     }
 
     public void Enter(ItemSO item)
     {
         ItemExUI.SetActive(true);
+        _rectCompo.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        _rectCompo.position = new Vector3(_rectCompo.position.x + spaceDistance, _rectCompo.position.y, 0);
         for (int i = 0; i < item.itemSetting.Count; i++)
         {
             Instantiate(Values, GridParent.transform).GetComponent<ItemValueSetting>().Setting(item, i);
