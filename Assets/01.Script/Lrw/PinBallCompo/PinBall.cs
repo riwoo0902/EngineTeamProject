@@ -21,9 +21,7 @@ namespace _01.Script.Lrw.PinBallCompo
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
-        private PinBallBrain pinBallBrain;
-
-        
+        private PinBallMachine _PinBallFsmMachine;
         
         private void Awake()
         {
@@ -42,13 +40,10 @@ namespace _01.Script.Lrw.PinBallCompo
         #endregion
         private void CreatPinBAllBrain()
         {
-            pinBallBrain = new PinBallBrain();
             PinBallContextTransform = transform;
             PinBallContextRigidbody = gameObject.GetComponent<Rigidbody2D>();
+            _PinBallFsmMachine = new PinBallMachine(this);
             
-            pinBallBrain.AddState(PinBallStates.Idle,new PinBallIdleState(this));
-            pinBallBrain.AddState(PinBallStates.Shooting,new PinBallShootingState(this));
-            pinBallBrain.SetState(PinBallStates.Idle);
         }
 
         private void Start()
@@ -59,13 +54,13 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void Update()
         {
-            pinBallBrain.Update();
+            _PinBallFsmMachine.Update();
             EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
         }
 
         private void FixedUpdate()
         {
-            pinBallBrain.FixedUpdate();
+            _PinBallFsmMachine.FixedUpdate();
         }
 
         public void SetPinBallSo(PinBallSO a)
@@ -87,6 +82,7 @@ namespace _01.Script.Lrw.PinBallCompo
         private void OnCollisionEnter2D(Collision2D other)
         {
             EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
+            Score += Damage;
         }
 
         

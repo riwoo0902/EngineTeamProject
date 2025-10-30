@@ -4,7 +4,7 @@ using _01.Script.Lrw.PinBallCompo.FSM.PinBallState;
 
 namespace _01.Script.Lrw.PinBallCompo.FSM
 {
-    public class PinBallBrain
+    public class FsmBrain
     {
         private Dictionary<PinBallStates,IState> _states = new Dictionary<PinBallStates, IState>();
         public IState CurrentState { get; private set; }

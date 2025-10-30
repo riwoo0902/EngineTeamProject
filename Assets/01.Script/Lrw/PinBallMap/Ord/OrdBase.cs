@@ -1,4 +1,6 @@
 using System;
+using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
+using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.PinBallMap.Ord;
 using UnityEngine;
 
@@ -30,13 +32,18 @@ namespace Lrw_Ord
                 Destroy(gameObject);
             }
         }
+        
 
         public void ReSet()
         {
             gameObject.SetActive(true);
             currentHp = hp;
         }
-        
+
+        private void OnDestroy()
+        {
+            EventBus<OrdDestoryEvent>.Raise(new OrdDestoryEvent(Collider));
+        }
     }
 }
 

@@ -15,11 +15,13 @@ namespace _01.Script.Lrw.PinBallMap.Ord
         {
             _ords = GetComponentsInChildren<IOrd>(true).ToDictionary(ord => ord.Collider);
             EventBus<OrdHitEvent>.OnEvent += OrdHit;
+            EventBus<OrdDestoryEvent>.OnEvent += OrdDestroy;
         }
 
         private void OnDestroy()
         {
             EventBus<OrdHitEvent>.OnEvent -= OrdHit;
+            EventBus<OrdDestoryEvent>.OnEvent -= OrdDestroy;
         }
 
         public void OrdHit(OrdHitEvent ordHitEvent)
@@ -28,6 +30,11 @@ namespace _01.Script.Lrw.PinBallMap.Ord
             {
                 ord.Hit(ordHitEvent.Damage);
             }
+        }
+
+        public void OrdDestroy(OrdDestoryEvent ordDestoryEvent)
+        {
+            _ords.Remove(ordDestoryEvent.MyCollider2D);
         }
 
         public void ReSet()
