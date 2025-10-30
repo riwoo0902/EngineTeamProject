@@ -41,7 +41,7 @@ public class LineSetting : MonoBehaviour
         {
             _lineCompo.colorGradient = gri;
             gri.SetKeys(colorKey, gri.alphaKeys);
-            colorKey[0].time = x - 0.001f;
+            colorKey[0].time = x;
             colorKey[1].time = x;
         }, 1f,duration).SetEase(Ease.Linear);
     }
