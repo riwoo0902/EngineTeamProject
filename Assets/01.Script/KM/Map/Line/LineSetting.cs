@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class LineSetting : MonoBehaviour
 {
-    [SerializeField] private GameObject EndPoint;
+    public GameObject EndPoint;
     [SerializeField] private float duration = 2f;
     private LineRenderer _lineCompo;
 
-    private void Start()
+    public void CreateLine()
     {
         _lineCompo = GetComponent<LineRenderer>();
         _lineCompo.SetPosition(0, new Vector3(transform.position.x, transform.position.y, 0));
