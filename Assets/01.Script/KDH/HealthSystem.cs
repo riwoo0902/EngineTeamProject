@@ -6,7 +6,7 @@ public class HealthSystem : MonoBehaviour
 {
     public float currentHealth { get; private set; }
 
-    [SerializeField] private CharacterData characterData;
+    [SerializeField] private CharacterDataSO characterData;
 
     [SerializeField] private ParticleSystem particleAp;
     [SerializeField] private ParticleSystem particleAd;
