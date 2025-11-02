@@ -18,7 +18,7 @@ public class ActionSystem : MonoSingleton<ActionSystem>
 
 
     //외부에서 액션 실행을 요청하는 시작점
-    public void Perform(GameAction action, System.Action OnPerformFinished = null)
+    public void Perform(GameAction action, Action OnPerformFinished = null)
     {
         if (IsPerforming) return; //액션중 중복실행 방지
         IsPerforming = true; 

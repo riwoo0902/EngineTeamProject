@@ -30,7 +30,7 @@ namespace Assets._01.Script.CHG
             TurnImage.DOColor(Color.red, 0);
             
         }
-        public void PlayerTurnSet()
+        public void PlayerTurnSet() 
         {
             CurTurn = true;
             TurnImage.DOColor(Color.blue, 0);

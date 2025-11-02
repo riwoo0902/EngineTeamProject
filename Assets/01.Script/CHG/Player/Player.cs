@@ -5,7 +5,7 @@ public class Player : Agent
     [HideInInspector]
     public C_Enemy PlayerTarget;
     private PlayerTurnManager _playerTurnManager;
-
+    private EnemyTargeting _enemyTargeting;
 
     protected override void Awake()
     {
@@ -16,13 +16,18 @@ public class Player : Agent
         base.Awake();
         Debug.Assert(playerManager != null, "PlayerManager is Null");
         HealthCompo.Init(playerManager.MaxHealth);
-        _playerTurnManager = GameObject.Find("PlayerTurnManager").GetComponent<PlayerTurnManager>();
 
-        _playerTurnManager.Init(this);
+        _enemyTargeting = GetComponent<EnemyTargeting>();
+        _enemyTargeting.Init(this);
+
+        _playerTurnManager = GameObject.Find("PlayerTurnManager").GetComponent<PlayerTurnManager>();
+        _playerTurnManager.Init(this, _enemyTargeting);
     }
     
     public void ChangeTarget(C_Enemy enemy)
     {
         PlayerTarget = enemy;
     }
+
+
 }

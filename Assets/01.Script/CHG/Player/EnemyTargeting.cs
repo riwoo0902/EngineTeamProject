@@ -1,53 +1,62 @@
+using Assets._01.Script.CHG;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EnemyTargeting : MonoBehaviour
 {
-    [SerializeField] private GameObject RedTriangle; //타겟 표시용, 이름 바꿔야함
+    [SerializeField] private GameObject TargetTriangle; //타겟 표시용, 이름 바꿔야함
     private SpriteRenderer _spren; //이름 바꿔야함
     private Color _sprenColor; //이름 바꿔야함
     private Player _player;
-    private void Awake()
+
+    public void Init(Player player)
     {
-        _player = GetComponent<Player>();
-        _spren = RedTriangle.GetComponent<SpriteRenderer>();
+        _player = player;
+        _spren = TargetTriangle.GetComponent<SpriteRenderer>();
         _sprenColor = _spren.color;
         _sprenColor.a = 0;
-        _spren.color = _sprenColor; //씬 시작할때? 실행 시점 나중에 봐야할듯
+        _spren.color = _sprenColor;
     }
 
 
 
     private void Update()
     {
+        if (!C_StageManager.Instance.CurTurn) return;
+
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D rayHit = Physics2D.Raycast(pos, Vector2.zero, 0f);
 
-            if (rayHit.collider != null)
+            if (rayHit.collider != null && rayHit.collider.TryGetComponent<C_Enemy>(out C_Enemy enemy))
             {
-                rayHit.collider.TryGetComponent<C_Enemy>(out C_Enemy enemy);
                 TargetSet(enemy);
             }
-            //else 
-            //{
-            //    _sprenColor.a = 0;
-            //    _spren.color = _sprenColor;
-            //}
+            else
+            {
+                TargetClear();
+            }
         }
+    }
+
+    public void TargetClear()
+    {
+        _sprenColor.a = 0;
+        _spren.color = _sprenColor;
+        _player.ChangeTarget(null);
     }
 
     private void TargetSet(C_Enemy enemy)
     {
         _sprenColor.a = 1;
-        _spren.color = _sprenColor;
+        _spren.color = _sprenColor;  
         Vector3 targetPos = enemy.transform.position;
-        RedTriangle.transform.position = new Vector3(targetPos.x, targetPos.y -1, 1);
+        TargetTriangle.transform.position = new Vector3(targetPos.x, targetPos.y -1, 1);
         
         _player.ChangeTarget(enemy);
-        
     }
-
-
-
 }

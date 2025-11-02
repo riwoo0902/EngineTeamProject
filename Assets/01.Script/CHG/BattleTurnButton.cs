@@ -15,8 +15,11 @@ public class BattleTurnButton : MonoBehaviour
 
     public void EnemyTurnButton()
     {
+        if (C_StageManager.Instance.CurTurn) return;
+
         Debug.Log($"CurTurn: {(C_StageManager.Instance.CurTurn ? "Player" : "Enemy")}");
-        EnemyTurnGA enemyTurnGA = new();
-        ActionSystem.Instance.Perform(enemyTurnGA); //EnemyTurn실행
+        EnemyMoveGA enemyMoveGA = new();
+        ActionSystem.Instance.Perform(enemyMoveGA); //EnemyTurn실행
+
     }
 }
