@@ -14,7 +14,7 @@ namespace _01.Script.Lrw.PinBallCompo
     [RequireComponent(typeof(Rigidbody2D))]
     public class PinBall : MonoBehaviour,ICanTriggerEvent,IPinBallContext
     {
-        [SerializeField] private PinBallSO pinBallSo;
+        [field:SerializeField] public PinBallSO PinBallSo { get; private set; }
         [field:SerializeField] public InputSO InputSo { get; private set; }
         
         public Rigidbody2D Rigid { get; private set; }
@@ -30,7 +30,7 @@ namespace _01.Script.Lrw.PinBallCompo
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
             _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
             
-            Damage = pinBallSo.BaseDamage;//임시
+            Damage = PinBallSo.BaseDamage;//임시
         }
         
         
@@ -48,14 +48,14 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void Start()
         {
-            SetPinBallSo(pinBallSo);
+            SetPinBallSo(PinBallSo);
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
 
         private void Update()
         {
             _PinBallFsmMachine.Update();
-            EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
+            
         }
 
         private void FixedUpdate()
@@ -65,6 +65,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         public void SetPinBallSo(PinBallSO a)
         {
+            PinBallSo = a;
             Rigid.gravityScale = a.Mass;
             _pinBallRenderer.SetSprite(a.PinBallImage);
             Rigid.sharedMaterial.friction = a.Friction;

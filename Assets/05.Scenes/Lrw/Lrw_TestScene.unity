@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58fd2d9910dd424699df6aed0231232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinBallSo: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
+  <PinBallSo>k__BackingField: {fileID: 0}
   <InputSo>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
   <Damage>k__BackingField: 0
 --- !u!50 &1232389647
@@ -728,6 +728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawDistance: 1
+  drawPintDistance: 0.1
 --- !u!1 &1737717330
 GameObject:
   m_ObjectHideFlags: 0
