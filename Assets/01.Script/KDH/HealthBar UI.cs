@@ -4,7 +4,7 @@ public class HealthBarUI : MonoBehaviour
 {
     [SerializeField] private HealthSystem healthSystem; // 체력 시스템 연결
     [SerializeField] private Transform healthBar;       // 체력바 오브젝트 (스케일 변경할 것)
-    [SerializeField] private CharacterData characterData;
+    [SerializeField] private CharacterDataSO characterData;
     private float originalScaleX;
 
     private void Start()

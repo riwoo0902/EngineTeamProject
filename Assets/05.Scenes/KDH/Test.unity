@@ -322,6 +322,8 @@ MonoBehaviour:
   shakeDuration: 0.5
   shakeMagnitude: 0.3
   dampingSpeed: 1
+  initialPosition: {x: 0, y: 0, z: 0}
+  currentShakeDuration: 0
 --- !u!114 &338254711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,8 +541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7b966380c05c94cab909b32eb51b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudDamageText: {fileID: 228128501772227255, guid: 81bf1683024975f46ac701fac0116a1f, type: 3}
-  mainCanvas: {fileID: 689966151}
 --- !u!1001 &975995545
 PrefabInstance:
   m_ObjectHideFlags: 0
