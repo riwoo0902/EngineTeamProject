@@ -14,9 +14,7 @@ public class HudDamageText : MonoBehaviour
     private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
-        text.text = damage.ToString();
         alpha = text.color;
-        Invoke("DestroyObject", destroyTime);
     }
 
     private void Update()
@@ -26,8 +24,8 @@ public class HudDamageText : MonoBehaviour
         text.color = alpha;
     }
 
-    private void DestroyObject()
+    public void SetDamage(float damageValue)
     {
-        Destroy(gameObject);
+        text.text = damageValue.ToString();
     }
 }

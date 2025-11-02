@@ -1,4 +1,6 @@
 using System;
+using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
+using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallMap.PinBallEvent
@@ -9,6 +11,8 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
         private float _finalScore = 0;
         public int NeedAddScoreCounter { get; set; }
         
+        public void AddNeedTriggerCounter(AddNeedTriggerCountEvent a) => NeedAddScoreCounter += a.AddAmount;
+        
         private void Awake()
         {
             BallTrigger[] ballTriggers = GetComponentsInChildren<BallTrigger>();
@@ -16,7 +20,14 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             {
                 trigger.OnBallScoreTrigger += AddFinalScore;
             }
+            EventBus<AddNeedTriggerCountEvent>.OnEvent += AddNeedTriggerCounter;
         }
+        
+        private void OnDestroy()
+        {
+            EventBus<AddNeedTriggerCountEvent>.OnEvent -= AddNeedTriggerCounter;
+        }
+        
         private void AddFinalScore(float value)
         {
             _finalScore += value;
@@ -24,12 +35,9 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             if (NeedAddScoreCounter <= 0)
             {
                 OnBallScoreTrigger?.Invoke(_finalScore);
-#if UNITYEDITOR
-                Debug.Log("FinalScore : " + FinalScore);
-#endif
+                _finalScore = 0;
             }
         }
-
         
     }
 }
