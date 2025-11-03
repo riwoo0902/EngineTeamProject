@@ -8,11 +8,13 @@ namespace _01.Script.Lrw.PinBallCompo
     public class PinBallMachine
     {
         private FsmBrain _fsmBrain;
-        public PinBallMachine(IPinBallContext a)
+        private PinBall _pinBall;
+        public PinBallMachine(PinBall a)
         {
-            _fsmBrain = new  FsmBrain();
-            _fsmBrain.AddState(PinBallStates.Idle,new PinBallIdleState(a));
-            _fsmBrain.AddState(PinBallStates.Shooting,new PinBallShootingState(a));
+            _fsmBrain = new FsmBrain();
+            _pinBall = a;
+            _fsmBrain.AddState(PinBallStates.Idle,new PinBallIdleState(this));
+            _fsmBrain.AddState(PinBallStates.Shooting,new PinBallShootingState(this));
             _fsmBrain.SetState(PinBallStates.Idle);
         }
 
@@ -23,7 +25,7 @@ namespace _01.Script.Lrw.PinBallCompo
         
         public bool CheackType<T>()
         {
-            return _fsmBrain.CheackType<T>() is T;
+            return _fsmBrain.CheackType<T>();
         }
         
         public void Update()

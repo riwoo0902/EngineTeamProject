@@ -5,16 +5,13 @@ namespace _01.Script.Lrw.PinBallCompo.FSM
 {
     public abstract class PinBallStateBase : IState
     {
-        protected Transform transform;
-        protected Rigidbody2D rigidbody2D;
-        
-        protected PinBallStateBase(IPinBallContext ball)
+        protected PinBallMachine _pinBallMachine;
+        protected PinBallStateBase(PinBallMachine pinBallMachine)
         {
-            transform = ball.PinBallContextTransform;
-            rigidbody2D = ball.PinBallContextRigidbody;
+            _pinBallMachine = pinBallMachine;
         }
         
-        public void Enter()
+        public virtual void Enter()
         {
             
         }

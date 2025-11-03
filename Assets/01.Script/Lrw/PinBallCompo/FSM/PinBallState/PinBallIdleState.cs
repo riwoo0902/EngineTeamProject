@@ -4,7 +4,7 @@ namespace _01.Script.Lrw.PinBallCompo.FSM.PinBallState
 {
     public class PinBallIdleState :PinBallStateBase
     {
-        public PinBallIdleState(IPinBallContext ball) : base(ball)
+        public PinBallIdleState(PinBallMachine pinBallMachine) : base(pinBallMachine)
         {
             
         }

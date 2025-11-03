@@ -1,3 +1,4 @@
+using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using UnityEngine;
@@ -34,9 +35,11 @@ namespace _01.Script.Lrw.PinBallCompo
             }
             _lineRenderer.positionCount = drawPoints.Length;
             _lineRenderer.SetPositions(drawPoints);
-
-
         }
-           
+
+        private void OnDestroy()
+        {
+            EventBus<MousePosEvent>.OnEvent -= DrawLine;
+        }
     }
 }

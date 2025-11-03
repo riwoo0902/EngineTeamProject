@@ -1,11 +1,7 @@
-using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
-using _01.Script.Lrw.PinBallCompo.FSM;
 using _01.Script.Lrw.PinBallCompo.FSM.Interface;
-using _01.Script.Lrw.PinBallCompo.FSM.PinBallState;
 using Lrw_CustomReadonly;
-using Lrw_Input;
 using Lrw_PinBall;
 using UnityEngine;
 
@@ -20,7 +16,7 @@ namespace _01.Script.Lrw.PinBallCompo
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
-        private PinBallMachine _PinBallFsmMachine;
+        private PinBallMachine _pinBallFsmMachine;
         
         private void Awake()
         {
@@ -41,7 +37,7 @@ namespace _01.Script.Lrw.PinBallCompo
         {
             PinBallContextTransform = transform;
             PinBallContextRigidbody = gameObject.GetComponent<Rigidbody2D>();
-            _PinBallFsmMachine = new PinBallMachine(this);
+            _pinBallFsmMachine = new PinBallMachine(this);
             
         }
 
@@ -53,13 +49,13 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void Update()
         {
-            _PinBallFsmMachine.Update();
+            _pinBallFsmMachine.Update();
             
         }
 
         private void FixedUpdate()
         {
-            _PinBallFsmMachine.FixedUpdate();
+            _pinBallFsmMachine.FixedUpdate();
         }
 
         public void SetPinBallSo(PinBallSO a)
