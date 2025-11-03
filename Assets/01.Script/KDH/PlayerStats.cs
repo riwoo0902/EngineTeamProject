@@ -25,9 +25,19 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    //아이템 추가 함수
+    public void AddItems(List<ItemSO> items)
+    {
+        foreach (var item in items)
+        {
+            AddItem(item); 
+        }
+    }
+
+    // 단일 아이템 추가
     public void AddItem(ItemSO item)
     {
+        if (item == null) return;
+
         inventory.Add(item);
         ApplyItemStats(item);
 

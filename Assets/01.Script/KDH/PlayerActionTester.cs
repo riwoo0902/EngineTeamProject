@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class PlayerActionTester : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats; // PlayerStats 연결
-    [SerializeField] private ItemSO testItem;          // 테스트할 ItemSO 연결
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private List<ItemSO> testItems;  
+    [SerializeField] private ItemSO testItem;  
 
     private void Start()
     {
         playerStats.action += OnInventoryChanged;
+        playerStats.AddItems(testItems);
         playerStats.AddItem(testItem);
     }
 
