@@ -17,21 +17,26 @@ namespace _01.Script.Lrw.PinBallCompo
         private void Awake()
         {
             _pinBall =  GetComponent<PinBall>();
+            _lineRenderer = GetComponent<LineRenderer>();
             EventBus<MousePosEvent>.OnEvent += DrawLine;
         }
 
         private void DrawLine(MousePosEvent mousePos)
         {
-            Vector2 mouseDir = (mousePos.RealPos - (Vector2)transform.position).normalized;
-            Vector2 Gravity = Physics2D.gravity * _pinBall.PinBallSo.Mass;
-            Vector2[] drawPoints = new Vector2[_drawPointAmount];
-        
-        
+            Vector3 mouseDir = (mousePos.RealPos - (Vector2)transform.position).normalized;
+            Vector3 gravity = Physics.gravity * _pinBall.PinBallSo.Mass;
+            Vector3[] drawPoints = new Vector3[_drawPointAmount];
+            Vector3 moveValue = transform.position + (gravity * drawPintDistance);
+            for (int i = 0; i < _drawPointAmount; i++)
+            {
+                drawPoints[i] = transform.position + (mouseDir * (drawPintDistance * i * _pinBall.PinBallSo.BallShootPower)) +
+                                (gravity * (Mathf.Pow(i*drawPintDistance, 1) * 0.5f));
+            }
+            _lineRenderer.positionCount = drawPoints.Length;
+            _lineRenderer.SetPositions(drawPoints);
 
 
         }
-        
-
-
+           
     }
 }

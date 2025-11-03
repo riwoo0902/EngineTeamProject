@@ -15,7 +15,6 @@ namespace _01.Script.Lrw.PinBallCompo
     public class PinBall : MonoBehaviour,ICanTriggerEvent,IPinBallContext
     {
         [field:SerializeField] public PinBallSO PinBallSo { get; private set; }
-        [field:SerializeField] public InputSO InputSo { get; private set; }
         
         public Rigidbody2D Rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;

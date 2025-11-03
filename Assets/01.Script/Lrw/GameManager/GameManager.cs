@@ -18,7 +18,6 @@ namespace _01.Script.Lrw.GameManager
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -35,5 +34,6 @@ namespace _01.Script.Lrw.GameManager
             
             
         }
+        
     }
 }
