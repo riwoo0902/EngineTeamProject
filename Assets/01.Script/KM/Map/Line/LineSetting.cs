@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class LineSetting : MonoBehaviour
 {
-    [SerializeField] private GameObject EndPoint;
+    public GameObject EndPoint;
     [SerializeField] private float duration = 2f;
     private LineRenderer _lineCompo;
 
-    private void Start()
+    public void CreateLine()
     {
         _lineCompo = GetComponent<LineRenderer>();
         _lineCompo.SetPosition(0, new Vector3(transform.position.x, transform.position.y, 0));
@@ -41,7 +41,7 @@ public class LineSetting : MonoBehaviour
         {
             _lineCompo.colorGradient = gri;
             gri.SetKeys(colorKey, gri.alphaKeys);
-            colorKey[0].time = x - 0.001f;
+            colorKey[0].time = x;
             colorKey[1].time = x;
         }, 1f,duration).SetEase(Ease.Linear);
     }
