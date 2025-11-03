@@ -1,6 +1,7 @@
 using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
+using _01.Script.Lrw.PinBallCompo.FSM;
 using Lrw_Input;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace _01.Script.Lrw.GameManager
     {
         [field:SerializeField] public InputSO InputSo { get; private set; }
         private Vector2 _pevMousePos;
+        [field: SerializeField] public PinBallStates State { get; private set; } = PinBallStates.Idle;
         
         public static GameManager Instance { get; private set; }
 

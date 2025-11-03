@@ -8,7 +8,7 @@ using UnityEngine;
 namespace _01.Script.Lrw.PinBallCompo
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PinBall : MonoBehaviour,ICanTriggerEvent,IPinBallContext
+    public class PinBall : MonoBehaviour,ICanTriggerEvent
     {
         [field:SerializeField] public PinBallSO PinBallSo { get; private set; }
         
@@ -29,13 +29,9 @@ namespace _01.Script.Lrw.PinBallCompo
         }
         
         
-        #region IPinBallContext
-        public Transform PinBallContextTransform { get; private set; }
         public Rigidbody2D PinBallContextRigidbody { get; private set;}
-        #endregion
         private void CreatPinBAllBrain()
         {
-            PinBallContextTransform = transform;
             PinBallContextRigidbody = gameObject.GetComponent<Rigidbody2D>();
             _pinBallFsmMachine = new PinBallMachine(this);
             

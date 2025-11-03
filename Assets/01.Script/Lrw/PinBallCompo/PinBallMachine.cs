@@ -8,14 +8,14 @@ namespace _01.Script.Lrw.PinBallCompo
     public class PinBallMachine
     {
         private FsmBrain _fsmBrain;
-        private PinBall _pinBall;
+        public PinBall PinBall { get; private set; }
         public PinBallMachine(PinBall a)
         {
             _fsmBrain = new FsmBrain();
-            _pinBall = a;
+            PinBall = a;
             _fsmBrain.AddState(PinBallStates.Idle,new PinBallIdleState(this));
             _fsmBrain.AddState(PinBallStates.Shooting,new PinBallShootingState(this));
-            _fsmBrain.SetState(PinBallStates.Idle);
+            _fsmBrain.SetState(GameManager.GameManager.Instance.State);
         }
 
         public void ChangeState(PinBallStates a)

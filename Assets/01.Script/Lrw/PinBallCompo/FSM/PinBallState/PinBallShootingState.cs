@@ -8,5 +8,11 @@ namespace _01.Script.Lrw.PinBallCompo.FSM.PinBallState
         {
             
         }
+
+        public override void Enter()
+        {
+            base.Enter();
+            _rigid.gravityScale = _pinBallSo.Mass;
+        }
     }
 }
