@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
   m_Name: ItemSO
   m_EditorClassIdentifier: 
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 15
+  itemName: TestAD
+  itemIcon: {fileID: 5096743657813371027, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
+  itemDescription: JustAD

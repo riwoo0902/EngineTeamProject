@@ -1,23 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets._01.Script.CHG.Enemy;
+﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets._01.Script.CHG
 {
-    public class C_StageManager : MonoBehaviour
+    public class C_StageManager : MonoSingleton<C_StageManager>
     {
-        //스테이지가 시작하면 -> 적 생성 ->  적 수 UI 정리 
-        //나중에 씬마다 배치할지, 게임 매니저에 붙여둘지에 따라 바꿔야함
-        private  int _curLevel;
-        [SerializeField] private C_StageDataSO[] _stageData;
+        [SerializeField] private Image TurnImage;
+
+        [SerializeField]
+        private PlayerManager _playerManager;
+        private int _curLevel;
+        public bool CurTurn { get; private set; } = true; //true일시 플레이어 턴
+
         //테스트용
-        [ContextMenu("TestSceneLoad")]
-        private void SceneLoad()
+        [SerializeField] private C_EnemyStageDataSO[] _stageData;
+
+        [ContextMenu("BattleStageLoad")]
+        private void BattleStageLoad()
         {
             Debug.Assert(_stageData != null, "StageData is null!");
-            StageEnemyManager enemyManager = GameObject.Find("EnemyManager").GetComponent<StageEnemyManager>();
-            enemyManager.Init(_stageData[0]); 
+            PlayerTurnSet(); //플레이어 턴으로 시작
+            GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(_stageData[0], _playerManager);
+        }
+
+        public void EnemyTurnSet()
+        {
+            CurTurn = false;
+            TurnImage.DOColor(Color.red, 0);
+            
+        }
+        public void PlayerTurnSet() 
+        {
+            CurTurn = true;
+            TurnImage.DOColor(Color.blue, 0);
+            
         }
 
         private void SceneUnLoad()

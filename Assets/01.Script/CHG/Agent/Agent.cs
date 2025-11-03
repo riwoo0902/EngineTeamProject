@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class Agent : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer), typeof(AgentHealth))]
+public abstract class Agent : MonoBehaviour
 {
-    public AgentHealth HealthCompo { get; protected set; }
+    protected SpriteRenderer _spriteRen;
+    public AgentHealth HealthCompo { get; private set; }
 
     protected virtual void Awake()
     {
         HealthCompo = GetComponent<AgentHealth>();
+        _spriteRen = GetComponent<SpriteRenderer>();
     }
 
 
