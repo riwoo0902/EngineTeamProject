@@ -22,6 +22,7 @@ public class HealthSystem : MonoBehaviour
 
     public Action OnDamaged;
     public Action OnDead;
+    public Action OnDeal;
 
     private void Awake()
     {
@@ -40,5 +41,10 @@ public class HealthSystem : MonoBehaviour
     public float GetNormalizeHelath()
     {
         return (float)Health / _maxHealth;
+    }
+
+    public void Deal(DamageData damage)
+    {
+        OnDeal?.Invoke();
     }
 }
