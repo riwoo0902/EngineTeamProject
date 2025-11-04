@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillSlot : MonoBehaviour
+public class SkillSlot : MonoBehaviour, IPointerClickHandler
 {
     public SkillSO skillData;
     [SerializeField] private Image icon;
@@ -14,6 +14,11 @@ public class SkillSlot : MonoBehaviour
 
     private void Start()
     {
+        if (skillData == null)
+        {
+            return;
+        }
+
         icon.sprite = skillData.icon;
     }
 
@@ -22,19 +27,25 @@ public class SkillSlot : MonoBehaviour
         if (isCoolDown)
         {
             currentCoolDown -= Time.deltaTime;
-            coolDownOverlay.fillAmount = currentCoolDown / skillData.cooldownTime;
+            coolDownOverlay.fillAmount = 1 - (currentCoolDown / skillData.cooldownTime);
 
             if (currentCoolDown <= 0)
             {
                 isCoolDown = false;
                 coolDownOverlay.fillAmount = 0;
+                Debug.Log($"ÄðÅ¸ÀÓ Á¾·á");
             }
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!isCoolDown && skillData != null)
+        if (skillData == null)
+        {
+            return;
+        }
+
+        if (!isCoolDown)
         {
             UseSkill();
         }
@@ -52,5 +63,4 @@ public class SkillSlot : MonoBehaviour
         currentCoolDown = skillData.cooldownTime;
         coolDownOverlay.fillAmount = 1;
     }
-
 }
