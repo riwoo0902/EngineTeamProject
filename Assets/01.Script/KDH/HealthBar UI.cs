@@ -2,36 +2,29 @@ using UnityEngine;
 
 public class HealthBarUI : MonoBehaviour
 {
-    [SerializeField] private HealthSystem healthSystem; // 체력 시스템 연결
-    [SerializeField] private Transform healthBar;       // 체력바 오브젝트 (스케일 변경할 것)
-    [SerializeField] private CharacterDataSO characterData;
-    private float originalScaleX;
+    [SerializeField] private Transform _bar;
+    private HealthSystem _healthSystem;
+
+    private void Awake()
+    {
+        _healthSystem = GetComponentInParent<HealthSystem>();
+    }
 
     private void Start()
     {
-        if (healthBar == null || healthSystem == null) return;
-
-        originalScaleX = healthBar.localScale.x;
-
-        // 이벤트 등록
-
-        // 초기 체력 표시
-        UpdateHealthBar();
+        UpdateBar();
+        _healthSystem.OnDamaged += UpdateBar;
     }
 
-    private void UpdateHealthBar()
+    private void UpdateBar()
     {
-        float healthPercent = (float)healthSystem.currentHealth / characterData.maxHealth;
-        Vector3 newScale = healthBar.localScale;
-        newScale.x = originalScaleX * healthPercent;
-        healthBar.localScale = newScale;
+        float xScale = _healthSystem.GetNormalizeHelath();
+        _bar.localScale = new Vector3(xScale, _bar.localScale.y, _bar.localScale.z);
     }
 
     private void OnDestroy()
     {
-        if (healthSystem != null)
-        {
-
-        }
+        _healthSystem.OnDamaged -= UpdateBar;
     }
+
 }
