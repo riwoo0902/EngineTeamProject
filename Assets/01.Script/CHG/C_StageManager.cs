@@ -16,6 +16,7 @@ namespace Assets._01.Script.CHG
         //테스트용
         [SerializeField] private C_EnemyStageDataSO[] _stageData;
 
+        #region BattleScene
         [ContextMenu("BattleStageLoad")]
         private void BattleStageLoad()
         {
@@ -34,8 +35,9 @@ namespace Assets._01.Script.CHG
         {
             CurTurn = true;
             TurnImage.DOColor(Color.blue, 0);
-            
         }
+        #endregion
+
 
         private void SceneUnLoad()
         {
