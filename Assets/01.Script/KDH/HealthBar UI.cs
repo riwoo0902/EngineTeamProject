@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HealthBarUI : MonoBehaviour
 {
     [SerializeField] private Transform _bar;
     private HealthSystem _healthSystem;
+    [SerializeField] private DamageData _damageData;
 
     private void Awake()
     {
@@ -14,6 +16,14 @@ public class HealthBarUI : MonoBehaviour
     {
         UpdateBar();
         _healthSystem.OnDamaged += UpdateBar;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            _healthSystem.GetDamage(_damageData);
+        }
     }
 
     private void UpdateBar()

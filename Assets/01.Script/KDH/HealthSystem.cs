@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    private int helath;
-    public int Health
+    private float helath;
+    public float Health
     {
         get
         {
@@ -28,9 +28,9 @@ public class HealthSystem : MonoBehaviour
         Health = _maxHealth;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(DamageData damage)
     {
-        Health -= damage;
+        Health -= damage.amount;
         OnDamaged?.Invoke();
 
         if (_isDead)
