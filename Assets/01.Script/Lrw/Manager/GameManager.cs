@@ -5,13 +5,13 @@ using _01.Script.Lrw.PinBallCompo.FSM;
 using Lrw_Input;
 using UnityEngine;
 
-namespace _01.Script.Lrw.GameManager
+namespace _01.Script.Lrw.Manager
 {
     public class GameManager : MonoBehaviour
     {
         [field:SerializeField] public InputSO InputSo { get; private set; }
         private Vector2 _pevMousePos;
-        [field: SerializeField] public PinBallStates State { get; private set; } = PinBallStates.Idle;
+        public PinBallStates state = PinBallStates.Idle;
         
         public static GameManager Instance { get; private set; }
 
@@ -29,13 +29,13 @@ namespace _01.Script.Lrw.GameManager
 
         private void Update()
         {
-            if (InputSo.MousePos != _pevMousePos)
-            {
-                EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
-            }
-            
+            EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
             
         }
-        
+
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
     }
 }

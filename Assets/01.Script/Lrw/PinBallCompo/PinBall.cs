@@ -1,9 +1,10 @@
+using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
-using _01.Script.Lrw.PinBallCompo.FSM.Interface;
+using _01.Script.Lrw.Manager;
+using _01.Script.Lrw.PinBallCompo.FSM;
 using Lrw_CustomReadonly;
 using Lrw_PinBall;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo
@@ -23,22 +24,30 @@ namespace _01.Script.Lrw.PinBallCompo
         {
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
-            _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
-            
             Damage = PinBallSo.BaseDamage;//임시
+            
+        }
+
+        public void PinBallShoot()
+        {
+            if (GameManager.Instance.state == PinBallStates.Idle)
+            {
+                GameManager.Instance.state = PinBallStates.Shooting;
+                Vector2 force  = Vector2.zero;
+                Rigid.AddForce(force, ForceMode2D.Impulse);
+                _pinBallFsmMachine.ChangeState(PinBallStates.Shooting);
+            }
+            
         }
         
-        
-        
-        public Rigidbody2D PinBallContextRigidbody { get; private set;}
         private void CreatPinBAllBrain()
         {
             _pinBallFsmMachine = new PinBallMachine(this);
-            
         }
 
         private void Start()
         {
+            GameManager.Instance.InputSo.OnMousePress += PinBallShoot;
             CreatPinBAllBrain();
             SetPinBallSo(PinBallSo);
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
@@ -47,7 +56,6 @@ namespace _01.Script.Lrw.PinBallCompo
         private void Update()
         {
             _pinBallFsmMachine.Update();
-            
         }
 
         private void FixedUpdate()
@@ -78,6 +86,9 @@ namespace _01.Script.Lrw.PinBallCompo
             Score += Damage;
         }
 
-        
+        private void OnDestroy()
+        {
+            GameManager.Instance.InputSo.OnMousePress -= PinBallShoot;
+        }
     }
 }

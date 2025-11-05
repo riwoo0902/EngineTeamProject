@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1960572612849385674}
   - component: {fileID: 7588957117737965836}
   - component: {fileID: 5651328454444354753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,4 +137,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03404a3842d6a9342adb90fe5397fec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 2
+  hp: 0

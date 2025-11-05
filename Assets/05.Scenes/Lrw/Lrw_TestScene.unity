@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 450165321}
   - component: {fileID: 450165323}
   - component: {fileID: 450165322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Map (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 722322697}
   - component: {fileID: 722322699}
   - component: {fileID: 722322698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Map (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,8 +684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa108c5a27ff1c4c9fd71bdf6cd3164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawDistance: 5.3
-  drawPintDistance: 0.1
+  drawDistance: 5
+  ordLayer:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!120 &1232389652
 LineRenderer:
   serializedVersion: 2
@@ -733,7 +735,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 10, z: 0}
+  - {x: 0, y: 5, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -793,6 +795,37 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1 &1544774969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544774970}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544774970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544774969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7027562, y: 8.372384, z: -4.6684647}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1714575209
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InputSo>k__BackingField: {fileID: 11400000, guid: ac43dd892e6c7184ea6e9ba8aa775935, type: 2}
+  state: 0
 --- !u!4 &1714575211
 Transform:
   m_ObjectHideFlags: 0
@@ -1028,7 +1062,7 @@ GameObject:
   - component: {fileID: 1858669937}
   - component: {fileID: 1858669939}
   - component: {fileID: 1858669938}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Map (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1266,3 +1300,4 @@ SceneRoots:
   - {fileID: 1737717333}
   - {fileID: 1934593849}
   - {fileID: 2092038610}
+  - {fileID: 1544774970}

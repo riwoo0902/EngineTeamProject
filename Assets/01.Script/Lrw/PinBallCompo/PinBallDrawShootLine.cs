@@ -1,8 +1,7 @@
-using System;
+using System.Collections.Generic;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _01.Script.Lrw.PinBallCompo
 {
@@ -12,9 +11,7 @@ namespace _01.Script.Lrw.PinBallCompo
         private LineRenderer _lineRenderer;
         private PinBall _pinBall;
         [SerializeField,Range(1,10)] private float drawDistance = 1;
-        [SerializeField,Range(0.1f,1)] private float drawPintDistance = 0.2f;
-        private int _drawPointAmount => (int)(drawDistance / drawPintDistance);
-        
+        [SerializeField] private LayerMask ordLayer;
         private void Awake()
         {
             _pinBall =  GetComponent<PinBall>();
@@ -24,22 +21,38 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void DrawLine(MousePosEvent mousePos)
         {
-            Vector3 mouseDir = (mousePos.RealPos - (Vector2)transform.position).normalized;
-            Vector3 gravity = Physics.gravity * _pinBall.PinBallSo.Mass;
-            Vector3[] drawPoints = new Vector3[_drawPointAmount];
-            Vector3 moveValue = transform.position + (gravity * drawPintDistance);
-            for (int i = 0; i < _drawPointAmount; i++)
+            Vector2 mouseDir = (mousePos.RealPos - (Vector2)transform.position).normalized;
+            Vector2 gravity = Vector2.down * (9.8f * _pinBall.PinBallSo.Mass);
+            List<Vector3> drawPoints = new List<Vector3>();
+            float t = 0;
+            float drawLength = 0;
+            Vector2 lastDrawPoint = transform.position;
+            while (true)
             {
-                drawPoints[i] = transform.position + (mouseDir * (drawPintDistance * i * _pinBall.PinBallSo.BallShootPower)) +
-                                (gravity * (Mathf.Pow(i*drawPintDistance, 1) * 0.5f));
+                Vector2 drawPoint = GetLinePos(transform.position, mouseDir, gravity,_pinBall.PinBallSo.BallShootPower,t);
+                drawPoints.Add(drawPoint);
+                drawLength += (drawPoint - lastDrawPoint).magnitude;
+                t += Time.fixedDeltaTime;
+                if(drawLength >= drawDistance) break;
+                Vector2 drawVec2 = drawPoint - lastDrawPoint;
+                if(Physics2D.Raycast(lastDrawPoint, drawVec2.normalized, drawVec2.magnitude, ordLayer).collider) break;
+                lastDrawPoint = drawPoint;
             }
-            _lineRenderer.positionCount = drawPoints.Length;
-            _lineRenderer.SetPositions(drawPoints);
+            _lineRenderer.positionCount = drawPoints.Count;
+            _lineRenderer.SetPositions(drawPoints.ToArray());
+        }
+
+        private static Vector2 GetLinePos(Vector2 startPos,Vector2 moveDir,Vector2 gravity,float power,float time)
+        {
+            Vector2 gValue = gravity * (0.5f * time * time);
+            Vector2 moveValue = moveDir * (power * time);
+            return startPos + gValue +  moveValue;
         }
 
         private void OnDestroy()
         {
             EventBus<MousePosEvent>.OnEvent -= DrawLine;
         }
+        
     }
 }

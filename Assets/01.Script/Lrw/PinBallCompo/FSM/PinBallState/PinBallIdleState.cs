@@ -19,6 +19,7 @@ namespace _01.Script.Lrw.PinBallCompo.FSM.PinBallState
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            _rigid.gravityScale = 0;
             _rigid.linearVelocity = Vector2.zero;
             
         }
