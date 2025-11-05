@@ -1,4 +1,5 @@
 using _01.Script.Lrw.PinBallCompo.FSM.Interface;
+using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo.FSM.PinBallState
 {
@@ -14,7 +15,12 @@ namespace _01.Script.Lrw.PinBallCompo.FSM.PinBallState
             base.Enter();
             _rigid.gravityScale = 0;
         }
-        
-        
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            _rigid.linearVelocity = Vector2.zero;
+            
+        }
     }
 }

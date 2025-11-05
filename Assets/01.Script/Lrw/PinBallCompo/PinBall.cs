@@ -3,6 +3,7 @@ using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.PinBallCompo.FSM.Interface;
 using Lrw_CustomReadonly;
 using Lrw_PinBall;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo
@@ -20,7 +21,6 @@ namespace _01.Script.Lrw.PinBallCompo
         
         private void Awake()
         {
-            CreatPinBAllBrain();
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
             _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
@@ -29,16 +29,17 @@ namespace _01.Script.Lrw.PinBallCompo
         }
         
         
+        
         public Rigidbody2D PinBallContextRigidbody { get; private set;}
         private void CreatPinBAllBrain()
         {
-            PinBallContextRigidbody = gameObject.GetComponent<Rigidbody2D>();
             _pinBallFsmMachine = new PinBallMachine(this);
             
         }
 
         private void Start()
         {
+            CreatPinBAllBrain();
             SetPinBallSo(PinBallSo);
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
