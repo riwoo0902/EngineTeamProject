@@ -582,6 +582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1218310575428284244, guid: aea910bf1467ada46be7b56909d09e4c, type: 3}
+      propertyPath: _damageData.amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6263433822789071139, guid: aea910bf1467ada46be7b56909d09e4c, type: 3}
       propertyPath: m_Name
       value: HealthBarParent
@@ -687,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5970667fa05ca44e84f4fa6c60d9e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 1
+  _maxHealth: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
