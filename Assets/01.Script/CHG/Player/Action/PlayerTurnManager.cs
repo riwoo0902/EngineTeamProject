@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Assets._01.Script.CHG;
 using UnityEngine;
 
 

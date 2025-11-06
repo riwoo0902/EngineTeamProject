@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets._01.Script.CHG;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +12,6 @@ public class EnemyTurnManager : MonoBehaviour
         _enemyManger = enemyManager;
 
         _player = _enemyManger.Player;
-
 
         SubscribeReaction();
         AttachPerformer();

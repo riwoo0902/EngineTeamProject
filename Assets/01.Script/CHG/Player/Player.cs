@@ -11,11 +11,11 @@ public class Player : Agent
     {
         
     }
-    public void Init(PlayerManager playerManager)
+    public void Init()
     {
         base.Awake();
-        Debug.Assert(playerManager != null, "PlayerManager is Null");
-        HealthCompo.Init(playerManager.MaxHealth);
+        Debug.Assert(PlayerManager.Instance != null, "PlayerManager is Null");
+        HealthCompo.Init(PlayerManager.Instance.MaxHealth);
 
         _enemyTargeting = GetComponent<EnemyTargeting>();
         _enemyTargeting.Init(this);

@@ -1,41 +1,49 @@
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoSingleton<PlayerManager>
 {
-    [SerializeField] private int _maxHealth = 0;
+    private int _maxHealth = 0;
+    private int _curHealth = 0;
     private int _gold;
     private Player _stagePlayer;
     private PlayerTurnManager _playerTurnManager;
     public int MaxHealth
     {
-        get => _maxHealth;
-        set => _maxHealth = value;
+        get { return _maxHealth; }
+        set
+        {
+            _maxHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
+        }
+    }
+    public int CurrentHealth
+    {
+        get { return _curHealth; }
+        set
+        {
+            _curHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
+        }
     }
 
     public int Gold
     {
-        get
-        {
-            return _gold;
-        }
+        get { return _gold; }
         set
         {
-            _gold = value;
-            _gold = Mathf.Clamp(_gold, 0, 9999);
+            _gold = Mathf.Clamp(_gold + value, 0, 9999);
         }
 
     }
 
-    public void AddMoney(int index)
+    public void AddMoney(int value)
     {
-        _gold += index;
+        _gold += value;
     }
 
-    public bool SpendMoney(int index)
+    public bool SpendMoney(int value)
     {
-        if (index <= 0 || _gold < index) return false;
+        if (value <= 0 || _gold < value) return false;
 
-        _gold -= index;
+        _gold -= value;
 
         return true;
     }
@@ -48,7 +56,11 @@ public class PlayerManager : MonoBehaviour
 
     public void AddMaxHealth(int value) => MaxHealth += value;
 
-    public void SubtractMaxHealth(int value) => MaxHealth -= value;
+    public void SpendMaxHealth(int value) => MaxHealth -= value;
+
+    public void AddCurrentHealth(int value) => CurrentHealth += value;
+
+    public void SpendCurrentHealth(int value) => CurrentHealth -= value;
 
 
 

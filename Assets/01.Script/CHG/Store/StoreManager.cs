@@ -11,10 +11,10 @@ public class StoreManager : MonoBehaviour
     [SerializeField]
     private List<ItemSO> ItemData;
 
-    [SerializeField]
-    private GameObject PinBallGroup;
-    [SerializeField]
-    private GameObject ItemGroup;
+    
+    private GameObject _pinBallGroup;
+    
+    private GameObject _itemGroup;
 
     private List<Image> _pinBallImgs;
     private List<Image> _itemImgs;
@@ -22,8 +22,11 @@ public class StoreManager : MonoBehaviour
     [ContextMenu("Init")]
     public void InIt()
     {
-        _pinBallImgs = PinBallGroup.GetComponentsInChildren<Image>().ToList();
-        _itemImgs = ItemGroup.GetComponentsInChildren<Image>().ToList();
+        _pinBallGroup = GameObject.Find("PinBallGroup");
+        _itemGroup = GameObject.Find("ItemGroup");
+
+        _pinBallImgs = _pinBallGroup.GetComponentsInChildren<Image>().ToList();
+        _itemImgs = _itemGroup.GetComponentsInChildren<Image>().ToList();
 
         RandomImg(_pinBallImgs, PinBallData);
         RandomImg(_itemImgs, ItemData);

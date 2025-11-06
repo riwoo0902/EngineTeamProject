@@ -1,5 +1,3 @@
-using Assets._01.Script.CHG;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BattleTurnButton : MonoBehaviour
