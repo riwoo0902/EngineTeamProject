@@ -113,6 +113,7 @@ public class SheetDataDownloader : MonoBehaviour
         // JSON 배열을 한 줄씩(JObject) 순회
         foreach (JObject row in jsonData)
         {
+<<<<<<< Updated upstream
             // 각 컬럼 이름으로 값 꺼내기 (없으면 빈 문자열)
             string tribe = row["종족"]?.ToString() ?? ""; // 종족 이름
             string type = row["속성"]?.ToString() ?? ""; // 속성
@@ -120,14 +121,24 @@ public class SheetDataDownloader : MonoBehaviour
             string attack = row["공격력"]?.ToString() ?? ""; // 공격력
             string damage = row["데미지"]?.ToString() ?? ""; // 데미지 값
             string effect = row["특수효과"]?.ToString() ?? ""; // 특수 효과 설명
+=======
+            string tribe = row["Name"]?.ToString() ?? "";
+            string type = row["Attribute"]?.ToString() ?? "";
+            string health = row["Health"]?.ToString() ?? "";
+            string attack = row["Damage"]?.ToString() ?? "";
+>>>>>>> Stashed changes
 
             // 종족 이름을 파일 이름으로 하는 새 MonsterDataSO 에셋 생성
             MonsterDataSO monster = CreateNewMonsterDataSO(tribe);
+<<<<<<< Updated upstream
 
             // SO 안에 실제 데이터 세팅 (SetData는 MonsterDataSO 안에 정의된 함수라고 가정)
             monster.SetData(tribe, type, health, attack, damage, effect);
 
             // 리스트에 방금 만든 SO 추가 (나중에 디버그나 확인용)
+=======
+            monster.SetData(tribe, type, health, attack);
+>>>>>>> Stashed changes
             monsterDataSO.Add(monster);
 
             // 파일 이름을 따로 바꾸고 싶으면 실행 (renameFiles 옵션)
