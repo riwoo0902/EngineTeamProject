@@ -1,58 +1,50 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float currentHealth { get; private set; }
-
-    [SerializeField] private CharacterDataSO characterData;
-
-    [SerializeField] private ParticleSystem particleAp;
-    [SerializeField] private ParticleSystem particleAd;
-
-    public static Action<DamageData, Transform> OnDeal;
-
-    private void Start()
+    private float helath;
+    public float Health
     {
-        currentHealth = characterData.maxHealth;
+        get
+        {
+            return helath;
+        }
+        private set
+        {
+            helath = Mathf.Clamp(value, 0, _maxHealth);
+        }
+    }
+
+    [SerializeField] private int _maxHealth;
+
+    private bool _isDead => Health <= 0;
+
+    public Action OnDamaged;
+    public Action OnDead;
+    public Action OnDeal;
+
+    private void Awake()
+    {
+        Health = _maxHealth;
+    }
+
+    public void GetDamage(DamageData damage)
+    {
+        Health -= damage.amount;
+        OnDamaged?.Invoke();
+
+        if (_isDead)
+            OnDead?.Invoke();
+    }
+
+    public float GetNormalizeHelath()
+    {
+        return (float)Health / _maxHealth;
     }
 
     public void Deal(DamageData damage)
     {
-        OnDeal?.Invoke(damage, transform);
-        float finalDamage = damage.amount;
-
-        if (damage.type == DamageTypeEnum.AD)
-        {
-            finalDamage -= characterData.adDefense;
-            if (finalDamage < 0)
-            {
-                finalDamage = 0;
-            }
-        }
-
-        else if (damage.type == DamageTypeEnum.AP)
-        {
-            finalDamage -= characterData.apDefense;
-            if (finalDamage < 0)
-            {
-                finalDamage = 0;
-            }
-        }
-
-        // 체력 차감
-        currentHealth -= finalDamage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, characterData.maxHealth);
-
-        Debug.Log($"{damage.type} 공격으로 {finalDamage} 피해를 받음 (남은 체력: {currentHealth})");
-    }
-
-
-    public void Heal(int amount)
-    {
-        currentHealth += amount;
-        if (currentHealth > characterData.maxHealth) currentHealth = characterData.maxHealth;
-        Mathf.Clamp(currentHealth, 0, characterData.maxHealth);
+        OnDeal?.Invoke();
     }
 }

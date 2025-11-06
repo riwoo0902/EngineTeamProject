@@ -15,7 +15,7 @@ MonoBehaviour:
   itemSetting:
   - itemType: 2
     itemValue: 5
-  - itemType: 2
+  - itemType: 1
     itemValue: -5
   - itemType: 0
     itemValue: 20

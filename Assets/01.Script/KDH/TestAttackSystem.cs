@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestAttackSystem : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class TestAttackSystem : MonoBehaviour
         {
             Attack(DamageTypeEnum.AP, 25);
         }
+
+        
+
+        
     }
 
     public void Attack(DamageTypeEnum type, float amount)
@@ -29,7 +34,7 @@ public class TestAttackSystem : MonoBehaviour
         if (target == null) return;
 
         DamageData damage = new DamageData(amount, type); // 데미지 생성 후 전달 
-        target.Deal(damage);
+        target.GetDamage(damage);
 
         switch (type) // 타입에 맞춰 파티클 재생
         {
