@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 //스테이지 데이터에 있는 에너미들 랜덤 생성, 남는 애들 UI로, 에너미 죽을 시 남은 자리에 푸쉬
 
-public class StageEnemyManager : MonoBehaviour
+public class EnemyStageManager : MonoBehaviour
 {
     [SerializeField] private Image EnemyUIPrefab;
     [SerializeField] private GameObject EnemyPrefab;
@@ -15,15 +15,16 @@ public class StageEnemyManager : MonoBehaviour
 
     private Stack<C_EnemyDataSO> _nextEnemy = new Stack<C_EnemyDataSO>(); //다음 나올 Enemy Stack
     private Stack<Image> _nextEnemyUI = new Stack<Image>(); //다음 나올 Enemy UIStack
-    private C_EnemyStageDataSO _stageData; //스테이지 정보
+    private BattleStageDataSO _stageData; //스테이지 정보
 
     public Dictionary<int, EnemySlot> EnemySlots = new(); //Enemy위치들과 위치에 Enemy존재 여부
+
+
     public Player Player { get; private set; }
-
-
     private EnemyTurnManager _turnManager;
+    
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
-    public void Init(C_EnemyStageDataSO stageData, Player player)
+    public void Init(BattleStageDataSO stageData, Player player)
     {
         Player = player;
 
@@ -41,7 +42,7 @@ public class StageEnemyManager : MonoBehaviour
     }
 
     //Enemy스크립트에 Stagenemy에 있는 EnemyData넣어주기
-    private bool EnemySetting(C_EnemyStageDataSO stageData)
+    private bool EnemySetting(BattleStageDataSO stageData)
     {
         this._stageData = stageData;
         try
@@ -90,11 +91,12 @@ public class StageEnemyManager : MonoBehaviour
         return true;
     }
 
+
+        // EnemyUI 생성 및 Sprite변경, nextEnemyUiStack에 푸쉬
     private void NextEnemyUISetting()
     {
         Transform NextEnemyGroup = GameObject.Find("NextEnemyGroup").transform;
 
-        // EnemyUI 생성 및 Sprite변경, nextEnemyUiStack에 푸쉬
         foreach (C_EnemyDataSO enemyData in _nextEnemy.Reverse())
         {
             Image image = Instantiate(EnemyUIPrefab, NextEnemyGroup);
@@ -103,7 +105,7 @@ public class StageEnemyManager : MonoBehaviour
         }
     }
 
-    //죽은 Enemy 채워넣기
+    //Enemy사망 시 죽은 Enemy스크립트에 새 EnemyData적용, 새 Enemy위치이동 및 슬롯 바꾸기
     private void EnemyRePlace(C_Enemy enemy)
     {
         //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제

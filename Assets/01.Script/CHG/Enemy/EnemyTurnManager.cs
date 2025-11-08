@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyTurnManager : MonoBehaviour
 {
-    private StageEnemyManager _enemyManger;
+    private EnemyStageManager _enemyManger;
     private Player _player;
     //공격 대상
-    public void Init(StageEnemyManager enemyManager)
+    public void Init(EnemyStageManager enemyManager)
     {
         _enemyManger = enemyManager;
 

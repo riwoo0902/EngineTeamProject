@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BattleStageContext : MonoBehaviour
 {
-    public StageEnemyManager EnemyManager { get; private set; }
+    public EnemyStageManager EnemyManager { get; private set; }
 
-    public void Init(C_EnemyStageDataSO enemyData)
+    public void Init(BattleStageDataSO enemyData)
     {
-        EnemyManager = GameObject.Find("EnemyManager").GetComponent<StageEnemyManager>();
+        EnemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyStageManager>();
 
         Player player = GameObject.Find("Player").GetComponent<Player>();
 

@@ -7,19 +7,23 @@ public class C_StageManager : MonoSingleton<C_StageManager>
 {
     [SerializeField] private Image TurnImage;
 
-    private int _curLevel;
+    public StageDataManager StageDataManager { get; private set; }
+    public int Level { get; private set; }
     public bool CurTurn { get; private set; } = true; //true일시 플레이어 턴
 
-    //테스트용
-    [SerializeField] private C_EnemyStageDataSO[] _stageData;
+
+    private void Start()
+    {
+        StageDataManager = GetComponent<StageDataManager>();
+        
+    }
 
     #region BattleScene
     [ContextMenu("BattleStageLoad")]
     private void BattleStageLoad()
     {
-        Debug.Assert(_stageData != null, "StageData is null!");
+        GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(StageDataManager.GetBattleData());
         PlayerTurnSet(); //플레이어 턴으로 시작
-        GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(_stageData[0]);
     }
 
     public void EnemyTurnSet()
@@ -34,7 +38,11 @@ public class C_StageManager : MonoSingleton<C_StageManager>
         TurnImage.DOColor(Color.blue, 0);
     }
     #endregion
-
+    [ContextMenu("EventStageLoad")]
+    private void EventStageLoad()
+    {
+        GameObject.Find("EventStageManager").GetComponent<EventStageManager>().Init(StageDataManager.GetEventData());
+    }
 
     private void SceneUnLoad()
     {
