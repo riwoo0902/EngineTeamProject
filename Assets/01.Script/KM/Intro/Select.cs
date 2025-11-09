@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +19,7 @@ public class Select : MonoBehaviour
     private GameObject arrow;
     private Vector2 nowPos;
     [SerializeField] private List<ObjSaves> chains = new List<ObjSaves>();
+    [SerializeField] private GameObject blackFrame;
     void FixedUpdate()
     {
         nowPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -51,6 +54,7 @@ public class Select : MonoBehaviour
                 Destroy(chains[2].ChainLeft);
                 Destroy(chains[2].ChainRight);
             }
+            StartCoroutine(DownDarkFrame());
         }
         if (NowSelect != null)
         {
@@ -67,6 +71,12 @@ public class Select : MonoBehaviour
             arrow.transform.localScale = new Vector3(arrow.transform.localScale.x, 0, arrow.transform.localScale.z);
             arrow = null;
         }
+    }
+
+    private IEnumerator DownDarkFrame()
+    {
+        yield return new WaitForSeconds(1f);
+        blackFrame.transform.DOMoveY(0,1);
     }
 
     private void OnDrawGizmos()
