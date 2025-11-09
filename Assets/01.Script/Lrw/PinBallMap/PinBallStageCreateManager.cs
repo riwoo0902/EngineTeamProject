@@ -1,3 +1,6 @@
+using System;
+using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
+using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +25,7 @@ namespace _01.Script.Lrw.PinBallMap
                 Destroy(gameObject);
             }
             CurrentPinBallMap = Instantiate(testPrefab, transform).GetComponent<PinBallMap>();
+            EventBus<OrbMapReset>.OnEvent += ReSet;
         }
 
         private void Start()
@@ -29,10 +33,15 @@ namespace _01.Script.Lrw.PinBallMap
             CurrentPinBallMap.SetBallTriggerEvent(onBallScoreTrigger);
         }
 
-        [ContextMenu("ReSet")]
-        private void ReSet()
+        private void OnDestroy()
         {
-            CurrentPinBallMap.OrdsReSet();
+            EventBus<OrbMapReset>.OnEvent -= ReSet;
+        }
+
+        [ContextMenu("ReSet")]
+        private void ReSet(OrbMapReset reset)
+        {
+            CurrentPinBallMap.OrdsReSet(reset.NoResetOrb);
         }
         
     }

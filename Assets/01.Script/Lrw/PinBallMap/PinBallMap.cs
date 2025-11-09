@@ -1,4 +1,5 @@
 
+using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.PinBallMap.Ord;
@@ -23,10 +24,11 @@ namespace _01.Script.Lrw.PinBallMap
             BallTriggers.OnBallScoreTrigger += (f) => { ue?.Invoke(f); };
         }
 
-        public void OrdsReSet()
+        public void OrdsReSet(IOrd noResetOrb)
         {
-            OrdsManager.ReSet();
+            OrdsManager.ReSet(noResetOrb);
         }
+
 
     }
 }

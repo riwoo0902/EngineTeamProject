@@ -32,10 +32,6 @@ namespace _01.Script.Lrw.Manager
             EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
             
         }
-
-        private void OnDestroy()
-        {
-            Instance = null;
-        }
+        
     }
 }

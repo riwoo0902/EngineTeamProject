@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
+using _01.Script.Lrw.Manager;
+using _01.Script.Lrw.PinBallCompo.FSM;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo
@@ -21,6 +23,11 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void DrawLine(MousePosEvent mousePos)
         {
+            if (GameManager.Instance.state == PinBallStates.Shooting)
+            {
+                _lineRenderer.positionCount = 0;
+                return;
+            }
             Vector2 mouseDir = (mousePos.RealPos - (Vector2)transform.position).normalized;
             Vector2 gravity = Vector2.down * (9.8f * _pinBall.PinBallSo.Mass);
             List<Vector3> drawPoints = new List<Vector3>();

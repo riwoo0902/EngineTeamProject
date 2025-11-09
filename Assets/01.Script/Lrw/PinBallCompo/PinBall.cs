@@ -33,7 +33,8 @@ namespace _01.Script.Lrw.PinBallCompo
             if (GameManager.Instance.state == PinBallStates.Idle)
             {
                 GameManager.Instance.state = PinBallStates.Shooting;
-                Vector2 force  = Vector2.zero;
+                Vector2 force = (GameManager.Instance.InputSo.MousePos - (Vector2)transform.position).normalized *
+                                PinBallSo.BallShootPower;
                 Rigid.AddForce(force, ForceMode2D.Impulse);
                 _pinBallFsmMachine.ChangeState(PinBallStates.Shooting);
             }
@@ -86,7 +87,7 @@ namespace _01.Script.Lrw.PinBallCompo
             Score += Damage;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             GameManager.Instance.InputSo.OnMousePress -= PinBallShoot;
         }

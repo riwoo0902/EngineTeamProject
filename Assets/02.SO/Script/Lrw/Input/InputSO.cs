@@ -26,10 +26,10 @@ namespace Lrw_Input
             _controler.Player.Enable();
         }
         
-        private void OnDisable()
+        /*private void OnDisable()
         {
             _controler.Player.Disable();
-        }
+        }*/
 
         public void OnMove(InputAction.CallbackContext context)
         {
