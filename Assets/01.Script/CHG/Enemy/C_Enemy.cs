@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(C_Enemy))]
+
 public class C_Enemy : Agent
 {
     public Action<C_Enemy> OnEnemyDead;

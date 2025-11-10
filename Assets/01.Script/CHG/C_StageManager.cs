@@ -2,44 +2,50 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._01.Script.CHG
+
+public class C_StageManager : MonoSingleton<C_StageManager>
 {
-    public class C_StageManager : MonoSingleton<C_StageManager>
+    [SerializeField] private Image TurnImage;
+
+    public StageDataManager StageDataManager { get; private set; }
+    public int Level { get; private set; }
+    public bool CurTurn { get; private set; } = true; //true일시 플레이어 턴
+
+
+    private void Start()
     {
-        [SerializeField] private Image TurnImage;
+        StageDataManager = GetComponent<StageDataManager>();
+        
+    }
 
-        [SerializeField]
-        private PlayerManager _playerManager;
-        private int _curLevel;
-        public bool CurTurn { get; private set; } = true; //true일시 플레이어 턴
+    #region BattleScene
+    [ContextMenu("BattleStageLoad")]
+    private void BattleStageLoad()
+    {
+        GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(StageDataManager.GetBattleData());
+        PlayerTurnSet(); //플레이어 턴으로 시작
+    }
 
-        //테스트용
-        [SerializeField] private C_EnemyStageDataSO[] _stageData;
+    public void EnemyTurnSet()
+    {
+        CurTurn = false;
+        TurnImage.DOColor(Color.red, 0);
 
-        [ContextMenu("BattleStageLoad")]
-        private void BattleStageLoad()
-        {
-            Debug.Assert(_stageData != null, "StageData is null!");
-            PlayerTurnSet(); //플레이어 턴으로 시작
-            GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(_stageData[0], _playerManager);
-        }
+    }
+    public void PlayerTurnSet()
+    {
+        CurTurn = true;
+        TurnImage.DOColor(Color.blue, 0);
+    }
+    #endregion
+    [ContextMenu("EventStageLoad")]
+    private void EventStageLoad()
+    {
+        GameObject.Find("EventStageManager").GetComponent<EventStageManager>().Init(StageDataManager.GetEventData());
+    }
 
-        public void EnemyTurnSet()
-        {
-            CurTurn = false;
-            TurnImage.DOColor(Color.red, 0);
-            
-        }
-        public void PlayerTurnSet() 
-        {
-            CurTurn = true;
-            TurnImage.DOColor(Color.blue, 0);
-            
-        }
+    private void SceneUnLoad()
+    {
 
-        private void SceneUnLoad()
-        {
-
-        }
     }
 }

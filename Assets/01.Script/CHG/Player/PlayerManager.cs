@@ -1,28 +1,66 @@
 using UnityEngine;
 
-public class    PlayerManager : MonoBehaviour
+public class PlayerManager : MonoSingleton<PlayerManager>
 {
-    [SerializeField] private int _maxHealth = 0;
-    private int _curGold;
+    private int _maxHealth = 0;
+    private int _curHealth = 0;
+    private int _gold;
     private Player _stagePlayer;
     private PlayerTurnManager _playerTurnManager;
     public int MaxHealth
     {
-        get => _maxHealth;
-        set => _maxHealth = value;
+        get { return _maxHealth; }
+        set
+        {
+            _maxHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
+        }
+    }
+    public int CurrentHealth
+    {
+        get { return _curHealth; }
+        set
+        {
+            _curHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
+        }
+    }
+
+    public int Gold
+    {
+        get { return _gold; }
+        set
+        {
+            _gold = Mathf.Clamp(_gold + value, 0, 9999);
+        }
+
+    }
+
+    public void AddMoney(int value)
+    {
+        _gold += value;
+    }
+
+    public bool SpendMoney(int value)
+    {
+        if (value <= 0 || _gold < value) return false;
+
+        _gold -= value;
+
+        return true;
     }
 
     //어떤 스테이지냐에 따라 나누기
     public void SceneLoaded()
     {
         _stagePlayer = GameObject.Find("Player").GetComponent<Player>();
-       
-
     }
 
-    public void AddMaxHealth(int value) => _maxHealth += value;
+    public void AddMaxHealth(int value) => MaxHealth += value;
 
-    public void SubtractMaxHealth(int value) => _maxHealth -= value;
+    public void SpendMaxHealth(int value) => MaxHealth -= value;
+
+    public void AddCurrentHealth(int value) => CurrentHealth += value;
+
+    public void SpendCurrentHealth(int value) => CurrentHealth -= value;
 
 
 

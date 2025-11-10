@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Start
+  - Setting
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -11,8 +14,6 @@ TagManager:
   - 
   - Water
   - UI
-  - Ord
-  - Map
   - 
   - 
   - 
@@ -30,6 +31,8 @@ TagManager:
   - 
   - 
   - 
+  - 
+  - Buttons
   - 
   - 
   - 

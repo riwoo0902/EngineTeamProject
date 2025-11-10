@@ -7,9 +7,12 @@ public class HealthBarUI : MonoBehaviour
     private HealthSystem _healthSystem;
     [SerializeField] private DamageData _damageData;
 
+    private Animator _anim;
+
     private void Awake()
     {
         _healthSystem = GetComponentInParent<HealthSystem>();
+        _anim = GetComponentInParent<Animator>();
     }
 
     private void Start()
@@ -23,6 +26,11 @@ public class HealthBarUI : MonoBehaviour
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
             _healthSystem.GetDamage(_damageData);
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            _healthSystem.Deal(_damageData);
         }
     }
 
