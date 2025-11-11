@@ -567,10 +567,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232389650}
-  - component: {fileID: 1232389648}
-  - component: {fileID: 1232389647}
   - component: {fileID: 1232389646}
   - component: {fileID: 1232389651}
+  - component: {fileID: 1232389647}
+  - component: {fileID: 1232389648}
   - component: {fileID: 1232389652}
   m_Layer: 0
   m_Name: PinBall
@@ -687,7 +687,7 @@ MonoBehaviour:
   drawDistance: 5
   ordLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 0
 --- !u!120 &1232389652
 LineRenderer:
   serializedVersion: 2

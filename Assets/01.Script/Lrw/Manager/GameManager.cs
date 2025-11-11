@@ -10,7 +10,7 @@ namespace _01.Script.Lrw.Manager
     public class GameManager : MonoBehaviour
     {
         [field:SerializeField] public InputSO InputSo { get; private set; }
-        private Vector2 _pevMousePos;
+
         public PinBallStates state = PinBallStates.Idle;
         
         public static GameManager Instance { get; private set; }
@@ -20,11 +20,16 @@ namespace _01.Script.Lrw.Manager
             if (Instance == null)
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
                 Destroy(gameObject);
+                return;
             }
+            
+            InputSo.Initialize();
+            
         }
 
         private void Update()
@@ -32,6 +37,15 @@ namespace _01.Script.Lrw.Manager
             EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
             
         }
+
+        private void OnDestroy()
+        {
+            InputSo.Cleanup();
+        }
         
+        private void OnApplicationQuit()
+        {
+            InputSo.Cleanup();
+        }
     }
 }
