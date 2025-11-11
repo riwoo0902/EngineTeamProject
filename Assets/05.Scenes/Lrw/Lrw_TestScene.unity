@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 450165321}
   - component: {fileID: 450165323}
   - component: {fileID: 450165322}
-  m_Layer: 7
+  m_Layer: 19
   m_Name: Map (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 722322697}
   - component: {fileID: 722322699}
   - component: {fileID: 722322698}
-  m_Layer: 7
+  m_Layer: 19
   m_Name: Map (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +687,7 @@ MonoBehaviour:
   drawDistance: 5
   ordLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1572864
 --- !u!120 &1232389652
 LineRenderer:
   serializedVersion: 2
@@ -1062,7 +1062,7 @@ GameObject:
   - component: {fileID: 1858669937}
   - component: {fileID: 1858669939}
   - component: {fileID: 1858669938}
-  m_Layer: 7
+  m_Layer: 19
   m_Name: Map (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1220,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2092038609}
         m_TargetAssemblyTypeName: _01.Script.Lrw.Test.TestDebug, Assembly-CSharp
         m_MethodName: BallTriggerEnd
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

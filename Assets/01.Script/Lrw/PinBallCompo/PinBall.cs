@@ -25,7 +25,7 @@ namespace _01.Script.Lrw.PinBallCompo
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
             Damage = PinBallSo.BaseDamage;//임시
-            
+            if (GameManager.Instance.state == PinBallStates.None) GameManager.Instance.state = PinBallStates.Idle;
         }
 
         public void PinBallShoot()
