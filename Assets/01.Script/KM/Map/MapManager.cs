@@ -1,10 +1,11 @@
-using System.Collections.Generic;
+using System;
+using _01.Script.Lrw.PinBallMap;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
-    public List<int> Persent = new List<int>();
+    public Action<MapDir> OnMapeDir;
 
     private void Awake()
     {
@@ -14,5 +15,11 @@ public class MapManager : MonoBehaviour
             return;
         }
         Instance = this;
+        OnMapeDir += MapMove;
+    }
+
+    private void MapMove(MapDir dir)
+    {
+
     }
 }

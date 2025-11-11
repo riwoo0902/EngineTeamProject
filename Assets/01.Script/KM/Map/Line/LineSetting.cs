@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,7 +7,12 @@ public class LineSetting : MonoBehaviour
     public GameObject EndPoint;
     [SerializeField] private float duration = 2f;
     private LineRenderer _lineCompo;
-
+    private Vector2 nowVec;
+    private Vector2 prevVec;
+    private void Start()
+    {
+        _lineCompo = GetComponent<LineRenderer>();
+    }
     public void CreateLine()
     {
         _lineCompo = GetComponent<LineRenderer>();
@@ -18,10 +24,33 @@ public class LineSetting : MonoBehaviour
             Vector3 midPos = Vector3.Lerp(_lineCompo.GetPosition(0), poss, (i + 1) / 20f);
             _lineCompo.SetPosition(i + 1, midPos);
         }
+        nowVec = transform.parent.transform.position;
+        prevVec = nowVec;
+    }
+
+    private void FixedUpdate()
+    {
+        MoveLineSelf();
+        nowVec = transform.parent.transform.position;
+    }
+
+    private void MoveLineSelf()
+    {
+        if(nowVec != prevVec)
+        {
+            _lineCompo.SetPosition(0, new Vector3(transform.position.x, transform.position.y, 0));
+            Vector3 poss = new Vector3(EndPoint.transform.position.x, EndPoint.transform.position.y, 0);
+            for (int i = 0; i < _lineCompo.positionCount - 1; i++)
+            {
+                Vector3 midPos = Vector3.Lerp(_lineCompo.GetPosition(0), poss, (i + 1) / 20f);
+                _lineCompo.SetPosition(i + 1, midPos);
+            }
+            prevVec = nowVec;
+        }
     }
 
     [ContextMenu("Test Line")]
-    private void LineTest()
+    public void LineMove()
     {
         Gradient gri = new Gradient();
         GradientColorKey[] colorKey = new GradientColorKey[3];

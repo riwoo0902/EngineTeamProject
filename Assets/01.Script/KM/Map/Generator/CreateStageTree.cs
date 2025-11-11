@@ -7,6 +7,7 @@ public class CreateStageTree : MonoBehaviour
     [SerializeField] private int countZeropercent = 3;
     [SerializeField] private GameObject StagePrefab;
     [SerializeField] private GameObject LinePrefab;
+    [SerializeField] private GameObject Parent;
 
     private int _currentPercent = 0;
     private int _currentFloor = 0;
@@ -40,6 +41,7 @@ public class CreateStageTree : MonoBehaviour
 
                 GameObject stage = Instantiate(StagePrefab, pos, Quaternion.identity, transform);
                 GameObject lineObj = Instantiate(LinePrefab, pos, Quaternion.identity, transform);
+                stage.transform.parent = Parent.transform;
 
                 thisFloorParents.Add(stage);
                 thisFloorLines.Add(lineObj);
@@ -59,6 +61,7 @@ public class CreateStageTree : MonoBehaviour
                     int right = Mathf.Clamp(pi + 1, 0, currStages.Count - 1);
 
                     var lineL = prevLines[pi].GetComponent<LineSetting>();
+                    lineL.transform.parent = Parent.transform;
                     if (lineL != null)
                     {
                         lineL.EndPoint = currStages[left];
@@ -66,6 +69,7 @@ public class CreateStageTree : MonoBehaviour
                     }
 
                     var lineObjR = Instantiate(LinePrefab, prevLines[pi].transform.position, Quaternion.identity, transform);
+                    lineObjR.transform.parent = Parent.transform;
                     var lineR = lineObjR.GetComponent<LineSetting>();
                     if (lineR != null)
                     {
@@ -73,6 +77,13 @@ public class CreateStageTree : MonoBehaviour
                         lineR.CreateLine();
                     }
                 }
+            }
+        }
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if(transform.GetChild(i).gameObject != Parent)
+            {
+                Destroy(transform.GetChild(i).gameObject);
             }
         }
     }
