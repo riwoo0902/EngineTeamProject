@@ -15,13 +15,13 @@ namespace Lrw_Ord
         public Collider2D Collider { get; set; }
         
         
-        protected void Awake()
+        protected virtual void Awake()
         {
             currentHp = hp;
             Collider = gameObject.GetComponent<Collider2D>();
         }
         
-        public void Hit(float a)
+        public virtual void Hit(float a)
         {
             currentHp -= a;
             OnHitEvent?.Invoke();
@@ -34,13 +34,13 @@ namespace Lrw_Ord
         }
         
 
-        public void ReSet()
+        public virtual void ReSet()
         {
             gameObject.SetActive(true);
             currentHp = hp;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             EventBus<OrdDestoryEvent>.Raise(new OrdDestoryEvent(Collider));
         }

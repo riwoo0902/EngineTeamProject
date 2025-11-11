@@ -1,34 +1,36 @@
 using _01.Script.Lrw.PinBallCompo.FSM.Interface;
+using Lrw_PinBall;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo.FSM
 {
     public abstract class PinBallStateBase : IState
     {
-        protected Transform transform;
-        protected Rigidbody2D rigidbody2D;
-        
-        protected PinBallStateBase(IPinBallContext ball)
+        protected PinBallMachine _pinBallMachine;
+        protected Rigidbody2D _rigid;
+        protected PinBallSO _pinBallSo;
+        protected PinBallStateBase(PinBallMachine pinBallMachine)
         {
-            transform = ball.PinBallContextTransform;
-            rigidbody2D = ball.PinBallContextRigidbody;
+            _pinBallMachine = pinBallMachine;
+            _rigid = pinBallMachine.PinBall.Rigid;
+            _pinBallSo = pinBallMachine.PinBall.PinBallSo;
         }
         
-        public void Enter()
+        public virtual void Enter()
         {
             
         }
 
-        public void Update()
+        public virtual void Update()
         {
               
         }
 
-        public void FixedUpdate()
+        public virtual void FixedUpdate()
         {
             
         }
-        public void Exit()
+        public virtual void Exit()
         {
             
         }

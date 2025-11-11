@@ -11,24 +11,43 @@ namespace Lrw_Input
         public Vector2 MousePos { get; private set; }
         public Vector2 MouseScreenPos { get; private set; }
         public Vector2 MoveDir { get; private set; }
+        public bool MouseClick { get; private set; }
+        
         public event Action OnJumpKeyPress;
         public event Action OnMousePress;
         public event Action OnMouseReleas;
+        
         private Controler _controler;
-        public bool MouseClick { get; private set; } = false;
-        private void OnEnable()
+        private Camera _mainCamera;
+        private bool _isInitialized;
+
+        public void Initialize()
         {
+            if (_isInitialized) return;
+            
+            _mainCamera = Camera.main;
+            
             if (_controler == null)
             {
                 _controler = new Controler();
                 _controler.Player.SetCallbacks(this);
             }
+            
             _controler.Player.Enable();
+            _isInitialized = true;
         }
-        
-        private void OnDisable()
+
+        public void Cleanup()
         {
-            _controler.Player.Disable();
+            if (!_isInitialized) return;
+            
+            _controler?.Player.Disable();
+            
+            OnJumpKeyPress = null;
+            OnMousePress = null;
+            OnMouseReleas = null;
+            
+            _isInitialized = false;
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -48,22 +67,25 @@ namespace Lrw_Input
         {
             if (context.performed)
             {
-                OnMousePress?.Invoke();
                 MouseClick = true;
+                OnMousePress?.Invoke();
             }
-            if (context.canceled)
+            else if (context.canceled)
             {
-                OnMouseReleas?.Invoke();
                 MouseClick = false;
+                OnMouseReleas?.Invoke();
             }
         }
 
         public void OnMouse(InputAction.CallbackContext context)
         {
             MouseScreenPos = context.ReadValue<Vector2>();
-            MousePos = Camera.main.ScreenToWorldPoint(MouseScreenPos);
+            
+            if (_mainCamera != null)
+            {
+                MousePos = _mainCamera.ScreenToWorldPoint(MouseScreenPos);
+            }
         }
-
     }
 }
 

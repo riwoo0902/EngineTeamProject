@@ -1,70 +1,72 @@
 using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
+using _01.Script.Lrw.Manager;
 using _01.Script.Lrw.PinBallCompo.FSM;
-using _01.Script.Lrw.PinBallCompo.FSM.Interface;
-using _01.Script.Lrw.PinBallCompo.FSM.PinBallState;
 using Lrw_CustomReadonly;
-using Lrw_Input;
 using Lrw_PinBall;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PinBall : MonoBehaviour,ICanTriggerEvent,IPinBallContext
+    public class PinBall : MonoBehaviour,ICanTriggerEvent
     {
-        [SerializeField] private PinBallSO pinBallSo;
-        [field:SerializeField] public InputSO InputSo { get; private set; }
+        [field:SerializeField] public PinBallSO PinBallSo { get; private set; }
         
         public Rigidbody2D Rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
-        private PinBallMachine _PinBallFsmMachine;
+        private PinBallMachine _pinBallFsmMachine;
         
         private void Awake()
         {
-            CreatPinBAllBrain();
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = transform.GetChild(0).GetComponent<PinBallRenderer>();
-            _pinBallDrawShootLine = GetComponent<PinBallDrawShootLine>();
+            Damage = PinBallSo.BaseDamage;//임시
             
-            Damage = pinBallSo.BaseDamage;//임시
+        }
+
+        public void PinBallShoot()
+        {
+            if (GameManager.Instance.state == PinBallStates.Idle)
+            {
+                GameManager.Instance.state = PinBallStates.Shooting;
+                Vector2 force = (GameManager.Instance.InputSo.MousePos - (Vector2)transform.position).normalized *
+                                PinBallSo.BallShootPower;
+                Rigid.AddForce(force, ForceMode2D.Impulse);
+                _pinBallFsmMachine.ChangeState(PinBallStates.Shooting);
+            }
+            
         }
         
-        
-        #region IPinBallContext
-        public Transform PinBallContextTransform { get; private set; }
-        public Rigidbody2D PinBallContextRigidbody { get; private set;}
-        #endregion
         private void CreatPinBAllBrain()
         {
-            PinBallContextTransform = transform;
-            PinBallContextRigidbody = gameObject.GetComponent<Rigidbody2D>();
-            _PinBallFsmMachine = new PinBallMachine(this);
-            
+            _pinBallFsmMachine = new PinBallMachine(this);
         }
 
         private void Start()
         {
-            SetPinBallSo(pinBallSo);
+            GameManager.Instance.InputSo.OnMousePress += PinBallShoot;
+            CreatPinBAllBrain();
+            SetPinBallSo(PinBallSo);
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
 
         private void Update()
         {
-            _PinBallFsmMachine.Update();
-            EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
+            _pinBallFsmMachine.Update();
         }
 
         private void FixedUpdate()
         {
-            _PinBallFsmMachine.FixedUpdate();
+            _pinBallFsmMachine.FixedUpdate();
         }
 
         public void SetPinBallSo(PinBallSO a)
         {
+            PinBallSo = a;
             Rigid.gravityScale = a.Mass;
             _pinBallRenderer.SetSprite(a.PinBallImage);
             Rigid.sharedMaterial.friction = a.Friction;
@@ -85,6 +87,9 @@ namespace _01.Script.Lrw.PinBallCompo
             Score += Damage;
         }
 
-        
+        private void OnDisable()
+        {
+            GameManager.Instance.InputSo.OnMousePress -= PinBallShoot;
+        }
     }
 }

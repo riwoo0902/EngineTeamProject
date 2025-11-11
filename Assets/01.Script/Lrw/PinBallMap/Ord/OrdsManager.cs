@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallMap.Ord
 { 
-    public class OrdsManager : MonoBehaviour
+    public class  OrdsManager : MonoBehaviour
     {
         private Dictionary<Collider2D,IOrd> _ords = new Dictionary<Collider2D,IOrd>();
 
@@ -37,11 +37,12 @@ namespace _01.Script.Lrw.PinBallMap.Ord
             _ords.Remove(ordDestoryEvent.MyCollider2D);
         }
 
-        public void ReSet()
+        public void ReSet(IOrd noResetOrb)
         {
             foreach (IOrd ord in _ords.Values)
             {
-                ord.ReSet();
+                if(noResetOrb != ord)
+                    ord.ReSet();
             }
         }
     
