@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
   m_Name: I2
   m_EditorClassIdentifier: 
-  itemSetting: []
-  itemName: 
+  itemSetting:
+  - itemType: 0
+    itemValue: 2147483647
+  itemName: Test Item 2
   itemIcon: {fileID: 8163405503371104965, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
-  itemDescription: 
+  itemDescription: 2222222222222222222222222
+  itemPrice: 2147483647

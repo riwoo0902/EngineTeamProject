@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StorePlayerHealBtn : MonoBehaviour
+public class StoreHealBtn : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI NameText;
     [SerializeField] private int AddMaxHealthValue = 10;
@@ -23,7 +23,7 @@ public class StorePlayerHealBtn : MonoBehaviour
         }
         else
         {
-            //구매 실패 연출
+            //구매 실패
         }
     }
 }
