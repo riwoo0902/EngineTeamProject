@@ -7,6 +7,8 @@ public class Player : Agent
     private PlayerTurnManager _playerTurnManager;
     private EnemyTargeting _enemyTargeting;
     public int AttackDamage;
+
+    
     protected override void Awake()
     {
         base.Awake();
@@ -20,6 +22,8 @@ public class Player : Agent
         _enemyTargeting = GetComponent<EnemyTargeting>();
         _enemyTargeting.Init(this);
 
+        AgentAnimatorCompo.Init(_animator);
+
         _playerTurnManager = GameObject.Find("PlayerTurnManager").GetComponent<PlayerTurnManager>();
         _playerTurnManager.Init(this, _enemyTargeting, turnManager);
 
@@ -31,6 +35,8 @@ public class Player : Agent
         PlayerTarget = enemy;
     }
 
+    
+
     //가하는 데미지 계산
     public void AttackDamageCalculation(EnemyType type, int damage)
     {
@@ -41,7 +47,7 @@ public class Player : Agent
         AttackDamage = damage;
     }
 
-    public int EnemyAttack()
+    public int GetAttackDamage()
     {
         int damage = AttackDamage;
         AttackDamage = 0;
@@ -54,4 +60,9 @@ public class Player : Agent
         Debug.Log("PlayerDead");
     }
 
+    public void PlayPlayerAttack()
+    {
+        PlayerTurnGA playerTurnGA = new();
+        ActionSystem.Instance.Perform(playerTurnGA);
+    }
 }

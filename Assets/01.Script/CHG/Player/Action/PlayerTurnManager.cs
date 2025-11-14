@@ -42,7 +42,7 @@ public class PlayerTurnManager : MonoBehaviour
         //데미지 계산
         //int damage = 
 
-        _player.PlayerTarget.HealthCompo.TakeDamage(_player.EnemyAttack());
+        _player.PlayerTarget.HealthCompo.TakeDamage(_player.GetAttackDamage());
 
         yield return new WaitForEndOfFrame(); //나중에 에니메이션 끝나거나 하는걸로 바꾸기
 
@@ -51,14 +51,17 @@ public class PlayerTurnManager : MonoBehaviour
 
     private void PlayerTurnEnd(PlayerTurnGA playerTurnGA)
     {
+        Debug.Log("PlayerTurnEnd 호출됨!"); // 이 로그가 한 턴에 두 번 찍히는지 확인
         _enemyTargeting.TargetClear();
         _turnManager.EnemyTurnSet();
-
-
 
         EnemyMoveGA enemyMoveGA = new();
         ActionSystem.Instance.AddReaction(enemyMoveGA);
     }
 
-    
+    private void OnDestroy()
+    {
+        ActionSystem.UnsubscribeReaction<PlayerTurnGA>(PlayerTurnEnd, ReactionTiming.POST);
+        ActionSystem.DetachPerFormer<PlayerTurnGA>(); // Performer도 해지
+    }
 }

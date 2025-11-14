@@ -10,7 +10,6 @@ public class EnemyTargeting : MonoBehaviour
 
     public void Init(Player player)
     {
-        //Debug.Log("I")
 
         _player = player;
         _spren = TargetTriangle.GetComponent<SpriteRenderer>();

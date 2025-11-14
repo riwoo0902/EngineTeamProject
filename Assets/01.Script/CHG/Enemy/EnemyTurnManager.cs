@@ -93,4 +93,13 @@ public class EnemyTurnManager : MonoBehaviour
         Debug.Log("End Enemy Turn");
         _turnManager.PlayerTurnSet();
     }
+
+    // EnemyTurnManager.cs ¿¡ Ãß°¡
+
+    private void OnDestroy()
+    {
+        ActionSystem.DetachPerFormer<EnemyMoveGA>();
+        ActionSystem.DetachPerFormer<EnemyAttackGA>();
+
+    }
 }
