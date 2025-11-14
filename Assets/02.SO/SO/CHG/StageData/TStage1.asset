@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe923af659f8cd44fb865cc03ed0514c, type: 3}
-  m_Name: StageDataSO
+  m_Script: {fileID: 11500000, guid: d0b729ffe09b2d64397d167e4404df21, type: 3}
+  m_Name: TStage1
   m_EditorClassIdentifier: 
-  EmergeCount: 7
-  EmergeEnemy:
+  <EmergeCount>k__BackingField: 2
+  <EmergeEnemy>k__BackingField:
   - {fileID: 11400000, guid: c48be99fe139a66458bfa2bdc016a812, type: 2}
   - {fileID: 11400000, guid: c7bc1d86de8d913469369fd73e5fb78d, type: 2}
   - {fileID: 11400000, guid: e2c9420f29c7c2e429872ce7d3c0cf18, type: 2}

@@ -1,21 +1,70 @@
-﻿using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
+public enum MapType
+{
+    None,
+    Battle,
+    Boss,
+    Store,
+    Event,
+    MapChoice
+}
 
 public class C_StageManager : MonoSingleton<C_StageManager>
 {
-    [SerializeField] private Image TurnImage;
 
     public StageDataManager StageDataManager { get; private set; }
-    public int Level { get; private set; }
-    public bool CurTurn { get; private set; } = true; //true일시 플레이어 턴
+    [field: SerializeField] public int Level { get; private set; } = 0;
 
+    private MapType _nextMapType;
 
     private void Start()
     {
         StageDataManager = GetComponent<StageDataManager>();
-        
+
+    }
+
+    public void SceneChange(MapType type)
+    {
+        _nextMapType = type;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        //씬 로드 실행
+        //씬 로드 실행
+        switch (type)
+        {
+            case MapType.Battle:
+                {
+                }
+                break;
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadScene)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        //여기서 특정 씬일 때 반응 실행
+        switch (_nextMapType)
+        {
+            case MapType.Battle:
+                {
+                    BattleStageLoad();
+                }
+                break;
+            case MapType.Store:
+                {
+                    StoreStageLoad();
+                }
+                break;
+            case MapType.Event:
+                {
+                    EventStageLoad();
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     #region BattleScene
@@ -23,20 +72,9 @@ public class C_StageManager : MonoSingleton<C_StageManager>
     private void BattleStageLoad()
     {
         GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(StageDataManager.GetBattleData());
-        PlayerTurnSet(); //플레이어 턴으로 시작
     }
 
-    public void EnemyTurnSet()
-    {
-        CurTurn = false;
-        TurnImage.DOColor(Color.red, 0);
 
-    }
-    public void PlayerTurnSet()
-    {
-        CurTurn = true;
-        TurnImage.DOColor(Color.blue, 0);
-    }
     #endregion
     [ContextMenu("EventStageLoad")]
     private void EventStageLoad()
@@ -44,8 +82,8 @@ public class C_StageManager : MonoSingleton<C_StageManager>
         GameObject.Find("EventStageManager").GetComponent<EventStageManager>().Init(StageDataManager.GetEventData());
     }
 
-    private void SceneUnLoad()
+    private void StoreStageLoad()
     {
-
+        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().InIt();
     }
 }

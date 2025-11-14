@@ -24,7 +24,7 @@ public class EnemyStageManager : MonoBehaviour
     private EnemyTurnManager _turnManager;
     
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
-    public void Init(BattleStageDataSO stageData, Player player)
+    public void Init(BattleStageDataSO stageData, Player player, BattleTurnManager turnManager)
     {
         Player = player;
 
@@ -33,7 +33,7 @@ public class EnemyStageManager : MonoBehaviour
         if (!flowControl) return;
 
         _turnManager = GetComponentInChildren<EnemyTurnManager>();
-        _turnManager.Init(this);
+        _turnManager.Init(this, turnManager);
 
         //EnemyUI 생성
         NextEnemyUISetting();
@@ -70,10 +70,12 @@ public class EnemyStageManager : MonoBehaviour
             //첫번째 몬스터가 앞에 오도록
             for (int i = StartEnemyCount; i > 0; i--)
             {
+                if (_nextEnemy.Count <= 0) continue;
                 var slot = EnemySlots[i-1];
 
                 GameObject enemyObj = Instantiate(EnemyPrefab, slot.Pos.position, Quaternion.identity);
                 C_Enemy enemy = enemyObj.GetComponent<C_Enemy>();
+                Debug.Log(_nextEnemy.Count);
                 enemy.Init(_nextEnemy.Pop()); //EnemyData 넣어주기
                         
                 slot.CurUse = enemy;

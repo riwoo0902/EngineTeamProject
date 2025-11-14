@@ -493,6 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 625341838}
   - component: {fileID: 625341837}
+  - component: {fileID: 625341839}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -512,10 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf63d66e6d602e645aa179dd30cd9c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurnImage: {fileID: 799647022}
-  _playerManager: {fileID: 1001661436}
-  _stageData:
-  - {fileID: 11400000, guid: 170d145316eab61428589dbb938e1e79, type: 2}
+  <Level>k__BackingField: 0
 --- !u!4 &625341838
 Transform:
   m_ObjectHideFlags: 0
@@ -533,6 +531,27 @@ Transform:
   - {fileID: 1549068528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &625341839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625341836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4124e30367e9f4ba1288d7dbbd825e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyStageData:
+  - EnemyData:
+    - {fileID: 11400000, guid: e03f804b767eb9d41a7b224d9402e67e, type: 2}
+    - {fileID: 11400000, guid: 12d23923763047544ac3ee86d038be15, type: 2}
+  - EnemyData:
+    - {fileID: 11400000, guid: a927ca24f0fa1c448a7a556ca7ba637b, type: 2}
+  EventData: []
+  pinBallData: []
+  ItemData: []
 --- !u!1 &698751042
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754de2aa22657a141ba45286bb26dc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
 --- !u!4 &1001661437
 Transform:
   m_ObjectHideFlags: 0
@@ -1181,6 +1199,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510157707}
   m_CullTransparentMesh: 1
+--- !u!1 &1540769102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1540769104}
+  - component: {fileID: 1540769103}
+  m_Layer: 0
+  m_Name: TurnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1540769103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540769102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9863ac7a57adcfe40b2e1324008d3b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TurnImage: {fileID: 799647022}
+--- !u!4 &1540769104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540769102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1094.6321, y: 1126.6113, z: -18.242172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549068526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,6 +1902,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23c40092ac7ccf42abdf8ce2b12588c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyManager: {fileID: 1549068527}
+  _turnManager: {fileID: 1540769103}
+  _player: {fileID: 360270320}
+  _turnButton: {fileID: 1919054720}
 --- !u!4 &2123273655
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,3 +1934,4 @@ SceneRoots:
   - {fileID: 625341838}
   - {fileID: 2123273655}
   - {fileID: 1134288213}
+  - {fileID: 1540769104}

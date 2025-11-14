@@ -6,20 +6,17 @@ public class EnemyTurnManager : MonoBehaviour
 {
     private EnemyStageManager _enemyManger;
     private Player _player;
+    private BattleTurnManager _turnManager;
     //공격 대상
-    public void Init(EnemyStageManager enemyManager)
+    public void Init(EnemyStageManager enemyManager, BattleTurnManager turnManager)
     {
         _enemyManger = enemyManager;
-
         _player = _enemyManger.Player;
+        _turnManager = turnManager;
 
-        SubscribeReaction();
+
         AttachPerformer();
-    }
 
-    private void SubscribeReaction() //사전 구독
-    {
-        ActionSystem.SubscribeReaction<EnemyMoveGA>(StartEnemyTurn, ReactionTiming.PRE); //움직이기 전 턴 바꾸기
     }
 
     private void AttachPerformer() //행동 등록
@@ -30,11 +27,6 @@ public class EnemyTurnManager : MonoBehaviour
 
     }
 
-    //턴 시작 시 사전에 현재 턴 바꿔놓기
-    private void StartEnemyTurn(EnemyMoveGA enemyMoveGA)
-    {
-        C_StageManager.Instance.EnemyTurnSet();
-    }
 
     private IEnumerator SlotCheck(EnemyMoveGA enemyMoveGA)
     {
@@ -62,7 +54,6 @@ public class EnemyTurnManager : MonoBehaviour
                 int next = cur + 1;
                 if (next < _enemyManger.EnemySlots.Count && _enemyManger.EnemySlots[next].CurUse == null)
                 {
-                    Debug.Log($"{_enemyManger.EnemySlots[cur].CurUse}, {cur}, {next}");
                     yield return EnemyMove(_enemyManger.EnemySlots[cur].CurUse, cur, next);
                 }
 
@@ -70,23 +61,20 @@ public class EnemyTurnManager : MonoBehaviour
         }
 
         if (!attack) //Enemy들이 공격을 하지 않았을 경우 플레이어 턴으로 전환
-            C_StageManager.Instance.PlayerTurnSet();
+            _turnManager.PlayerTurnSet();
     }
 
     //                        현재 칸의 Enemy, 현재 칸 번호, 다음 칸 번호
     private IEnumerator EnemyMove(C_Enemy enemy, int cur, int next)
     {
         bool endMove = false;
-        Debug.Log("Enemy Move 실행");
 
         EnemySlot curSlot = _enemyManger.EnemySlots[cur];
         EnemySlot nextSlot = _enemyManger.EnemySlots[next];
 
-        Debug.Log($"Enemy Pos: {enemy.gameObject.transform.position}, next Pos: {nextSlot.Pos.position}");
         //이동 이후 True로 만들어 진행
         enemy.gameObject.transform.DOMove(nextSlot.Pos.position, 0.3f)
             .OnComplete(() => endMove = true);
-        Debug.Log("Move 실행됨");
 
         yield return new WaitUntil(() => endMove); //Move가 끝나면 실행
 
@@ -100,9 +88,9 @@ public class EnemyTurnManager : MonoBehaviour
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)
     {
         Debug.Log($"Attack Enemy: {enemyAttackGA.AttackEnemy.name}");
-        _player.HealthCompo.TakeDamage(10);
-        yield return new WaitForSeconds(1f);
+        _player.HealthCompo.TakeDamage(enemyAttackGA.AttackEnemy.Attack);
+        yield return new WaitForSeconds(1f); //Enemy 공격 모션 종료 이후
         Debug.Log("End Enemy Turn");
-        C_StageManager.Instance.PlayerTurnSet();
+        _turnManager.PlayerTurnSet();
     }
 }

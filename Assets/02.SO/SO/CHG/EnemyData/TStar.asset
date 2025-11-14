@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dd91f1253cf9fe4daa61a014e171c23, type: 3}
-  m_Name: E_Triangle
+  m_Name: TStar
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  Name: Triangle
-  MaxHP: 20
-  Attack: 10
+  <Sprite>k__BackingField: {fileID: 7940049087014482242, guid: 4fa977930c928bc4b8f6124ce821b39a, type: 3}
+  <Name>k__BackingField: TStar
+  <MaxHP>k__BackingField: 40
+  <Attack>k__BackingField: 15
+  <EnemyType>k__BackingField: 1

@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,51 +15,53 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private TextMeshProUGUI _nameText;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
 
-    public static event Action<ItemSO> OnItemBtnEnter;
-    public static event Action OnItemBtnExit;
-
     public void Init(ItemSO itemData)
     {
         _itemData = itemData;
         _img.sprite = _itemData.itemIcon;
         _price = _itemData.itemPrice;
-        Debug.Log(_itemData.itemName);
         _nameText.text = _itemData.itemName;
 
         _button = GetComponent<Button>();
         _scale = transform.localScale;
-        Debug.Log("InitClear");
     }
 
     public void BtnClick()
     {
-        if (PlayerManager.Instance.Gold < _price) return;
+        Debug.Log(PlayerManager.Instance.Gold);
+        Debug.Log(_price);
+        if (PlayerManager.Instance.SpendGold(_price))
+        {
+            Debug.Log($"{_itemData.itemName} 획득");
+            //아이템 획득 추가
 
-        Debug.Log($"{_itemData.itemName} 획득");
-        //아이템 획득 추가
 
-        PlayerManager.Instance.Gold -= _price;
+            _nameText.text = "SoldOut!";
+            _button.interactable = false;
 
-        _nameText.text = "SoldOut!";
-        _button.interactable = false;
+        }
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        gameObject.transform.DOScale(_scale * UpSize, 0.3f);
+        if (_button.interactable == false) return;
+
+        gameObject.transform.DOScale(_scale * UpSize, 0.1f);
 
         MoreInfoUIData infoData = new MoreInfoUIData(
             Price: _itemData.itemPrice.ToString(),
             description: _itemData.itemDescription
         );
 
-        BtnEvents.PointeEnter(infoData);
+        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        gameObject.transform.DOScale(_scale, 0.3f);
+        if (_button.interactable == false) return;
 
+        gameObject.transform.DOScale(_scale, 0.1f);
         BtnEvents.PointeExit();
     }
 }

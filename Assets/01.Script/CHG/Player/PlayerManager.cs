@@ -34,12 +34,12 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     }
 
-    public void AddMoney(int value)
+    public void AddGold(int value)
     {
         _gold += value;
     }
 
-    public bool SpendMoney(int value)
+    public bool SpendGold(int value)
     {
         if (value <= 0 || _gold < value) return false;
 
@@ -62,7 +62,18 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     public void SpendCurrentHealth(int value) => CurrentHealth -= value;
 
+    #region Test
+    [ContextMenu("AddGold")]
+    private void AddGoldTest()
+    {
+        AddGold(1000);
+    }
 
-
+    [ContextMenu("AddHealth")]
+    private void AddHealthTest()
+    {
+        AddMaxHealth(100);
+    }
+    #endregion
 
 }

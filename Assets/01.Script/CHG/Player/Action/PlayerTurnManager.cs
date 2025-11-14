@@ -8,18 +8,27 @@ public class PlayerTurnManager : MonoBehaviour
 
     private Player _player;
     private EnemyTargeting _enemyTargeting;
-
-    public void Init(Player player, EnemyTargeting enemyTargeting)
+    private BattleTurnManager _turnManager;
+    public void Init(Player player, EnemyTargeting enemyTargeting, BattleTurnManager turnManager)
     {
         _player = player;
         _enemyTargeting = enemyTargeting;
+        _turnManager = turnManager;
         AttachPerformer();
+        SubscribeReaction();
         Debug.Log("Player 구독");
     }
 
     private void AttachPerformer()
     {
         ActionSystem.AttachPerformer<PlayerTurnGA>(PlayerAttack);
+        
+    }
+
+    private void SubscribeReaction()
+    {
+        ActionSystem.SubscribeReaction<PlayerTurnGA>(PlayerTurnEnd, ReactionTiming.POST); //공격 이후 세팅
+
     }
 
     private IEnumerator PlayerAttack(PlayerTurnGA playerTurnGA)
@@ -29,11 +38,27 @@ public class PlayerTurnManager : MonoBehaviour
         if (_player.PlayerTarget == null) yield break;
 
         Debug.Log("Player Turn");
-        _player.PlayerTarget.HealthCompo.TakeDamage(10);
 
-        yield return new WaitForEndOfFrame();
+        //데미지 계산
+        //int damage = 
 
-        _enemyTargeting.TargetClear();
-        C_StageManager.Instance.EnemyTurnSet();
+        _player.PlayerTarget.HealthCompo.TakeDamage(_player.EnemyAttack());
+
+        yield return new WaitForEndOfFrame(); //나중에 에니메이션 끝나거나 하는걸로 바꾸기
+
+        
     }
+
+    private void PlayerTurnEnd(PlayerTurnGA playerTurnGA)
+    {
+        _enemyTargeting.TargetClear();
+        _turnManager.EnemyTurnSet();
+
+
+
+        EnemyMoveGA enemyMoveGA = new();
+        ActionSystem.Instance.AddReaction(enemyMoveGA);
+    }
+
+    
 }

@@ -13,16 +13,16 @@ public class BattleStageDatas
 
 public class StageDataManager : MonoBehaviour
 {
-    private int _level = 0;
+    
     public List<BattleStageDatas> EnemyStageData; //레벨 당 스테이지Data
     public List<C_EventSO> EventData;
     public List<PinBallSO> pinBallData;
     public List<ItemSO> ItemData;
 
-    //현재 레벨에 
+    //현재 레벨에 맞춰 Enemy반환
     public BattleStageDataSO GetBattleData()
     {
-        BattleStageDatas stageDatas = EnemyStageData[_level];
+        BattleStageDatas stageDatas = EnemyStageData[C_StageManager.Instance.Level];
         int r = Random.Range(0, stageDatas.EnemyData.Count);
         return stageDatas.EnemyData[r];
     }
@@ -51,6 +51,8 @@ public class StageDataManager : MonoBehaviour
                                  .ToArray();
         return items;
     }
+
+
     public PinBallSO[] GetPinBallData(int n)
     {
         List<PinBallSO> pinBalls = new List<PinBallSO>();

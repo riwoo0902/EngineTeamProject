@@ -6,8 +6,8 @@ using UnityEngine;
 public class C_Enemy : Agent
 {
     public Action<C_Enemy> OnEnemyDead;
-    private int _attack;
-
+    public int Attack { get; private set; }
+    public C_EnemyDataSO EnemyData {  get; private set; }
     protected override void Awake()
     {
         base.Awake();
@@ -16,11 +16,12 @@ public class C_Enemy : Agent
     public void Init(C_EnemyDataSO enemyData)
     {
         if (HealthCompo == null || enemyData == null) return;
-
+        EnemyData = enemyData;
         gameObject.name = enemyData.Name;
         _spriteRen.sprite = enemyData.Sprite;
         HealthCompo.Init(enemyData.MaxHP);
         HealthCompo.OnDead += EnemyDead;
+        Attack = enemyData.Attack;
 
         _spriteRen.DOFade(1, 0.7f);
     }

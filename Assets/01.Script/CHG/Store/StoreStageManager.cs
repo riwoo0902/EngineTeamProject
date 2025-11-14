@@ -6,13 +6,9 @@ using UnityEngine.UI;
 
 public class StoreStageManager : MonoBehaviour
 {
-    
-
-    
-    private GameObject _pinBallGroup;
-    
-    private GameObject _itemGroup;
-
+    [SerializeField] private GameObject PinBallGroup;
+    [SerializeField] private GameObject ItemGroup;
+    [SerializeField] private GameObject HealBtn;
     private List<Image> _pinBallImgs; // 버튼 스크립트로 수정
     private List<StoreItemBtn> _itemBtn;
     
@@ -20,19 +16,17 @@ public class StoreStageManager : MonoBehaviour
     public void InIt()
     {
 
-        _pinBallGroup = GameObject.Find("PinBallGroup");
-        _itemGroup = GameObject.Find("ItemGroup");
-
-        _pinBallImgs = _pinBallGroup.GetComponentsInChildren<Image>().ToList();
-        _itemBtn = _itemGroup.GetComponentsInChildren<StoreItemBtn>().ToList();
-        //PinBallSO[] pinballs = C_StageManager.Instance.StageDataManager.GetPinBallData(_pinBallImgs.Count);
+        _pinBallImgs = PinBallGroup.GetComponentsInChildren<Image>().ToList();
+        _itemBtn = ItemGroup.GetComponentsInChildren<StoreItemBtn>().ToList();
+        PinBallSO[] pinballs = C_StageManager.Instance.StageDataManager.GetPinBallData(_pinBallImgs.Count);
         ItemSO[] items = C_StageManager.Instance.StageDataManager.GetItemData(_itemBtn.Count);
 
         //PinBallBtnSetting(_pinBallImgs, pinballs);
         ItemBtnSetting(_itemBtn, items);
+
+        HealBtn.GetComponent<StoreHealBtn>().Init();
     }
 
-    //버튼에 정보 넣기로 수정
     private void PinBallBtnSetting(List<Image> images, PinBallSO[] datas)
     {
         foreach (var item in datas)
@@ -54,8 +48,6 @@ public class StoreStageManager : MonoBehaviour
         Debug.Log($"{btns.Count} items");
         for (int i = 0; i < btns.Count; i++)
         {
-            //if (datas.Length > i) return;
-
             btns[i].Init(datas[i]);
         }
     }

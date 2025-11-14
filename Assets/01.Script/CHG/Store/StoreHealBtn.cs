@@ -1,24 +1,31 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
-public class StoreHealBtn : MonoBehaviour
+public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] TextMeshProUGUI NameText;
+    [SerializeField] TextMeshProUGUI HealValueText;
     [SerializeField] private int AddMaxHealthValue = 10;
- 
-    private int _price = 0;
+
+    [SerializeField] private int _price = 0;
     private Button _button;
 
     public void Init()
     {
         _button = GetComponent<Button>();
+        HealValueText.text = $"+{AddMaxHealthValue}";
     }
     public void BuyBttonClick()
     {
-        if (PlayerManager.Instance.SpendMoney(_price))
+        if (PlayerManager.Instance.SpendGold(_price))
         {
             PlayerManager.Instance.AddMaxHealth(AddMaxHealthValue);
+
+            HealValueText.text = "SoldOut!";
             _button.interactable = false;
         }
         else
@@ -26,4 +33,22 @@ public class StoreHealBtn : MonoBehaviour
             //구매 실패
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
+        MoreInfoUIData infoData = new MoreInfoUIData(
+            Price: _price.ToString(),
+            description: $"구매 시 체력을 {AddMaxHealthValue}만큼 회복한다."
+            );
+        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+
+        BtnEvents.PointeExit();
+
+    }
+
 }

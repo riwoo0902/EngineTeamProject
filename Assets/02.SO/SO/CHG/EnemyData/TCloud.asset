@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd91f1253cf9fe4daa61a014e171c23, type: 3}
+  m_Name: TCloud
+  m_EditorClassIdentifier: 
+  <Sprite>k__BackingField: {fileID: -8691776531976519794, guid: 260c90459f31c8e419dfe51ff41f30b3, type: 3}
+  <Name>k__BackingField: Cloud
+  <MaxHP>k__BackingField: 50
+  <Attack>k__BackingField: 1
+  <EnemyType>k__BackingField: 2
