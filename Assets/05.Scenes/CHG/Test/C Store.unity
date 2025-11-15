@@ -3134,40 +3134,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673016952}
   m_CullTransparentMesh: 1
---- !u!1 &1714276109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4195619681811246834, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
-  m_PrefabInstance: {fileID: 5316612270910988793}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1714276113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714276109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typewriterStartsAutomatically: 0
-  animationLoop: 0
-  timeScale: 0
-  _text: "<shake>\uD754\uB4E4\uB9AC\uB294 \uD14D\uC2A4\uD2B8</shake>"
-  useDynamicScaling: 1
-  referenceFontSize: 10
-  isResettingTimeOnNewText: 1
-  useDefaultDatabases: 1
-  databaseBehaviors: {fileID: 0}
-  databaseAppearances: {fileID: 0}
-  useDefaultStyleSheet: 1
-  styleSheet: {fileID: 0}
-  databaseActions: {fileID: 0}
-  defaultAppearancesTags: []
-  defaultDisappearancesTags: []
-  defaultBehaviorsTags: []
-  defaultTagsMode: 0
 --- !u!1 &1905832227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3448,9 +3414,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemButton
       objectReference: {fileID: 0}
-    - target: {fileID: 4293960531308294890, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
-      propertyPath: m_text
-      value: '{slime}adsadf'
+    - target: {fileID: 2642284758490653797, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
+      propertyPath: _textAnimator
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7432521193432585617, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
       propertyPath: m_Pivot.x
@@ -3535,10 +3501,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4195619681811246834, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1714276113}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -73,7 +73,7 @@ public class EnemyTurnManager : MonoBehaviour
         EnemySlot nextSlot = _enemyManger.EnemySlots[next];
 
         //이동 이후 True로 만들어 진행
-        enemy.gameObject.transform.DOMove(nextSlot.Pos.position, 0.3f)
+        enemy.gameObject.transform.DOMove(nextSlot.Pos.position, 0.5f)
             .OnComplete(() => endMove = true);
 
         yield return new WaitUntil(() => endMove); //Move가 끝나면 실행

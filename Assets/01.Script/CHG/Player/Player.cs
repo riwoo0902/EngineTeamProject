@@ -7,7 +7,7 @@ public class Player : Agent
     private PlayerTurnManager _playerTurnManager;
     private EnemyTargeting _enemyTargeting;
     public int AttackDamage;
-
+    [SerializeField] private GameObject AttackEffack;
     
     protected override void Awake()
     {
@@ -64,5 +64,11 @@ public class Player : Agent
     {
         PlayerTurnGA playerTurnGA = new();
         ActionSystem.Instance.Perform(playerTurnGA);
+    }
+
+    public void AttackEffactPlay()
+    {
+        Debug.Log("Attack");
+        Instantiate(AttackEffack, PlayerTarget.transform.position, Quaternion.identity);
     }
 }

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _img: {fileID: 8820139475962935585}
   _nameText: {fileID: 4293960531308294890}
+  _textAnimator: {fileID: 0}
   <UpSize>k__BackingField: 1.3
 --- !u!1 &4195619681811246834
 GameObject:

@@ -1,9 +1,9 @@
 ﻿using DG.Tweening;
+using Febucci.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
 
 public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -13,6 +13,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private Vector3 _scale;
     [SerializeField] private Image _img;
     [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextAnimator_TMP _textAnimator;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
 
     public void Init(ItemSO itemData)
@@ -22,6 +23,8 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _price = _itemData.itemPrice;
         _nameText.text = _itemData.itemName;
 
+        _button = GetComponent<Button>();
+        _scale = transform.localScale;
         _button = GetComponent<Button>();
         _scale = transform.localScale;
     }
