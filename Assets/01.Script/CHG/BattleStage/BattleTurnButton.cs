@@ -4,9 +4,9 @@ public class BattleTurnButton : MonoBehaviour
 {
     private BattleTurnManager _turnManager;
 
-    public void Init(BattleTurnManager turnManager)
+    public void Init(BattleStageContect contect)
     {
-        _turnManager = turnManager;
+        _turnManager = contect.TurnManager;
     }
 
     public void PlayerTurnButton()

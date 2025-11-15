@@ -7,21 +7,15 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     private int _gold;
     private Player _stagePlayer;
     private PlayerTurnManager _playerTurnManager;
+
     public int MaxHealth
     {
         get { return _maxHealth; }
-        set
-        {
-            _maxHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
-        }
     }
+
     public int CurrentHealth
     {
         get { return _curHealth; }
-        set
-        {
-            _curHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
-        }
     }
 
     public int Gold
@@ -34,9 +28,32 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     }
 
+    public void AddMaxHealth(int value)
+    {
+        _maxHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
+        _curHealth = Mathf.Clamp(_curHealth, 1, _maxHealth);
+    }
+
+    public void SpendMaxHealth(int value)
+    {
+        _maxHealth = Mathf.Clamp(_maxHealth - value, 1, 999);
+        _curHealth = Mathf.Clamp(_curHealth, 1, _maxHealth);
+    }
+
+    public void AddCurrentHealth(int value)
+    {
+        _curHealth = Mathf.Clamp(_curHealth + value, 1, _maxHealth);
+    }
+
+    public void SpendCurrentHealth(int value)
+    {
+        _curHealth = Mathf.Clamp(_curHealth - value, 1, _maxHealth);
+    }
+
+
     public void AddGold(int value)
     {
-        _gold += value;
+        _gold = Mathf.Clamp(_gold + value, 0, 9999);
     }
 
     public bool SpendGold(int value)
@@ -47,20 +64,6 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
         return true;
     }
-
-    //어떤 스테이지냐에 따라 나누기
-    public void SceneLoaded()
-    {
-        _stagePlayer = GameObject.Find("Player").GetComponent<Player>();
-    }
-
-    public void AddMaxHealth(int value) => MaxHealth += value;
-
-    public void SpendMaxHealth(int value) => MaxHealth -= value;
-
-    public void AddCurrentHealth(int value) => CurrentHealth += value;
-
-    public void SpendCurrentHealth(int value) => CurrentHealth -= value;
 
     #region Test
     [ContextMenu("AddGold")]
@@ -73,7 +76,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     private void AddHealthTest()
     {
         AddMaxHealth(100);
+        AddCurrentHealth(100);
     }
     #endregion
-
 }

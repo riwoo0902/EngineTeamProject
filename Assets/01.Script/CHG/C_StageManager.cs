@@ -71,7 +71,7 @@ public class C_StageManager : MonoSingleton<C_StageManager>
     [ContextMenu("BattleStageLoad")]
     private void BattleStageLoad()
     {
-        GameObject.Find("BattleStageContext").GetComponent<BattleStageContext>().Init(StageDataManager.GetBattleData());
+        GameObject.Find("BattleStageContext").GetComponent<BattleStageContect>().Init(StageDataManager.GetBattleData());
     }
 
 

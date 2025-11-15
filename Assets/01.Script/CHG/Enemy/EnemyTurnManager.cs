@@ -87,8 +87,7 @@ public class EnemyTurnManager : MonoBehaviour
     //공격 실행 임시
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)
     {
-        Debug.Log($"Attack Enemy: {enemyAttackGA.AttackEnemy.name}");
-        _player.HealthCompo.TakeDamage(enemyAttackGA.AttackEnemy.Attack);
+        _player.TakeDamage(enemyAttackGA.AttackEnemy.Attack);
         yield return new WaitForSeconds(1f); //Enemy 공격 모션 종료 이후
         Debug.Log("End Enemy Turn");
         _turnManager.PlayerTurnSet();

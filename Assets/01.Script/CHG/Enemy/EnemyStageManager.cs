@@ -24,16 +24,16 @@ public class EnemyStageManager : MonoBehaviour
     private EnemyTurnManager _turnManager;
     
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
-    public void Init(BattleStageDataSO stageData, Player player, BattleTurnManager turnManager)
+    public void Init(BattleStageDataSO stageData, BattleStageContect contect)
     {
-        Player = player;
+        Player = contect.Player;
 
         //처음 시작 할 때 Enemy 세팅
         bool flowControl = EnemySetting(stageData);
         if (!flowControl) return;
 
-        _turnManager = GetComponentInChildren<EnemyTurnManager>();
-        _turnManager.Init(this, turnManager);
+        _turnManager = contect.EnemyTurnManager;
+        _turnManager.Init(this, contect.TurnManager);
 
         //EnemyUI 생성
         NextEnemyUISetting();
