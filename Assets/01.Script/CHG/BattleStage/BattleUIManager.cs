@@ -22,7 +22,7 @@ public class BattleUIManager : MonoBehaviour
     private Vector3 ItemInventoryOriginalPos;
     private Vector3 ItemInventoryScale;
     private Sequence _itemInventorySeq;
-    private bool _ItemInventoryShow = false;
+    private bool _ItemInventoryShow = true;
 
     [Header("EnemyTargeting")]
     [SerializeField] private Image TargetingImg;
@@ -30,6 +30,14 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("CurrentLevel")]
     [SerializeField] private TextMeshProUGUI _levelText;
+    [Header("Damage")]
+    [SerializeField] private TextMeshProUGUI _damageText;
+
+    [Header("Spell")]
+    [SerializeField] private Image PlayerSpellImg;
+    [SerializeField] private Image PlayerSpellImgBG;
+    [SerializeField] private Image PinBallSpellImg;
+    [SerializeField] private Image PinBallSpellImgBG;
 
     private void Start()
     {
@@ -41,6 +49,8 @@ public class BattleUIManager : MonoBehaviour
         ItemInventory.transform.localScale = Vector3.zero;
 
         _levelText.text = "Level:" + StageManager.Instance.Level;
+
+        DamageTextChange(68);
     }
     public void TurnTextMove(int turn)
     {
@@ -55,7 +65,7 @@ public class BattleUIManager : MonoBehaviour
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.OutQuint));
     }
 
-    public void HealthUIChange(int maxHealth, int curHealth)
+    public void HealthUIChange(int maxHealth, int curHealth) //체력 변경
     {
         HealthText.text = $"{curHealth}/{maxHealth}";
         if (maxHealth == 0)
@@ -71,6 +81,8 @@ public class BattleUIManager : MonoBehaviour
     public void ItemInventoryAdd()
     {
         //추가
+
+        ItemInventoryShowHide(); //추가 후 닫기
     }
 
     public void ItemInventoryShowHide()
@@ -90,10 +102,10 @@ public class BattleUIManager : MonoBehaviour
         {
             _itemInventorySeq.Append(ItemInventory.transform.DOMove(ItemInventoryMovePos.position, 0.3f));
             _itemInventorySeq.Join(ItemInventory.transform.DOScale(Vector3.zero, 0.3f));
-            
+
             _ItemInventoryShow = false;
         }
-    }
+    } //인벤토리 열려있으면 닫고 닫혀있으면 열고
 
     public void TargetingImgShow(Transform target)
     {
@@ -105,12 +117,35 @@ public class BattleUIManager : MonoBehaviour
         _targetingImgSeq.Append(TargetingImg.transform.DOMove(targetPos, 0.3f).SetEase(Ease.OutQuint));
         _targetingImgSeq.Join(TargetingImg.DOFade(1, 0.3f));
     }
-    
-    public void TargetingImgHide()
+
+    public void TargetingImgHide() 
     {
         _targetingImgSeq?.Kill();
         _targetingImgSeq = DOTween.Sequence();
 
         _targetingImgSeq.Append(TargetingImg.DOFade(0, 0.3f));
+    }  
+
+    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //스펠 이미지 처음 세팅
+    {
+        PlayerSpellImg.sprite = playerIcon;
+        PlayerSpellImgBG.sprite = playerIcon;
+
+        PinBallSpellImg.sprite = pinBallIcon;
+        PinBallSpellImgBG.sprite = pinBallIcon;
+    }
+
+    public void DamageTextChange(int damage) //데미치 표시 변경
+    {
+        float n = (float)damage / 100;
+
+        _damageText.text = $"<shake a={n}>{damage}";
+    }
+
+    public void EnemyHealthBarMove(GameObject healthBar , Transform pos)
+    {
+        healthBar.transform.position = Camera.main.ScreenToWorldPoint(pos.position);
     }
 }
+
+
