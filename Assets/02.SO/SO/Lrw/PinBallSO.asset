@@ -15,9 +15,10 @@ MonoBehaviour:
   <PinBallType>k__BackingField: 0
   <PinBallImage>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   <Mass>k__BackingField: 1
-  <Friction>k__BackingField: 0.2
-  <Bounciness>k__BackingField: 0.8
+  <Friction>k__BackingField: 0.1
+  <Bounciness>k__BackingField: 0.95
   <BaseDamage>k__BackingField: 1
   <BallName>k__BackingField: Default
   <BallExplanation>k__BackingField: Notthing
-  <BallLinearDamping>k__BackingField: 0.3
+  <BallLinearDamping>k__BackingField: 0
+  <BallShootPower>k__BackingField: 5

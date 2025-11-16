@@ -1,23 +1,51 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class AttackSystem : MonoBehaviour
+public class TestAttackSystem : MonoBehaviour
 {
-    public HealthSystem target; // 인스펙터에서 적 연결
+    [Header("공격 대상")]
+    public HealthSystem target;
+
+    [Header("공격 이펙트")]
+    public GameObject adEffectPrefab;  // AD 공격용 이펙트
+    public GameObject apEffectPrefab;  // AP 공격용 이펙트
+
+    GameObject effectPrefab;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("AD 공격");
-            DamageData ad = new DamageData(30, DamageTypeEnum.AD);
-            target.Deal(ad);
+            Attack(DamageTypeEnum.AD, 30);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("AP 공격");
-            DamageData ap = new DamageData(25, DamageTypeEnum.AP);
-            target.Deal(ap);
+            Attack(DamageTypeEnum.AP, 25);
         }
+
+        
+
+        
+    }
+
+    public void Attack(DamageTypeEnum type, float amount)
+    {
+        if (target == null) return;
+
+        DamageData damage = new DamageData(amount, type); // 데미지 생성 후 전달 
+        target.GetDamage(damage);
+
+        switch (type) // 타입에 맞춰 파티클 재생
+        {
+            case DamageTypeEnum.AD:
+                effectPrefab = adEffectPrefab;
+                break;
+            case DamageTypeEnum.AP:
+                effectPrefab = apEffectPrefab;
+                break;
+        }
+            GameObject effect = Instantiate(effectPrefab, target.transform.position, Quaternion.identity);
+            effect.GetComponent<ParticleSystem>()?.Play();
     }
 }

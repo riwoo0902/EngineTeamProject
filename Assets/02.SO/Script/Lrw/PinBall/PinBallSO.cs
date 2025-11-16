@@ -14,6 +14,8 @@ namespace Lrw_PinBall
         [field: SerializeField] public string BallName { get; private set; } = "Default";
         [field: SerializeField] public string BallExplanation { get; private set; } = "Notthing";
         [field: SerializeField] public float BallLinearDamping { get; private set; } = 0;
+        [field: SerializeField] public float BallShootPower { get; private set; } = 5;
+        [field: SerializeField] public GameObject BallPrefab { get; private set; }
     }
     public enum BallType
     {

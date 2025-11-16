@@ -6,25 +6,32 @@ public class AgentHealth : MonoBehaviour
     public Action OnDead;
 
     private int _maxHp;
-    private int _curHp;
+    public int _curHp;
     
 
-    public void Init(C_EnemyDataSO enemyData)
+    public void Init(int value)
     {
-        _maxHp = enemyData.MaxHP;
+        _maxHp = value;
+        _curHp = _maxHp;
     }
 
-    public void GetDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _curHp -= damage;
+        
+        if (_curHp <= 0) OnDead?.Invoke();    
+    }
 
-        if (_curHp <= 0) OnDead?.Invoke();
-            
+    public void Heal(int heal)
+    {
+        _curHp += heal;
+
+        Mathf.Clamp(_curHp, 0, _maxHp);
     }
 
     //테스트용
-    [ContextMenu("EnemyDead")]
-    private void EnemyDead()
+    [ContextMenu("Dead")]
+    private void Dead()
     {
         OnDead?.Invoke();
     }
