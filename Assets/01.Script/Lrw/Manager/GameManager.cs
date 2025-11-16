@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace _01.Script.Lrw.Manager
 {
+    [DefaultExecutionOrder(-20)]
     public class GameManager : MonoBehaviour
     {
         [field:SerializeField] public InputSO InputSo { get; private set; }

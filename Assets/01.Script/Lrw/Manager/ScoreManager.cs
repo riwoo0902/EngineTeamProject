@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace _01.Script.Lrw.Manager
 {
+    [DefaultExecutionOrder(-10)]
     public class ScoreManager : MonoBehaviour,ISingleton
     {
         private static ScoreManager _instance;
