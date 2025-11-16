@@ -4,7 +4,7 @@ namespace _01.Script.Lrw.PinBallCompo.FSM.PinBallState
 {
     public class PinBallShootingState :PinBallStateBase
     {
-        public PinBallShootingState(PinBallMachine pinBallMachine) : base(pinBallMachine)
+        public PinBallShootingState(PinBallBase pinBallBase) : base(pinBallBase)
         {
             
         }
