@@ -53,7 +53,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         gameObject.transform.DOScale(_scale * UpSize, 0.1f);
 
         MoreInfoUIData infoData = new MoreInfoUIData(
-            Price: _itemData.itemPrice.ToString(),
+            Price:"<sprite=0> "+ _itemData.itemPrice.ToString(),
             description: _itemData.itemDescription
         );
 

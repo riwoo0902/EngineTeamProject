@@ -17,11 +17,11 @@ public class C_Enemy : Agent
     {
         if (HealthCompo == null || enemyData == null) return;
         EnemyData = enemyData;
-        gameObject.name = enemyData.Name;
-        _spriteRen.sprite = enemyData.Sprite;
-        HealthCompo.Init(enemyData.MaxHP);
+        gameObject.name = enemyData.EnemyName;
+        _spriteRen.sprite = enemyData.EnemySprite;
+        HealthCompo.Init(enemyData.EnemyMaxHP);
         HealthCompo.OnDead += EnemyDead;
-        Attack = enemyData.Attack;
+        Attack = enemyData.EnemyAttack;
 
         _spriteRen.DOFade(1, 0.7f);
     }

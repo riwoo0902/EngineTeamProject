@@ -23,7 +23,7 @@ public class Player : Agent
         HealthCompo.Init(PlayerManager.Instance.MaxHealth, PlayerManager.Instance.CurrentHealth);
 
         _enemyTargeting = GetComponent<EnemyTargeting>();
-        _enemyTargeting.Init(this);
+        _enemyTargeting.Init(this, contect.UIManager);
 
         AgentAnimatorCompo.Init(_animator);
 
@@ -74,7 +74,7 @@ public class Player : Agent
     public void AttackEffactPlay()
     {
         Debug.Log("Attack");
-        Instantiate(AttackEffack, PlayerTarget.transform.position, Quaternion.identity);
+        Instantiate(AttackEffack, new Vector2(PlayerTarget.transform.position.x, PlayerTarget.transform.position.y-1), Quaternion.identity);
     }
 
 

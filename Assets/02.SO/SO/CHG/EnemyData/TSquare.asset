@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd91f1253cf9fe4daa61a014e171c23, type: 3}
   m_Name: TSquare
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  <Name>k__BackingField: Square
-  <MaxHP>k__BackingField: 20
-  <Attack>k__BackingField: 5
+  <EnemySprite>k__BackingField: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  <EnemyName>k__BackingField: Square
+  <EnemyMaxHP>k__BackingField: 2346
+  <EnemyAttack>k__BackingField: 7654
   <EnemyType>k__BackingField: 1

@@ -22,7 +22,7 @@ public class StageDataManager : MonoBehaviour
     //현재 레벨에 맞춰 Enemy반환
     public BattleStageDataSO GetBattleData()
     {
-        BattleStageDatas stageDatas = EnemyStageData[C_StageManager.Instance.Level];
+        BattleStageDatas stageDatas = EnemyStageData[StageManager.Instance.Level];
         int r = Random.Range(0, stageDatas.EnemyData.Count);
         return stageDatas.EnemyData[r];
     }

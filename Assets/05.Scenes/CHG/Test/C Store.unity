@@ -2361,7 +2361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Price
+  m_text: <sprite=0>12345678
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 74513733a77927340bb737aae0a33e04, type: 2}
   m_sharedMaterial: {fileID: -724813189027547401, guid: 74513733a77927340bb737aae0a33e04, type: 2}
@@ -2821,7 +2821,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20.6, y: -21.8}
+  m_AnchoredPosition: {x: 20.6, y: -23.7}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1514850577

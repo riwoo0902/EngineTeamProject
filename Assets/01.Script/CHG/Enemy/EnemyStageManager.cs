@@ -102,7 +102,7 @@ public class EnemyStageManager : MonoBehaviour
         foreach (C_EnemyDataSO enemyData in _nextEnemy.Reverse())
         {
             Image image = Instantiate(EnemyUIPrefab, NextEnemyGroup);
-            image.sprite = enemyData.Sprite;
+            image.sprite = enemyData.EnemySprite;
             _nextEnemyUI.Push(image);
         }
     }

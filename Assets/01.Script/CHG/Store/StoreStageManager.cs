@@ -19,7 +19,7 @@ public class StoreStageManager : MonoBehaviour
         _pinBallImgs = PinBallGroup.GetComponentsInChildren<Image>().ToList();
         _itemBtn = ItemGroup.GetComponentsInChildren<StoreItemBtn>().ToList();
         //PinBallSO[] pinballs = C_StageManager.Instance.StageDataManager.GetPinBallData(_pinBallImgs.Count);
-        ItemSO[] items = C_StageManager.Instance.StageDataManager.GetItemData(_itemBtn.Count);
+        ItemSO[] items = StageManager.Instance.StageDataManager.GetItemData(_itemBtn.Count);
 
         //PinBallBtnSetting(_pinBallImgs, pinballs);
         ItemBtnSetting(_itemBtn, items);

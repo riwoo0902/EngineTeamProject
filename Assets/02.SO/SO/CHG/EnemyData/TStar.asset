@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd91f1253cf9fe4daa61a014e171c23, type: 3}
   m_Name: TStar
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 7940049087014482242, guid: 4fa977930c928bc4b8f6124ce821b39a, type: 3}
-  <Name>k__BackingField: TStar
-  <MaxHP>k__BackingField: 40
-  <Attack>k__BackingField: 15
+  <EnemySprite>k__BackingField: {fileID: 8237386796742481718, guid: adbc372104015a4419cce06a3a9c15e5, type: 3}
+  <EnemyName>k__BackingField: Star
+  <EnemyMaxHP>k__BackingField: 876
+  <EnemyAttack>k__BackingField: 678
   <EnemyType>k__BackingField: 1

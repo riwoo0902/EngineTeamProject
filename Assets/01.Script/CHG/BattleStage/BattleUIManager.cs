@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class BattleUIManager : MonoBehaviour
 {
     [Header("Turn")]
+    [SerializeField] private TextMeshProUGUI MoveTurnText;
     [SerializeField] private TextMeshProUGUI TurnText;
     [SerializeField] private Transform TurnTextMovePos;
+    private Sequence _MoveTurnTextSeq;
     private Vector3 TurnTextOriginalPos;
 
     [Header("Health")]
     [SerializeField] private Image HealthBar;
     [SerializeField] private TextMeshProUGUI HealthText;
-    private Sequence _turnTextSeq;
 
     [Header("ItemInventory")]
     [SerializeField] private GameObject ItemInventory;
@@ -22,26 +23,36 @@ public class BattleUIManager : MonoBehaviour
     private Vector3 ItemInventoryScale;
     private Sequence _itemInventorySeq;
     private bool _ItemInventoryShow = false;
+
+    [Header("EnemyTargeting")]
+    [SerializeField] private Image TargetingImg;
+    private Sequence _targetingImgSeq;
+
+    [Header("CurrentLevel")]
+    [SerializeField] private TextMeshProUGUI _levelText;
+
     private void Start()
     {
-        TurnTextOriginalPos = TurnText.transform.position;
+        TurnTextOriginalPos = MoveTurnText.transform.position;
 
         ItemInventoryOriginalPos = ItemInventory.transform.position;
         ItemInventoryScale = ItemInventory.transform.localScale;
         ItemInventory.transform.position = ItemInventoryMovePos.position;
         ItemInventory.transform.localScale = Vector3.zero;
+
+        _levelText.text = "Level:" + StageManager.Instance.Level;
     }
     public void TurnTextMove(int turn)
     {
-        TurnText.text = $"Turn {turn}";
+        MoveTurnText.text = $"Turn {turn}";
+        TurnText.text = $"Turn:{turn}";
 
+        _MoveTurnTextSeq?.Kill();
 
-        _turnTextSeq?.Kill();
+        _MoveTurnTextSeq = DOTween.Sequence();
 
-        _turnTextSeq = DOTween.Sequence();
-
-        _turnTextSeq.Append(TurnText.transform.DOMove(TurnTextMovePos.transform.position, 1f).SetEase(Ease.OutQuint));
-        _turnTextSeq.Append(TurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.OutQuint));
+        _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextMovePos.transform.position, 1f).SetEase(Ease.OutQuint));
+        _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.OutQuint));
     }
 
     public void HealthUIChange(int maxHealth, int curHealth)
@@ -82,5 +93,24 @@ public class BattleUIManager : MonoBehaviour
             
             _ItemInventoryShow = false;
         }
+    }
+
+    public void TargetingImgShow(Transform target)
+    {
+        _targetingImgSeq?.Kill();
+
+        _targetingImgSeq = DOTween.Sequence();
+
+        Vector3 targetPos = Camera.main.WorldToScreenPoint(target.position);
+        _targetingImgSeq.Append(TargetingImg.transform.DOMove(targetPos, 0.3f).SetEase(Ease.OutQuint));
+        _targetingImgSeq.Join(TargetingImg.DOFade(1, 0.3f));
+    }
+    
+    public void TargetingImgHide()
+    {
+        _targetingImgSeq?.Kill();
+        _targetingImgSeq = DOTween.Sequence();
+
+        _targetingImgSeq.Append(TargetingImg.DOFade(0, 0.3f));
     }
 }

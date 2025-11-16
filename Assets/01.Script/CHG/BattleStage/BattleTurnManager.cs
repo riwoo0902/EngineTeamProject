@@ -21,8 +21,8 @@ public class BattleTurnManager : MonoBehaviour
     public void PlayerTurnSet()
     {
         CurTurn = true;
-        TurnCount += 1;
         _contect.UIManager.TurnTextMove(TurnCount);
+        TurnCount += 1;
     }
 
 

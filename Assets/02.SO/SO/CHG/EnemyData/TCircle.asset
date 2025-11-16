@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd91f1253cf9fe4daa61a014e171c23, type: 3}
   m_Name: TCircle
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  <Name>k__BackingField: Circle
-  <MaxHP>k__BackingField: 10
-  <Attack>k__BackingField: 3
+  <EnemySprite>k__BackingField: {fileID: -2413806693520163455, guid: e074a9b4b276847b0b578d2c96d2c1db, type: 3}
+  <EnemyName>k__BackingField: Circle
+  <EnemyMaxHP>k__BackingField: 10
+  <EnemyAttack>k__BackingField: 14
+  <EnemyType>k__BackingField: 0

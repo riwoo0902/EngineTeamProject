@@ -11,7 +11,7 @@ public enum MapType
     MapChoice
 }
 
-public class C_StageManager : MonoSingleton<C_StageManager>
+public class StageManager : MonoSingleton<StageManager>
 {
 
     public StageDataManager StageDataManager { get; private set; }

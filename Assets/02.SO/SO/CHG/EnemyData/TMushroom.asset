@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd91f1253cf9fe4daa61a014e171c23, type: 3}
   m_Name: TMushroom
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: -925690490945323590, guid: 4fa977930c928bc4b8f6124ce821b39a, type: 3}
-  <Name>k__BackingField: Mushroom
-  <MaxHP>k__BackingField: 30
-  <Attack>k__BackingField: 50
+  <EnemySprite>k__BackingField: {fileID: 1391680026071204206, guid: adbc372104015a4419cce06a3a9c15e5, type: 3}
+  <EnemyName>k__BackingField: Mushroom
+  <EnemyMaxHP>k__BackingField: 75433
+  <EnemyAttack>k__BackingField: 64
   <EnemyType>k__BackingField: 3

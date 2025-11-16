@@ -11,10 +11,10 @@ public enum EnemyType
 [CreateAssetMenu(fileName = "EnemyDataSO", menuName = "C_SO/EnemyDataSO")]
 public class C_EnemyDataSO : ScriptableObject
 {
-    [field: SerializeField] public Sprite Sprite { get; private set; }
-    [field: SerializeField] public string Name { get; private set; }
-    [field: SerializeField] public int MaxHP { get; private set; }
-    [field: SerializeField] public int Attack { get; private set; }
+    [field: SerializeField] public Sprite EnemySprite { get; private set; }
+    [field: SerializeField] public string EnemyName { get; private set; }
+    [field: SerializeField] public int EnemyMaxHP { get; private set; }
+    [field: SerializeField] public int EnemyAttack { get; private set; }
     [field: SerializeField] public EnemyType EnemyType { get; private set; } = EnemyType.Normal;
     
 }
