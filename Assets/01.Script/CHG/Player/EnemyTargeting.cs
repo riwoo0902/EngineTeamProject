@@ -3,25 +3,17 @@ using UnityEngine.EventSystems;
 
 public class EnemyTargeting : MonoBehaviour
 {
-    [SerializeField] private GameObject TargetTriangle; //타겟 표시용, 이름 바꿔야함
-    private SpriteRenderer _spren; //이름 바꿔야함
-    private Color _sprenColor; //이름 바꿔야함
     private Player _player;
-
-    public void Init(Player player)
+    private BattleUIManager _uIManager;
+    public void Init(Player player, BattleUIManager uIManager)
     {
         _player = player;
-        _spren = TargetTriangle.GetComponent<SpriteRenderer>();
-        _sprenColor = _spren.color;
-        _sprenColor.a = 0;
-        _spren.color = _sprenColor;
+        _uIManager = uIManager;
     }
-
-
 
     private void Update()
     {
-        if (!C_StageManager.Instance.CurTurn) return;
+        //if (!C_StageManager.Instance.CurTurn) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,18 +36,15 @@ public class EnemyTargeting : MonoBehaviour
 
     public void TargetClear()
     {
-        _sprenColor.a = 0;
-        _spren.color = _sprenColor;
+        _uIManager.TargetingImgHide();
         _player.ChangeTarget(null);
     }
 
     private void TargetSet(C_Enemy enemy)
     {
-        _sprenColor.a = 1;
-        _spren.color = _sprenColor;  
-        Vector3 targetPos = enemy.transform.position;
-        TargetTriangle.transform.position = new Vector3(targetPos.x, targetPos.y -1, 1);
-        
+        Debug.Log(enemy.EnemyData.EnemyName);
+        _uIManager.TargetingImgShow(enemy.transform);
+
         _player.ChangeTarget(enemy);
     }
 }

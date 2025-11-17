@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b729ffe09b2d64397d167e4404df21, type: 3}
+  m_Name: TStage1
+  m_EditorClassIdentifier: 
+  <EmergeCount>k__BackingField: 2
+  <EmergeEnemy>k__BackingField:
+  - {fileID: 11400000, guid: c48be99fe139a66458bfa2bdc016a812, type: 2}
+  - {fileID: 11400000, guid: c7bc1d86de8d913469369fd73e5fb78d, type: 2}
+  - {fileID: 11400000, guid: e2c9420f29c7c2e429872ce7d3c0cf18, type: 2}
