@@ -3,12 +3,12 @@ using UnityEngine;
 public class Player : Agent
 {
     [HideInInspector]
-    public C_Enemy PlayerTarget;
+    public Enemy PlayerTarget;
     private PlayerTurnManager _playerTurnManager;
     private EnemyTargeting _enemyTargeting;
     [SerializeField] private GameObject AttackEffack;
-    
 
+    private int _power = 1;
     public int AttackDamage;
     private BattleStageContect _contect;
     protected override void Awake()
@@ -20,6 +20,8 @@ public class Player : Agent
         _contect = contect;
         base.Awake();
         Debug.Assert(PlayerManager.Instance != null, "PlayerManager is Null");
+
+        _power = PlayerManager.Instance.Power;
         HealthCompo.Init(PlayerManager.Instance.MaxHealth, PlayerManager.Instance.CurrentHealth);
 
         _enemyTargeting = GetComponent<EnemyTargeting>();
@@ -35,7 +37,7 @@ public class Player : Agent
         _contect.UIManager.HealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
     }
     
-    public void ChangeTarget(C_Enemy enemy)
+    public void ChangeTarget(Enemy enemy)
     {
         PlayerTarget = enemy;
     }
@@ -52,6 +54,7 @@ public class Player : Agent
         AttackDamage = damage;
     }
 
+    //АјАн
     public int GetAttackDamage()
     {
         int damage = AttackDamage;

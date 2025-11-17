@@ -23,7 +23,7 @@ public class EnemyTargeting : MonoBehaviour
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D rayHit = Physics2D.Raycast(pos, Vector2.zero, 0f);
 
-            if (rayHit.collider != null && rayHit.collider.TryGetComponent<C_Enemy>(out C_Enemy enemy))
+            if (rayHit.collider != null && rayHit.collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 TargetSet(enemy);
             }
@@ -40,7 +40,7 @@ public class EnemyTargeting : MonoBehaviour
         _player.ChangeTarget(null);
     }
 
-    private void TargetSet(C_Enemy enemy)
+    private void TargetSet(Enemy enemy)
     {
         Debug.Log(enemy.EnemyData.EnemyName);
         _uIManager.TargetingImgShow(enemy.transform);

@@ -48,9 +48,7 @@ public class BattleUIManager : MonoBehaviour
         ItemInventory.transform.position = ItemInventoryMovePos.position;
         ItemInventory.transform.localScale = Vector3.zero;
 
-        _levelText.text = "Level:" + StageManager.Instance.Level;
-
-        DamageTextChange(68);
+        _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
     }
     public void TurnTextMove(int turn)
     {
@@ -114,7 +112,7 @@ public class BattleUIManager : MonoBehaviour
         _targetingImgSeq = DOTween.Sequence();
 
         Vector3 targetPos = Camera.main.WorldToScreenPoint(target.position);
-        _targetingImgSeq.Append(TargetingImg.transform.DOMove(targetPos, 0.3f).SetEase(Ease.OutQuint));
+        _targetingImgSeq.Append(TargetingImg.transform.DOMoveX(targetPos.x, 0.3f).SetEase(Ease.OutQuint));
         _targetingImgSeq.Join(TargetingImg.DOFade(1, 0.3f));
     }
 

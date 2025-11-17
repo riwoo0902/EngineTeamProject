@@ -2709,7 +2709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514672682}
   m_Layer: 0
-  m_Name: PosGroup
+  m_Name: EnemyPosGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2724,7 +2724,7 @@ Transform:
   m_GameObject: {fileID: 514672681}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: -0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5632,7 +5632,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -85, y: -477}
+  m_AnchoredPosition: {x: -85, y: -340}
   m_SizeDelta: {x: 299.1533, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &812607561
@@ -7390,12 +7390,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2123273653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18363d617a716a24992b0f4272e1d5e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a1f39e82a2b1304fa44f647efcdf72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyUIPrefab: {fileID: 3585271618330287092, guid: 637dd81974812b648a7459f309d3f71e, type: 3}
   EnemyPrefab: {fileID: 8586339952976076069, guid: 91453eea3454107479fd8146ac697d18, type: 3}
-  StartEnemyCount: 3
   EnemyPosGroup: {fileID: 514672681}
 --- !u!114 &2123273659
 MonoBehaviour:
