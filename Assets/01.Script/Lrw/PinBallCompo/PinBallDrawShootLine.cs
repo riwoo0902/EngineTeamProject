@@ -7,16 +7,16 @@ using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo
 {
-    [RequireComponent(typeof(PinBall))]
+    [RequireComponent(typeof(PinBallBase))]
     public class PinBallDrawShootLine : MonoBehaviour
     {
         private LineRenderer _lineRenderer;
-        private PinBall _pinBall;
+        private PinBallBase _pinBallBase;
         [SerializeField,Range(1,10)] private float drawDistance = 1;
-        [SerializeField] private LayerMask ordLayer;
+        [SerializeField] private LayerMask ObstacleLayer;
         private void Awake()
         {
-            _pinBall =  GetComponent<PinBall>();
+            _pinBallBase =  GetComponent<PinBallBase>();
             _lineRenderer = GetComponent<LineRenderer>();
             EventBus<MousePosEvent>.OnEvent += DrawLine;
         }
@@ -29,20 +29,20 @@ namespace _01.Script.Lrw.PinBallCompo
                 return;
             }
             Vector2 mouseDir = (mousePos.RealPos - (Vector2)transform.position).normalized;
-            Vector2 gravity = Vector2.down * (9.8f * _pinBall.PinBallSo.Mass);
+            Vector2 gravity = Vector2.down * (9.8f * _pinBallBase.PinBallSo.Mass);
             List<Vector3> drawPoints = new List<Vector3>();
             float t = 0;
             float drawLength = 0;
             Vector2 lastDrawPoint = transform.position;
             while (true)
             {
-                Vector2 drawPoint = GetLinePos(transform.position, mouseDir, gravity,_pinBall.PinBallSo.BallShootPower,t);
+                Vector2 drawPoint = GetLinePos(transform.position, mouseDir, gravity,_pinBallBase.PinBallSo.BallShootPower,t);
                 drawPoints.Add(drawPoint);
                 drawLength += (drawPoint - lastDrawPoint).magnitude;
                 t += Time.fixedDeltaTime;
                 if(drawLength >= drawDistance) break;
                 Vector2 drawVec2 = drawPoint - lastDrawPoint;
-                if(Physics2D.Raycast(lastDrawPoint, drawVec2.normalized, drawVec2.magnitude, ordLayer).collider) break;
+                if(Physics2D.Raycast(lastDrawPoint, drawVec2.normalized, drawVec2.magnitude, ObstacleLayer).collider) break;
                 lastDrawPoint = drawPoint;
             }
             _lineRenderer.positionCount = drawPoints.Count;

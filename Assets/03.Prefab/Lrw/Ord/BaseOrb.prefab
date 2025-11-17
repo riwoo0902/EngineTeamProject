@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1960572612849385674}
   - component: {fileID: 7588957117737965836}
   - component: {fileID: 5651328454444354753}
-  m_Layer: 6
+  m_Layer: 20
   m_Name: BaseOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -29,7 +29,6 @@ namespace Lrw_Ord
             {
                 OnDestroyEvent?.Invoke();
                 gameObject.SetActive(false);
-                Destroy(gameObject);
             }
         }
         

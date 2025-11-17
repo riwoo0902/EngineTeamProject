@@ -6,14 +6,14 @@ namespace _01.Script.Lrw.PinBallCompo.FSM
 {
     public abstract class PinBallStateBase : IState
     {
-        protected PinBallMachine _pinBallMachine;
+        protected PinBallBase pinBallBase;
         protected Rigidbody2D _rigid;
         protected PinBallSO _pinBallSo;
-        protected PinBallStateBase(PinBallMachine pinBallMachine)
+        protected PinBallStateBase(PinBallBase pinBallBase)
         {
-            _pinBallMachine = pinBallMachine;
-            _rigid = pinBallMachine.PinBall.Rigid;
-            _pinBallSo = pinBallMachine.PinBall.PinBallSo;
+            this.pinBallBase =  pinBallBase;
+            _rigid = pinBallBase.Rigid;
+            _pinBallSo = pinBallBase.PinBallSo;
         }
         
         public virtual void Enter()
@@ -21,6 +21,7 @@ namespace _01.Script.Lrw.PinBallCompo.FSM
             
         }
 
+        
         public virtual void Update()
         {
               
