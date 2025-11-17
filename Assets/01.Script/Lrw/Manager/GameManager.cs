@@ -11,9 +11,7 @@ namespace _01.Script.Lrw.Manager
     public class GameManager : MonoBehaviour
     {
         [field:SerializeField] public InputSO InputSo { get; private set; }
-
-        public PinBallStates state = PinBallStates.Idle;
-        
+        public PinBallStates state = PinBallStates.None;
         public static GameManager Instance { get; private set; }
 
         private void Awake()

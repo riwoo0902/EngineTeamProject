@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6357824700254795506}
-  - component: {fileID: 1826167447309102112}
+  - component: {fileID: 8301038831104881250}
   - component: {fileID: 2971569714238444186}
   - component: {fileID: 2108079772765357126}
   - component: {fileID: 2105379492117231424}
@@ -37,7 +37,7 @@ Transform:
   - {fileID: 4322461046337069277}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1826167447309102112
+--- !u!114 &8301038831104881250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4058439538221762748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58fd2d9910dd424699df6aed0231232, type: 3}
+  m_Script: {fileID: 11500000, guid: b6c901742804496ea6e2889ac2c0a947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <PinBallSo>k__BackingField: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawDistance: 5
-  ordLayer:
+  ObstacleLayer:
     serializedVersion: 2
     m_Bits: 1572864
 --- !u!50 &2108079772765357126
@@ -129,7 +129,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.25
+  m_Radius: 0.15
 --- !u!120 &6910267253412356986
 LineRenderer:
   serializedVersion: 2
@@ -175,9 +175,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 5, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -319,7 +317,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.35, y: 0.35}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
