@@ -104,6 +104,7 @@ namespace _01.Script.Lrw.PinBallCompo
         {
             EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
             Score += Damage;
+            EventBus<ScoreAddEvent>.Raise(new ScoreAddEvent(Damage));
         }
 
         private void OnDisable()
