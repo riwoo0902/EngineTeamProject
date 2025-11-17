@@ -1,31 +1,31 @@
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class PlayerActionTester : MonoBehaviour
-{
-    [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private List<ItemSO> testItems;  
-    [SerializeField] private ItemSO testItem;  
+//public class PlayerActionTester : MonoBehaviour
+//{
+//    [SerializeField] private PlayerStats playerStats;
+//    [SerializeField] private List<ItemSO> testItems;  
+//    [SerializeField] private ItemSO testItem;  
 
-    private void Start()
-    {
-        playerStats.action += OnInventoryChanged;
-        playerStats.AddItems(testItems);
-        playerStats.AddItem(testItem);
-    }
+//    private void Start()
+//    {
+//        playerStats.action += OnInventoryChanged;
+//        playerStats.AddItems(testItems);
+//        playerStats.AddItem(testItem);
+//    }
 
-    private void OnInventoryChanged(List<ItemSO> inventory)
-    {
-        Debug.Log($"ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: {inventory.Count}");
-        foreach (var item in inventory)
-        {
-            Debug.Log($"{item.itemName}");
-        }
-    }
+//    private void OnInventoryChanged(List<ItemSO> inventory)
+//    {
+//        Debug.Log($"ÀÎº¥Åä¸® º¯°æ °¨Áö ÇöÀç °³¼ö: {inventory.Count}");
+//        foreach (var item in inventory)
+//        {
+//            Debug.Log($"{item.itemName}");
+//        }
+//    }
 
-    private void OnDestroy()
-    {
-        if (playerStats != null)
-            playerStats.action -= OnInventoryChanged;
-    }
-}
+//    private void OnDestroy()
+//    {
+//        if (playerStats != null)
+//            playerStats.action -= OnInventoryChanged;
+//    }
+//}
