@@ -1,16 +1,16 @@
 using System.IO;
 using UnityEngine;
 
-namespace _01.Script.Lrw.FileManager
+namespace _01.Script.Lrw.File
 {
-    public static class JsonManager
+    public static class FileManager
     {
         private static readonly string FolderName = "GameDataFolder";
         private static readonly string BaseFileName = "GameDataFile";
 
         private static string _saveFolderPath;
-        
-        public static void CreatFolder()
+
+        private static void CreatFolder()
         {
             _saveFolderPath = Path.Combine(Application.dataPath, "..", FolderName);
             _saveFolderPath = Path.GetFullPath(_saveFolderPath);
@@ -21,7 +21,7 @@ namespace _01.Script.Lrw.FileManager
             }
         }
 
-        public static void CreateJsonFile<T>(T gameData)
+        public static void SetFile(string gameData)
         {
             if (_saveFolderPath == null ||!Directory.Exists(_saveFolderPath))
             {
@@ -32,46 +32,46 @@ namespace _01.Script.Lrw.FileManager
             string createFilePath;
             do
             {
-                createFilePath = Path.Combine(_saveFolderPath, $"{BaseFileName}{counter}.json");
+                createFilePath = Path.Combine(_saveFolderPath, $"{BaseFileName}{counter}.txt");
                 counter++;
             }
-            while (File.Exists(createFilePath));
-
-            string json = JsonUtility.ToJson(gameData, true);
-            File.WriteAllText(createFilePath, json);
+            while (System.IO.File.Exists(createFilePath));
+            
+            System.IO.File.WriteAllText(createFilePath, gameData);
         }
 
-        public static bool CreateJsonFile<T>(T gameData,string fileName)
+        public static void SetFile(string gameData,string fileName)
         {
             if (!Directory.Exists(_saveFolderPath))
             {
                 CreatFolder();
             }
 
-            string createFilePath = Path.Combine(_saveFolderPath, $"{fileName}.json");
-            if (File.Exists(createFilePath))
-            {
-                return false;
-            }
-
-            string json = JsonUtility.ToJson(gameData, true);
-            File.WriteAllText(createFilePath, json);
-            return true;
+            string createFilePath = Path.Combine(_saveFolderPath, $"{fileName}.txt");
+            
+            System.IO.File.WriteAllText(createFilePath, gameData);
         }
         
         public static string[] CanReadFilePaths() => Directory.GetFiles(_saveFolderPath);
 
-        public static T ReadFile<T>(string path)
+        public static string ReadFile(string path)
         {
-            if (!File.Exists(path))
+            if (!System.IO.File.Exists(path))
             {
                 Debug.Log("path Error");
-                return default;
+                return string.Empty;
             }
 
-            string json = File.ReadAllText(path);
-            return JsonUtility.FromJson<T>(json);
+  
+            return System.IO.File.ReadAllText(path);
         }
+
+        public static string GetFilePath(string fileName)
+        {
+            CreatFolder();
+            return Path.Combine(_saveFolderPath, $"{fileName}.txt");
+        }
+        
         
     }
 }
