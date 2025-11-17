@@ -434,7 +434,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2280056135946761538, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 3215212546539415357, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 1594218666712658005, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 161297854715473549, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 5792353167253910003, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 335021972807190282, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 2871350196690636000, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 3743534936624393361, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 4288037952448696989, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 1994073949277623739, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 8396608039716703741, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 4558644415873735455, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 342133312868919685, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 2624452455619235888, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 5183581287382811580, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 4035306460124221145, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 3350666419551151789, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 4618207809682694253, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 5250069199396004139, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 7195532517281340881, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
+    - {fileID: 4094308870557569679, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}
