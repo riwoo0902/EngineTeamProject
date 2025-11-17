@@ -16,7 +16,7 @@ public class PlayerActionTester : MonoBehaviour
 
     private void OnInventoryChanged(List<ItemSO> inventory)
     {
-        Debug.Log($"ÀÎº¥Åä¸® º¯°æ °¨Áö ÇöÀç °³¼ö: {inventory.Count}");
+        Debug.Log($"ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: {inventory.Count}");
         foreach (var item in inventory)
         {
             Debug.Log($"{item.itemName}");
