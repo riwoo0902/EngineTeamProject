@@ -1,3 +1,4 @@
+using System.Globalization;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.File;
@@ -10,8 +11,7 @@ namespace _01.Script.Lrw.Manager
     public class ScoreManager : MonoBehaviour
     {
         public static ScoreManager Instance { get; private set; }
-        [SerializeField,ReadOnly] 
-        private float score;
+        [SerializeField,ReadOnly] private float score;
         public float Score
         {
             get => score;
