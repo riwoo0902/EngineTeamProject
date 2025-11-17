@@ -1,5 +1,4 @@
 using System.Collections;
-using DG.Tweening;
 using UnityEngine;
 
 public class EnemyTurnManager : MonoBehaviour
@@ -36,7 +35,7 @@ public class EnemyTurnManager : MonoBehaviour
         //마지막 칸이라면 Enemy 공격, 아니라면 Enemy 이동
         for (int cur = _enemyManger.EnemySlots.Count - 1; cur >= 0; cur--)
         {
-            
+
             Debug.Log("SlotCheck 실행");
 
             EnemySlot slot = _enemyManger.EnemySlots[cur];
@@ -74,22 +73,23 @@ public class EnemyTurnManager : MonoBehaviour
         Debug.Log("Move실행");
 
         bool endMove = false;
-
         EnemySlot curSlot = _enemyManger.EnemySlots[cur];
         EnemySlot nextSlot = _enemyManger.EnemySlots[next];
 
         //이동 이후 True로 만들어 진행
-        endMove = enemy.EnemyMove(endMove, nextSlot);
+        enemy.EnemyMove(nextSlot, () =>
+        {
+            //Slot 바꾸기
+            _enemyManger.EnemySlots[next].CurUse = enemy;
+            _enemyManger.EnemySlots[cur].CurUse = null;
+            endMove = true;
+        });
 
-        //Slot 바꾸기
-        _enemyManger.EnemySlots[next].CurUse = enemy;
-        _enemyManger.EnemySlots[cur].CurUse = null;
-        yield return new WaitUntil(() => endMove); //Move가 끝나면 실행
-
+        yield return new WaitUntil(() => endMove);
 
     }
 
-    
+
 
     //공격 실행 임시
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)

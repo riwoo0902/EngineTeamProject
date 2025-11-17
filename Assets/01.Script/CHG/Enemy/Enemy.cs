@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -9,7 +8,7 @@ public class Enemy : Agent
 {
     public Action<Enemy> OnEnemyDead;
     public int Attack { get; private set; }
-    public EnemyDataSO EnemyData {  get; private set; }
+    public EnemyDataSO EnemyData { get; private set; }
     protected override void Awake()
     {
         base.Awake();
@@ -27,18 +26,12 @@ public class Enemy : Agent
 
         _spriteRen.DOFade(1, 0.7f);
     }
-    //public bool EnemyMove(EnemySlot nextSlot, Action onComplete)
-    //{
+    public void EnemyMove(EnemySlot nextSlot, Action onComplete)
+    {
+        StartCoroutine(EnemyMoved(nextSlot, onComplete));
+    }
 
-    //    StartCoroutine(EnemyMoved(nextSlot, onComplete));
-
-        
-    //    return false;
-
-
-    //}
-
-    private IEnumerator EnemyMoved(EnemySlot nextSlot)
+    private IEnumerator EnemyMoved(EnemySlot nextSlot, Action onComplite)
     {
         bool endMove = false;
 
@@ -46,7 +39,11 @@ public class Enemy : Agent
                     .OnComplete(() => endMove = true);
 
         yield return new WaitUntil(() => endMove);
+
+        onComplite?.Invoke();
+
     }
+
     public void EnemyDead()
     {
         _spriteRen.DOFade(0f, 0.7f).OnComplete(() => OnEnemyDead?.Invoke(this));
