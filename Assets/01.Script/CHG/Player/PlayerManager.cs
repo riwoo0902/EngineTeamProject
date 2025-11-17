@@ -83,6 +83,60 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         return true;
     }
 
+    private int itemValue_Health = 0;
+    private int itemValue_Gold = 0;
+    private int itemValue_Damage = 0;
+    public void AddItemValue(ItemSO[] item)
+    {
+        for(int i = 0; i < item.Length; i++)
+        {
+            for(int j = 0; j < item[i].itemSetting.Count; j++)
+            {
+                switch (item[i].itemSetting[j].itemType)
+                {
+                    case ItemType.Heal:
+                        itemValue_Health += item[i].itemSetting[j].itemValue;
+                        break;
+                    case ItemType.Gold:
+                        itemValue_Gold += item[i].itemSetting[j].itemValue;
+                        break;
+                    case ItemType.Damage:
+                        itemValue_Damage += item[i].itemSetting[j].itemValue;
+                        break;
+                }
+            }
+        }
+    }
+    public void RemoveItemValue(ItemSO[] item)
+    {
+        for (int i = 0; i < item.Length; i++)
+        {
+            for (int j = 0; j < item[i].itemSetting.Count; j++)
+            {
+                switch (item[i].itemSetting[j].itemType)
+                {
+                    case ItemType.Heal:
+                        itemValue_Health -= item[i].itemSetting[j].itemValue;
+                        break;
+                    case ItemType.Gold:
+                        itemValue_Gold -= item[i].itemSetting[j].itemValue;
+                        break;
+                    case ItemType.Damage:
+                        itemValue_Damage -= item[i].itemSetting[j].itemValue;
+                        break;
+                }
+            }
+        }
+    }
+
+    private void SetItemValue()
+    {
+        AddMaxHealth(itemValue_Health);
+        AddCurrentHealth(itemValue_Health);
+        AddGold(itemValue_Gold);
+        AddPower(itemValue_Damage);
+    }
+
     #region Test
     [ContextMenu("AddGold")]
     private void AddGoldTest()
