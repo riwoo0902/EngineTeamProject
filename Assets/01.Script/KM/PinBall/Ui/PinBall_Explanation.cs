@@ -23,6 +23,7 @@ public class PinBall_Explanation : MonoBehaviour
     private float _pinBall_Bounciless;
 
     private RectTransform _rectCompo;
+    private CanvasGroup  _canvasGroup;
     private void Awake()
     {
         if (Instance == null)
@@ -33,22 +34,23 @@ public class PinBall_Explanation : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        _canvasGroup = GetComponent<CanvasGroup>();
         _rectCompo = GetComponent<RectTransform>();
         PointerOnExit();
     }
 
-    public void PointerOnEnter(PinBallSO pinball)
+    public void PointerOnEnter(PinBallSO pinball,Transform target)
     {
+        _canvasGroup.alpha = 1;
         SettingSOinUi(pinball);
-        _rectCompo.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        _rectCompo.position = target.position;
         _rectCompo.position = new Vector3(_rectCompo.position.x + spaceDistance, _rectCompo.position.y, 0);
 
     }
 
     public void PointerOnExit()
     {
-        _rectCompo.position = new Vector3(10000, 10000, 0);
+        _canvasGroup.alpha = 0;
     }
 
     private void SettingSOinUi(PinBallSO pinball)
