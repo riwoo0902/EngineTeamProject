@@ -35,6 +35,7 @@ public class Player : Agent
         HealthCompo.OnDead += PlayerDead;
 
         _contect.UIManager.HealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+
     }
     
     public void ChangeTarget(Enemy enemy)

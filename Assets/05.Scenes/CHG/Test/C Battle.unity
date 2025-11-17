@@ -765,7 +765,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 799575992}
-  - {fileID: 1376594804}
   m_Father: {fileID: 1526040112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2969,7 +2968,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a927ca24f0fa1c448a7a556ca7ba637b, type: 2}
   EventData: []
   pinBallData: []
-  ItemData: []
+  ItemData:
+  - {fileID: 11400000, guid: 5cbf768802fabf049b15311af70de0df, type: 2}
+  - {fileID: 11400000, guid: 0bcd2eabcd8415e46b4e99f124d58bdb, type: 2}
+  - {fileID: 11400000, guid: 60f5cc24baa291a4dbb2ed7f68cc2198, type: 2}
+  - {fileID: 11400000, guid: 9b798b0404b7ccc4bbdc37eec91db6c5, type: 2}
+  - {fileID: 11400000, guid: 135cb65a5db8ddb4399486107f672751, type: 2}
 --- !u!1 &696574095
 GameObject:
   m_ObjectHideFlags: 0
@@ -5592,6 +5596,7 @@ RectTransform:
   - {fileID: 218877918}
   - {fileID: 290432703}
   - {fileID: 1526040112}
+  - {fileID: 1376594804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5688,6 +5693,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754de2aa22657a141ba45286bb26dc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 0
+  <testItems>k__BackingField:
+  - {fileID: 11400000, guid: 5cbf768802fabf049b15311af70de0df, type: 2}
+  - {fileID: 11400000, guid: 0bcd2eabcd8415e46b4e99f124d58bdb, type: 2}
+  - {fileID: 11400000, guid: 60f5cc24baa291a4dbb2ed7f68cc2198, type: 2}
 --- !u!4 &1001661437
 Transform:
   m_ObjectHideFlags: 0
@@ -6208,11 +6218,11 @@ RectTransform:
   m_Children:
   - {fileID: 387669970}
   - {fileID: 250293390}
-  m_Father: {fileID: 323405195}
+  m_Father: {fileID: 809724938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: 100}
+  m_AnchoredPosition: {x: -719, y: -149}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376594805
@@ -7434,6 +7444,8 @@ MonoBehaviour:
   PlayerSpellImgBG: {fileID: 290432704}
   PinBallSpellImg: {fileID: 2144115797}
   PinBallSpellImgBG: {fileID: 1526040113}
+  InventoryObj: {fileID: 1140267705}
+  ImgPrefab: {fileID: 8998512578872490002, guid: 52475147a122214488d02e699e3f2c7f, type: 3}
 --- !u!1 &2124352725
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoSingleton<PlayerManager>
 {
-    private int _maxHealth = 0;
+    [SerializeField] private int _maxHealth = 0;
     private int _curHealth = 0;
     private int _power;
     private int _gold;
@@ -96,6 +96,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
                 {
                     case ItemType.Heal:
                         itemValue_Health += item[i].itemSetting[j].itemValue;
+                        Debug.Log(itemValue_Health);
                         break;
                     case ItemType.Gold:
                         itemValue_Gold += item[i].itemSetting[j].itemValue;
@@ -106,6 +107,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
                 }
             }
         }
+        SetItemValue();
     }
     public void RemoveItemValue(ItemSO[] item)
     {
@@ -139,16 +141,16 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
 
     #region Test
-    [SerializeField] private ItemSO[] testItems;
+    [field:SerializeField] public ItemSO[] testItems { get; private set; }
     [ContextMenu("SetItemValue")]
     public void TestSetItemValue()
     {
         AddItemValue(testItems);
     }
-    [ContextMenu("SetItemValue")]
+    [ContextMenu("SetItemRemoveValue")]
     public void TestRemoveItemValue()
     {
-        AddItemValue(testItems);
+        RemoveItemValue(testItems);
     }
     [ContextMenu("AddGold")]
     private void AddGoldTest()

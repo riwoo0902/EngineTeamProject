@@ -30,6 +30,7 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("CurrentLevel")]
     [SerializeField] private TextMeshProUGUI _levelText;
+
     [Header("Damage")]
     [SerializeField] private TextMeshProUGUI _damageText;
 
@@ -39,14 +40,19 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private Image PinBallSpellImg;
     [SerializeField] private Image PinBallSpellImgBG;
 
+    [Header("Item")]
+    [SerializeField] private GameObject InventoryObj;
+    [SerializeField] private GameObject ImgPrefab;
+
     private void Start()
     {
         TurnTextOriginalPos = MoveTurnText.transform.position;
 
         ItemInventoryOriginalPos = ItemInventory.transform.position;
         ItemInventoryScale = ItemInventory.transform.localScale;
-        ItemInventory.transform.position = ItemInventoryMovePos.position;
-        ItemInventory.transform.localScale = Vector3.zero;
+        //ItemInventory.transform.position = ItemInventoryMovePos.position;
+        //ItemInventory.transform.localScale = Vector3.zero;
+        ItemInventoryAdd();
 
         _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
     }
@@ -79,6 +85,15 @@ public class BattleUIManager : MonoBehaviour
     public void ItemInventoryAdd()
     {
         //추가
+
+        foreach (var item in PlayerManager.Instance.testItems)
+        {
+            GameObject obj = Instantiate(ImgPrefab);
+            Image img = obj.GetComponent<Image>();
+            img.sprite = item.itemIcon;
+            img.transform.parent = InventoryObj.transform;
+            
+        }
 
         ItemInventoryShowHide(); //추가 후 닫기
     }
@@ -144,6 +159,7 @@ public class BattleUIManager : MonoBehaviour
     {
         healthBar.transform.position = Camera.main.ScreenToWorldPoint(pos.position);
     }
+
 }
 
 
