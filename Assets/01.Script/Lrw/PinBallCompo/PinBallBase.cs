@@ -23,6 +23,7 @@ namespace _01.Script.Lrw.PinBallCompo
         [field:SerializeField,ReadOnly] public float Damage { get; private set; }
         private FsmBrain _pinBallFsmMachine;
         public float BaseDamage { get; private set; }
+        public bool IsEnd { get; private set; } = false;
 
         private void Awake()
         {
@@ -40,7 +41,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         public void PinBallShoot()
         {
-            if (GameManager.Instance.state == PinBallStates.Idle)
+            if (GameManager.Instance.state == PinBallStates.Idle && !IsEnd)
             {
                 GameManager.Instance.state = PinBallStates.Shooting;
                 Vector2 force = (GameManager.Instance.InputSo.MousePos - (Vector2)transform.position).normalized *
@@ -97,13 +98,14 @@ namespace _01.Script.Lrw.PinBallCompo
         private IEnumerator ActiveFalse()
         {
             yield return new WaitForSeconds(1);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
             EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
             Score += Damage;
+            EventBus<ScoreAddEvent>.Raise(new ScoreAddEvent(Damage));
         }
 
         private void OnDisable()

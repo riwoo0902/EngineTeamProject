@@ -33,7 +33,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void ChangeGameManagerState(float a)
         {
-            GameManager.Instance.state = PinBallStates.Idle;
+            GameManager.Instance.state = PinBallStates.None;
         }
 
         private void Start()
@@ -49,6 +49,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void OnDestroy()
         {
+            onBallScoreTrigger.RemoveListener(ChangeGameManagerState);
             EventBus<OrbMapReset>.OnEvent -= ReSet;
         }
         
