@@ -137,7 +137,19 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         AddPower(itemValue_Damage);
     }
 
+
     #region Test
+    [SerializeField] private ItemSO[] testItems;
+    [ContextMenu("SetItemValue")]
+    public void TestSetItemValue()
+    {
+        AddItemValue(testItems);
+    }
+    [ContextMenu("SetItemValue")]
+    public void TestRemoveItemValue()
+    {
+        AddItemValue(testItems);
+    }
     [ContextMenu("AddGold")]
     private void AddGoldTest()
     {
