@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyTurnManager : MonoBehaviour
 {
-    private EnemyStageManager _enemyManger;
+    private BattleEnemyManager _enemyManger;
     private Player _player;
     private BattleTurnManager _turnManager;
     //공격 대상
-    public void Init(EnemyStageManager enemyManager, BattleTurnManager turnManager)
+    public void Init(BattleEnemyManager enemyManager, BattleTurnManager turnManager)
     {
         _enemyManger = enemyManager;
         _player = _enemyManger.Player;
@@ -31,14 +31,17 @@ public class EnemyTurnManager : MonoBehaviour
     private IEnumerator SlotCheck(EnemyMoveGA enemyMoveGA)
     {
         bool attack = false;
-        Debug.Log("SlotCheck 실행");
-        //Dirtionary에서 돌면서 적 발견 -> 적 앞에 칸이 있는가? -> 있으면 이동, 없으면 그대로
+        //Dirtionary에서 돌면서 적 발견 -> 적 앞에 칸이 있는지 확인 -> 있으면 이동, 없으면 그대로
 
         //마지막 칸이라면 Enemy 공격, 아니라면 Enemy 이동
         for (int cur = _enemyManger.EnemySlots.Count - 1; cur >= 0; cur--)
         {
+            
+            Debug.Log("SlotCheck 실행");
+
             EnemySlot slot = _enemyManger.EnemySlots[cur];
             if (slot.CurUse == null) continue; //자리에 Enemy가 없다면 다시
+            Debug.Log(slot.CurUse.gameObject.name);
 
             //마지막칸일 경우 공격
             if (cur == _enemyManger.EnemySlots.Count - 1)
@@ -55,6 +58,7 @@ public class EnemyTurnManager : MonoBehaviour
                 if (next < _enemyManger.EnemySlots.Count && _enemyManger.EnemySlots[next].CurUse == null)
                 {
                     yield return EnemyMove(_enemyManger.EnemySlots[cur].CurUse, cur, next);
+                    Debug.Log("aa");
                 }
 
             }
@@ -65,24 +69,27 @@ public class EnemyTurnManager : MonoBehaviour
     }
 
     //                        현재 칸의 Enemy, 현재 칸 번호, 다음 칸 번호
-    private IEnumerator EnemyMove(C_Enemy enemy, int cur, int next)
+    private IEnumerator EnemyMove(Enemy enemy, int cur, int next)
     {
+        Debug.Log("Move실행");
+
         bool endMove = false;
 
         EnemySlot curSlot = _enemyManger.EnemySlots[cur];
         EnemySlot nextSlot = _enemyManger.EnemySlots[next];
 
         //이동 이후 True로 만들어 진행
-        enemy.gameObject.transform.DOMove(nextSlot.Pos.position, 0.5f)
-            .OnComplete(() => endMove = true);
-
-        yield return new WaitUntil(() => endMove); //Move가 끝나면 실행
-
+        endMove = enemy.EnemyMove(endMove, nextSlot);
 
         //Slot 바꾸기
         _enemyManger.EnemySlots[next].CurUse = enemy;
         _enemyManger.EnemySlots[cur].CurUse = null;
+        yield return new WaitUntil(() => endMove); //Move가 끝나면 실행
+
+
     }
+
+    
 
     //공격 실행 임시
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)

@@ -4,6 +4,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 {
     private int _maxHealth = 0;
     private int _curHealth = 0;
+    private int _power;
     private int _gold;
     private Player _stagePlayer;
     private PlayerTurnManager _playerTurnManager;
@@ -16,6 +17,14 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public int CurrentHealth
     {
         get { return _curHealth; }
+    }
+
+    public int Power
+    {
+        get
+        {
+            return _power;
+        }
     }
 
     public int Gold
@@ -50,6 +59,15 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         _curHealth = Mathf.Clamp(_curHealth - value, 1, _maxHealth);
     }
 
+    public void AddPower(int value)
+    {
+        _power += value;
+    }
+
+    public void SpendPower(int value)
+    {
+        _power -= value;
+    }
 
     public void AddGold(int value)
     {

@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c48be99fe139a66458bfa2bdc016a812, type: 2}
   - {fileID: 11400000, guid: c7bc1d86de8d913469369fd73e5fb78d, type: 2}
   - {fileID: 11400000, guid: e2c9420f29c7c2e429872ce7d3c0cf18, type: 2}
+  <StartEnemyCount>k__BackingField: 3

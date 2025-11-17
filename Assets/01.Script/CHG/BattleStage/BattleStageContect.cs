@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BattleStageContect : MonoBehaviour
 {
-    [field: SerializeField] public EnemyStageManager EnemyManager { get; private set; }
+    [field: SerializeField] public BattleEnemyManager EnemyManager { get; private set; }
     [field: SerializeField] public EnemyTurnManager  EnemyTurnManager { get; private set; }
     [field: SerializeField] public BattleTurnManager TurnManager { get; private set; }
     [field: SerializeField] public BattleUIManager UIManager { get; private set; }

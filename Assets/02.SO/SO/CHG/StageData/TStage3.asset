@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EmergeCount>k__BackingField: 5
   <EmergeEnemy>k__BackingField:
-  - {fileID: 11400000, guid: 8eb8168c31ad9654c801a8bea9de42dd, type: 2}
-  - {fileID: 11400000, guid: e2c9420f29c7c2e429872ce7d3c0cf18, type: 2}
-  - {fileID: 11400000, guid: aa136fb5039ac6e44b82a35cc08360a8, type: 2}
-  - {fileID: 11400000, guid: c7bc1d86de8d913469369fd73e5fb78d, type: 2}
-  - {fileID: 11400000, guid: 1ad9686c3633eec419eeb82350a698fd, type: 2}
+  - {fileID: 11400000, guid: e6c78634b99b9f74093459f30d0d83b6, type: 2}
+  - {fileID: 11400000, guid: 8c3814594d7bfd04f8ce7180b22c2f92, type: 2}
+  - {fileID: 11400000, guid: 40d78b082f8218845af028bb5b5dfd1b, type: 2}
+  <StartEnemyCount>k__BackingField: 3
