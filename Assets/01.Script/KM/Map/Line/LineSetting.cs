@@ -48,8 +48,6 @@ public class LineSetting : MonoBehaviour
             prevVec = nowVec;
         }
     }
-
-    [ContextMenu("Test Line")]
     public void LineMove()
     {
         Gradient gri = new Gradient();

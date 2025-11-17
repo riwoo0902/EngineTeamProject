@@ -16,10 +16,17 @@ public class CreateStageTree : MonoBehaviour
     [SerializeField] private float verticalSpacing = 3f;
     [SerializeField] private Vector3 origin = Vector3.zero;
 
+    // ⭐ 여기 추가: [층][층에서의 index] 로 스테이지 GameObject 들고 있음
+    public List<List<GameObject>> Stages { get; private set; } = new List<List<GameObject>>();
+
     [ContextMenu("CreateStages")]
     private void CreateStages()
     {
-        List<List<GameObject>> stageParents = new List<List<GameObject>>();
+        // 매번 새로 만들 때 초기화
+        Stages.Clear();
+        _currentPercent = 0;
+        _currentFloor = 0;
+
         List<List<GameObject>> StageLineRends = new List<List<GameObject>>();
 
         int rand = Random.Range(0, 100);
@@ -47,13 +54,14 @@ public class CreateStageTree : MonoBehaviour
                 thisFloorLines.Add(lineObj);
             }
 
-            stageParents.Add(thisFloorParents);
+            // ⭐ 여기: 층별 스테이지를 Stages에 저장
+            Stages.Add(thisFloorParents);
             StageLineRends.Add(thisFloorLines);
 
             if (_currentFloor >= 2)
             {
                 List<GameObject> prevLines = StageLineRends[_currentFloor - 2];
-                List<GameObject> currStages = stageParents[_currentFloor - 1];
+                List<GameObject> currStages = Stages[_currentFloor - 1];
 
                 for (int pi = 0; pi < prevLines.Count; pi++)
                 {
@@ -79,9 +87,9 @@ public class CreateStageTree : MonoBehaviour
                 }
             }
         }
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).gameObject != Parent)
+            if (transform.GetChild(i).gameObject != Parent)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
