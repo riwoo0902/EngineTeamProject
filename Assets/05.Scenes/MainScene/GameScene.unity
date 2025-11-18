@@ -539,7 +539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20, y: 60.000122}
+  m_AnchoredPosition: {x: 20, y: 60.000237}
   m_SizeDelta: {x: 0, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &405306854
@@ -1041,6 +1041,7 @@ MonoBehaviour:
   pinBall_Friction: {fileID: 1954013326}
   pinBall_Bounciless: {fileID: 1952751785}
   spaceDistance: 2.5
+  _pinBallSo: {fileID: 0}
 --- !u!225 &574613138
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1210,8 +1211,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 446347465}
   m_HandleRect: {fileID: 446347464}
   m_Direction: 3
-  m_Value: -0.0000020345053
-  m_Size: 0.75996774
+  m_Value: -0.0000040690106
+  m_Size: 0.76
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
