@@ -44,8 +44,12 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private GameObject InventoryObj;
     [SerializeField] private GameObject ImgPrefab;
 
-    [Header("EnemyHealthBar")]
-    [SerializeField] private GameObject EnemyHealthBarPrefab;
+    [Header("EnemyInfoBar")]
+    [SerializeField] private GameObject EnemyInfoBarPrefab;
+    [SerializeField] private Sprite NomalImg;
+    [SerializeField] private Sprite FireImg;
+    [SerializeField] private Sprite GressImg;
+    [SerializeField] private Sprite WaterImg;
 
     private void Start()
     {
@@ -97,8 +101,8 @@ public class BattleUIManager : MonoBehaviour
             GameObject obj = Instantiate(ImgPrefab);
             Image img = obj.GetComponent<Image>();
             img.sprite = item.itemIcon;
-            img.transform.parent = InventoryObj.transform;
-            
+            img.transform.SetParent(InventoryObj.transform, true);
+
         }
 
         ItemInventory.transform.position = ItemInventoryMovePos.position;
@@ -140,7 +144,7 @@ public class BattleUIManager : MonoBehaviour
         _targetingImgSeq.Join(TargetingImg.DOFade(1, 0.3f));
     }
 
-    public void TargetingImgHide() 
+    public void TargetingImgHide()
     {
         _targetingImgSeq?.Kill();
         _targetingImgSeq = DOTween.Sequence();
@@ -170,29 +174,45 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region EnemyHealthBar
-    public void EnemyHealthBarSet(GameObject enemyObj, Enemy enemy)
+    public void EnemyInfoBarSet(GameObject enemyObj, Enemy enemy)
     {
-        GameObject enemyHPbar = Instantiate(EnemyHealthBarPrefab);
+        GameObject enemyHPbar = Instantiate(EnemyInfoBarPrefab, GameObject.Find("Canvas").transform);
         Vector3 vec3 = new Vector3(enemyObj.transform.position.x, enemyObj.transform.position.y, enemyObj.transform.position.z);
         enemyHPbar.transform.position = Camera.main.WorldToScreenPoint(vec3);
-        enemyHPbar.transform.parent = GameObject.Find("Canvas").transform;
 
-        enemy.HealthBar = enemyHPbar;
+        enemy.EnemyInfoBar = enemyHPbar;
     }
 
-    public Tween EnemyHealthBarHide(Image img, TextMeshProUGUI text)
+    public Tween EnemyInfoBarHide(Image img, TextMeshProUGUI text)
     {
         img.DOFade(0, 0.5f);
         return text.DOFade(0, 0.5f);
     }
 
-    public Tween EnemyHealthBarShow(Image img, TextMeshProUGUI text, int maxHealth)
+    public Tween EnemyInfoBarShow(Image healthBarImg, TextMeshProUGUI helathText, TextMeshProUGUI powerText, 
+        Image typeImg, CanvasGroup canvasGroup, EnemyDataSO enemyData)
     {
-        img.fillAmount = 1;
-        text.text = $"{maxHealth}/{maxHealth}";
+        healthBarImg.fillAmount = 1;
+        helathText.text = $"{enemyData.EnemyMaxHP}/{enemyData.EnemyMaxHP}";
+        powerText.text = enemyData.EnemyPower.ToString();
+        switch (enemyData.EnemyType)
+        {
+            case EnemyType.Normal:
+                typeImg.sprite = NomalImg;
+                break;
+            case EnemyType.Fire:
+                typeImg.sprite = FireImg;
+                break;
+            case EnemyType.Water:
+                typeImg.sprite = WaterImg;
+                break;
+            case EnemyType.Gress:
+                typeImg.sprite = GressImg;
+                break;
+        }
 
-        img.DOFade(1, 0.3f);
-        return text.DOFade(1, 0.3f);
+
+        return canvasGroup.DOFade(1, 0.3f);
     }
 
     public Tween EnemyHealthBarMove(Transform moveTrns, Transform target)

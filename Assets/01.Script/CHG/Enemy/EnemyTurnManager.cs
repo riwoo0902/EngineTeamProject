@@ -93,12 +93,10 @@ public class EnemyTurnManager : MonoBehaviour
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)
     {
         _player.TakeDamage(enemyAttackGA.AttackEnemy.Power);
-        yield return new WaitForSeconds(1f); //Enemy 공격 모션 종료 이후
-        Debug.Log("End Enemy Turn");
-        _turnManager.PlayerTurnSet();
+        _player.AgentAnimatorCompo.HurtPlay();
+        yield return new WaitForSeconds(1f); //Enemy 공격 모션 넣기?
+        //_turnManager.PlayerTurnSet();
     }
-
-    // EnemyTurnManager.cs 에 추가
 
     private void OnDestroy()
     {

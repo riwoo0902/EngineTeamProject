@@ -3,15 +3,16 @@ using UnityEngine;
 public class BattleTurnButton : MonoBehaviour
 {
     private BattleTurnManager _turnManager;
-
+    private BattleStageContect _contect;
     public void Init(BattleStageContect contect)
     {
+        _contect = contect;
         _turnManager = contect.TurnManager;
     }
 
     public void PlayerTurnButton()
     {
-        if (!_turnManager.CurTurn) return;
+        if (!_turnManager.CurTurn || _contect.Player.PlayerTarget == null) return;
 
         //Debug.Log($"CurTurn: {(_turnManager.CurTurn ? "Player" : "Enemy")}");
         //PlayerTurnGA playerTurnGA = new();

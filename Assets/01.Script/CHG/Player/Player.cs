@@ -40,6 +40,12 @@ public class Player : Agent
 
     }
 
+    private void OnDamaged()
+    {
+        Debug.Log("damage");
+        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+        Instantiate(AttackEffack, transform.position, Quaternion.identity);
+    }
 
     public void ChangeTarget(Enemy enemy)
     {
@@ -78,7 +84,7 @@ public class Player : Agent
         ActionSystem.Instance.Perform(playerTurnGA);
     }
 
-    public void AttackEffactPlay()
+    public void EnemyAttackEffactPlay()
     {
         Debug.Log("Attack");
         Instantiate(AttackEffack, new Vector2(PlayerTarget.transform.position.x, PlayerTarget.transform.position.y), Quaternion.identity);
@@ -88,10 +94,9 @@ public class Player : Agent
     public void TakeDamage(int damage)
     {
         HealthCompo.TakeDamage(damage);
-        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
     }
-    private void OnDamaged()
+    public void PlayerTurnStart()
     {
-            
+        _contect.TurnManager.PlayerTurnSet();
     }
 }

@@ -14,9 +14,12 @@ public class Enemy : Agent
     public EnemyDataSO EnemyData { get; private set; }
     public EnemyType EnemyType { get; private set; } = EnemyType.Normal;
 
-    public GameObject HealthBar { get; set; }
-    private Image HealthBarImg { get; set; }
-    private TextMeshProUGUI HealthText { get; set; }
+    public GameObject EnemyInfoBar { get; set; }
+    private Image _healthBarImg;
+    private TextMeshProUGUI _healthText;
+    private TextMeshProUGUI _powerText;
+    private Image _typeImg;
+    private CanvasGroup _canvasGroup;
 
     private BattleStageContect _contect = null;
     private Sequence _moveSeq;
@@ -43,14 +46,20 @@ public class Enemy : Agent
 
         if (_contect == null)
         {
+            Image[] imgs = EnemyInfoBar.GetComponentsInChildren<Image>();
+            TextMeshProUGUI[] texts = EnemyInfoBar.GetComponentsInChildren<TextMeshProUGUI>();
+
             _contect = contect;
-            HealthBarImg = HealthBar.GetComponent<Image>();
-            HealthText = HealthBar.GetComponentInChildren<TextMeshProUGUI>();
+            _healthBarImg = imgs[0];
+            _healthText = texts[0];
+            _powerText = texts[1];
+            _typeImg = imgs[1];
+            _canvasGroup = EnemyInfoBar.GetComponent<CanvasGroup>();
         }
 
 
-        _contect.UIManager.EnemyHealthBarMove(HealthBar.transform, transform);
-        _contect.UIManager.EnemyHealthBarShow(HealthBarImg, HealthText, EnemyData.EnemyMaxHP);
+        _contect.UIManager.EnemyHealthBarMove(EnemyInfoBar.transform, transform);
+        _contect.UIManager.EnemyInfoBarShow(_healthBarImg, _healthText, _powerText, _typeImg,_canvasGroup, enemyData);
 
         _spriteRen.DOFade(1, 0.7f);
 
@@ -67,7 +76,7 @@ public class Enemy : Agent
         _moveSeq?.Kill();
         _moveSeq = DOTween.Sequence();
 
-        _moveSeq.Append(_contect.UIManager.EnemyHealthBarMove(HealthBar.transform, nextSlot.Pos));
+        _moveSeq.Append(_contect.UIManager.EnemyHealthBarMove(EnemyInfoBar.transform, nextSlot.Pos));
         _moveSeq.Join(gameObject.transform.DOMove(nextSlot.Pos.position, 0.5f));
         _moveSeq.AppendCallback(() => endMove = true);
 
@@ -80,7 +89,7 @@ public class Enemy : Agent
     public void OnDamage()
     {
         Debug.Log("Damage½ÇÇà");
-        _contect.UIManager.EnemyTakeDamage(HealthBarImg, HealthText, HealthCompo.MaxHp, HealthCompo.CurHp);
+        _contect.UIManager.EnemyTakeDamage(_healthBarImg, _healthText, HealthCompo.MaxHp, HealthCompo.CurHp);
         _spriteRenSeq?.Kill();
 
         _spriteRenSeq = DOTween.Sequence();
@@ -96,10 +105,10 @@ public class Enemy : Agent
         _deadSeq?.Kill();
         _deadSeq = DOTween.Sequence();
 
-        HealthBarImg.fillAmount = 0;
-        HealthText.text = "0/0";
+        _healthBarImg.fillAmount = 0;
+        _healthText.text = "0/0";
 
-        _deadSeq.Append(_contect.UIManager.EnemyHealthBarHide(HealthBarImg, HealthText));
+        _deadSeq.Append(_contect.UIManager.EnemyInfoBarHide(_healthBarImg, _healthText));
         _deadSeq.Join(_spriteRen.DOFade(0f, 0.5f));
         _deadSeq.AppendCallback(() => OnEnemyDead?.Invoke(this));
  

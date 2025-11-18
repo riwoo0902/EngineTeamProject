@@ -79,7 +79,7 @@ public class BattleEnemyManager : MonoBehaviour
 
                 GameObject enemyObj = Instantiate(EnemyPrefab, slot.Pos.position, Quaternion.identity);
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
-                _contect.UIManager.EnemyHealthBarSet(enemyObj, enemy);
+                _contect.UIManager.EnemyInfoBarSet(enemyObj, enemy);
 
                 enemy.Init(_nextEnemy.Pop(), _contect); //EnemyData 넣어주기
 
