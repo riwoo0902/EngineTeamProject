@@ -37,8 +37,6 @@ public class PlayerTurnManager : MonoBehaviour
 
         if (_player.PlayerTarget == null) yield break;
 
-        Debug.Log("Player Turn");
-
         //데미지 계산
         //int damage = 
 

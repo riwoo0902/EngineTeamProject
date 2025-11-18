@@ -40,7 +40,6 @@ public class EnemyTurnManager : MonoBehaviour
 
             EnemySlot slot = _enemyManger.EnemySlots[cur];
             if (slot.CurUse == null) continue; //자리에 Enemy가 없다면 다시
-            Debug.Log(slot.CurUse.gameObject.name);
 
             //마지막칸일 경우 공격
             if (cur == _enemyManger.EnemySlots.Count - 1)
@@ -57,7 +56,6 @@ public class EnemyTurnManager : MonoBehaviour
                 if (next < _enemyManger.EnemySlots.Count && _enemyManger.EnemySlots[next].CurUse == null)
                 {
                     yield return EnemyMove(_enemyManger.EnemySlots[cur].CurUse, cur, next);
-                    Debug.Log("aa");
                 }
 
             }

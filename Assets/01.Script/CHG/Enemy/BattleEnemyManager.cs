@@ -23,7 +23,7 @@ public class BattleEnemyManager : MonoBehaviour
 
     public Player Player { get; private set; }
     private EnemyTurnManager _turnManager;
-    
+
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
     public void Init(BattleStageDataSO stageData, BattleStageContect contect)
     {
@@ -32,7 +32,7 @@ public class BattleEnemyManager : MonoBehaviour
         Player = contect.Player;
 
         //처음 시작 할 때 Enemy 세팅
-        _startEnemyCount = stageData.StartEnemyCount;   
+        _startEnemyCount = stageData.StartEnemyCount;
         bool flowControl = EnemySetting(stageData);
         if (!flowControl) return;
 
@@ -81,7 +81,7 @@ public class BattleEnemyManager : MonoBehaviour
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
                 _contect.UIManager.EnemyHealthBarSet(enemyObj, enemy);
 
-                enemy.Init(_nextEnemy.Pop()); //EnemyData 넣어주기
+                enemy.Init(_nextEnemy.Pop(), _contect); //EnemyData 넣어주기
 
                 slot.CurUse = enemy;
                 EnemySlots[i - 1].CurUse = slot.CurUse;
@@ -118,10 +118,11 @@ public class BattleEnemyManager : MonoBehaviour
     //Enemy사망 시 죽은 Enemy스크립트에 새 EnemyData적용, 새 Enemy위치이동 및 슬롯 바꾸기
     private void EnemyRePlace(Enemy enemy)
     {
+        var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy); //enemy가 현재 있는 칸 key가져오기
+        EnemySlots[pairEnemy.Key].CurUse = null;
         //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제
         if (_nextEnemy.Count == 0) return;
 
-        var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy); //enemy가 현재 있는 칸 key가져오기
 
         // 위치이동 및 슬롯 바꾸기
         foreach (var slot in EnemySlots)
@@ -129,14 +130,13 @@ public class BattleEnemyManager : MonoBehaviour
             if (!slot.Value.IsUse) //슬롯에 요소가 없다면
             {
                 slot.Value.CurUse = enemy;
-                EnemySlots[pairEnemy.Key].CurUse = null;
 
                 enemy.transform.position = slot.Value.Pos.transform.position;
                 break;
             }
         }
 
-        enemy.Init(_nextEnemy.Pop());
+        enemy.Init(_nextEnemy.Pop(), _contect);
 
 
         //생성된 EnemyUI 투명화 

@@ -180,18 +180,31 @@ public class BattleUIManager : MonoBehaviour
         enemy.HealthBar = enemyHPbar;
     }
 
-    public void EnemyHealthBarHide()
+    public Tween EnemyHealthBarHide(Image img, TextMeshProUGUI text)
     {
-
+        img.DOFade(0, 0.5f);
+        return text.DOFade(0, 0.5f);
     }
 
-    public void EnemyHealthBarShow()
+    public Tween EnemyHealthBarShow(Image img, TextMeshProUGUI text, int maxHealth)
     {
+        img.fillAmount = 1;
+        text.text = $"{maxHealth}/{maxHealth}";
 
+        img.DOFade(1, 0.3f);
+        return text.DOFade(1, 0.3f);
     }
 
-    public void EnemyHealthBarMove()
+    public Tween EnemyHealthBarMove(Transform moveTrns, Transform target)
     {
+        return moveTrns.DOMoveX(Camera.main.WorldToScreenPoint(target.position).x, 0.5f);
+    }
+
+    public void EnemyTakeDamage(Image healthBar, TextMeshProUGUI text, int maxHealth, int curHealth)
+    {
+        Debug.Log(curHealth);
+        text.text = $"{curHealth}/{maxHealth}";
+        healthBar.DOFillAmount((float)curHealth / maxHealth, 0.3f);
 
     }
     #endregion
