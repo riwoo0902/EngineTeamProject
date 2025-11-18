@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
-  m_Name: ItemSO
+  m_Name: Snal
   m_EditorClassIdentifier: 
   itemSetting:
   - itemType: 2
-    itemValue: 15
-  itemName: TestAD
-  itemIcon: {fileID: 5096743657813371027, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
-  itemDescription: JustAD
+    itemValue: 200
+  itemName: "\uB2EC\uD33D\uC774"
+  itemIcon: {fileID: 21300000, guid: b674b8453594e413d87754cb518de70f, type: 3}
+  itemDescription: "\uB2E8\uB2E8\uD558\uB2E4 \uC0DD\uAC01\uBCF4\uB2E8"
+  itemPrice: 0

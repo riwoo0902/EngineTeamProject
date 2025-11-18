@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
-  m_Name: ItemValue2
+  m_Name: Light
   m_EditorClassIdentifier: 
   itemSetting:
-  - itemType: 2
-    itemValue: 69
+  - itemType: 0
+    itemValue: 20
   - itemType: 1
-    itemValue: 74
-  itemName: TestADDF
-  itemIcon: {fileID: 4383632359747355069, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
-  itemDescription: Testttt
+    itemValue: 15
+  itemName: "\uCC3D\uACF5"
+  itemIcon: {fileID: 21300000, guid: b25e60f9bb37b43a9aed226fc41836b2, type: 3}
+  itemDescription: "\uAC15\uB825\uD55C \uBE5B\uC5D0 \uBE60\uC9C4 \uC801\uB4E4\uC5D0\uAC8C
+    \uB3C8\uC744 \uB72F\uACE0 \uACF5\uACA9\uC744 \uB354 \uAC15\uD558\uAC8C \uAC00\uD55C\uB2E4!"
+  itemPrice: 0
