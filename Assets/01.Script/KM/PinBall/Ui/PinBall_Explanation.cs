@@ -21,7 +21,9 @@ public class PinBall_Explanation : MonoBehaviour
     private float _pinBall_Mass;
     private float _pinBall_Friction;
     private float _pinBall_Bounciless;
-
+    [SerializeField] private PinBallSO _pinBallSo;
+    
+    
     private RectTransform _rectCompo;
     private CanvasGroup  _canvasGroup;
     private void Awake()
@@ -55,16 +57,12 @@ public class PinBall_Explanation : MonoBehaviour
 
     private void SettingSOinUi(PinBallSO pinball)
     {
-        _pinBallName = pinball.BallName;
-        _pinBall_Explanation = pinball.BallExplanation;
-        _pinBall_Mass = pinball.Friction;
-        _pinBall_Friction = pinball.Mass;
-        _pinBall_Bounciless = pinball.Bounciness;
+        _pinBallSo =  pinball;
 
-        pinBallName.text = _pinBallName;
-        pinBall_Explanation.text = _pinBall_Explanation;
-        pinBall_Mass.text = _pinBall_Mass.ToString();
-        pinBall_Friction.text = _pinBall_Friction.ToString();
-        pinBall_Bounciless.text = _pinBall_Bounciless.ToString();
+        pinBallName.text = _pinBallSo.BallName;
+        pinBall_Explanation.text = _pinBallSo.BallExplanation;
+        pinBall_Mass.text = _pinBallSo.Mass.ToString();
+        pinBall_Friction.text = _pinBallSo.Friction.ToString();
+        pinBall_Bounciless.text = _pinBallSo.Bounciness.ToString();
     }
 }
