@@ -1,11 +1,9 @@
 using UnityEngine;
 
-namespace Lrw_PinBallUI
+namespace _01.Script.Lrw.UI.PinBalls
 {
     public class PinBallUIManager : MonoBehaviour
     {
         
-
-
     }
 }
