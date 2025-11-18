@@ -22,7 +22,7 @@ public class BattleUIManager : MonoBehaviour
     private Vector3 ItemInventoryOriginalPos;
     private Vector3 ItemInventoryScale;
     private Sequence _itemInventorySeq;
-    private bool _ItemInventoryShow = true;
+    private bool _ItemInventoryShow = false;
 
     [Header("EnemyTargeting")]
     [SerializeField] private Image TargetingImg;
@@ -30,6 +30,7 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("CurrentLevel")]
     [SerializeField] private TextMeshProUGUI _levelText;
+
     [Header("Damage")]
     [SerializeField] private TextMeshProUGUI _damageText;
 
@@ -39,17 +40,24 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private Image PinBallSpellImg;
     [SerializeField] private Image PinBallSpellImgBG;
 
+    [Header("Item")]
+    [SerializeField] private GameObject InventoryObj;
+    [SerializeField] private GameObject ImgPrefab;
+
+    [Header("EnemyHealthBar")]
+    [SerializeField] private GameObject EnemyHealthBarPrefab;
+
     private void Start()
     {
         TurnTextOriginalPos = MoveTurnText.transform.position;
 
         ItemInventoryOriginalPos = ItemInventory.transform.position;
         ItemInventoryScale = ItemInventory.transform.localScale;
-        ItemInventory.transform.position = ItemInventoryMovePos.position;
-        ItemInventory.transform.localScale = Vector3.zero;
+        ItemInventoryAdd();
 
         _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
     }
+    #region TurnText
     public void TurnTextMove(int turn)
     {
         MoveTurnText.text = $"Turn {turn}";
@@ -62,8 +70,10 @@ public class BattleUIManager : MonoBehaviour
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextMovePos.transform.position, 1f).SetEase(Ease.OutQuint));
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.OutQuint));
     }
+    #endregion
 
-    public void HealthUIChange(int maxHealth, int curHealth) //체력 변경
+    #region PlayerHealthUI
+    public void PlayerHealthUIChange(int maxHealth, int curHealth) //체력 변경
     {
         HealthText.text = $"{curHealth}/{maxHealth}";
         if (maxHealth == 0)
@@ -75,12 +85,24 @@ public class BattleUIManager : MonoBehaviour
             HealthBar.DOFillAmount((float)curHealth / maxHealth, 0.3f);
         }
     }
+    #endregion
 
+    #region ItemInvetory
     public void ItemInventoryAdd()
     {
         //추가
 
-        ItemInventoryShowHide(); //추가 후 닫기
+        foreach (var item in PlayerManager.Instance.testItems)
+        {
+            GameObject obj = Instantiate(ImgPrefab);
+            Image img = obj.GetComponent<Image>();
+            img.sprite = item.itemIcon;
+            img.transform.parent = InventoryObj.transform;
+            
+        }
+
+        ItemInventory.transform.position = ItemInventoryMovePos.position;
+        ItemInventory.transform.localScale = Vector3.zero; //추가 후 닫기
     }
 
     public void ItemInventoryShowHide()
@@ -104,7 +126,9 @@ public class BattleUIManager : MonoBehaviour
             _ItemInventoryShow = false;
         }
     } //인벤토리 열려있으면 닫고 닫혀있으면 열고
+    #endregion
 
+    #region TargetImg
     public void TargetingImgShow(Transform target)
     {
         _targetingImgSeq?.Kill();
@@ -122,8 +146,10 @@ public class BattleUIManager : MonoBehaviour
         _targetingImgSeq = DOTween.Sequence();
 
         _targetingImgSeq.Append(TargetingImg.DOFade(0, 0.3f));
-    }  
+    }
+    #endregion
 
+    #region SpellImg
     public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //스펠 이미지 처음 세팅
     {
         PlayerSpellImg.sprite = playerIcon;
@@ -132,18 +158,43 @@ public class BattleUIManager : MonoBehaviour
         PinBallSpellImg.sprite = pinBallIcon;
         PinBallSpellImgBG.sprite = pinBallIcon;
     }
+    #endregion
 
+    #region DamageText
     public void DamageTextChange(int damage) //데미치 표시 변경
     {
         float n = (float)damage / 100;
 
         _damageText.text = $"<shake a={n}>{damage}";
     }
+    #endregion
 
-    public void EnemyHealthBarMove(GameObject healthBar , Transform pos)
+    #region EnemyHealthBar
+    public void EnemyHealthBarSet(GameObject enemyObj, Enemy enemy)
     {
-        healthBar.transform.position = Camera.main.ScreenToWorldPoint(pos.position);
+        GameObject enemyHPbar = Instantiate(EnemyHealthBarPrefab);
+        Vector3 vec3 = new Vector3(enemyObj.transform.position.x, enemyObj.transform.position.y, enemyObj.transform.position.z);
+        enemyHPbar.transform.position = Camera.main.WorldToScreenPoint(vec3);
+        enemyHPbar.transform.parent = GameObject.Find("Canvas").transform;
+
+        enemy.HealthBar = enemyHPbar;
     }
+
+    public void EnemyHealthBarHide()
+    {
+
+    }
+
+    public void EnemyHealthBarShow()
+    {
+
+    }
+
+    public void EnemyHealthBarMove()
+    {
+
+    }
+    #endregion
 }
 
 

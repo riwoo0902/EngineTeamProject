@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class EventStageManager : MonoBehaviour
 {
+    [Header("Event")]
     [SerializeField] private List<Button> Buttons;
     [SerializeField] private GameObject EndButton;
 
     [SerializeField] private Image StoryImage;
     [SerializeField] private TextMeshProUGUI TitleText;
     [SerializeField] private TextMeshProUGUI StoryText;
-
-
+    
     public void Init(C_EventSO eventData)
     {
         EndButton.SetActive(false);
@@ -34,6 +34,8 @@ public class EventStageManager : MonoBehaviour
         TitleText.text = eventData.TitleText;
         StoryText.text = eventData.StoryText;
         StoryImage.sprite = eventData.EventSprite;
+
+        
     }
 
     private void ButtonAddReaction(C_EventSO eventData, int i)

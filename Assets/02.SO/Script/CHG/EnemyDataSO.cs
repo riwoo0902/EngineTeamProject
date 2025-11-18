@@ -14,7 +14,7 @@ public class EnemyDataSO : ScriptableObject
     [field: SerializeField] public Sprite EnemySprite { get; private set; }
     [field: SerializeField] public string EnemyName { get; private set; }
     [field: SerializeField] public int EnemyMaxHP { get; private set; }
-    [field: SerializeField] public int EnemyAttack { get; private set; }
+    [field: SerializeField] public int EnemyPower { get; private set; }
     [field: SerializeField] public EnemyType EnemyType { get; private set; } = EnemyType.Normal;
     
 }

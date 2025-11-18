@@ -34,7 +34,8 @@ public class Player : Agent
 
         HealthCompo.OnDead += PlayerDead;
 
-        _contect.UIManager.HealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+
     }
     
     public void ChangeTarget(Enemy enemy)
@@ -84,6 +85,6 @@ public class Player : Agent
     public void TakeDamage(int damage)
     {
         HealthCompo.TakeDamage(damage);
-        _contect.UIManager.HealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
     }
 }
