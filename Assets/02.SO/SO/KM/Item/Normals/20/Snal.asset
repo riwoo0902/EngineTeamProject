@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
+  m_Name: Snal
+  m_EditorClassIdentifier: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 200
+  itemName: "\uB2EC\uD33D\uC774"
+  itemIcon: {fileID: 21300000, guid: b674b8453594e413d87754cb518de70f, type: 3}
+  itemDescription: "\uB2E8\uB2E8\uD558\uB2E4 \uC0DD\uAC01\uBCF4\uB2E8"
+  itemPrice: 0

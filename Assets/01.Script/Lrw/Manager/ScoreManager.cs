@@ -10,7 +10,7 @@ namespace _01.Script.Lrw.Manager
     [DefaultExecutionOrder(-10)]
     public class ScoreManager : MonoBehaviour
     {
-        public static ScoreManager Instance { get; private set; }
+        private static ScoreManager _instance;
         [SerializeField,ReadOnly] private float score;
         public float Score
         {
@@ -27,14 +27,15 @@ namespace _01.Script.Lrw.Manager
         
         private void AddScore(ScoreAddEvent scoreAddEvent)
         {
-            score += scoreAddEvent.AddScore;
+            Score += scoreAddEvent.AddScore;
+            EventBus<ScoreEvent>.Raise(new ScoreEvent(Score));
         }
 
         private void Singleton()
         {
-            if (Instance == null)
+            if (_instance == null)
             {
-                Instance = this;
+                _instance = this;
             }
             else
             {
@@ -46,6 +47,7 @@ namespace _01.Script.Lrw.Manager
         {
             string i = FileManager.ReadFile(FileManager.GetFilePath("Score"));
             Score = (int.TryParse(i,out int j) ? j : 0);
+            EventBus<ScoreEvent>.Raise(new ScoreEvent(Score));
         }
         
 
