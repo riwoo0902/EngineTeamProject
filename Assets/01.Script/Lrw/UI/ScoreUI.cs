@@ -1,3 +1,6 @@
+using System;
+using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
+using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.Manager;
 using TMPro;
 using UnityEngine;
@@ -11,11 +14,17 @@ namespace _01.Script.Lrw.UI
         private void Awake()
         {
             _text = GetComponent<TextMeshProUGUI>();
+            EventBus<ScoreEvent>.OnEvent += SetText;
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            _text.text = $"Score : {ScoreManager.Instance.Score}";
+            EventBus<ScoreEvent>.OnEvent -= SetText;
+        }
+
+        private void SetText(ScoreEvent text)
+        {
+            _text.text = $"Score : {text.Score}";
         }
     }
 }
