@@ -7446,6 +7446,7 @@ MonoBehaviour:
   PinBallSpellImgBG: {fileID: 1526040113}
   InventoryObj: {fileID: 1140267705}
   ImgPrefab: {fileID: 8998512578872490002, guid: 52475147a122214488d02e699e3f2c7f, type: 3}
+  EnemyHealthBarPrefab: {fileID: 6768401472915403135, guid: 9415c8de2912d9046afa4b12488ca3c9, type: 3}
 --- !u!1 &2124352725
 GameObject:
   m_ObjectHideFlags: 0

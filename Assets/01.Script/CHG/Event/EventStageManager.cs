@@ -12,12 +12,7 @@ public class EventStageManager : MonoBehaviour
     [SerializeField] private Image StoryImage;
     [SerializeField] private TextMeshProUGUI TitleText;
     [SerializeField] private TextMeshProUGUI StoryText;
-
-    [Header("PlayerInfo")]
-    [SerializeField] private TextMeshProUGUI PlayerHealthText;
-    [SerializeField] private TextMeshProUGUI PlayerCoinText;
-    [SerializeField] private TextMeshProUGUI PlayerPower;
-    [SerializeField] private TextMeshProUGUI LevelText;
+    
     public void Init(C_EventSO eventData)
     {
         EndButton.SetActive(false);
@@ -36,11 +31,11 @@ public class EventStageManager : MonoBehaviour
             }
         }
 
-        TitleText.text = "<fading>" + eventData.TitleText;
+        TitleText.text = eventData.TitleText;
         StoryText.text = eventData.StoryText;
         StoryImage.sprite = eventData.EventSprite;
 
-        PlayerInfoSet();
+        
     }
 
     private void ButtonAddReaction(C_EventSO eventData, int i)
@@ -61,14 +56,4 @@ public class EventStageManager : MonoBehaviour
             EndButton.SetActive(true);
         }
     }
-
-    private void PlayerInfoSet()
-    {
-        PlayerManager pManager = PlayerManager.Instance;
-        PlayerHealthText.text = pManager.MaxHealth + "/" + pManager.CurrentHealth;
-        PlayerCoinText.text = pManager.Gold.ToString();
-        PlayerPower.text = pManager.Power.ToString();
-        LevelText.text = StageManager.Instance.Level.ToString();
-    }
-
 }

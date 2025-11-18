@@ -16,6 +16,7 @@ public class BattleEnemyManager : MonoBehaviour
     private Stack<Image> _nextEnemyUI = new Stack<Image>(); //다음 나올 Enemy UIStack
     private BattleStageDataSO _stageData; //스테이지 정보
     private int _startEnemyCount; //처음에 등장하는 Enemy 수
+    private BattleStageContect _contect;
 
     public Dictionary<int, EnemySlot> EnemySlots = new(); //Enemy위치들과 위치에 Enemy존재 여부
 
@@ -26,6 +27,8 @@ public class BattleEnemyManager : MonoBehaviour
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
     public void Init(BattleStageDataSO stageData, BattleStageContect contect)
     {
+        _contect = contect;
+
         Player = contect.Player;
 
         //처음 시작 할 때 Enemy 세팅
@@ -53,16 +56,16 @@ public class BattleEnemyManager : MonoBehaviour
                 _nextEnemy.Push(_stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)]);
 
             //Enemy위치 가져오기
-            Transform[] poss = EnemyPosGroup.GetComponentsInChildren<Transform>()
+            Transform[] enemyPos = EnemyPosGroup.GetComponentsInChildren<Transform>()
                 .Where(t => t != EnemyPosGroup.transform) //PosGroup 자신은 제외 
                 .ToArray();
 
-            //EnemySlots 위치, 현재 사용중 설정
-            for (int i = 0; i < poss.Length; i++)
+            //EnemySlots 기본 설정
+            for (int i = 0; i < enemyPos.Length; i++)
             {
                 EnemySlots[i] = new EnemySlot
                 {
-                    Pos = poss[i],
+                    Pos = enemyPos[i],
                     CurUse = null
                 };
             }
@@ -72,15 +75,16 @@ public class BattleEnemyManager : MonoBehaviour
             for (int i = _startEnemyCount; i > 0; i--)
             {
                 if (_nextEnemy.Count <= 0) continue;
-                var slot = EnemySlots[i-1];
+                var slot = EnemySlots[i - 1];
 
                 GameObject enemyObj = Instantiate(EnemyPrefab, slot.Pos.position, Quaternion.identity);
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
+                _contect.UIManager.EnemyHealthBarSet(enemyObj, enemy);
 
                 enemy.Init(_nextEnemy.Pop()); //EnemyData 넣어주기
-                        
+
                 slot.CurUse = enemy;
-                EnemySlots[i-1].CurUse = slot.CurUse;
+                EnemySlots[i - 1].CurUse = slot.CurUse;
 
                 enemy.OnEnemyDead += EnemyRePlace;
             }
@@ -96,7 +100,9 @@ public class BattleEnemyManager : MonoBehaviour
     }
 
 
-        // EnemyUI 생성 및 Sprite변경, nextEnemyUiStack에 푸쉬
+
+
+    // EnemyUI 생성 및 Sprite변경, nextEnemyUiStack에 푸쉬
     private void NextEnemyUISetting()
     {
         Transform NextEnemyGroup = GameObject.Find("NextEnemyGroup").transform;
