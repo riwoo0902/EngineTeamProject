@@ -32,6 +32,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         public void SetSprite(Sprite a)
         {
+            if(_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = a;
         }
 

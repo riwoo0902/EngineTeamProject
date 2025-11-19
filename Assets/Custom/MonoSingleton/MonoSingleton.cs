@@ -1,8 +1,7 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace _01.Script.Lrw
+namespace Custom.MonoSingleton
 {
     public abstract class MonoSingleton<T> : MonoBehaviour where T : class
     {
