@@ -7,17 +7,13 @@ namespace _01.Script.Lrw.UI.PinBalls
     public abstract class PinballSlotBase : MonoBehaviour, IPinBallSlot
     {
         [field:SerializeField] public PinBallSO Pinball { get; set; }
-        private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] protected PinBallUISetting pinBallUISetting;
-        private void Awake()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
         
         public void SetPinBall(PinBallSO pinball)
         {
             Pinball =  pinball;
-            _spriteRenderer.sprite = Pinball.PinBallImage;
+            spriteRenderer.sprite = Pinball.PinBallImage;
             SettingPinBallUISetting();
         }
 

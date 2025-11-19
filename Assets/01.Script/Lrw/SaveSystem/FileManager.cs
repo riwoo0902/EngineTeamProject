@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace _01.Script.Lrw.File
+namespace _01.Script.Lrw.SaveSystem
 {
     public static class FileManager
     {
@@ -10,6 +10,10 @@ namespace _01.Script.Lrw.File
 
         private static string _saveFolderPath;
 
+        public static void PathClear()
+        {
+            _saveFolderPath = "";
+        }
         private static void CreatFolder()
         {
             _saveFolderPath = Path.Combine(Application.dataPath, "..", FolderName);
@@ -20,27 +24,8 @@ namespace _01.Script.Lrw.File
                 Directory.CreateDirectory(_saveFolderPath);
             }
         }
-
-        public static void SetFile(string gameData)
-        {
-            if (_saveFolderPath == null ||!Directory.Exists(_saveFolderPath))
-            {
-                CreatFolder();
-            }
-
-            int counter = 1;
-            string createFilePath;
-            do
-            {
-                createFilePath = Path.Combine(_saveFolderPath, $"{BaseFileName}{counter}.txt");
-                counter++;
-            }
-            while (System.IO.File.Exists(createFilePath));
-            
-            System.IO.File.WriteAllText(createFilePath, gameData);
-        }
-
-        public static void SetFile(string gameData,string fileName)
+        
+        public static void SetFile(string fileName,string gameData)
         {
             if (!Directory.Exists(_saveFolderPath))
             {
@@ -49,21 +34,20 @@ namespace _01.Script.Lrw.File
 
             string createFilePath = Path.Combine(_saveFolderPath, $"{fileName}.txt");
             
-            System.IO.File.WriteAllText(createFilePath, gameData);
+            File.WriteAllText(createFilePath, gameData);
         }
         
         public static string[] CanReadFilePaths() => Directory.GetFiles(_saveFolderPath);
 
         public static string ReadFile(string path)
         {
-            if (!System.IO.File.Exists(path))
+            if (!File.Exists(path))
             {
                 Debug.Log("path Error");
                 return string.Empty;
             }
-
-  
-            return System.IO.File.ReadAllText(path);
+            
+            return File.ReadAllText(path);
         }
 
         public static string GetFilePath(string fileName)

@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -609,8 +610,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonSetting:
     <DontDestroyLoadObject>k__BackingField: 0
-  currentPinballSlots: []
+  currentPinBallSOs: []
   nowPinBall: {fileID: 0}
+  pinballSlots: []
+  ballSo: {fileID: 0}
 --- !u!1 &379498390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -1757,48 +1761,14 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2558367817482416734, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1716704134}
+    - targetCorrespondingSourceObject: {fileID: 2558367817482416734, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1821856637}
     - targetCorrespondingSourceObject: {fileID: 5387348195467406018, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 761173979}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2967464455624888017, guid: b926371fcd9165143a55351bd142f65e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 990826209}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b926371fcd9165143a55351bd142f65e, type: 3}
---- !u!1 &990826208 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2967464455624888017, guid: b926371fcd9165143a55351bd142f65e, type: 3}
-  m_PrefabInstance: {fileID: 990826207}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &990826209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990826208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Graph: {fileID: 8504615274032220197, guid: 1b742b74616bfae4c93ae8561ca18b06, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 5121450816010715366
-  m_OriginalGraph: {fileID: 8504615274032220197, guid: 1b742b74616bfae4c93ae8561ca18b06, type: 2}
-  m_IsInitialised: 0
-  m_IsStarted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 5121450816010715366
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 990826208}
 --- !u!1 &1044466290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,6 +2009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2134,6 +2105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2229,6 +2201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2853,52 +2826,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337636640}
   m_CullTransparentMesh: 1
---- !u!1 &1388031819
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1388031821}
-  - component: {fileID: 1388031820}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1388031820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388031819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e5493314544143ae8097051f8b890d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  singletonSetting:
-    <DontDestroyLoadObject>k__BackingField: 0
---- !u!4 &1388031821
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388031819}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 474.69116, y: 353.3039, z: 1.0001361}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1463526054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,8 +2927,8 @@ GameObject:
   - component: {fileID: 1533174540}
   - component: {fileID: 1533174544}
   - component: {fileID: 1533174543}
-  - component: {fileID: 1533174542}
   - component: {fileID: 1533174541}
+  - component: {fileID: 1533174545}
   m_Layer: 0
   m_Name: PinBalls
   m_TagString: Untagged
@@ -3059,19 +2986,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1533174542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533174539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
 --- !u!114 &1533174543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,9 +3000,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3110,6 +3024,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533174539}
   m_CullTransparentMesh: 1
+--- !u!114 &1533174545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533174539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
 --- !u!1 &1577811232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,12 +3691,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
     pinBallBounce: 
     pinBallFriction: 
     pinBallMass: 
+--- !u!1 &1821856636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1821856637}
+  - component: {fileID: 1821856638}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1821856637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821856636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 949339840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1821856638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821856636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e536ce8b99a468d9ce634f2cd963ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singletonSetting:
+    <DontDestroyLoadObject>k__BackingField: 0
+  inventory: []
 --- !u!1 &1835974375
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,52 +4467,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033887161}
   m_CullTransparentMesh: 1
---- !u!1 &2112817401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2112817403}
-  - component: {fileID: 2112817402}
-  m_Layer: 0
-  m_Name: GameObject (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2112817402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112817401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e5493314544143ae8097051f8b890d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  singletonSetting:
-    <DontDestroyLoadObject>k__BackingField: 0
---- !u!4 &2112817403
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112817401}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 474.69116, y: 353.3039, z: 1.0001361}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4546,5 +4475,3 @@ SceneRoots:
   - {fileID: 990826207}
   - {fileID: 1695040871}
   - {fileID: 1594309866}
-  - {fileID: 1388031821}
-  - {fileID: 2112817403}

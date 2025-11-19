@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lrw_CustomReadonly;
+using Lrw_PinBall;
 using UnityEngine;
 
 
@@ -8,15 +9,20 @@ namespace _01.Script.Lrw.UI.PinBalls
 {
     public class PinBallUIManager : MonoSingleton<PinBallUIManager>
     {
-        [SerializeField] private List<PinballSlotBase> currentPinballSlots = new();
-        [SerializeField, ReadOnly] private PinballSlotBase nowPinBall;
-        private List<PinballSlotBase> _pinballSlots = new();
+        [SerializeField] private List<PinBallSO> currentPinBallSOs = new();
+        [SerializeField] private PinballSlotBase nowPinBall;
+        [SerializeField] private List<PinballSlotBase> pinballSlots = new();
+        
+        
+        [Header("Test")]
+        [SerializeField] private PinBallSO ballSo;
+        
         
         protected override void Awake()
         {
             base.Awake();
-            _pinballSlots = GetComponentsInChildren<PinballSlotBase>().ToList();
-            currentPinballSlots =  _pinballSlots;
+            pinballSlots = GetComponentsInChildren<PinballSlotBase>().ToList();
+            
             
         }
 
@@ -28,15 +34,11 @@ namespace _01.Script.Lrw.UI.PinBalls
         [ContextMenu("Use PinBall")]
         public void UsePinBall()
         {
-            if (currentPinballSlots.Count == 0)
-            {
-                Debug.Log("No pinball slots");
-                return;
-            }
-            nowPinBall.gameObject.SetActive(false);
-            nowPinBall = currentPinballSlots[0];
-            currentPinballSlots.RemoveAt(0);
+            
+            
         }
+        
+        
         
     }
 }
