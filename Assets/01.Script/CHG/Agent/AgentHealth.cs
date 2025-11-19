@@ -4,6 +4,7 @@ using UnityEngine;
 public class AgentHealth : MonoBehaviour
 {
     public Action OnDead;
+    public Action OnDamage;
 
     private int _maxHp;
     private int _curHp;
@@ -57,6 +58,8 @@ public class AgentHealth : MonoBehaviour
         {
             OnDead?.Invoke();
         }
+        else
+            OnDamage?.Invoke();
     }
 
     public void Heal(int heal)

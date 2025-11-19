@@ -15,5 +15,5 @@ MonoBehaviour:
   <EnemySprite>k__BackingField: {fileID: 21300000, guid: bdfdac02ba82f44299f04213bcca4bb5, type: 3}
   <EnemyName>k__BackingField: Flower
   <EnemyMaxHP>k__BackingField: 25
-  <EnemyAttack>k__BackingField: 4
+  <EnemyPower>k__BackingField: 3
   <EnemyType>k__BackingField: 3

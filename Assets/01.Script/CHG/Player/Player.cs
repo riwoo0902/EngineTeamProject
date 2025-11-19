@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : Agent
@@ -32,12 +33,20 @@ public class Player : Agent
         _playerTurnManager = contect.PlayerTurnManager;
         _playerTurnManager.Init(this, _enemyTargeting, contect.TurnManager);
 
-        HealthCompo.OnDead += PlayerDead;
+        HealthCompo.OnDamage += OnDamaged;
+        HealthCompo.OnDead += OnDead;
 
         _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
 
     }
-    
+
+    private void OnDamaged()
+    {
+        Debug.Log("damage");
+        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+        Instantiate(AttackEffack, transform.position, Quaternion.identity);
+    }
+
     public void ChangeTarget(Enemy enemy)
     {
         PlayerTarget = enemy;
@@ -64,7 +73,7 @@ public class Player : Agent
        
     }
 
-    private void PlayerDead()
+    private void OnDead()
     {
         Debug.Log("PlayerDead");
     }
@@ -75,16 +84,19 @@ public class Player : Agent
         ActionSystem.Instance.Perform(playerTurnGA);
     }
 
-    public void AttackEffactPlay()
+    public void EnemyAttackEffactPlay()
     {
         Debug.Log("Attack");
-        Instantiate(AttackEffack, new Vector2(PlayerTarget.transform.position.x, PlayerTarget.transform.position.y-1), Quaternion.identity);
+        Instantiate(AttackEffack, new Vector2(PlayerTarget.transform.position.x, PlayerTarget.transform.position.y), Quaternion.identity);
     }
 
 
     public void TakeDamage(int damage)
     {
         HealthCompo.TakeDamage(damage);
-        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
+    }
+    public void PlayerTurnStart()
+    {
+        _contect.TurnManager.PlayerTurnSet();
     }
 }
