@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace _01.Script.Lrw.UI.PinBalls
 {
-    public abstract class PinballSlotBase : MonoBehaviour, IPinBallSlot ,IPointerClickHandler
+    public abstract class PinballSlotBase : MonoBehaviour, IPinBallSlot ,IPointerEnterHandler,IPointerExitHandler
     {
         [field:SerializeField] public PinBallSO Pinball { get; set; }
         [SerializeField] private Image spriteRenderer;
@@ -36,12 +36,16 @@ namespace _01.Script.Lrw.UI.PinBalls
             spriteRenderer.color = new Color(255,255,255,0);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
             PinBall_Explanation.Instance.PointerOnEnter(pinBallUISetting, transform);
         }
-        
-        
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            PinBall_Explanation.Instance.PointerOnExit();
+            
+        }
     }
     
     [Serializable]

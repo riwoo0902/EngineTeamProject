@@ -1,8 +1,10 @@
+using System;
 using System.Globalization;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.SaveSystem;
 using Lrw_CustomReadonly;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _01.Script.Lrw.Manager
@@ -55,8 +57,8 @@ namespace _01.Script.Lrw.Manager
         {
             EventBus<ScoreAddEvent>.OnEvent -= AddScore;
             FileManager.SetFile("Score",Score.ToString());
+            
         }
-        
 
     }
 }

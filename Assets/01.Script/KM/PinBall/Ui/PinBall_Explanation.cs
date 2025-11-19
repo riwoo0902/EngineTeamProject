@@ -42,7 +42,7 @@ public class PinBall_Explanation : MonoBehaviour
         _rectCompo.position += (Vector3)offset;
 
     }
-
+    
     public void PointerOnExit()
     {
         _canvasGroup.alpha = 0;
