@@ -4,19 +4,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace _01.Script.Lrw.UI.PinBalls
+namespace _01.Script.Lrw.UI.PinBalls.PinBallInventory
 {
-    public abstract class PinballSlotBase : MonoBehaviour, IPinBallSlot ,IPointerEnterHandler,IPointerExitHandler
+    public class PinballInventorySlot : MonoBehaviour, IPinBallSlot ,IPointerEnterHandler,IPointerExitHandler
     {
         [field:SerializeField] public PinBallSO Pinball { get; set; }
+        [SerializeField] private Image selfImage;
         [SerializeField] private Image spriteRenderer;
-        [SerializeField] protected PinBallUISetting pinBallUISetting;
+        [SerializeField] protected PinBalls.PinBallUISetting pinBallUISetting;
         
         public void SetPinBall(PinBallSO pinball)
         {
             Pinball =  pinball;
             spriteRenderer.sprite = Pinball.PinBallImage;
-            spriteRenderer.color = new Color(255,255,255,255);
+            gameObject.SetActive(true);
             SettingPinBallUISetting();
         }
 
@@ -33,7 +34,7 @@ namespace _01.Script.Lrw.UI.PinBalls
         {
             Pinball =  null;
             spriteRenderer.sprite = null;
-            spriteRenderer.color = new Color(255,255,255,0);
+            gameObject.SetActive(false);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

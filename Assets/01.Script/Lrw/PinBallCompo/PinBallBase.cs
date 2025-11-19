@@ -77,8 +77,10 @@ namespace _01.Script.Lrw.PinBallCompo
 
         public void SetPinBallSo(PinBallSO a)
         {
+            Rigid = GetComponent<Rigidbody2D>();
             PinBallSo = a;
             Rigid.gravityScale = a.Mass;
+            _pinBallRenderer = GetComponentInChildren<PinBallRenderer>();
             _pinBallRenderer.SetSprite(a.PinBallImage);
             Rigid.sharedMaterial.friction = a.Friction;
             Rigid.sharedMaterial.bounciness = a.Bounciness;
