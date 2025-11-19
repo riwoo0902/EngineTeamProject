@@ -40,7 +40,6 @@ public class EnemyTargeting : MonoBehaviour
 
     private void TargetSet(Enemy enemy)
     {
-        Debug.Log(enemy.EnemyData.EnemyName);
         _contect.UIManager.TargetingImgShow(enemy.transform);
 
         _player.ChangeTarget(enemy);

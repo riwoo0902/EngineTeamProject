@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b729ffe09b2d64397d167e4404df21, type: 3}
   m_Name: TStage3
   m_EditorClassIdentifier: 
-  <EmergeCount>k__BackingField: 5
+  <EmergeCount>k__BackingField: 1
   <EmergeEnemy>k__BackingField:
   - {fileID: 11400000, guid: e6c78634b99b9f74093459f30d0d83b6, type: 2}
   - {fileID: 11400000, guid: 8c3814594d7bfd04f8ce7180b22c2f92, type: 2}

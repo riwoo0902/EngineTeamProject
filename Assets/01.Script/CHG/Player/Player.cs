@@ -46,7 +46,6 @@ public class Player : Agent
 
     private void OnDamaged()
     {
-        Debug.Log("damage");
         _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
         Instantiate(AttackEffack, transform.position, Quaternion.identity);
     }
@@ -118,7 +117,7 @@ public class Player : Agent
     [ContextMenu("AddPower")]
     public void AddPower()
     {
-        AttackDamageCalculation(EnemyType.Normal, 30);
+        AttackDamageCalculation(EnemyType.Normal, 400);
     }
     #endregion
 }

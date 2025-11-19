@@ -36,7 +36,6 @@ public class EnemyTurnManager : MonoBehaviour
         for (int cur = _enemyManger.EnemySlots.Count - 1; cur >= 0; cur--)
         {
 
-            Debug.Log("SlotCheck 실행");
 
             EnemySlot slot = _enemyManger.EnemySlots[cur];
             if (slot.CurUse == null) continue; //자리에 Enemy가 없다면 다시
@@ -68,7 +67,6 @@ public class EnemyTurnManager : MonoBehaviour
     //                        현재 칸의 Enemy, 현재 칸 번호, 다음 칸 번호
     private IEnumerator EnemyMove(Enemy enemy, int cur, int next)
     {
-        Debug.Log("Move실행");
 
         bool endMove = false;
         EnemySlot curSlot = _enemyManger.EnemySlots[cur];
@@ -98,7 +96,7 @@ public class EnemyTurnManager : MonoBehaviour
         //_turnManager.PlayerTurnSet();
     }
 
-    private void OnDestroy()
+    private void OnDeatachPerFormer()
     {
         ActionSystem.DetachPerFormer<EnemyMoveGA>();
         ActionSystem.DetachPerFormer<EnemyAttackGA>();

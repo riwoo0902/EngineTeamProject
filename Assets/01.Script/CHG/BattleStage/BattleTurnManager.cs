@@ -1,14 +1,24 @@
 using System.Collections;
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BattleTurnManager : MonoBehaviour
 {
     private BattleStageContect _contect;
 
-    public bool CurTurn { get; private set; } = true; //true일시 플레이어 턴
+    private bool _curTurn = true;
+    public bool CurTurn
+    {
+        get
+        {
+            return _curTurn;
+        }
+        private set
+        {
+            _curTurn = value;
+            
+        }
+    } //true일시 플레이어 턴
+
     public int TurnCount { get; private set; } = 1;
 
     public void Init(BattleStageContect contect)
@@ -22,7 +32,7 @@ public class BattleTurnManager : MonoBehaviour
     public void PlayerTurnSet()
     {
         StartCoroutine(ChangePlayerTurn());
-        
+
     }
 
     private IEnumerator ChangePlayerTurn()
@@ -33,7 +43,6 @@ public class BattleTurnManager : MonoBehaviour
         _contect.UIManager.TurnTextSet(TurnCount, () => textMoveEnd = true);
 
         yield return new WaitUntil(() => textMoveEnd);
-        Debug.Log("Change Turn");
         CurTurn = true;
         TurnCount += 1;
 

@@ -16,7 +16,6 @@ public class PlayerTurnManager : MonoBehaviour
         _turnManager = turnManager;
         AttachPerformer();
         SubscribeReaction();
-        Debug.Log("Player 구독");
     }
 
     private void AttachPerformer()
@@ -40,7 +39,6 @@ public class PlayerTurnManager : MonoBehaviour
         //데미지 계산
         //int damage = 
 
-        Debug.Log(_player.AttackDamage);
         _player.PlayerTarget.HealthCompo.TakeDamage(_player.AttackDamage);
         _player.AttackDamageCalculation(EnemyType.None, 0);
 

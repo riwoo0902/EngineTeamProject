@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class EventReaction : MonoSingleton<EventReaction>
 {
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     public void RetouchMaxHealth(int n)
     {
         if (n > 0)

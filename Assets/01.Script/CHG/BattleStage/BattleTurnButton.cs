@@ -17,7 +17,7 @@ public class BattleTurnButton : MonoBehaviour
         //Debug.Log($"CurTurn: {(_turnManager.CurTurn ? "Player" : "Enemy")}");
         //PlayerTurnGA playerTurnGA = new();
         //ActionSystem.Instance.Perform(playerTurnGA);
-        GameObject.Find("Player").GetComponent<AgentAnimator>().AttackPlay();
+        _contect.Player.AgentAnimatorCompo.AttackPlay();
     }
 
     public void EnemyTurnButton()

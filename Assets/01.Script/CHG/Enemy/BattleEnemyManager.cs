@@ -16,6 +16,7 @@ public class BattleEnemyManager : MonoBehaviour
     private Stack<Image> _nextEnemyUI = new Stack<Image>(); //다음 나올 Enemy UIStack
     private BattleStageDataSO _stageData; //스테이지 정보
     private int _startEnemyCount; //처음에 등장하는 Enemy 수
+    private int _lootCoin = 0;
     private BattleStageContect _contect;
 
     public Dictionary<int, EnemySlot> EnemySlots = new(); //Enemy위치들과 위치에 Enemy존재 여부
@@ -23,7 +24,9 @@ public class BattleEnemyManager : MonoBehaviour
 
     public Player Player { get; private set; }
     private EnemyTurnManager _turnManager;
+    private int _enemyKillCount = 0;
 
+    
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
     public void Init(BattleStageDataSO stageData, BattleStageContect contect)
     {
@@ -42,6 +45,7 @@ public class BattleEnemyManager : MonoBehaviour
         //EnemyUI 생성
         NextEnemyUISetting();
 
+        _enemyKillCount = stageData.EmergeCount-1;
 
     }
 
@@ -51,9 +55,15 @@ public class BattleEnemyManager : MonoBehaviour
         this._stageData = stageData;
         try
         {
+            
             //출현 에너미중 랜덤으로 골라 스테이지 등장 Enemy에 푸쉬
             for (int i = 0; i < _stageData.EmergeCount; i++)
                 _nextEnemy.Push(_stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)]);
+
+            foreach (var item in _nextEnemy)
+            {
+                _lootCoin += item.LootCoin;
+            }
 
             //Enemy위치 가져오기
             Transform[] enemyPos = EnemyPosGroup.GetComponentsInChildren<Transform>()
@@ -118,6 +128,12 @@ public class BattleEnemyManager : MonoBehaviour
     //Enemy사망 시 죽은 Enemy스크립트에 새 EnemyData적용, 새 Enemy위치이동 및 슬롯 바꾸기
     private void EnemyRePlace(Enemy enemy)
     {
+        if (_enemyKillCount <= 0)
+        {
+            StageClear();
+        }
+        _enemyKillCount--;
+
         var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy); //enemy가 현재 있는 칸 key가져오기
         EnemySlots[pairEnemy.Key].CurUse = null;
         //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제
@@ -136,6 +152,8 @@ public class BattleEnemyManager : MonoBehaviour
             }
         }
 
+        
+
         enemy.Init(_nextEnemy.Pop(), _contect);
 
 
@@ -147,5 +165,13 @@ public class BattleEnemyManager : MonoBehaviour
             color.a = 0f;
             img.color = color;
         }
+    }
+
+    private void StageClear()
+    {
+        EnemyDataSO data = _stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)];
+        _contect.UIManager.ClearStage(_lootCoin, data.LootItem, data.LootPinBall);
+
+
     }
 }

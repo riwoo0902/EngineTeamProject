@@ -2635,8 +2635,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 74513733a77927340bb737aae0a33e04, type: 2}
+  m_sharedMaterial: {fileID: -724813189027547401, guid: 74513733a77927340bb737aae0a33e04, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3086,7 +3086,7 @@ RectTransform:
   m_GameObject: {fileID: 1673016952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7029981, y: 0.7029981, z: 0.7029981}
+  m_LocalScale: {x: 0.6201498, y: 0.6201498, z: 0.6201498}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1061552791}
@@ -3214,6 +3214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754de2aa22657a141ba45286bb26dc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 0
+  <testItems>k__BackingField: []
 --- !u!224 &1928705190 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7432521193432585617, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}

@@ -161,8 +161,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     [ContextMenu("AddHealth")]
     private void AddHealthTest()
     {
-        AddMaxHealth(5);
-        AddCurrentHealth(5);
+        AddMaxHealth(100);
+        AddCurrentHealth(100);
     }
     #endregion
 }

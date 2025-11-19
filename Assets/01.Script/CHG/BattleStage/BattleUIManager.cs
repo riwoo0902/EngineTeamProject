@@ -1,6 +1,7 @@
 using System;
-using System.Collections;
+using System.Linq;
 using DG.Tweening;
+using Lrw_PinBall;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,6 +56,10 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private Sprite GressImg;
     [SerializeField] private Sprite WaterImg;
 
+    [Header("ClearStage")]
+    [SerializeField] private GameObject ClearUI;
+
+
     [SerializeField] private Image GameOverImg;
     public void Init()
     {
@@ -66,14 +71,74 @@ public class BattleUIManager : MonoBehaviour
         ItemInventoryAdd();
 
         _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
-        _coinText.text = PlayerManager.Instance.Gold.ToString();
+        _coinText.text = "<sprite=0>" + PlayerManager.Instance.Gold;
         _powerText.text = PlayerManager.Instance.Power.ToString();
 
     }
 
+    public void ClearStage(int lootCoin, ItemSO item, PinBallSO pinBall)
+    {
+        Debug.Log($"{lootCoin}, {item.itemIcon.name}, {pinBall.PinBallImage.name}");
+        ClearUI.SetActive(true);
+        Button[] _lootBtns = ClearUI.GetComponentsInChildren<Button>();
+        Image[] btnIcons = new Image[3];
+        Image[] btnBG = new Image[3];
+        TextMeshProUGUI[] texts = new TextMeshProUGUI[3];
+
+        Debug.Log($"{_lootBtns.Length}");
+
+        btnBG = ClearUI.GetComponentsInChildren<Image>()
+            .Where(t => t != ClearUI.transform)
+            .ToArray();
+        foreach (var item1 in btnBG)
+        {
+            Debug.Log(item1.name);
+        }
+        for (int i = 0; i < _lootBtns.Length - 1; i++)
+        {
+            Debug.Log(_lootBtns[i].name);
+            btnIcons[i] = _lootBtns[i].GetComponentInChildren<Image>();
+            texts[i] = _lootBtns[i].GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        try
+        {
+            btnIcons[1].sprite = item.itemIcon;
+            btnIcons[2].sprite = pinBall.PinBallImage;
+
+            texts[0].text = lootCoin.ToString();
+            texts[1].text = item.itemName;
+            texts[2].text = pinBall.BallName;
+            Debug.Log("dd");
+
+            _lootBtns[0].onClick.AddListener(() =>
+            {
+                Debug.Log("Click1");
+                PlayerManager.Instance.AddGold(lootCoin);
+                foreach (Transform child in _lootBtns[0].transform)
+                    Destroy(child.gameObject);
+                Destroy(btnBG[1]);
+            });
+
+        }
+        catch (Exception e) { Debug.LogException(e); }
+        _lootBtns[1].onClick.AddListener(() =>
+        {
+            Debug.Log("Click2");
+            foreach (Transform child in _lootBtns[1].transform)
+                Destroy(child.gameObject);
+            Destroy(btnBG[2]);
+        });//아이템 추가 만들기
+        _lootBtns[2].onClick.AddListener(() =>
+        {
+            Debug.Log("Click3");
+            foreach (Transform child in _lootBtns[2].transform)
+                Destroy(child.gameObject);
+            Destroy(btnBG[3]);
+        }); //핀볼 추가 만들기
+    }
     public void GameOver()
     {
-        Debug.Log("AA");
         GameOverImg.gameObject.SetActive(true);
         GameOverImg.DOFade(1, 0.6f);
     }
@@ -205,7 +270,7 @@ public class BattleUIManager : MonoBehaviour
         return canvasGroup.DOFade(0, 0.3f);
     }
 
-    public Tween EnemyInfoBarShow(Image healthBarImg, TextMeshProUGUI helathText, TextMeshProUGUI powerText, 
+    public Tween EnemyInfoBarShow(Image healthBarImg, TextMeshProUGUI helathText, TextMeshProUGUI powerText,
         Image typeImg, CanvasGroup canvasGroup, EnemyDataSO enemyData)
     {
         healthBarImg.fillAmount = 1;
@@ -238,20 +303,12 @@ public class BattleUIManager : MonoBehaviour
 
     public void EnemyTakeDamage(Image healthBar, TextMeshProUGUI text, int maxHealth, int curHealth)
     {
-        Debug.Log(curHealth);
         text.text = $"{curHealth}/{maxHealth}";
         healthBar.DOFillAmount((float)curHealth / maxHealth, 0.3f);
 
     }
 
-    //으히히 너 털린거야
-    /// <summary>
-    /// 너 털린거야
-    /// </summary>
-    public void 너털린거야()
-    {
 
-    }
     #endregion
 }
 
