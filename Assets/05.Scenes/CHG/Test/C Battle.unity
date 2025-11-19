@@ -7403,7 +7403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1f39e82a2b1304fa44f647efcdf72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyUIPrefab: {fileID: 3585271618330287092, guid: 637dd81974812b648a7459f309d3f71e, type: 3}
+  EnemyUIPrefab: {fileID: 7449273537372298649, guid: 52475147a122214488d02e699e3f2c7f, type: 3}
   EnemyPrefab: {fileID: 8586339952976076069, guid: 91453eea3454107479fd8146ac697d18, type: 3}
   EnemyPosGroup: {fileID: 514672681}
 --- !u!114 &2123273659
@@ -7446,7 +7446,11 @@ MonoBehaviour:
   PinBallSpellImgBG: {fileID: 1526040113}
   InventoryObj: {fileID: 1140267705}
   ImgPrefab: {fileID: 8998512578872490002, guid: 52475147a122214488d02e699e3f2c7f, type: 3}
-  EnemyHealthBarPrefab: {fileID: 6768401472915403135, guid: 9415c8de2912d9046afa4b12488ca3c9, type: 3}
+  EnemyInfoBarPrefab: {fileID: 6768401472915403135, guid: 9415c8de2912d9046afa4b12488ca3c9, type: 3}
+  NomalImg: {fileID: 6051461806625355020, guid: 2ec944cabc6326a448157937bfe9c719, type: 3}
+  FireImg: {fileID: 989123813363763071, guid: 4ee88d5e1a4df1b40893596cd25cf4d6, type: 3}
+  GressImg: {fileID: 3973187760570444981, guid: abe8ef679efc86a4f8ebc935029d9a11, type: 3}
+  WaterImg: {fileID: -8350017915244704703, guid: 977759d6fe36d9e41b6067990a306003, type: 3}
 --- !u!1 &2124352725
 GameObject:
   m_ObjectHideFlags: 0
