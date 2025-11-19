@@ -6,18 +6,20 @@ namespace _01.Script.Lrw.SaveSystem
     public static class FileManager
     {
         private static readonly string FolderName = "GameDataFolder";
-        private static readonly string BaseFileName = "GameDataFile";
 
-        private static string _saveFolderPath;
+        private static string _saveFolderPath = "Null";
 
         public static void PathClear()
         {
-            _saveFolderPath = "";
+            _saveFolderPath = "Null";
         }
         private static void CreatFolder()
         {
-            _saveFolderPath = Path.Combine(Application.dataPath, "..", FolderName);
-            _saveFolderPath = Path.GetFullPath(_saveFolderPath);
+            if (_saveFolderPath == "Null")
+            {
+                _saveFolderPath = Path.Combine(Application.dataPath, "..", FolderName);
+                _saveFolderPath = Path.GetFullPath(_saveFolderPath);
+            }
 
             if (!Directory.Exists(_saveFolderPath))
             {

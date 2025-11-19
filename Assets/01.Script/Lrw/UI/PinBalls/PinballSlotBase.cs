@@ -1,19 +1,22 @@
 using System;
 using Lrw_PinBall;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace _01.Script.Lrw.UI.PinBalls
 {
-    public abstract class PinballSlotBase : MonoBehaviour, IPinBallSlot
+    public abstract class PinballSlotBase : MonoBehaviour, IPinBallSlot ,IPointerClickHandler
     {
         [field:SerializeField] public PinBallSO Pinball { get; set; }
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Image spriteRenderer;
         [SerializeField] protected PinBallUISetting pinBallUISetting;
         
         public void SetPinBall(PinBallSO pinball)
         {
             Pinball =  pinball;
             spriteRenderer.sprite = Pinball.PinBallImage;
+            spriteRenderer.color = new Color(255,255,255,255);
             SettingPinBallUISetting();
         }
 
@@ -25,6 +28,20 @@ namespace _01.Script.Lrw.UI.PinBalls
             pinBallUISetting.pinBallFriction = Pinball.Friction.ToString();
             pinBallUISetting.pinBallMass = Pinball.Mass.ToString();
         }
+
+        public void SetNull()
+        {
+            Pinball =  null;
+            spriteRenderer.sprite = null;
+            spriteRenderer.color = new Color(255,255,255,0);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            PinBall_Explanation.Instance.PointerOnEnter(pinBallUISetting, transform);
+        }
+        
+        
     }
     
     [Serializable]

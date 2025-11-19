@@ -119,102 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &27890845
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 27890846}
-  - component: {fileID: 27890848}
-  - component: {fileID: 27890847}
-  - component: {fileID: 27890849}
-  m_Layer: 5
-  m_Name: PinBallUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &27890846
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27890845}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1533174540}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &27890847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27890845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -6470460504253458178, guid: 340b3ab5e64986a40b60a1e26b95cf03, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &27890848
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27890845}
-  m_CullTransparentMesh: 1
---- !u!114 &27890849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27890845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b8cbf9879642379074dcfb982ecd1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Pinball>k__BackingField: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  pinBallUISetting:
-    pinBallName: 
-    pinBallExplanation: 
-    pinBallBounce: 
-    pinBallFriction: 
-    pinBallMass: 
 --- !u!1001 &30546122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -610,10 +514,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonSetting:
     <DontDestroyLoadObject>k__BackingField: 0
-  currentPinBallSOs: []
-  nowPinBall: {fileID: 0}
+  currentHavePinBalls: []
+  nowPinBallSlot: {fileID: 0}
   pinballSlots: []
-  ballSo: {fileID: 0}
 --- !u!1 &379498390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1047,13 @@ MonoBehaviour:
   pinBall_Friction: {fileID: 1954013326}
   pinBall_Bounciless: {fileID: 1952751785}
   spaceDistance: 2.5
-  _pinBallSo: {fileID: 0}
+  pinBallUISetting:
+    pinBallName: 
+    pinBallExplanation: 
+    pinBallBounce: 
+    pinBallFriction: 
+    pinBallMass: 
+  offset: {x: 200, y: 0}
 --- !u!225 &574613138
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1357,7 +1266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 589482111}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2009,7 +1918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1073385319}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2105,7 +2014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1075449130}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2201,7 +2110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1129621663}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -2952,7 +2861,6 @@ RectTransform:
   - {fileID: 1075449129}
   - {fileID: 1073385318}
   - {fileID: 589482110}
-  - {fileID: 27890846}
   m_Father: {fileID: 299072550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3511,7 +3419,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716704133}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -3691,7 +3599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Pinball>k__BackingField: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1735343747}
   pinBallUISetting:
     pinBallName: 
     pinBallExplanation: 
@@ -3744,7 +3652,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonSetting:
     <DontDestroyLoadObject>k__BackingField: 0
-  inventory: []
+  inventory:
+  - {fileID: 11400000, guid: 27aa823ac66101f448371e0dd8bb8414, type: 2}
+  - {fileID: 11400000, guid: 5c31c53b6267c104e8cded9457b34173, type: 2}
+  - {fileID: 11400000, guid: a53bcfb58e717c14c8598c51f883362e, type: 2}
+  - {fileID: 11400000, guid: 27aa823ac66101f448371e0dd8bb8414, type: 2}
+  - {fileID: 11400000, guid: 5c31c53b6267c104e8cded9457b34173, type: 2}
+  - {fileID: 11400000, guid: a53bcfb58e717c14c8598c51f883362e, type: 2}
 --- !u!1 &1835974375
 GameObject:
   m_ObjectHideFlags: 0

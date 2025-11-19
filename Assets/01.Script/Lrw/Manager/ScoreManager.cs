@@ -54,7 +54,7 @@ namespace _01.Script.Lrw.Manager
         private void OnDestroy()
         {
             EventBus<ScoreAddEvent>.OnEvent -= AddScore;
-            FileManager.SetFile(Score.ToString(),"Score");
+            FileManager.SetFile("Score",Score.ToString());
         }
         
 

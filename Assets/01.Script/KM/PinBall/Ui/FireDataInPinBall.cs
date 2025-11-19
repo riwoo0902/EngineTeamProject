@@ -22,7 +22,7 @@ public class FireDataInPinBall : MonoBehaviour
 
     public void FireOnEnter()
     {
-        _pinball_Ex.PointerOnEnter(NowPinBall,transform);
+        //_pinball_Ex.PointerOnEnter(NowPinBall,transform);
     }
 
     public void FireOnExit()
