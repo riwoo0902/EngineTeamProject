@@ -3,16 +3,18 @@ using System.Linq;
 using Lrw_CustomReadonly;
 using UnityEngine;
 
+
 namespace _01.Script.Lrw.UI.PinBalls
 {
-    public class PinBallUIManager : MonoBehaviour
+    public class PinBallUIManager : MonoSingleton<PinBallUIManager>
     {
         [SerializeField] private List<PinballSlotBase> currentPinballSlots = new();
         [SerializeField, ReadOnly] private PinballSlotBase nowPinBall;
         private List<PinballSlotBase> _pinballSlots = new();
         
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _pinballSlots = GetComponentsInChildren<PinballSlotBase>().ToList();
             currentPinballSlots =  _pinballSlots;
             
@@ -35,8 +37,6 @@ namespace _01.Script.Lrw.UI.PinBalls
             nowPinBall = currentPinballSlots[0];
             currentPinballSlots.RemoveAt(0);
         }
-        
-        
         
     }
 }
