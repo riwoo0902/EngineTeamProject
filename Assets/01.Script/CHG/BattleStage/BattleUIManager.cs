@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -28,8 +30,10 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private Image TargetingImg;
     private Sequence _targetingImgSeq;
 
-    [Header("CurrentLevel")]
+    [Header("PlayerInfo")]
     [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private TextMeshProUGUI _coinText;
+    [SerializeField] private TextMeshProUGUI _powerText;
 
     [Header("Damage")]
     [SerializeField] private TextMeshProUGUI _damageText;
@@ -51,8 +55,10 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private Sprite GressImg;
     [SerializeField] private Sprite WaterImg;
 
-    private void Start()
+    [SerializeField] private Image GameOverImg;
+    public void Init()
     {
+
         TurnTextOriginalPos = MoveTurnText.transform.position;
 
         ItemInventoryOriginalPos = ItemInventory.transform.position;
@@ -60,19 +66,30 @@ public class BattleUIManager : MonoBehaviour
         ItemInventoryAdd();
 
         _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
+        _coinText.text = PlayerManager.Instance.Gold.ToString();
+        _powerText.text = PlayerManager.Instance.Power.ToString();
+
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("AA");
+        GameOverImg.gameObject.SetActive(true);
+        GameOverImg.DOFade(1, 0.6f);
     }
     #region TurnText
-    public void TurnTextMove(int turn)
+    public void TurnTextSet(int turn, Action OnEndMove)
     {
         MoveTurnText.text = $"Turn {turn}";
         TurnText.text = $"Turn:{turn}";
-
         _MoveTurnTextSeq?.Kill();
 
         _MoveTurnTextSeq = DOTween.Sequence();
 
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextMovePos.transform.position, 1f).SetEase(Ease.OutQuint));
-        _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.OutQuint));
+        _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.InQuint));
+        _MoveTurnTextSeq.AppendCallback(() => OnEndMove?.Invoke());
+
     }
     #endregion
 
@@ -183,10 +200,9 @@ public class BattleUIManager : MonoBehaviour
         enemy.EnemyInfoBar = enemyHPbar;
     }
 
-    public Tween EnemyInfoBarHide(Image img, TextMeshProUGUI text)
+    public Tween EnemyInfoBarHide(CanvasGroup canvasGroup)
     {
-        img.DOFade(0, 0.5f);
-        return text.DOFade(0, 0.5f);
+        return canvasGroup.DOFade(0, 0.3f);
     }
 
     public Tween EnemyInfoBarShow(Image healthBarImg, TextMeshProUGUI helathText, TextMeshProUGUI powerText, 
@@ -225,6 +241,15 @@ public class BattleUIManager : MonoBehaviour
         Debug.Log(curHealth);
         text.text = $"{curHealth}/{maxHealth}";
         healthBar.DOFillAmount((float)curHealth / maxHealth, 0.3f);
+
+    }
+
+    //으히히 너 털린거야
+    /// <summary>
+    /// 너 털린거야
+    /// </summary>
+    public void 너털린거야()
+    {
 
     }
     #endregion

@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Sequence = DG.Tweening.Sequence;
 
@@ -64,12 +65,12 @@ public class Enemy : Agent
         _spriteRen.DOFade(1, 0.7f);
 
     }
-    public void EnemyMove(EnemySlot nextSlot, Action onComplete)
+    public void EnemyMove(EnemySlot nextSlot, Action onEndMove)
     {
-        StartCoroutine(EnemyMoved(nextSlot, onComplete));
+        StartCoroutine(EnemyMoved(nextSlot, onEndMove));
     }
 
-    private IEnumerator EnemyMoved(EnemySlot nextSlot, Action onComplite)
+    private IEnumerator EnemyMoved(EnemySlot nextSlot, Action onEndMove)
     {
         bool endMove = false;
 
@@ -82,7 +83,7 @@ public class Enemy : Agent
 
         yield return new WaitUntil(() => endMove);
 
-        onComplite?.Invoke();
+        onEndMove?.Invoke();
 
     }
 
@@ -108,7 +109,7 @@ public class Enemy : Agent
         _healthBarImg.fillAmount = 0;
         _healthText.text = "0/0";
 
-        _deadSeq.Append(_contect.UIManager.EnemyInfoBarHide(_healthBarImg, _healthText));
+        _deadSeq.Append(_contect.UIManager.EnemyInfoBarHide(_canvasGroup));
         _deadSeq.Join(_spriteRen.DOFade(0f, 0.5f));
         _deadSeq.AppendCallback(() => OnEnemyDead?.Invoke(this));
  

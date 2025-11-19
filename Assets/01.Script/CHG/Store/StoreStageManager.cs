@@ -13,13 +13,12 @@ public class StoreStageManager : MonoBehaviour
     private List<StoreItemBtn> _itemBtn;
     
     [ContextMenu("Init")]
-    public void InIt()
+    public void InIt(ItemSO[] items)
     {
 
         _pinBallImgs = PinBallGroup.GetComponentsInChildren<Image>().ToList();
         _itemBtn = ItemGroup.GetComponentsInChildren<StoreItemBtn>().ToList();
         //PinBallSO[] pinballs = C_StageManager.Instance.StageDataManager.GetPinBallData(_pinBallImgs.Count);
-        ItemSO[] items = StageManager.Instance.StageDataManager.GetItemData(_itemBtn.Count);
 
         //PinBallBtnSetting(_pinBallImgs, pinballs);
         ItemBtnSetting(_itemBtn, items);

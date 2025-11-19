@@ -13,11 +13,12 @@ public class BattleStageContect : MonoBehaviour
     {
         EnemyManager.Init(enemyData, this);
         TurnManager.Init(this);
-      
         Player.Init(this);
         TurnButton.Init(this);
+        UIManager.Init();
 
         TurnManager.PlayerTurnSet();
+        
 
     }
 

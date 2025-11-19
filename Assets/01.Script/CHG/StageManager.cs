@@ -84,6 +84,6 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void StoreStageLoad()
     {
-        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().InIt();
+        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().InIt(PlayerManager.Instance.testItems);
     }
 }

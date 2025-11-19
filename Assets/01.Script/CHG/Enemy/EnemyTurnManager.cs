@@ -94,7 +94,7 @@ public class EnemyTurnManager : MonoBehaviour
     {
         _player.TakeDamage(enemyAttackGA.AttackEnemy.Power);
         _player.AgentAnimatorCompo.HurtPlay();
-        yield return new WaitForSeconds(1f); //Enemy 공격 모션 넣기?
+        yield return new WaitForSeconds(1f); 
         //_turnManager.PlayerTurnSet();
     }
 

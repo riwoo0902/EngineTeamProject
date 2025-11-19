@@ -4,21 +4,19 @@ using UnityEngine.EventSystems;
 public class EnemyTargeting : MonoBehaviour
 {
     private Player _player;
-    private BattleUIManager _uIManager;
-    public void Init(Player player, BattleUIManager uIManager)
+    private BattleStageContect _contect;
+    public void Init(Player player, BattleStageContect contect)
     {
         _player = player;
-        _uIManager = uIManager;
+        _contect = contect;
     }
 
     private void Update()
     {
-        //if (!C_StageManager.Instance.CurTurn) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
+            if (!_contect.TurnManager.CurTurn) return;
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D rayHit = Physics2D.Raycast(pos, Vector2.zero, 0f);
@@ -36,14 +34,14 @@ public class EnemyTargeting : MonoBehaviour
 
     public void TargetClear()
     {
-        _uIManager.TargetingImgHide();
+        _contect.UIManager.TargetingImgHide();
         _player.ChangeTarget(null);
     }
 
     private void TargetSet(Enemy enemy)
     {
         Debug.Log(enemy.EnemyData.EnemyName);
-        _uIManager.TargetingImgShow(enemy.transform);
+        _contect.UIManager.TargetingImgShow(enemy.transform);
 
         _player.ChangeTarget(enemy);
     }

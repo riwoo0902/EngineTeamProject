@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -20,9 +21,23 @@ public class BattleTurnManager : MonoBehaviour
     }
     public void PlayerTurnSet()
     {
+        StartCoroutine(ChangePlayerTurn());
+        
+    }
+
+    private IEnumerator ChangePlayerTurn()
+    {
+        if (_contect.Player.HealthCompo.CurHp <= 0) goto End;
+        bool textMoveEnd = false;
+
+        _contect.UIManager.TurnTextSet(TurnCount, () => textMoveEnd = true);
+
+        yield return new WaitUntil(() => textMoveEnd);
+        Debug.Log("Change Turn");
         CurTurn = true;
-        _contect.UIManager.TurnTextMove(TurnCount);
         TurnCount += 1;
+
+    End:;
     }
 
 

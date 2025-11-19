@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum EnemyType
 {
+    None,
     Normal,
     Fire,
     Water,
