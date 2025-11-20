@@ -14,7 +14,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Image _img;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
-    private ItemUIManager _itemUIManager;
+    private StoreInventory _itemInventory;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
     private Tween _failTween;
     public void Init(ItemSO itemData)
@@ -29,7 +29,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _button = GetComponent<Button>();
         _scale = transform.localScale;
 
-        _itemUIManager = GameObject.Find("ItemUI").GetComponent<ItemUIManager>();
+        _itemInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
     }
 
     public void BtnClick()
@@ -42,7 +42,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             BtnEvents.PointeExit();
             _img.gameObject.SetActive(false);
 
-            _itemUIManager.AddItem?.Invoke(_itemData);
+            _itemInventory.AddItem?.Invoke(_itemData);
         }
         else
         {

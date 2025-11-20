@@ -1,0 +1,37 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class StoreItemInventoryIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    [HideInInspector] public ItemSO ItemData;
+
+    private void Start()
+    {
+
+        if (ItemData == null)
+        {
+            Destroy(this);
+        }
+        Debug.Log(gameObject.GetComponent<Image>() == null);
+        Debug.Log(ItemData.itemIcon == null);
+        gameObject.GetComponent<Image>().sprite = ItemData.itemIcon;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
+        MoreInfoUIData infoData = new MoreInfoUIData(
+            name: ItemData.itemName,
+            price: "<sprite=0> " + ItemData.itemPrice.ToString(),
+            description: ItemData.itemDescription
+        );
+
+        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        BtnEvents.PointeExit();
+    }
+}

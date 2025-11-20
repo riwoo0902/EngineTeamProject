@@ -5,10 +5,13 @@ public class StoreInventoryUI : MonoBehaviour
 {
     [SerializeField] private GameObject ItemInventory;
     [SerializeField] private GameObject PinBallInventory;
-    [SerializeField] private Transform MovePos;
+    [SerializeField] private Transform FirstMovePos;
+    [SerializeField] private Transform SecondMovePos;
 
-    private bool _itemInventoryShow = false;
-    private bool _pinBallInventoryShow = false;
+    private bool _firstItemInventoryShow = false;
+    private bool _secondItemInventoryShow = false;
+    private bool _firstPinBallInventoryShow = false;
+    private bool _secondPinBallInventoryShow = false;
 
     private Vector3 _originalPos;
 
@@ -25,17 +28,25 @@ public class StoreInventoryUI : MonoBehaviour
     {
         _itemInventoryTween.Kill();
 
-        if (!_itemInventoryShow)
+        if (!_firstItemInventoryShow && !_secondItemInventoryShow)
         {
-            Debug.Log("aa");
-            _itemInventoryTween = ItemInventory.transform.DOMoveX(MovePos.position.x, 0.3f);
-            _itemInventoryShow = true;
+            if (_firstPinBallInventoryShow)
+            {
+                _itemInventoryTween = ItemInventory.transform.DOMoveX(SecondMovePos.position.x, 0.3f);
+                _secondItemInventoryShow = true;
+            }
+            else
+            {
+                _itemInventoryTween = ItemInventory.transform.DOMoveX(FirstMovePos.position.x, 0.3f);
+                _firstItemInventoryShow = true;
+
+            }
         }
         else
         {
-            Debug.Log("bb");
             _itemInventoryTween = ItemInventory.transform.DOMoveX(_originalPos.x, 0.3f);
-            _itemInventoryShow = false;
+            _firstItemInventoryShow = false;
+            _secondItemInventoryShow = false;
         }
     }
 
@@ -43,15 +54,26 @@ public class StoreInventoryUI : MonoBehaviour
     {
         _PinBallInventoryTween.Kill();
 
-        if (!_pinBallInventoryShow)
+        if (!_firstPinBallInventoryShow && !_secondPinBallInventoryShow)
         {
-            _PinBallInventoryTween = PinBallInventory.transform.DOMoveX(MovePos.position.x, 0.3f);
-            _pinBallInventoryShow = true;
+            if (_firstItemInventoryShow)
+            {
+                _PinBallInventoryTween = PinBallInventory.transform.DOMoveX(SecondMovePos.position.x, 0.3f);
+                _secondPinBallInventoryShow = true;
+            }
+            else
+            {
+                _PinBallInventoryTween = PinBallInventory.transform.DOMoveX(FirstMovePos.position.x, 0.3f);
+                _firstPinBallInventoryShow = true;
+
+            }
+
         }
         else
         {
             _PinBallInventoryTween = PinBallInventory.transform.DOMoveX(_originalPos.x, 0.3f);
-            _pinBallInventoryShow= false;
+            _firstPinBallInventoryShow = false;
+            _secondPinBallInventoryShow = false;
         }
     }
 }

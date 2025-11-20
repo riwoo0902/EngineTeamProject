@@ -20,9 +20,9 @@ public class EnemyTurnManager : MonoBehaviour
 
     private void AttachPerformer() //행동 등록
     {
+        ActionSystem.AttachPerformer<EnemyAttackGA>(EnemyAttack);
         ActionSystem.AttachPerformer<EnemyMoveGA>(SlotCheck);
 
-        ActionSystem.AttachPerformer<EnemyAttackGA>(EnemyAttack);
 
     }
 
