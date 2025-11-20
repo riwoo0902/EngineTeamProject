@@ -11,7 +11,8 @@ namespace _01.Script.Lrw.UI.PinBalls.PinBallInventory
     {
         public List<PinBallSO> currentHavePinBalls => PinballInventory.Instance.inventory;
         [SerializeField] private List<PinballInventorySlot> pinballSlots = new();
-        
+
+        [SerializeField] private GameObject InventorySlotPrefab;
         protected override void Awake()
         {
             base.Awake();
@@ -26,11 +27,20 @@ namespace _01.Script.Lrw.UI.PinBalls.PinBallInventory
 
         private void SlotSetting()
         {
+            if (currentHavePinBalls.Count > pinballSlots.Count)
+            {
+                int j = currentHavePinBalls.Count - pinballSlots.Count;
+                for (int i = 0; i < j; i++)
+                {
+                    pinballSlots.Add(Instantiate(InventorySlotPrefab, transform).GetComponent<PinballInventorySlot>());
+                }
+            }
+            
             for (int i = 0; i < pinballSlots.Count; i++)
             {
                 try
                 {
-                    pinballSlots[i].SetPinBall(currentHavePinBalls[i + 1]);
+                    pinballSlots[i].SetPinBall(currentHavePinBalls[i]);
                 }
                 catch
                 {
