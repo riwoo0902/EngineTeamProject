@@ -170,7 +170,7 @@ public class BattleEnemyManager : MonoBehaviour
     private void StageClear()
     {
         EnemyDataSO data = _stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)];
-        _contect.UIManager.ClearStage(_lootCoin, data.LootItem, data.LootPinBall);
+        _contect.UIManager.StageClear(_lootCoin, data.LootItem, data.LootPinBall);
 
 
     }

@@ -21,11 +21,17 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("ItemInventory")]
     [SerializeField] private GameObject ItemInventory;
+    //[SerializeField] private GameObject PinBallInventory;
     [SerializeField] private Transform ItemInventoryMovePos;
-    private Vector3 ItemInventoryOriginalPos;
-    private Vector3 ItemInventoryScale;
+    //[SerializeField] private Transform PinBallInventoryMovePos;
+    private Vector3 _itemInventoryOriginalPos;
+    private Vector3 _itemInventoryScale;
+    //private Vector3 _pinBallInventoryOriginalPos;
+    //private Vector3 _pinBallInventoryScale;
     private Sequence _itemInventorySeq;
-    private bool _ItemInventoryShow = false;
+    //private Sequence _pinBallInventorySeq;
+    private bool _itemInventoryShow = false;
+    //private bool _pinBallInventoryShow = false;
 
     [Header("EnemyTargeting")]
     [SerializeField] private Image TargetingImg;
@@ -66,17 +72,22 @@ public class BattleUIManager : MonoBehaviour
 
         TurnTextOriginalPos = MoveTurnText.transform.position;
 
-        ItemInventoryOriginalPos = ItemInventory.transform.position;
-        ItemInventoryScale = ItemInventory.transform.localScale;
+        _itemInventoryOriginalPos = ItemInventory.transform.position;
+        _itemInventoryScale = ItemInventory.transform.localScale;
         ItemInventoryAdd();
+
+        //_pinBallInventoryOriginalPos = PinBallInventory.transform.position;
+        //_pinBallInventoryScale = PinBallInventory.transform.localScale;
+        //PinBallInventory.transform.position = PinBallInventoryMovePos.transform.position;
+        //PinBallInventory.transform.localScale = Vector3.zero;
 
         _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
         _coinText.text = "<sprite=0>" + PlayerManager.Instance.Gold;
         _powerText.text = PlayerManager.Instance.Power.ToString();
 
     }
-
-    public void ClearStage(int lootCoin, ItemSO item, PinBallSO pinBall)
+    #region StageClear
+    public void StageClear(int lootCoin, ItemSO item, PinBallSO pinBall)
     {
         Debug.Log($"{lootCoin}, {item.itemIcon.name}, {pinBall.PinBallImage.name}");
         ClearUI.SetActive(true);
@@ -122,6 +133,7 @@ public class BattleUIManager : MonoBehaviour
 
         }
         catch (Exception e) { Debug.LogException(e); }
+
         _lootBtns[1].onClick.AddListener(() =>
         {
             Debug.Log("Click2");
@@ -137,11 +149,16 @@ public class BattleUIManager : MonoBehaviour
             Destroy(btnBG[3]);
         }); //핀볼 추가 만들기
     }
+    #endregion
+
+    #region GameOver
     public void GameOver()
     {
         GameOverImg.gameObject.SetActive(true);
         GameOverImg.DOFade(1, 0.6f);
     }
+    #endregion
+
     #region TurnText
     public void TurnTextSet(int turn, Action OnEndMove)
     {
@@ -173,7 +190,7 @@ public class BattleUIManager : MonoBehaviour
     }
     #endregion
 
-    #region ItemInvetory
+    #region Invetory
     public void ItemInventoryAdd()
     {
         //추가
@@ -197,21 +214,43 @@ public class BattleUIManager : MonoBehaviour
 
         _itemInventorySeq = DOTween.Sequence();
 
-        if (!_ItemInventoryShow) //UI열기
+        if (!_itemInventoryShow) //UI열기
         {
-            _itemInventorySeq.Append(ItemInventory.transform.DOMove(ItemInventoryOriginalPos, 0.3f));
-            _itemInventorySeq.Join(ItemInventory.transform.DOScale(ItemInventoryScale, 0.3f));
+            _itemInventorySeq.Append(ItemInventory.transform.DOMove(_itemInventoryOriginalPos, 0.3f));
+            _itemInventorySeq.Join(ItemInventory.transform.DOScale(_itemInventoryScale, 0.3f));
 
-            _ItemInventoryShow = true;
+            _itemInventoryShow = true;
         }
         else
         {
             _itemInventorySeq.Append(ItemInventory.transform.DOMove(ItemInventoryMovePos.position, 0.3f));
             _itemInventorySeq.Join(ItemInventory.transform.DOScale(Vector3.zero, 0.3f));
 
-            _ItemInventoryShow = false;
+            _itemInventoryShow = false;
         }
     } //인벤토리 열려있으면 닫고 닫혀있으면 열고
+    //public void PinBallInventoryShowHide()
+    //{
+    //    _pinBallInventorySeq?.Kill();
+
+    //    _pinBallInventorySeq = DOTween.Sequence();
+
+    //    if (!_pinBallInventoryShow) //UI열기
+    //    {
+    //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
+    //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
+
+    //        _pinBallInventoryShow = true;
+    //    }
+    //    else
+    //    {
+    //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(PinBallInventoryMovePos.position, 0.3f));
+    //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(Vector3.zero, 0.3f));
+
+    //        _pinBallInventoryShow = false;
+    //    }
+    //}
+
     #endregion
 
     #region TargetImg

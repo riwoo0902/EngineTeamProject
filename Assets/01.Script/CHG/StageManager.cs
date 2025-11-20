@@ -71,7 +71,7 @@ public class StageManager : MonoSingleton<StageManager>
         }
     }
 
-    #region BattleScene
+    #region SceneLoad
     [ContextMenu("BattleStageLoad")]
     private void BattleStageLoad()
     {
@@ -79,20 +79,23 @@ public class StageManager : MonoSingleton<StageManager>
     }
 
 
-    #endregion
+    
     [ContextMenu("EventStageLoad")]
     private void EventStageLoad()
     {
         GameObject.Find("EventStageManager").GetComponent<EventStageManager>().Init(StageDataManager.GetEventData());
     }
 
+    [ContextMenu("StoreStageLoad")]
     private void StoreStageLoad()
     {
-        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().InIt(PlayerManager.Instance.testItems);
+        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().
+            InIt(StageDataManager.ItemData.ToArray(), StageDataManager.PinBallData.ToArray());
     }
 
     private void BossSceneLoad()
     {
         //gameObject
     }
+    #endregion
 }

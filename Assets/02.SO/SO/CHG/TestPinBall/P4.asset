@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PinBallType>k__BackingField: 0
   <PinBallImage>k__BackingField: {fileID: 6436755822472246094, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
-  <Mass>k__BackingField: 1
-  <Friction>k__BackingField: 0.2
-  <Bounciness>k__BackingField: 0.5
-  <BaseDamage>k__BackingField: 1
-  <BallName>k__BackingField: Default
-  <BallExplanation>k__BackingField: Notthing
-  <BallLinearDamping>k__BackingField: 0
+  <Mass>k__BackingField: 4
+  <Friction>k__BackingField: 4
+  <Bounciness>k__BackingField: 4
+  <BaseDamage>k__BackingField: 4444
+  <BallName>k__BackingField: "\uC2DC"
+  <BallExplanation>k__BackingField: "4\uBC88\uB108\uB108\uB10C\uC5B4\uB2D8\uC544\u3153\u313B\uB2C8\u314F\u313B\uB108\u314F\u3163;\u3139\u3134\u3141\uC544\u3163\u3153;\u3134\u3147\u3139\uB9C8\u3163\u3153"
+  <BallLinearDamping>k__BackingField: 444
+  <BallShootPower>k__BackingField: 44444
+  <BallPrefab>k__BackingField: {fileID: 0}
+  <BallPrice>k__BackingField: 444444444
