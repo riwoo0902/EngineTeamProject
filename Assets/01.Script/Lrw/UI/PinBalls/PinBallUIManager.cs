@@ -35,19 +35,24 @@ namespace _01.Script.Lrw.UI.PinBalls
             if (CurrentHavePinBalls.Count > 0)
             {
                 nowPinBallSlot.SetPinBall(CurrentHavePinBalls[0]);
-                if (CurrentHavePinBalls.Count > 1)
+                for (int i = 0; i < pinballSlots.Count; i++)
                 {
-                    for (int i = 0; i < pinballSlots.Count; i++)
+                    try
                     {
-                        try
-                        {
-                            pinballSlots[i].SetPinBall(CurrentHavePinBalls[i+1]);
-                        }
-                        catch
-                        {
-                            pinballSlots[i].SetNull();
-                        }
+                        pinballSlots[i].SetPinBall(CurrentHavePinBalls[i + 1]);
                     }
+                    catch
+                    {
+                        pinballSlots[i].SetNull();
+                    }
+                }
+            }
+            else
+            {
+                nowPinBallSlot.SetNull();
+                for (int i = 0; i < pinballSlots.Count; i++)
+                { 
+                    pinballSlots[i].SetNull();
                 }
             }
         }

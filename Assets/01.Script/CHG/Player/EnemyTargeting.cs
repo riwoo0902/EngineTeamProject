@@ -13,7 +13,6 @@ public class EnemyTargeting : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!_contect.TurnManager.CurTurn) return;

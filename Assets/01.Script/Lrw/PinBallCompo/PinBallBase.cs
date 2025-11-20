@@ -18,7 +18,7 @@ namespace _01.Script.Lrw.PinBallCompo
         public Rigidbody2D Rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
-        [field:SerializeField,ReadOnly] public float Damage { get; private set; }
+        [field:SerializeField,ReadOnly] public int Damage { get; private set; }
         private FsmBrain _pinBallFsmMachine;
         public float BaseDamage { get; private set; }
         public bool IsEnd { get; private set; } = false;
@@ -87,9 +87,9 @@ namespace _01.Script.Lrw.PinBallCompo
             Rigid.linearDamping = a.BallLinearDamping;
         }
 
-        public float Score { get; set; }
+        public int Score { get; set; }
 
-        public float GetScore()
+        public int GetScore()
         {
             StartCoroutine(ActiveFalse());
             return Score;
