@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using _01.Script.Lrw.Inventory;
 using DG.Tweening;
 using Lrw_PinBall;
 using TMPro;
@@ -21,16 +22,16 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("ItemInventory")]
     [SerializeField] private GameObject ItemInventory;
-    //[SerializeField] private GameObject PinBallInventory;
     [SerializeField] private Transform ItemInventoryMovePos;
-    //[SerializeField] private Transform PinBallInventoryMovePos;
     private Vector3 _itemInventoryOriginalPos;
     private Vector3 _itemInventoryScale;
+    private Sequence _itemInventorySeq;
+    private bool _itemInventoryShow = false;
+    //[SerializeField] private GameObject PinBallInventory;
+    //[SerializeField] private Transform PinBallInventoryMovePos;
     //private Vector3 _pinBallInventoryOriginalPos;
     //private Vector3 _pinBallInventoryScale;
-    private Sequence _itemInventorySeq;
     //private Sequence _pinBallInventorySeq;
-    private bool _itemInventoryShow = false;
     //private bool _pinBallInventoryShow = false;
 
     [Header("EnemyTargeting")]
@@ -74,7 +75,7 @@ public class BattleUIManager : MonoBehaviour
 
         _itemInventoryOriginalPos = ItemInventory.transform.position;
         _itemInventoryScale = ItemInventory.transform.localScale;
-        ItemInventoryAdd();
+        ItemInventoryUIAdd();
 
         //_pinBallInventoryOriginalPos = PinBallInventory.transform.position;
         //_pinBallInventoryScale = PinBallInventory.transform.localScale;
@@ -89,25 +90,18 @@ public class BattleUIManager : MonoBehaviour
     #region StageClear
     public void StageClear(int lootCoin, ItemSO item, PinBallSO pinBall)
     {
-        Debug.Log($"{lootCoin}, {item.itemIcon.name}, {pinBall.PinBallImage.name}");
         ClearUI.SetActive(true);
         Button[] _lootBtns = ClearUI.GetComponentsInChildren<Button>();
         Image[] btnIcons = new Image[3];
         Image[] btnBG = new Image[3];
         TextMeshProUGUI[] texts = new TextMeshProUGUI[3];
 
-        Debug.Log($"{_lootBtns.Length}");
-
         btnBG = ClearUI.GetComponentsInChildren<Image>()
             .Where(t => t != ClearUI.transform)
             .ToArray();
-        foreach (var item1 in btnBG)
-        {
-            Debug.Log(item1.name);
-        }
+
         for (int i = 0; i < _lootBtns.Length - 1; i++)
         {
-            Debug.Log(_lootBtns[i].name);
             btnIcons[i] = _lootBtns[i].GetComponentInChildren<Image>();
             texts[i] = _lootBtns[i].GetComponentInChildren<TextMeshProUGUI>();
         }
@@ -124,7 +118,6 @@ public class BattleUIManager : MonoBehaviour
 
             _lootBtns[0].onClick.AddListener(() =>
             {
-                Debug.Log("Click1");
                 PlayerManager.Instance.AddGold(lootCoin);
                 foreach (Transform child in _lootBtns[0].transform)
                     Destroy(child.gameObject);
@@ -136,17 +129,16 @@ public class BattleUIManager : MonoBehaviour
 
         _lootBtns[1].onClick.AddListener(() =>
         {
-            Debug.Log("Click2");
             foreach (Transform child in _lootBtns[1].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[2]);
         });//아이템 추가 만들기
         _lootBtns[2].onClick.AddListener(() =>
         {
-            Debug.Log("Click3");
             foreach (Transform child in _lootBtns[2].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[3]);
+            PinballInventory.Instance.inventory.Add(pinBall);
         }); //핀볼 추가 만들기
     }
     #endregion
@@ -162,6 +154,8 @@ public class BattleUIManager : MonoBehaviour
     #region TurnText
     public void TurnTextSet(int turn, Action OnEndMove)
     {
+        if (ClearUI.activeSelf) return;
+
         MoveTurnText.text = $"Turn {turn}";
         TurnText.text = $"Turn:{turn}";
         _MoveTurnTextSeq?.Kill();
@@ -190,8 +184,8 @@ public class BattleUIManager : MonoBehaviour
     }
     #endregion
 
-    #region Invetory
-    public void ItemInventoryAdd()
+    #region InvetoryUI
+    public void ItemInventoryUIAdd()
     {
         //추가
 
@@ -208,7 +202,7 @@ public class BattleUIManager : MonoBehaviour
         ItemInventory.transform.localScale = Vector3.zero; //추가 후 닫기
     }
 
-    public void ItemInventoryShowHide()
+    public void ItemInventoryUIShowHide()
     {
         _itemInventorySeq?.Kill();
 
