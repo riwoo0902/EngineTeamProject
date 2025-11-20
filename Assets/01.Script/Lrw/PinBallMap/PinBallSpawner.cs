@@ -8,7 +8,8 @@ namespace _01.Script.Lrw.PinBallMap
     public class PinBallSpawner : MonoBehaviour
     {
         public static PinBallSpawner Instance { get; private set; }
-
+        [SerializeField] private PinBallBase currentPinBall;
+        
         private void Singleton()
         {
             if (Instance == null)
@@ -40,6 +41,7 @@ namespace _01.Script.Lrw.PinBallMap
                 if (pinBallBase == null) throw new Exception("pinBallBase is null");
                 
                 pinBallBase.SetPinBallSo(pinBallSo);
+                currentPinBall = pinBallBase;
             }
             catch(Exception e)
             {
