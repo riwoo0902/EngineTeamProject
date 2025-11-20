@@ -1,3 +1,4 @@
+using _01.Script.Lrw.Inventory;
 using DG.Tweening;
 using Febucci.UI;
 using Lrw_PinBall;
@@ -16,6 +17,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
+    private Tween _failTween;
 
     public void Init(PinBallSO pinBallData)
     {
@@ -32,16 +34,27 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void BtnClick()
     {
-        Debug.Log(PlayerManager.Instance.Gold);
-        Debug.Log(_price);
         if (PlayerManager.Instance.SpendGold(_price))
         {
-            //¾ÆÀÌÅÛ È¹µæ Ãß°¡
-
-
+            
             _nameText.text = "SoldOut!";
             _button.interactable = false;
+            gameObject.transform.DOScale(_scale, 0.1f);
+            BtnEvents.PointeExit();
+            _img.gameObject.SetActive(false);
 
+            PinballInventory.Instance.inventory.Add(_pinBallData);
+        }
+        else
+        {
+            Quaternion rotation = gameObject.transform.rotation;
+
+            _failTween.Kill();
+
+            _failTween = gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z + 5), 0.1f).OnComplete(() =>
+            gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z - 5), 0.1f)
+                ).SetLoops(2).OnComplete(() =>
+               gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z), 0.1f));
         }
 
     }
@@ -67,7 +80,6 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_button.interactable == false) return;
 
         gameObject.transform.DOScale(_scale, 0.1f);
         BtnEvents.PinBallExit();

@@ -13,7 +13,7 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     [SerializeField] private int _price = 0;
     private Button _button;
-
+    private Tween _failTween;
     public void Init()
     {
         _button = GetComponent<Button>();
@@ -30,12 +30,21 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         else
         {
-            //구매 실패
+            Quaternion rotation = gameObject.transform.rotation;
+
+            _failTween.Kill();
+
+            _failTween = gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z + 5), 0.1f).OnComplete(() => 
+            gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z - 5), 0.1f)
+                ).SetLoops(2).OnComplete(() =>
+               gameObject.transform.DORotate(new Vector3(rotation.x,rotation.y,rotation.z),0.1f));
+
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!_button.interactable) return;
 
         MoreInfoUIData infoData = new MoreInfoUIData(
             name: "HealthHeal",
