@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using _01.Script.Lrw.Inventory;
 using DG.Tweening;
 using Lrw_PinBall;
 using TMPro;
@@ -21,16 +22,16 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("ItemInventory")]
     [SerializeField] private GameObject ItemInventory;
-    //[SerializeField] private GameObject PinBallInventory;
     [SerializeField] private Transform ItemInventoryMovePos;
-    //[SerializeField] private Transform PinBallInventoryMovePos;
     private Vector3 _itemInventoryOriginalPos;
     private Vector3 _itemInventoryScale;
+    private Sequence _itemInventorySeq;
+    private bool _itemInventoryShow = false;
+    //[SerializeField] private GameObject PinBallInventory;
+    //[SerializeField] private Transform PinBallInventoryMovePos;
     //private Vector3 _pinBallInventoryOriginalPos;
     //private Vector3 _pinBallInventoryScale;
-    private Sequence _itemInventorySeq;
     //private Sequence _pinBallInventorySeq;
-    private bool _itemInventoryShow = false;
     //private bool _pinBallInventoryShow = false;
 
     [Header("EnemyTargeting")]
@@ -74,7 +75,7 @@ public class BattleUIManager : MonoBehaviour
 
         _itemInventoryOriginalPos = ItemInventory.transform.position;
         _itemInventoryScale = ItemInventory.transform.localScale;
-        ItemInventoryAdd();
+        ItemInventoryUIAdd();
 
         //_pinBallInventoryOriginalPos = PinBallInventory.transform.position;
         //_pinBallInventoryScale = PinBallInventory.transform.localScale;
@@ -89,25 +90,18 @@ public class BattleUIManager : MonoBehaviour
     #region StageClear
     public void StageClear(int lootCoin, ItemSO item, PinBallSO pinBall)
     {
-        Debug.Log($"{lootCoin}, {item.itemIcon.name}, {pinBall.PinBallImage.name}");
         ClearUI.SetActive(true);
         Button[] _lootBtns = ClearUI.GetComponentsInChildren<Button>();
         Image[] btnIcons = new Image[3];
         Image[] btnBG = new Image[3];
         TextMeshProUGUI[] texts = new TextMeshProUGUI[3];
 
-        Debug.Log($"{_lootBtns.Length}");
-
         btnBG = ClearUI.GetComponentsInChildren<Image>()
             .Where(t => t != ClearUI.transform)
             .ToArray();
-        foreach (var item1 in btnBG)
-        {
-            Debug.Log(item1.name);
-        }
+
         for (int i = 0; i < _lootBtns.Length - 1; i++)
         {
-            Debug.Log(_lootBtns[i].name);
             btnIcons[i] = _lootBtns[i].GetComponentInChildren<Image>();
             texts[i] = _lootBtns[i].GetComponentInChildren<TextMeshProUGUI>();
         }
@@ -124,7 +118,6 @@ public class BattleUIManager : MonoBehaviour
 
             _lootBtns[0].onClick.AddListener(() =>
             {
-                Debug.Log("Click1");
                 PlayerManager.Instance.AddGold(lootCoin);
                 foreach (Transform child in _lootBtns[0].transform)
                     Destroy(child.gameObject);
@@ -136,18 +129,18 @@ public class BattleUIManager : MonoBehaviour
 
         _lootBtns[1].onClick.AddListener(() =>
         {
-            Debug.Log("Click2");
             foreach (Transform child in _lootBtns[1].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[2]);
-        });//������ �߰� �����
+        });//占쏙옙占쏙옙占쏙옙 占쌩곤옙 占쏙옙占쏙옙占
         _lootBtns[2].onClick.AddListener(() =>
         {
-            Debug.Log("Click3");
             foreach (Transform child in _lootBtns[2].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[3]);
-        }); //�ɺ� �߰� �����
+            PinballInventory.Instance.inventory.Add(pinBall);
+        }); //핀볼 추가 만들기
+
     }
     #endregion
 
@@ -162,7 +155,8 @@ public class BattleUIManager : MonoBehaviour
     #region TurnText
     public void TurnTextSet(int turn, Action OnEndMove)
     {
-        Debug.Log("TurnTextSet");
+        if (ClearUI.activeSelf) return;
+
         MoveTurnText.text = $"Turn {turn}";
         TurnText.text = $"Turn:{turn}";
         _MoveTurnTextSeq?.Kill();
@@ -177,7 +171,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region PlayerHealthUI
-    public void PlayerHealthUIChange(int maxHealth, int curHealth) //ü�� ����
+    public void PlayerHealthUIChange(int maxHealth, int curHealth) //체占쏙옙 占쏙옙占쏙옙
     {
         HealthText.text = $"{curHealth}/{maxHealth}";
         if (maxHealth == 0)
@@ -191,10 +185,10 @@ public class BattleUIManager : MonoBehaviour
     }
     #endregion
 
-    #region Invetory
-    public void ItemInventoryAdd()
+    #region InvetoryUI
+    public void ItemInventoryUIAdd()
     {
-        //�߰�
+        //占쌩곤옙
 
         foreach (var item in PlayerManager.Instance.testItems)
         {
@@ -206,16 +200,16 @@ public class BattleUIManager : MonoBehaviour
         }
 
         ItemInventory.transform.position = ItemInventoryMovePos.position;
-        ItemInventory.transform.localScale = Vector3.zero; //�߰� �� �ݱ�
+        ItemInventory.transform.localScale = Vector3.zero; //占쌩곤옙 占쏙옙 占쌥깍옙
     }
 
-    public void ItemInventoryShowHide()
+    public void ItemInventoryUIShowHide()
     {
         _itemInventorySeq?.Kill();
 
         _itemInventorySeq = DOTween.Sequence();
 
-        if (!_itemInventoryShow) //UI����
+        if (!_itemInventoryShow) //UI占쏙옙占쏙옙
         {
             _itemInventorySeq.Append(ItemInventory.transform.DOMove(_itemInventoryOriginalPos, 0.3f));
             _itemInventorySeq.Join(ItemInventory.transform.DOScale(_itemInventoryScale, 0.3f));
@@ -229,14 +223,14 @@ public class BattleUIManager : MonoBehaviour
 
             _itemInventoryShow = false;
         }
-    } //�κ��丮 ���������� �ݰ� ���������� ����
+    } //占싸븝옙占썰리 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌥곤옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
     //public void PinBallInventoryShowHide()
     //{
     //    _pinBallInventorySeq?.Kill();
 
     //    _pinBallInventorySeq = DOTween.Sequence();
 
-    //    if (!_pinBallInventoryShow) //UI����
+    //    if (!_pinBallInventoryShow) //UI占쏙옙占쏙옙
     //    {
     //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
     //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
@@ -276,7 +270,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region SpellImg
-    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //���� �̹��� ó�� ����
+    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //占쏙옙占쏙옙 占싱뱄옙占쏙옙 처占쏙옙 占쏙옙占쏙옙
     {
         PlayerSpellImg.sprite = playerIcon;
         PlayerSpellImgBG.sprite = playerIcon;
@@ -287,7 +281,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region DamageText
-    public void DamageTextChange(int damage) //����ġ ǥ�� ����
+    public void DamageTextChange(int damage) //占쏙옙占쏙옙치 표占쏙옙 占쏙옙占쏙옙
     {
         float n = (float)damage / 100;
 
