@@ -140,14 +140,14 @@ public class BattleUIManager : MonoBehaviour
             foreach (Transform child in _lootBtns[1].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[2]);
-        });//¾ÆÀÌÅÛ Ãß°¡ ¸¸µé±â
+        });//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         _lootBtns[2].onClick.AddListener(() =>
         {
             Debug.Log("Click3");
             foreach (Transform child in _lootBtns[2].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[3]);
-        }); //ÇÉº¼ Ãß°¡ ¸¸µé±â
+        }); //ï¿½Éºï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     }
     #endregion
 
@@ -162,6 +162,7 @@ public class BattleUIManager : MonoBehaviour
     #region TurnText
     public void TurnTextSet(int turn, Action OnEndMove)
     {
+        Debug.Log("TurnTextSet");
         MoveTurnText.text = $"Turn {turn}";
         TurnText.text = $"Turn:{turn}";
         _MoveTurnTextSeq?.Kill();
@@ -170,13 +171,13 @@ public class BattleUIManager : MonoBehaviour
 
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextMovePos.transform.position, 1f).SetEase(Ease.OutQuint));
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.InQuint));
-        _MoveTurnTextSeq.AppendCallback(() => OnEndMove?.Invoke());
+        _MoveTurnTextSeq.OnComplete(() => OnEndMove?.Invoke());
 
     }
     #endregion
 
     #region PlayerHealthUI
-    public void PlayerHealthUIChange(int maxHealth, int curHealth) //Ã¼·Â º¯°æ
+    public void PlayerHealthUIChange(int maxHealth, int curHealth) //Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         HealthText.text = $"{curHealth}/{maxHealth}";
         if (maxHealth == 0)
@@ -193,7 +194,7 @@ public class BattleUIManager : MonoBehaviour
     #region Invetory
     public void ItemInventoryAdd()
     {
-        //Ãß°¡
+        //ï¿½ß°ï¿½
 
         foreach (var item in PlayerManager.Instance.testItems)
         {
@@ -205,7 +206,7 @@ public class BattleUIManager : MonoBehaviour
         }
 
         ItemInventory.transform.position = ItemInventoryMovePos.position;
-        ItemInventory.transform.localScale = Vector3.zero; //Ãß°¡ ÈÄ ´Ý±â
+        ItemInventory.transform.localScale = Vector3.zero; //ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½Ý±ï¿½
     }
 
     public void ItemInventoryShowHide()
@@ -214,7 +215,7 @@ public class BattleUIManager : MonoBehaviour
 
         _itemInventorySeq = DOTween.Sequence();
 
-        if (!_itemInventoryShow) //UI¿­±â
+        if (!_itemInventoryShow) //UIï¿½ï¿½ï¿½ï¿½
         {
             _itemInventorySeq.Append(ItemInventory.transform.DOMove(_itemInventoryOriginalPos, 0.3f));
             _itemInventorySeq.Join(ItemInventory.transform.DOScale(_itemInventoryScale, 0.3f));
@@ -228,14 +229,14 @@ public class BattleUIManager : MonoBehaviour
 
             _itemInventoryShow = false;
         }
-    } //ÀÎº¥Åä¸® ¿­·ÁÀÖÀ¸¸é ´Ý°í ´ÝÇôÀÖÀ¸¸é ¿­°í
+    } //ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     //public void PinBallInventoryShowHide()
     //{
     //    _pinBallInventorySeq?.Kill();
 
     //    _pinBallInventorySeq = DOTween.Sequence();
 
-    //    if (!_pinBallInventoryShow) //UI¿­±â
+    //    if (!_pinBallInventoryShow) //UIï¿½ï¿½ï¿½ï¿½
     //    {
     //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
     //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
@@ -275,7 +276,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region SpellImg
-    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //½ºÆç ÀÌ¹ÌÁö Ã³À½ ¼¼ÆÃ
+    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         PlayerSpellImg.sprite = playerIcon;
         PlayerSpellImgBG.sprite = playerIcon;
@@ -286,7 +287,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region DamageText
-    public void DamageTextChange(int damage) //µ¥¹ÌÄ¡ Ç¥½Ã º¯°æ
+    public void DamageTextChange(int damage) //ï¿½ï¿½ï¿½ï¿½Ä¡ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         float n = (float)damage / 100;
 

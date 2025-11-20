@@ -15,9 +15,9 @@ public class BattleTurnManager : MonoBehaviour
         private set
         {
             _curTurn = value;
-            
+            Debug.Log("Cur" + _curTurn);
         }
-    } //trueÀÏ½Ã ÇÃ·¹ÀÌ¾î ÅÏ
+    } //trueï¿½Ï½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½
 
     public int TurnCount { get; private set; } = 1;
 
@@ -43,6 +43,9 @@ public class BattleTurnManager : MonoBehaviour
         _contect.UIManager.TurnTextSet(TurnCount, () => textMoveEnd = true);
 
         yield return new WaitUntil(() => textMoveEnd);
+
+        //yield return new WaitForSeconds(2);
+        
         CurTurn = true;
         TurnCount += 1;
 

@@ -6,7 +6,7 @@ public class EnemyTurnManager : MonoBehaviour
     private BattleEnemyManager _enemyManger;
     private Player _player;
     private BattleTurnManager _turnManager;
-    //°ø°Ý ´ë»ó
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public void Init(BattleEnemyManager enemyManager, BattleTurnManager turnManager)
     {
         _enemyManger = enemyManager;
@@ -18,7 +18,7 @@ public class EnemyTurnManager : MonoBehaviour
 
     }
 
-    private void AttachPerformer() //Çàµ¿ µî·Ï
+    private void AttachPerformer() //ï¿½àµ¿ ï¿½ï¿½ï¿½
     {
         ActionSystem.AttachPerformer<EnemyMoveGA>(SlotCheck);
 
@@ -30,17 +30,17 @@ public class EnemyTurnManager : MonoBehaviour
     private IEnumerator SlotCheck(EnemyMoveGA enemyMoveGA)
     {
         bool attack = false;
-        //Dirtionary¿¡¼­ µ¹¸é¼­ Àû ¹ß°ß -> Àû ¾Õ¿¡ Ä­ÀÌ ÀÖ´ÂÁö È®ÀÎ -> ÀÖÀ¸¸é ÀÌµ¿, ¾øÀ¸¸é ±×´ë·Î
+        //Dirtionaryï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ ï¿½ß°ï¿½ -> ï¿½ï¿½ ï¿½Õ¿ï¿½ Ä­ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×´ï¿½ï¿½
 
-        //¸¶Áö¸· Ä­ÀÌ¶ó¸é Enemy °ø°Ý, ¾Æ´Ï¶ó¸é Enemy ÀÌµ¿
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä­ï¿½Ì¶ï¿½ï¿½ Enemy ï¿½ï¿½ï¿½ï¿½, ï¿½Æ´Ï¶ï¿½ï¿½ Enemy ï¿½Ìµï¿½
         for (int cur = _enemyManger.EnemySlots.Count - 1; cur >= 0; cur--)
         {
 
 
             EnemySlot slot = _enemyManger.EnemySlots[cur];
-            if (slot.CurUse == null) continue; //ÀÚ¸®¿¡ Enemy°¡ ¾ø´Ù¸é ´Ù½Ã
+            if (slot.CurUse == null) continue; //ï¿½Ú¸ï¿½ï¿½ï¿½ Enemyï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Ù½ï¿½
 
-            //¸¶Áö¸·Ä­ÀÏ °æ¿ì °ø°Ý
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (cur == _enemyManger.EnemySlots.Count - 1)
             {
                 EnemyAttackGA enemyAttackGA = new(_enemyManger.EnemySlots[_enemyManger.EnemySlots.Count - 1].CurUse);
@@ -48,9 +48,9 @@ public class EnemyTurnManager : MonoBehaviour
                 attack = true;
                 continue;
             }
-            else //¾Æ´Ò°æ¿ì ÀÌµ¿
+            else //ï¿½Æ´Ò°ï¿½ï¿½ ï¿½Ìµï¿½
             {
-                //¾ÕÀÚ¸®°¡ ÀÖ°í ¾ÕÀÚ¸®¿¡ Enemy°¡ ¾ø´Ù¸é ÀÌµ¿
+                //ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ Enemyï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Ìµï¿½
                 int next = cur + 1;
                 if (next < _enemyManger.EnemySlots.Count && _enemyManger.EnemySlots[next].CurUse == null)
                 {
@@ -60,11 +60,11 @@ public class EnemyTurnManager : MonoBehaviour
             }
         }
 
-        if (!attack) //EnemyµéÀÌ °ø°ÝÀ» ÇÏÁö ¾Ê¾ÒÀ» °æ¿ì ÇÃ·¹ÀÌ¾î ÅÏÀ¸·Î ÀüÈ¯
+        if (!attack) //Enemyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
             _turnManager.PlayerTurnSet();
     }
 
-    //                        ÇöÀç Ä­ÀÇ Enemy, ÇöÀç Ä­ ¹øÈ£, ´ÙÀ½ Ä­ ¹øÈ£
+    //                        ï¿½ï¿½ï¿½ï¿½ Ä­ï¿½ï¿½ Enemy, ï¿½ï¿½ï¿½ï¿½ Ä­ ï¿½ï¿½È£, ï¿½ï¿½ï¿½ï¿½ Ä­ ï¿½ï¿½È£
     private IEnumerator EnemyMove(Enemy enemy, int cur, int next)
     {
 
@@ -72,10 +72,10 @@ public class EnemyTurnManager : MonoBehaviour
         EnemySlot curSlot = _enemyManger.EnemySlots[cur];
         EnemySlot nextSlot = _enemyManger.EnemySlots[next];
 
-        //ÀÌµ¿ ÀÌÈÄ True·Î ¸¸µé¾î ÁøÇà
+        //ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ Trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         enemy.EnemyMove(nextSlot, () =>
         {
-            //Slot ¹Ù²Ù±â
+            //Slot ï¿½Ù²Ù±ï¿½
             _enemyManger.EnemySlots[next].CurUse = enemy;
             _enemyManger.EnemySlots[cur].CurUse = null;
             endMove = true;
@@ -87,7 +87,7 @@ public class EnemyTurnManager : MonoBehaviour
 
 
 
-    //°ø°Ý ½ÇÇà ÀÓ½Ã
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)
     {
         _player.TakeDamage(enemyAttackGA.AttackEnemy.Power);
