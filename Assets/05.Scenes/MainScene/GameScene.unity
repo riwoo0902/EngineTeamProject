@@ -879,6 +879,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 234509249063706977, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 234509249063706977, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 234509249063706977, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 234509249063706977, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 611885369773590505, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       propertyPath: m_Name
       value: Lrw
@@ -927,6 +943,54 @@ PrefabInstance:
       propertyPath: offTarget
       value: 
       objectReference: {fileID: 468726613}
+    - target: {fileID: 3496237043340373290, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3496237043340373290, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3496237043340373290, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3496237043340373290, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748274066704782460, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748274066704782460, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748274066704782460, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748274066704782460, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741155490378002672, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741155490378002672, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741155490378002672, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741155490378002672, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8666805183621137202, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1511,6 +1575,10 @@ PrefabInstance:
     - target: {fileID: 4695951633676850228, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737568588837916072, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: monsterLayer.m_Bits
+      value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 5773472910681460768, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_IsActive
