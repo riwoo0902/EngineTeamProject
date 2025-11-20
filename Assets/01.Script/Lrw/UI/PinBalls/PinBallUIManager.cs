@@ -10,12 +10,12 @@ namespace _01.Script.Lrw.UI.PinBalls
 {
     public class PinBallUIManager : Custom.MonoSingleton.MonoSingleton<PinBallUIManager>
     {
-        [SerializeField] private List<PinBallSO> currentHavePinBalls = new();
-        
+        [field:SerializeField] public List<PinBallSO> CurrentHavePinBalls { get; private set; } = new();
+
         [SerializeField] private MainPinBallSlot nowPinBallSlot;
         [SerializeField] private List<SubPinBallSlot> pinballSlots = new();
         
-        private bool NoHavePinball => currentHavePinBalls.Count == 0;
+        private bool NoHavePinball => CurrentHavePinBalls.Count == 0;
         
         protected override void Awake()
         {
@@ -28,21 +28,20 @@ namespace _01.Script.Lrw.UI.PinBalls
         private void Update()
         {
             SlotSetting();
-            
         }
 
         private void SlotSetting()
         {
-            if (currentHavePinBalls.Count > 0)
+            if (CurrentHavePinBalls.Count > 0)
             {
-                nowPinBallSlot.SetPinBall(currentHavePinBalls[0]);
-                if (currentHavePinBalls.Count > 1)
+                nowPinBallSlot.SetPinBall(CurrentHavePinBalls[0]);
+                if (CurrentHavePinBalls.Count > 1)
                 {
                     for (int i = 0; i < pinballSlots.Count; i++)
                     {
                         try
                         {
-                            pinballSlots[i].SetPinBall(currentHavePinBalls[i+1]);
+                            pinballSlots[i].SetPinBall(CurrentHavePinBalls[i+1]);
                         }
                         catch
                         {
@@ -56,14 +55,13 @@ namespace _01.Script.Lrw.UI.PinBalls
         [ContextMenu("Reset PinBalls")]
         public void ReSet()
         {
-            currentHavePinBalls = PinballInventory.Instance.inventory;
-            
+            CurrentHavePinBalls = PinballInventory.Instance.inventory.ToArray().ToList();
         }
 
         [ContextMenu("Use PinBall")]
         public void UsePinBall()
         {
-            currentHavePinBalls.RemoveAt(0);
+            CurrentHavePinBalls.RemoveAt(0);
             
         }
         
