@@ -7,8 +7,8 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
 {
     public class BallTriggers : MonoBehaviour
     {
-        public event Action<float> OnBallScoreTrigger;
-        private float _finalScore = 0;
+        public event Action<int> OnBallScoreTrigger;
+        private int _finalScore = 0;
         public int NeedAddScoreCounter { get; set; }
         
         public void AddNeedTriggerCounter(AddNeedTriggerCountEvent a) => NeedAddScoreCounter += a.AddAmount;
@@ -28,7 +28,7 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             EventBus<AddNeedTriggerCountEvent>.OnEvent -= AddNeedTriggerCounter;
         }
         
-        private void AddFinalScore(float value)
+        private void AddFinalScore(int value)
         {
             _finalScore += value;
             NeedAddScoreCounter--;
