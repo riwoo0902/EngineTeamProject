@@ -24,7 +24,7 @@ namespace _01.Script.Lrw.UI
 
         private void SetText(ScoreEvent text)
         {
-            _text.text = $"Score : {text.Score}";
+            _text.text = $"Score:{text.Score}";
         }
     }
 }

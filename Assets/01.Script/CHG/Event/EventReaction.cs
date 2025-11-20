@@ -1,11 +1,18 @@
-using System;
 using UnityEngine;
 
-public class EventReaction : MonoSingleton<EventReaction>
+public class EventReaction : MonoBehaviour
 {
-    protected override void Awake()
+    public static EventReaction Instance {  get; private set; }
+    private void Awake()
     {
-        base.Awake();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void RetouchMaxHealth(int n)
     {

@@ -15,9 +15,12 @@ MonoBehaviour:
   <PinBallType>k__BackingField: 0
   <PinBallImage>k__BackingField: {fileID: -4805246834521888552, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
   <Mass>k__BackingField: 1
-  <Friction>k__BackingField: 0.2
-  <Bounciness>k__BackingField: 0.5
-  <BaseDamage>k__BackingField: 1
-  <BallName>k__BackingField: Default
-  <BallExplanation>k__BackingField: Notthing
-  <BallLinearDamping>k__BackingField: 0
+  <Friction>k__BackingField: 1
+  <Bounciness>k__BackingField: 1
+  <BaseDamage>k__BackingField: 56
+  <BallName>k__BackingField: "1\uBC88\uBC88"
+  <BallExplanation>k__BackingField: "\uC548\uB155\uD558\uC138\uC694 1\uBC88\uC785\uB2C8\uB2E4."
+  <BallLinearDamping>k__BackingField: 2
+  <BallShootPower>k__BackingField: 66
+  <BallPrefab>k__BackingField: {fileID: 0}
+  <BallPrice>k__BackingField: 123

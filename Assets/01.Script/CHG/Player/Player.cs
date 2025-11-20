@@ -64,14 +64,14 @@ public class Player : Agent
 
 
     //가하는 데미지 계산
-    public void AttackDamageCalculation(EnemyType type, int power)
+    public void AttackDamageCalculation(EnemyType type, int damage)
     {
 
         if (PlayerTarget.EnemyData.EnemyType == type)
         {
-            AttackDamage = power * 2;
+            AttackDamage = damage * 2;
         }
-        AttackDamage = power;
+        AttackDamage = damage;
         _contect.UIManager.DamageTextChange(AttackDamage);
 
     }

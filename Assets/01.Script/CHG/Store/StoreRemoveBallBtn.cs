@@ -1,12 +1,9 @@
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
 
-public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class StoreRemoveBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] TextMeshProUGUI HealValueText;
     [SerializeField] private int AddMaxHealthValue = 10;
@@ -17,7 +14,6 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void Init()
     {
         _button = GetComponent<Button>();
-        HealValueText.text = $"+{AddMaxHealthValue}";
     }
     public void BuyBttonClick()
     {

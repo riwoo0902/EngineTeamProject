@@ -1,14 +1,15 @@
-Ôªøusing DG.Tweening;
+using DG.Tweening;
 using Febucci.UI;
+using Lrw_PinBall;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Button _button;
-    private ItemSO _itemData;
+    private PinBallSO _pinBallData;
     private int _price;
     private Vector3 _scale;
     [SerializeField] private Image _img;
@@ -16,12 +17,12 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private TextAnimator_TMP _textAnimator;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
 
-    public void Init(ItemSO itemData)
+    public void Init(PinBallSO pinBallData)
     {
-        _itemData = itemData;
-        _img.sprite = _itemData.itemIcon;
-        _price = _itemData.itemPrice;
-        _nameText.text = _itemData.itemName;
+        _pinBallData = pinBallData;
+        _img.sprite = _pinBallData.PinBallImage;
+        _price = _pinBallData.BallPrice;
+        _nameText.text = _pinBallData.BallName;
 
         _button = GetComponent<Button>();
         _scale = transform.localScale;
@@ -35,8 +36,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Debug.Log(_price);
         if (PlayerManager.Instance.SpendGold(_price))
         {
-            Debug.Log($"{_itemData.itemName} ÌöçÎìù");
-            //ÏïÑÏù¥ÌÖú ÌöçÎìù Ï∂îÍ∞Ä
+            //æ∆¿Ã≈€ »πµÊ √ﬂ∞°
 
 
             _nameText.text = "SoldOut!";
@@ -53,12 +53,16 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         gameObject.transform.DOScale(_scale * UpSize, 0.1f);
 
         MoreInfoUIData infoData = new MoreInfoUIData(
-            name: _itemData.itemName,
-            price: "<sprite=0> " + _itemData.itemPrice.ToString(),
-            description: _itemData.itemDescription
+            name: _pinBallData.BallName,
+            price: "<sprite=0> " + _pinBallData.BallPrice.ToString(),
+            description: _pinBallData.BallExplanation,
+            mass: _pinBallData.Mass,
+            friction: _pinBallData.Friction,
+            bounciless: _pinBallData.Bounciness
+
         );
 
-        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.PinBallEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -66,6 +70,6 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (_button.interactable == false) return;
 
         gameObject.transform.DOScale(_scale, 0.1f);
-        BtnEvents.PointeExit();
+        BtnEvents.PinBallExit();
     }
 }

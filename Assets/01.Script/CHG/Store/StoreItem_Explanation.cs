@@ -3,9 +3,10 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-public class MoreInfoUI : MonoBehaviour
+public class StoreItem_Explanation : MonoBehaviour
 {
     [SerializeField] private GameObject ImgRoot;
+    [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI PriceText;
     [SerializeField] private TextMeshProUGUI DescriptionText;
     [SerializeField] private float padding = 10f; 
@@ -39,6 +40,7 @@ public class MoreInfoUI : MonoBehaviour
 
     private void ShowInfo(MoreInfoUIData data, RectTransform buttonRect)
     {
+        NameText.text = data.NameText;
         PriceText.text = data.PriceText;
         DescriptionText.text = data.DescriptionText;
 
