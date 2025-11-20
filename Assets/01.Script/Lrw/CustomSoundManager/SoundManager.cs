@@ -85,6 +85,18 @@ namespace Lrw_CustomSoundManager
         {
             SFXVolume = slider.value;
         }
+        public void SetMasterVolume(float value)
+        {
+            MasterVolume = value;
+        }
+        public void SetBGMVolume(float value)
+        {
+            BGMVolume = value;
+        }
+        public void SetSFXVolume(float value)
+        {
+            SFXVolume = value;
+        }
     }
 
     [Serializable]
