@@ -1,5 +1,4 @@
 using System;
-using _01.Script.Lrw.Inventory;
 using _01.Script.Lrw.PinBallCompo;
 using _01.Script.Lrw.UI.PinBalls;
 using Lrw_PinBall;
@@ -60,8 +59,6 @@ namespace _01.Script.Lrw.PinBallMap
                 if(pinBallGameObject != null) Destroy(pinBallGameObject);
                 return;
             }
-            
-            
         }
         
     }
