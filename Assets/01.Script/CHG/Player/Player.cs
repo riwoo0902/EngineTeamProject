@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class Player : Agent
 {
+    public Action<Player> PlayerDead;
+
     [HideInInspector]
     public Enemy PlayerTarget;
     private PlayerTurnManager _playerTurnManager;
     private EnemyTargeting _enemyTargeting;
     [SerializeField] private GameObject AttackEffack;
+    [SerializeField] private GameObject AttackDamageEffack;
 
     private int _power = 1;
-    public int AttackDamage;
+    public int AttackDamage { get; private set; } = 0;
     private BattleStageContect _contect;
     protected override void Awake()
     {
@@ -26,7 +29,7 @@ public class Player : Agent
         HealthCompo.Init(PlayerManager.Instance.MaxHealth, PlayerManager.Instance.CurrentHealth);
 
         _enemyTargeting = GetComponent<EnemyTargeting>();
-        _enemyTargeting.Init(this, contect.UIManager);
+        _enemyTargeting.Init(this, contect);
 
         AgentAnimatorCompo.Init(_animator);
 
@@ -38,46 +41,51 @@ public class Player : Agent
 
         _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
 
+        
     }
 
     private void OnDamaged()
     {
-        Debug.Log("damage");
         _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, HealthCompo.CurHp);
         Instantiate(AttackEffack, transform.position, Quaternion.identity);
     }
 
     public void ChangeTarget(Enemy enemy)
     {
+        if (enemy == null)
+        {
+            PlayerTarget = null;
+            return;
+        }
         PlayerTarget = enemy;
+        AttackDamageCalculation(PlayerTarget.EnemyType, AttackDamage);
     }
 
-    
+
 
     //가하는 데미지 계산
-    public void AttackDamageCalculation(EnemyType type, int damage)
+    public void AttackDamageCalculation(EnemyType type, int power)
     {
+
         if (PlayerTarget.EnemyData.EnemyType == type)
         {
-            AttackDamage = damage * 2;
+            AttackDamage = power * 2;
         }
-        AttackDamage = damage;
-    }
+        AttackDamage = power;
+        _contect.UIManager.DamageTextChange(AttackDamage);
 
-    //공격
-    public int GetAttackDamage()
-    {
-        int damage = AttackDamage;
-        AttackDamage = 0;
-        return damage;
-       
     }
 
     private void OnDead()
     {
-        Debug.Log("PlayerDead");
+        AgentAnimatorCompo.DeadPlay();
+        _contect.UIManager.PlayerHealthUIChange(HealthCompo.MaxHp, 0);
+        
     }
-
+    public void DeadUiShow()
+    {
+        _contect.UIManager.GameOver();
+    }
     public void PlayPlayerAttack()
     {
         PlayerTurnGA playerTurnGA = new();
@@ -86,8 +94,17 @@ public class Player : Agent
 
     public void EnemyAttackEffactPlay()
     {
-        Debug.Log("Attack");
-        Instantiate(AttackEffack, new Vector2(PlayerTarget.transform.position.x, PlayerTarget.transform.position.y), Quaternion.identity);
+        Vector3 targetPos = PlayerTarget.transform.position;
+
+        Instantiate(AttackEffack, new Vector2(targetPos.x, targetPos.y), Quaternion.identity);
+        GameObject attackDamageEffact = Instantiate(AttackDamageEffack, new Vector2(targetPos.x, targetPos.y), Quaternion.identity);
+        attackDamageEffact.GetComponent<AttackEffact>().AttackDamage(AttackDamage);
+        _contect.UIManager.DamageTextChange(AttackDamage);
+        
+    }
+    public void PlayerTurnStart()
+    {
+        _contect.TurnManager.PlayerTurnSet();
     }
 
 
@@ -95,8 +112,12 @@ public class Player : Agent
     {
         HealthCompo.TakeDamage(damage);
     }
-    public void PlayerTurnStart()
+
+    #region test
+    [ContextMenu("AddPower")]
+    public void AddPower()
     {
-        _contect.TurnManager.PlayerTurnSet();
+        AttackDamageCalculation(EnemyType.Normal, 400);
     }
+    #endregion
 }

@@ -16,8 +16,12 @@ public class ActionSystem : MonoSingleton<ActionSystem>
     //GameAction을 상속받은 Type의 액션이 실행될 때 실행되는 함수들
     private static Dictionary<Type, Func<GameAction, IEnumerator>> _performers = new(); //실행 시 수행할 행동
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
-    //외부에서 액션 실행을 요청하는 시작점
+    //외부에서 액션 실행을 요청
     public void Perform(GameAction action, Action OnPerformFinished = null)
     {
         if (IsPerforming) return; //액션중 중복실행 방지
@@ -56,7 +60,7 @@ public class ActionSystem : MonoSingleton<ActionSystem>
         OnFlowFinished?.Invoke(); //Perform에서 받은 실행중 표시 False로 바꾸기
     }
 
-    //_performers 딕셔너리에 등록된 맞는 타입의 로직을 실행
+    //_performers 딕셔너리에 등록된 맞는 타입의 코드 실행
     private IEnumerator PerformPerformer(GameAction action)
     {
         Type type = action.GetType();

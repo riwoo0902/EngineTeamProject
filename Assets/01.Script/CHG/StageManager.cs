@@ -13,6 +13,10 @@ public enum MapType
 
 public class StageManager : MonoSingleton<StageManager>
 {
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     public StageDataManager StageDataManager { get; private set; }
     [field: SerializeField] public int Level { get; private set; } = 0;
@@ -31,11 +35,11 @@ public class StageManager : MonoSingleton<StageManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         //씬 로드 실행
-        //씬 로드 실행
         switch (type)
         {
             case MapType.Battle:
                 {
+                    
                 }
                 break;
         }
@@ -84,6 +88,11 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void StoreStageLoad()
     {
-        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().InIt();
+        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().InIt(PlayerManager.Instance.testItems);
+    }
+
+    private void BossSceneLoad()
+    {
+        //gameObject
     }
 }

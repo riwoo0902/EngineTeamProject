@@ -4,8 +4,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 {
     [SerializeField] private int _maxHealth = 0;
     private int _curHealth = 0;
-    private int _power;
-    private int _gold;
+    private int _power = 1;
+    private int _gold = 0;
     private Player _stagePlayer;
     private PlayerTurnManager _playerTurnManager;
 
