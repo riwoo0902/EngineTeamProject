@@ -38,16 +38,20 @@ namespace _01.Script.Lrw.PinBallMap
                 PinBallSO pinBallSo = PinBallUIManager.Instance.CurrentHavePinBalls[0];
                 if (pinBallSo == null) throw new Exception("pinBallSo is null");
                 if (pinBallSo.BallPrefab == null) throw new Exception("pinBallSo.BallPrefab is null");
-                if(pinBallSo.PinBallImage == null) throw new Exception("pinBallSo.PinBallImage is null"); 
-                
+                if (pinBallSo.PinBallImage == null) throw new Exception("pinBallSo.PinBallImage is null");
+
                 pinBallGameObject = Instantiate(pinBallSo.BallPrefab, transform);
-                
+
                 PinBallBase pinBallBase = pinBallGameObject.GetComponent<PinBallBase>();
                 if (pinBallBase == null) throw new Exception("pinBallBase is null");
-                
+
                 pinBallBase.SetPinBallSo(pinBallSo);
                 currentPinBall = pinBallBase;
                 PinBallUIManager.Instance.UsePinBall();
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Debug.Log("All pinBall Use");
             }
             catch(Exception e)
             {
