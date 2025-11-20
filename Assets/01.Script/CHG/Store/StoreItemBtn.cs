@@ -14,8 +14,9 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Image _img;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
+    private ItemUIManager _itemUIManager;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
-
+    private Tween _failTween;
     public void Init(ItemSO itemData)
     {
         _itemData = itemData;
@@ -27,21 +28,32 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _scale = transform.localScale;
         _button = GetComponent<Button>();
         _scale = transform.localScale;
+
+        _itemUIManager = GameObject.Find("ItemUI").GetComponent<ItemUIManager>();
     }
 
     public void BtnClick()
     {
-        Debug.Log(PlayerManager.Instance.Gold);
-        Debug.Log(_price);
         if (PlayerManager.Instance.SpendGold(_price))
         {
-            Debug.Log($"{_itemData.itemName} 획득");
-            //아이템 획득 추가
-
-
             _nameText.text = "SoldOut!";
             _button.interactable = false;
+            gameObject.transform.DOScale(_scale, 0.1f);
+            BtnEvents.PointeExit();
+            _img.gameObject.SetActive(false);
 
+            _itemUIManager.AddItem?.Invoke(_itemData);
+        }
+        else
+        {
+            Quaternion rotation = gameObject.transform.rotation;
+
+            _failTween.Kill();
+
+            _failTween = gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z + 5), 0.1f).OnComplete(() =>
+            gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z - 5), 0.1f)
+                ).SetLoops(2).OnComplete(() =>
+               gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z), 0.1f));
         }
 
     }
@@ -63,7 +75,6 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_button.interactable == false) return;
 
         gameObject.transform.DOScale(_scale, 0.1f);
         BtnEvents.PointeExit();

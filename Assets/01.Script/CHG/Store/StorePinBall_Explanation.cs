@@ -41,8 +41,6 @@ public class StorePinBall_Explanation : MonoBehaviour
 
     private void ShowInfo(MoreInfoUIData data, RectTransform buttonRect)
     {
-        Debug.Log(data != null);
-        Debug.Log(data.NameText);
 
         NameText.text = data.NameText;
         PriceText.text = data.PriceText;
@@ -61,7 +59,6 @@ public class StorePinBall_Explanation : MonoBehaviour
         float scaledPadding = padding * canvasScale;
 
         Vector2 newPosition;
-        Debug.Log($"Right: {spaceOnRight}, width: {panelWidth + scaledPadding}");
         if (spaceOnRight >= panelWidth + scaledPadding)
         {
 

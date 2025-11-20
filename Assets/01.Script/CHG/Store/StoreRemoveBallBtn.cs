@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,7 +11,7 @@ public class StoreRemoveBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     [SerializeField] private int _price = 0;
     private Button _button;
-
+    private Tween _failTween;
     public void Init()
     {
         _button = GetComponent<Button>();
@@ -23,10 +24,18 @@ public class StoreRemoveBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerE
 
             HealValueText.text = "SoldOut!";
             _button.interactable = false;
+
         }
         else
         {
-            //구매 실패
+            Quaternion rotation = gameObject.transform.rotation;
+
+            _failTween.Kill();
+
+            _failTween = gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z + 5), 0.1f).OnComplete
+                (() => gameObject.transform.DORotate(new Vector3(rotation.x, rotation.y, rotation.z - 5), 0.1f)
+                ).SetLoops(2);
+
         }
     }
 
