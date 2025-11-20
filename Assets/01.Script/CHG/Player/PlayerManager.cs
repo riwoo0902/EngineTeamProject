@@ -37,6 +37,12 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        _curHealth = _maxHealth;
+    }
+
     public void AddMaxHealth(int value)
     {
         _maxHealth = Mathf.Clamp(_maxHealth + value, 1, 999);

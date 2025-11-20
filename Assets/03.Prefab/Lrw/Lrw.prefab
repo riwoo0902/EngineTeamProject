@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   singletonSetting:
-    <DontDestroyLoadObject>k__BackingField: 0
+    <DontDestroyLoadObject>k__BackingField: 1
   inventory:
   - {fileID: 11400000, guid: 27aa823ac66101f448371e0dd8bb8414, type: 2}
   - {fileID: 11400000, guid: 5c31c53b6267c104e8cded9457b34173, type: 2}
