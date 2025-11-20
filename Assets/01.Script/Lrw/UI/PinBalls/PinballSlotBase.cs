@@ -22,6 +22,7 @@ namespace _01.Script.Lrw.UI.PinBalls
 
         private void SettingPinBallUISetting()
         {
+            pinBallUISetting = new PinBallUISetting();
             pinBallUISetting.pinBallName = Pinball.name;
             pinBallUISetting.pinBallExplanation = Pinball.BallExplanation;
             pinBallUISetting.pinBallBounce = Pinball.Bounciness.ToString();
@@ -34,11 +35,13 @@ namespace _01.Script.Lrw.UI.PinBalls
             Pinball =  null;
             spriteRenderer.sprite = null;
             spriteRenderer.color = new Color(255,255,255,0);
+            pinBallUISetting = null;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            PinBall_Explanation.Instance.PointerOnEnter(pinBallUISetting, transform);
+            if(pinBallUISetting != null)
+                PinBall_Explanation.Instance.PointerOnEnter(pinBallUISetting, transform);
         }
 
         public void OnPointerExit(PointerEventData eventData)
