@@ -129,10 +129,11 @@ public class BattleUIManager : MonoBehaviour
 
         _lootBtns[1].onClick.AddListener(() =>
         {
+            PlayerManager.Instance.HaveItem.Add(item);
             foreach (Transform child in _lootBtns[1].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[2]);
-        });//占쏙옙占쏙옙占쏙옙 占쌩곤옙 占쏙옙占쏙옙占
+        });
         _lootBtns[2].onClick.AddListener(() =>
         {
             foreach (Transform child in _lootBtns[2].transform)
@@ -190,7 +191,7 @@ public class BattleUIManager : MonoBehaviour
     {
         //占쌩곤옙
 
-        foreach (var item in PlayerManager.Instance.testItems)
+        foreach (var item in PlayerManager.Instance.HaveItem)
         {
             GameObject obj = Instantiate(ImgPrefab);
             Image img = obj.GetComponent<Image>();

@@ -17,8 +17,8 @@ public class StageDataManager : MonoBehaviour
     
     public List<BattleStageDatas> EnemyStageData; //레벨 당 스테이지Data
     public List<C_EventSO> EventData;
-    public List<PinBallSO> PinBallData;
-    public List<ItemSO> ItemData;
+    public List<PinBallSO> PinBallData; //사용되는 핀볼
+    public List<ItemSO> ItemData; //사용되는 아이템
 
     //현재 레벨에 맞춰 Enemy반환
     public BattleStageDataSO GetBattleData()

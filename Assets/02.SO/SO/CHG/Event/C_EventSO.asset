@@ -19,8 +19,18 @@ MonoBehaviour:
   - ButtonText: "\uCD5C\uB300\uCCB4\uB825 \uD68D\uB4DD"
     EffectType: 1
     EffectValue: 10
+    Items: []
+    PinBalls: []
     ChoiceText: "\uCD5C\uB300\uCCB4\uB825 \uD68D\uB4DD\uC5D0 \uC131\uACF5"
   - ButtonText: "\uD604\uC81C\uCCB4\uB825 \uAC10\uC18C"
     EffectType: 2
     EffectValue: -10
+    Items: []
+    PinBalls: []
     ChoiceText: "\uD604\uC7AC\uCCB4\uB825 \uAC10\uC18C\uC5D0 \uC131\uACF5"
+  - ButtonText: "\uC544\uC774\uD15C \uC0AD\uC81C"
+    EffectType: 3
+    EffectValue: 1
+    Items: []
+    PinBalls: []
+    ChoiceText: "\uC81C\uBC1C \uC0AD\uC81C \uC131\uACF5 \uAE30\uC6D0"

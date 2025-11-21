@@ -17,7 +17,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
     private StoreInventory _pinBallInventory;
-    [field: SerializeField] private float UpSize { get; set; } = 1.3f;
+    [SerializeField] private float UpSize = 1.3f;
     private Tween _failTween;
 
     public void Init(PinBallSO pinBallData)

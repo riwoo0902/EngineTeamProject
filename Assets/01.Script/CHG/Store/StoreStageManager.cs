@@ -22,31 +22,35 @@ public class StoreStageManager : MonoBehaviour
         _items = items;
         _pinballs = pinballs;
 
-        PinBallBtnSetting(_pinBallBtn, pinballs
-        .OrderBy(item => Random.value)
-        .Take(_pinBallBtn.Count)
-        .ToArray());
+        PinBallBtnSetting();
 
-        ItemBtnSetting(_itemBtn, items
-        .OrderBy(item => Random.value)
-        .Take(_itemBtn.Count)
-        .ToArray());
+        ItemBtnSetting();
 
         HealBtn.GetComponent<StoreHealBtn>().Init();
     }
 
-    private void PinBallBtnSetting(List<StorePinBallBtn> btns, PinBallSO[] datas)
+    public void PinBallBtnSetting()
     {
-        for (int i = 0; i < btns.Count; i++)
+        PinBallSO[] ranPinBalls = _pinballs
+        .OrderBy(item => Random.value)
+        .Take(_pinBallBtn.Count)
+        .ToArray();
+
+        for (int i = 0; i < _pinBallBtn.Count; i++)
         {
-            btns[i].Init(datas[i]);
+            _pinBallBtn[i].Init(ranPinBalls[i]);
         }
     }
-    private void ItemBtnSetting(List<StoreItemBtn> btns, ItemSO[] datas)
+    public void ItemBtnSetting()
     {
-        for (int i = 0; i < btns.Count; i++)
+        ItemSO[] ranItems = _items
+        .OrderBy(item => Random.value)
+        .Take(_pinBallBtn.Count)
+        .ToArray();
+
+        for (int i = 0; i < _itemBtn.Count; i++)
         {
-            btns[i].Init(datas[i]);
+            _itemBtn[i].Init(ranItems[i]);
         }
     }
 }
