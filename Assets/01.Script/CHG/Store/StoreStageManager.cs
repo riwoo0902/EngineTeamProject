@@ -11,16 +11,26 @@ public class StoreStageManager : MonoBehaviour
     [SerializeField] private GameObject HealBtn;
     private List<StorePinBallBtn> _pinBallBtn; // 버튼 스크립트로 수정
     private List<StoreItemBtn> _itemBtn;
-    
+
+    private ItemSO[] _items;
+    private PinBallSO[] _pinballs;
     public void InIt(ItemSO[] items, PinBallSO[] pinballs)
     {
-
         _pinBallBtn = PinBallGroup.GetComponentsInChildren<StorePinBallBtn>().ToList();
         _itemBtn = ItemGroup.GetComponentsInChildren<StoreItemBtn>().ToList();
-        
 
-        PinBallBtnSetting(_pinBallBtn, pinballs);
-        ItemBtnSetting(_itemBtn, items);
+        _items = items;
+        _pinballs = pinballs;
+
+        PinBallBtnSetting(_pinBallBtn, pinballs
+        .OrderBy(item => Random.value)
+        .Take(_pinBallBtn.Count)
+        .ToArray());
+
+        ItemBtnSetting(_itemBtn, items
+        .OrderBy(item => Random.value)
+        .Take(_itemBtn.Count)
+        .ToArray());
 
         HealBtn.GetComponent<StoreHealBtn>().Init();
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _01.Script.Lrw.Inventory;
 using Lrw_PinBall;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,17 +40,10 @@ public class StageDataManager : MonoBehaviour
     //상품이 중복되지 않게 반환
     public ItemSO[] GetItemData(int n)
     {
-        if (n >= ItemData.Count)
-        {
-            //모든 아이템을 순서 무작위로 해서 반환
-            return ItemData.OrderBy(item => Guid.NewGuid()).ToArray();
-        }
-
-        //랜덤으로 배열 후 n개만큼 가져오기
-        ItemSO[] items = ItemData.OrderBy(item => Guid.NewGuid())
-                                 .Take(n)
-                                 .ToArray();
-        return items;
+        return ItemData
+        .OrderBy(item => Random.value)
+        .Take(n)
+        .ToArray();
     }
 
 
@@ -57,6 +51,7 @@ public class StageDataManager : MonoBehaviour
     {
         List<PinBallSO> pinBalls = new List<PinBallSO>();
         while (pinBalls.Count < n)
+
         {
             int r = Random.Range(0, PinBallData.Count);
             if (pinBalls.Contains(PinBallData[r]))
