@@ -5,16 +5,14 @@ using UnityEngine.UI;
 public class StoreItemInventoryIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [HideInInspector] public ItemSO ItemData;
-
     private void Start()
     {
 
         if (ItemData == null)
         {
             Destroy(this);
+            return;
         }
-        Debug.Log(gameObject.GetComponent<Image>() == null);
-        Debug.Log(ItemData.itemIcon == null);
         gameObject.GetComponent<Image>().sprite = ItemData.itemIcon;
     }
 
