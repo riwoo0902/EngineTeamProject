@@ -12,6 +12,7 @@ public class StorePinBallInventoryIcon : MonoBehaviour, IPointerEnterHandler, IP
         if (PinBallData == null)
         {
             Destroy(this);
+            return;
         }
 
         gameObject.GetComponent<Image>().sprite = PinBallData.PinBallImage;
