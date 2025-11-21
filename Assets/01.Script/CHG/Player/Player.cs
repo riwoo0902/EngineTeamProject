@@ -63,14 +63,9 @@ public class Player : Agent
 
 
 
-    //°¡ÇÏ´Â µ¥¹ÌÁö °è»ê
+    //ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public void AttackDamageCalculation(EnemyType type, int damage)
     {
-
-        if (PlayerTarget.EnemyData.EnemyType == type)
-        {
-            AttackDamage = damage * 2;
-        }
         AttackDamage = damage;
         _contect.UIManager.DamageTextChange(AttackDamage);
 

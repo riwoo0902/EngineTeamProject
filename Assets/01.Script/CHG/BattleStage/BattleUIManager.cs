@@ -132,14 +132,15 @@ public class BattleUIManager : MonoBehaviour
             foreach (Transform child in _lootBtns[1].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[2]);
-        });//¾ÆÀÌÅÛ Ãß°¡ ¸¸µé±â
+        });//å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ©ê³¤ì˜™ å ì™ì˜™å ì™ì˜™å 
         _lootBtns[2].onClick.AddListener(() =>
         {
             foreach (Transform child in _lootBtns[2].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[3]);
             PinballInventory.Instance.inventory.Add(pinBall);
-        }); //ÇÉº¼ Ãß°¡ ¸¸µé±â
+        }); //í•€ë³¼ ì¶”ê°€ ë§Œë“¤ê¸°
+
     }
     #endregion
 
@@ -164,13 +165,13 @@ public class BattleUIManager : MonoBehaviour
 
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextMovePos.transform.position, 1f).SetEase(Ease.OutQuint));
         _MoveTurnTextSeq.Append(MoveTurnText.transform.DOMove(TurnTextOriginalPos, 1f).SetEase(Ease.InQuint));
-        _MoveTurnTextSeq.AppendCallback(() => OnEndMove?.Invoke());
+        _MoveTurnTextSeq.OnComplete(() => OnEndMove?.Invoke());
 
     }
     #endregion
 
     #region PlayerHealthUI
-    public void PlayerHealthUIChange(int maxHealth, int curHealth) //Ã¼·Â º¯°æ
+    public void PlayerHealthUIChange(int maxHealth, int curHealth) //ì²´å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
         HealthText.text = $"{curHealth}/{maxHealth}";
         if (maxHealth == 0)
@@ -187,7 +188,7 @@ public class BattleUIManager : MonoBehaviour
     #region InvetoryUI
     public void ItemInventoryUIAdd()
     {
-        //Ãß°¡
+        //å ìŒ©ê³¤ì˜™
 
         foreach (var item in PlayerManager.Instance.testItems)
         {
@@ -199,7 +200,7 @@ public class BattleUIManager : MonoBehaviour
         }
 
         ItemInventory.transform.position = ItemInventoryMovePos.position;
-        ItemInventory.transform.localScale = Vector3.zero; //Ãß°¡ ÈÄ ´İ±â
+        ItemInventory.transform.localScale = Vector3.zero; //å ìŒ©ê³¤ì˜™ å ì™ì˜™ å ìŒ¥ê¹ì˜™
     }
 
     public void ItemInventoryUIShowHide()
@@ -208,7 +209,7 @@ public class BattleUIManager : MonoBehaviour
 
         _itemInventorySeq = DOTween.Sequence();
 
-        if (!_itemInventoryShow) //UI¿­±â
+        if (!_itemInventoryShow) //UIå ì™ì˜™å ì™ì˜™
         {
             _itemInventorySeq.Append(ItemInventory.transform.DOMove(_itemInventoryOriginalPos, 0.3f));
             _itemInventorySeq.Join(ItemInventory.transform.DOScale(_itemInventoryScale, 0.3f));
@@ -222,14 +223,14 @@ public class BattleUIManager : MonoBehaviour
 
             _itemInventoryShow = false;
         }
-    } //ÀÎº¥Åä¸® ¿­·ÁÀÖÀ¸¸é ´İ°í ´İÇôÀÖÀ¸¸é ¿­°í
+    } //å ì‹¸ë¸ì˜™å ì°ë¦¬ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ¥ê³¤ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     //public void PinBallInventoryShowHide()
     //{
     //    _pinBallInventorySeq?.Kill();
 
     //    _pinBallInventorySeq = DOTween.Sequence();
 
-    //    if (!_pinBallInventoryShow) //UI¿­±â
+    //    if (!_pinBallInventoryShow) //UIå ì™ì˜™å ì™ì˜™
     //    {
     //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
     //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
@@ -269,7 +270,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region SpellImg
-    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //½ºÆç ÀÌ¹ÌÁö Ã³À½ ¼¼ÆÃ
+    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //å ì™ì˜™å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™ ì²˜å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
         PlayerSpellImg.sprite = playerIcon;
         PlayerSpellImgBG.sprite = playerIcon;
@@ -280,7 +281,7 @@ public class BattleUIManager : MonoBehaviour
     #endregion
 
     #region DamageText
-    public void DamageTextChange(int damage) //µ¥¹ÌÄ¡ Ç¥½Ã º¯°æ
+    public void DamageTextChange(int damage) //å ì™ì˜™å ì™ì˜™ì¹˜ í‘œå ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
         float n = (float)damage / 100;
 

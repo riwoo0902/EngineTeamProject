@@ -19,7 +19,7 @@ namespace _01.Script.Lrw.PinBallMap
             OrdsManager = GetComponentInChildren<OrdsManager>();
         }
 
-        public void SetBallTriggerEvent(UnityEvent<float> ue)
+        public void SetBallTriggerEvent(UnityEvent<int> ue)
         {
             BallTriggers.OnBallScoreTrigger += (f) => { ue?.Invoke(f); };
         }

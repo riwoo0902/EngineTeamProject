@@ -1,8 +1,11 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class EnemyTargeting : MonoBehaviour
 {
+    [SerializeField]
+    private LayerMask monsterLayer;
     private Player _player;
     private BattleStageContect _contect;
     public void Init(Player player, BattleStageContect contect)
@@ -13,17 +16,30 @@ public class EnemyTargeting : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!_contect.TurnManager.CurTurn) return;
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D rayHit = Physics2D.Raycast(pos, Vector2.zero, 0f);
-
-            if (rayHit.collider != null && rayHit.collider.TryGetComponent<Enemy>(out Enemy enemy))
+            Collider2D[] rayHit = Physics2D.OverlapPointAll(pos, monsterLayer);
+            
+            Debug.Log(rayHit.Length);
+            
+            bool flag = false;
+            
+            if (rayHit.Length > 0)
             {
-                TargetSet(enemy);
+                rayHit.ToList().ForEach((c) =>
+                {
+                    if (c.TryGetComponent<Enemy>(out Enemy enemy))
+                    {
+                        TargetSet(enemy);
+                        flag = true;
+                    }
+                });
+                
+                if(!flag)
+                    TargetClear();
             }
             else
             {

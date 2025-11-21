@@ -16,7 +16,7 @@ MonoBehaviour:
   <PinBallImage>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   <Mass>k__BackingField: 1
   <Friction>k__BackingField: 0
-  <Bounciness>k__BackingField: 2
+  <Bounciness>k__BackingField: 0.6
   <BaseDamage>k__BackingField: 1
   <BallName>k__BackingField: KimMin
   <BallExplanation>k__BackingField: Worlds Biggest Human

@@ -10,11 +10,11 @@ namespace _01.Script.Lrw.PinBallMap
 {
     public class PinBallStageCreateManager : MonoBehaviour
     {
-        public UnityEvent<float> onBallScoreTrigger;
+        public UnityEvent<int> onBallScoreTrigger;
         public PinBallMap CurrentPinBallMap {get; private set;}
         
         public GameObject testPrefab;
-        
+        private Player _player;
         public static PinBallStageCreateManager Instance { get; private set; }
         private void Awake()
         {
@@ -28,10 +28,11 @@ namespace _01.Script.Lrw.PinBallMap
             }
 
             onBallScoreTrigger.AddListener(ChangeGameManagerState);
+            onBallScoreTrigger.AddListener(AddDamage);
             EventBus<OrbMapReset>.OnEvent += ReSet;
         }
 
-        private void ChangeGameManagerState(float a)
+        private void ChangeGameManagerState(int a)
         {
             GameManager.Instance.state = PinBallStates.None;
         }
@@ -39,6 +40,12 @@ namespace _01.Script.Lrw.PinBallMap
         private void Start()
         {
             CreatMap(testPrefab);
+            _player = FindAnyObjectByType<Player>();
+        }
+
+        private void AddDamage(int damage)
+        {
+            _player.AttackDamageCalculation(EnemyType.None, damage);
         }
 
         public void CreatMap(GameObject mapPrefab)
@@ -50,6 +57,7 @@ namespace _01.Script.Lrw.PinBallMap
         private void OnDestroy()
         {
             onBallScoreTrigger.RemoveListener(ChangeGameManagerState);
+            onBallScoreTrigger.RemoveListener(AddDamage);
             EventBus<OrbMapReset>.OnEvent -= ReSet;
         }
         

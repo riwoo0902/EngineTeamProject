@@ -19,6 +19,7 @@ namespace Custom.MonoSingleton
                 Instance = this as T;
                 if (singletonSetting.DontDestroyLoadObject)
                 {
+                    transform.SetParent(null);
                     DontDestroyOnLoad(gameObject);
                 }
             }

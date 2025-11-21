@@ -2,8 +2,8 @@ namespace _01.Script.Lrw.PinBallCompo
 {
     public interface ICanTriggerEvent
     {
-        public float Score { get; set; }
-        public float GetScore()
+        public int Score { get; set; }
+        public int GetScore()
         {
             return Score;
         }

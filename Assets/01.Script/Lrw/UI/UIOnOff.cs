@@ -39,11 +39,7 @@ namespace _01.Script.Lrw.UI
                 {
                     _isMove = false;
                 });
-
-
-
         }
-        
         
     }
 }
