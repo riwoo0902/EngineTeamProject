@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using UnityEngine;
@@ -34,9 +36,16 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
             NeedAddScoreCounter--;
             if (NeedAddScoreCounter <= 0)
             {
-                OnBallScoreTrigger?.Invoke(_finalScore);
-                _finalScore = 0;
+                StartCoroutine(WaitForDestroyBall());
             }
+        }
+
+        private IEnumerator WaitForDestroyBall()
+        {
+            int a = _finalScore;
+            _finalScore = 0;
+            yield return new WaitForSeconds(1);
+            OnBallScoreTrigger?.Invoke(a);
         }
         
     }

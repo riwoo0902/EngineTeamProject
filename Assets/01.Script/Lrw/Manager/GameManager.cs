@@ -35,6 +35,7 @@ namespace _01.Script.Lrw.Manager
             
         }
 
+
         private void OnDestroy()
         {
             InputSo.Cleanup();
