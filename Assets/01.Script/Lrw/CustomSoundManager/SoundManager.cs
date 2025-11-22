@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lrw_CustomSoundManager
+namespace _01.Script.Lrw.CustomSoundManager
 {
-    [RequireComponent(typeof(AudioSource))]
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : MonoSingleton<SoundManager>
     {
-        [SerializeField] private AudioData[] audioDatas;
-        private Dictionary<string, (AudioClip, float, AudioType)> _soundDictionary = new();
-        private AudioSource audioSource;
+        //[SerializeField] private AudioData[] audioDatas;
+        //private Dictionary<string, (AudioClip, float, AudioType)> _soundDictionary = new();
 
         [Header("Volume")]
         [Range(0, 1)]
@@ -19,26 +17,13 @@ namespace Lrw_CustomSoundManager
         public float BGMVolume = 1;
         [Range(0, 1)]
         public float SFXVolume = 1;
-        public static SoundManager instance { get; private set; }
-        private void Awake()
+        protected override void Awake()
         {
-            #region Singleton
-            if (instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            else
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            #endregion
-
-            audioSource = GetComponent<AudioSource>();
-            SetAudioDatas();
+            base.Awake();
+            
+            //SetAudioDatas();
         }
-        private void SetAudioDatas()
+        /*private void SetAudioDatas()
         {
             _soundDictionary.Clear();
             if(CheckSoundSetting())
@@ -49,11 +34,11 @@ namespace Lrw_CustomSoundManager
                 }
             }
             
-        }
+        }*/
 
-        private void AddAudioClip(string audioClipName, (AudioClip, float, AudioType) addClip) => _soundDictionary.Add(audioClipName, addClip);
-        private (AudioClip, float, AudioType) GetAudioClip(string getAudioClipName) => _soundDictionary.TryGetValue(getAudioClipName, out (AudioClip, float, AudioType) returnValue) ? returnValue : (null, 0, AudioType.None);
-        public void PlayAudioClip(string audioClipName)
+        // void AddAudioClip(string audioClipName, (AudioClip, float, AudioType) addClip) => _soundDictionary.Add(audioClipName, addClip);
+        //private (AudioClip, float, AudioType) GetAudioClip(string getAudioClipName) => _soundDictionary.TryGetValue(getAudioClipName, out (AudioClip, float, AudioType) returnValue) ? returnValue : (null, 0, AudioType.None);
+        /*public void PlayAudioClip(string audioClipName)
         {
             (AudioClip, float, AudioType) getAudioClip = GetAudioClip(audioClipName);
             if (getAudioClip.Item1 != null)
@@ -63,14 +48,22 @@ namespace Lrw_CustomSoundManager
                 else if (getAudioClip.Item3 == AudioType.SFX) volume *= SFXVolume;
                 audioSource.PlayOneShot(getAudioClip.Item1, getAudioClip.Item2 * volume);
             }
+        }*/
+        public float GetVolume(AudioType a)
+        {
+            float volume = MasterVolume;
+            if (a == AudioType.BGM) volume *= BGMVolume;
+            else if (a == AudioType.SFX) volume *= SFXVolume;
+            return volume;
         }
 
-        private void OnValidate()
+        /*private void OnValidate()
         {
             CheckSoundSetting();
         }
+        */
 
-        private bool CheckSoundSetting()
+        /*private bool CheckSoundSetting()
         {
             foreach (AudioData audioData in audioDatas)
             {
@@ -81,7 +74,7 @@ namespace Lrw_CustomSoundManager
                 }
             }
             return true;
-        }
+        }*/
 
         public void ChangeMasterVolume(Slider slider)
         {
