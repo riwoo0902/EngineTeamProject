@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum MapType
 {
@@ -31,15 +32,16 @@ public class StageManager : MonoSingleton<StageManager>
 
     public void SceneChange(MapType type)
     {
+        Level++;
         _nextMapType = type;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         //씬 로드 실행
-        switch (type)
+        switch (_nextMapType)
         {
             case MapType.Battle:
                 {
-                    
+                    SceneManager.LoadScene("");
                 }
                 break;
         }
@@ -66,6 +68,11 @@ public class StageManager : MonoSingleton<StageManager>
                     EventStageLoad();
                 }
                 break;
+            case MapType.Boss:
+                {
+                    BattleStageLoad();
+                }
+                break;
             default:
                 break;
         }
@@ -78,8 +85,12 @@ public class StageManager : MonoSingleton<StageManager>
         GameObject.Find("BattleStageContext").GetComponent<BattleStageContect>().Init(StageDataManager.GetBattleData());
     }
 
+    [ContextMenu("BossStageLoad")]
+    private void BossStageLoad()
+    {
+        GameObject.Find("BattleStageContext").GetComponent<BattleStageContect>().Init(StageDataManager.GetBossData());
+    }
 
-    
     [ContextMenu("EventStageLoad")]
     private void EventStageLoad()
     {
@@ -91,11 +102,6 @@ public class StageManager : MonoSingleton<StageManager>
     {
         GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().
             InIt(StageDataManager.ItemData.ToArray(), StageDataManager.PinBallData.ToArray());
-    }
-
-    private void BossSceneLoad()
-    {
-        //gameObject
     }
     #endregion
 }

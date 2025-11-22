@@ -7,12 +7,12 @@ public class EventStageManager : MonoBehaviour
 {
     [Header("Event")]
     [SerializeField] private List<Button> Buttons;
-    [SerializeField] private GameObject EndButton;
 
+    [SerializeField] private GameObject EndButton;
     [SerializeField] private Image StoryImage;
     [SerializeField] private TextMeshProUGUI TitleText;
     [SerializeField] private TextMeshProUGUI StoryText;
-    
+
     public void Init(C_EventSO eventData)
     {
         EndButton.SetActive(false);
@@ -35,7 +35,7 @@ public class EventStageManager : MonoBehaviour
         StoryText.text = eventData.StoryText;
         StoryImage.sprite = eventData.EventSprite;
 
-        
+        EndButton.GetComponent<Button>().onClick.AddListener(() => StageManager.Instance.SceneChange(MapType.MapChoice));
     }
 
     private void ButtonAddReaction(C_EventSO eventData, int i)
@@ -44,7 +44,7 @@ public class EventStageManager : MonoBehaviour
         btnText.text = eventData.Choices[i].ButtonText;
         Buttons[i].onClick.RemoveAllListeners();
         Buttons[i].onClick.AddListener(() => eventData.AddListener(i));
-        Buttons[i].onClick.AddListener(() =>  ButtonChoice(eventData, i));
+        Buttons[i].onClick.AddListener(() => ButtonChoice(eventData, i));
     }
 
     private void ButtonChoice(C_EventSO eventData, int n)
@@ -53,7 +53,7 @@ public class EventStageManager : MonoBehaviour
         foreach (var item in Buttons)
         {
             item.gameObject.SetActive(false);
-            EndButton.SetActive(true);
         }
+        EndButton.SetActive(true);
     }
 }
