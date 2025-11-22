@@ -6,6 +6,7 @@ namespace _01.Script.Lrw.UI
 {
     public class UIOnOff : MonoBehaviour
     {
+        [SerializeField] private bool startState = false;
         [SerializeField] private Transform offTarget;
         [SerializeField] private float duration = 1f;
         [SerializeField] private Ease onease = Ease.OutQuart;
@@ -19,7 +20,8 @@ namespace _01.Script.Lrw.UI
         {
             _onPos =  transform.position;
             _offPos = offTarget.position;
-            _isOn = false;
+            _isOn = startState;
+            SetOnOff(!_isOn);
         }
         
         [ContextMenu("ChangeOnOff")]

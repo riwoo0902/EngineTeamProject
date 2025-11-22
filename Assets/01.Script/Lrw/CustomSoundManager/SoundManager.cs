@@ -41,10 +41,14 @@ namespace Lrw_CustomSoundManager
         private void SetAudioDatas()
         {
             _soundDictionary.Clear();
-            foreach (AudioData audioData in audioDatas)
+            if(CheckSoundSetting())
             {
-                AddAudioClip(audioData.AudioClipName, (audioData.AudioClip, audioData.Volume, audioData.AudioClipType));
+                foreach (AudioData audioData in audioDatas)
+                {
+                    AddAudioClip(audioData.AudioClipName, (audioData.AudioClip, audioData.Volume, audioData.AudioClipType));
+                }
             }
+            
         }
 
         private void AddAudioClip(string audioClipName, (AudioClip, float, AudioType) addClip) => _soundDictionary.Add(audioClipName, addClip);
@@ -63,14 +67,20 @@ namespace Lrw_CustomSoundManager
 
         private void OnValidate()
         {
+            CheckSoundSetting();
+        }
+
+        private bool CheckSoundSetting()
+        {
             foreach (AudioData audioData in audioDatas)
             {
                 if (audioData.AudioClip == null || audioData.AudioClipName == null)
                 {
-                    Debug.LogError("SoundManager Error");
-                    return;
+                    Debug.Log("SoundManager Error");
+                    return false;
                 }
             }
+            return true;
         }
 
         public void ChangeMasterVolume(Slider slider)
