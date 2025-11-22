@@ -16,6 +16,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] private Image _img;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
+    private StoreInventory _pinBallInventory;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
     private Tween _failTween;
 
@@ -30,6 +31,8 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _scale = transform.localScale;
         _button = GetComponent<Button>();
         _scale = transform.localScale;
+
+        _pinBallInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
     }
 
     public void BtnClick()
@@ -43,7 +46,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
             BtnEvents.PointeExit();
             _img.gameObject.SetActive(false);
 
-            PinballInventory.Instance.inventory.Add(_pinBallData);
+            _pinBallInventory.AddPinBall?.Invoke(_pinBallData);
         }
         else
         {

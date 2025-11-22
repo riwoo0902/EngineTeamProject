@@ -55,7 +55,6 @@ public class StoreItem_Explanation : MonoBehaviour
         float scaledPadding = padding * canvasScale; 
 
         Vector2 newPosition;
-        Debug.Log($"Right: {spaceOnRight}, width: {panelWidth + scaledPadding}");
         if (spaceOnRight >= panelWidth + scaledPadding)
         {
 
