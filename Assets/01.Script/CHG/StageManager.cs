@@ -22,7 +22,7 @@ public class StageManager : MonoSingleton<StageManager>
     public StageDataManager StageDataManager { get; private set; }
     [field: SerializeField] public int Level { get; private set; } = 0;
 
-    [SerializeField] private MapType nextMapType;
+    [SerializeField] private MapType _nextMapType;
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class StageManager : MonoSingleton<StageManager>
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         //여기서 특정 씬일 때 반응 실행
-        switch (nextMapType)
+        switch (_nextMapType)
         {
             case MapType.Battle:
                 {
