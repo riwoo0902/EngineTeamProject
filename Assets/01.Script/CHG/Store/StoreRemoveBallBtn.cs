@@ -47,13 +47,13 @@ public class StoreRemoveBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerE
             price: _price.ToString(),
             description: $"구매 시 체력을 {AddMaxHealthValue}만큼 회복한다."
             );
-        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.ItemPointeEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
 
-        BtnEvents.PointeExit();
+        BtnEvents.ItemPointeExit();
 
     }
 

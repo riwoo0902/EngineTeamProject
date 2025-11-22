@@ -25,11 +25,11 @@ public class StoreItemInventoryIcon : MonoBehaviour, IPointerEnterHandler, IPoin
             description: ItemData.itemDescription
         );
 
-        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.ItemPointeEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        BtnEvents.PointeExit();
+        BtnEvents.ItemPointeExit();
     }
 }

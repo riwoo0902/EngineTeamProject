@@ -51,30 +51,19 @@ public class StorePinBall_Explanation : MonoBehaviour
 
         float canvasScale = _rootCanvas.scaleFactor;
 
-        float panelWidth = _rectTransform.rect.width * canvasScale;
-
         buttonRect.GetWorldCorners(_buttonCorners);
 
-        float spaceOnRight = Screen.width - _buttonCorners[2].x; //화면 오른쪽과 버튼 오른쪽 사이 거리
         float scaledPadding = padding * canvasScale;
 
         Vector2 newPosition;
-        if (spaceOnRight >= panelWidth + scaledPadding)
-        {
-
-            //피벗 설정 왼쪽 
-            _rectTransform.pivot = new Vector2(0f, 0.7f);
 
 
-            newPosition = new Vector2(_buttonCorners[2].x + scaledPadding, buttonRect.position.y);
-        }
-        else
-        {
-            //피벗 설정 오른쪽
-            _rectTransform.pivot = new Vector2(1f, 0.7f);
+        //피벗 설정 왼쪽 
+        _rectTransform.pivot = new Vector2(0f, 0.7f);
 
-            newPosition = new Vector2(_buttonCorners[1].x - scaledPadding, buttonRect.position.y);
-        }
+
+        newPosition = new Vector2(_buttonCorners[2].x + scaledPadding, buttonRect.position.y);
+
 
         _rectTransform.position = newPosition;
 
