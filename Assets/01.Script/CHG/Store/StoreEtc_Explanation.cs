@@ -1,31 +1,29 @@
-ï»¿using System;
-using System.Text;
 using TMPro;
 using UnityEngine;
 
-public class StoreItem_Explanation : MonoBehaviour
+public class StoreEtc_Explanation : MonoBehaviour
 {
     [SerializeField] private GameObject ImgRoot;
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI PriceText;
     [SerializeField] private TextMeshProUGUI DescriptionText;
-    [SerializeField] private float padding = 10f; 
+    [SerializeField] private float padding = 10f;
 
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
-    private Canvas _rootCanvas; 
-    private Vector3[] _buttonCorners = new Vector3[4]; 
+    private Canvas _rootCanvas;
+    private Vector3[] _buttonCorners = new Vector3[4];
 
     private void OnEnable()
     {
-        BtnEvents.OnItemButtonEnter += ShowInfo;
-        BtnEvents.OnItemButtonExit += HideInfo;
+        BtnEvents.OnEtcBtnEnter += ShowInfo;
+        BtnEvents.OnEtcBtnExit += HideInfo;
     }
 
     private void OnDisable()
     {
-        BtnEvents.OnItemButtonEnter -= ShowInfo;
-        BtnEvents.OnItemButtonExit -= HideInfo;
+        BtnEvents.OnEtcBtnEnter -= ShowInfo;
+        BtnEvents.OnEtcBtnExit -= HideInfo;
     }
 
     private void Start()
@@ -54,11 +52,11 @@ public class StoreItem_Explanation : MonoBehaviour
         Vector2 newPosition;
 
 
-        //í”¼ë²— ì„¤ì • ì™¼ìª½ 
-        _rectTransform.pivot = new Vector2(0f, 0.7f);
+        //ÇÇ¹þ ¼³Á¤ ¿ÞÂÊ 
+        _rectTransform.pivot = new Vector2(1f, 0.7f);
 
 
-        newPosition = new Vector2(_buttonCorners[2].x + scaledPadding, buttonRect.position.y);
+        newPosition = new Vector2(_buttonCorners[1].x - scaledPadding, buttonRect.position.y);
 
         _rectTransform.position = newPosition;
 

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Text;
+using DG.Tweening;
 using Febucci.UI;
 using TMPro;
 using UnityEngine;
@@ -39,9 +40,10 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             _nameText.text = "SoldOut!";
             _button.interactable = false;
             gameObject.transform.DOScale(_scale, 0.1f);
-            BtnEvents.PointeExit();
+            BtnEvents.ItemPointeExit();
             _img.gameObject.SetActive(false);
 
+            PlayerManager.Instance.AddItemValue(new System.Collections.Generic.List<ItemSO> { _itemData });
             _itemInventory.AddItem?.Invoke(_itemData);
         }
         else
@@ -64,19 +66,28 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         gameObject.transform.DOScale(_scale * UpSize, 0.1f);
 
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < _itemData.itemSetting.Count; i++)
+        {
+            sb.Append($"{_itemData.itemSetting[i].itemType}: {_itemData.itemSetting[i].itemValue} / ");
+        }
+        sb.Length--;
+        sb.Length--;
+
         MoreInfoUIData infoData = new MoreInfoUIData(
             name: _itemData.itemName,
             price: "<sprite=0> " + _itemData.itemPrice.ToString(),
-            description: _itemData.itemDescription
+            description: $"{_itemData.itemDescription}\n{sb.ToString()}"
         );
 
-        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.ItemPointeEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
 
         gameObject.transform.DOScale(_scale, 0.1f);
-        BtnEvents.PointeExit();
+        BtnEvents.ItemPointeExit();
     }
 }

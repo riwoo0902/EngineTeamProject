@@ -41,12 +41,10 @@ public class EventReaction : MonoBehaviour
         if (items.Count != 0)
         {
             PlayerManager.Instance.AddItemValue(items);
-            Debug.Log("AddItem");
 
         }
         else
         {
-            Debug.Log("RemoveItem");
             int removeCount = PlayerManager.Instance.HaveItem.Count > value ? value : PlayerManager.Instance.HaveItem.Count;
 
             List<ItemSO> removeItems = new List<ItemSO>();
@@ -56,10 +54,6 @@ public class EventReaction : MonoBehaviour
                 removeItems.Add(PlayerManager.Instance.HaveItem[r]);
                 PlayerManager.Instance.HaveItem.RemoveAt(r);
             }
-            foreach (var item in removeItems)
-            {
-                Debug.Log(item.itemName);
-            }
 
             PlayerManager.Instance.RemoveItemValue(removeItems);
         }
@@ -67,7 +61,7 @@ public class EventReaction : MonoBehaviour
 
     public void RetouchPinBall(List<PinBallSO> pinBalls, int value)
     {
-        if (pinBalls != null)
+        if (pinBalls.Count != 0)
         {
             foreach (var item in pinBalls)
             {

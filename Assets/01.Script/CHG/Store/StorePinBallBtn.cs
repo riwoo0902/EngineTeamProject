@@ -43,9 +43,10 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
             _nameText.text = "SoldOut!";
             _button.interactable = false;
             gameObject.transform.DOScale(_scale, 0.1f);
-            BtnEvents.PointeExit();
+            BtnEvents.ItemPointeExit();
             _img.gameObject.SetActive(false);
 
+            PinballInventory.Instance.inventory.Add(_pinBallData);
             _pinBallInventory.AddPinBall?.Invoke(_pinBallData);
         }
         else
@@ -78,13 +79,13 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         );
 
-        BtnEvents.PinBallEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.PinBallPointEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
 
         gameObject.transform.DOScale(_scale, 0.1f);
-        BtnEvents.PinBallExit();
+        BtnEvents.PinBallPointExit();
     }
 }

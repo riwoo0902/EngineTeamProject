@@ -3,31 +3,45 @@ using UnityEngine;
 
 public class BtnEvents
 {
-    public static event Action<MoreInfoUIData, RectTransform> OnButtonEnter;
+    public static event Action<MoreInfoUIData, RectTransform> OnItemButtonEnter;
 
-    public static event Action OnButtonExit;
+    public static event Action OnItemButtonExit;
 
     public static event Action<MoreInfoUIData, RectTransform> OnPinBallBtnEnter;
 
     public static event Action OnPinBallBtnExit;
 
-    public static void PointeEnter(MoreInfoUIData data, RectTransform rect)
+    public static event Action<MoreInfoUIData, RectTransform> OnEtcBtnEnter;
+
+    public static event Action OnEtcBtnExit;
+
+    public static void ItemPointeEnter(MoreInfoUIData data, RectTransform rect)
     {
-        OnButtonEnter?.Invoke(data, rect);
+        OnItemButtonEnter?.Invoke(data, rect);
     }
 
-    public static void PointeExit()
+    public static void ItemPointeExit()
     {
-        OnButtonExit?.Invoke();
+        OnItemButtonExit?.Invoke();
     }
     
-    public static void PinBallEnter(MoreInfoUIData data, RectTransform rect)
+    public static void PinBallPointEnter(MoreInfoUIData data, RectTransform rect)
     {
         OnPinBallBtnEnter?.Invoke(data,rect);
     }
 
-    public static void PinBallExit()
+    public static void PinBallPointExit()
     {
         OnPinBallBtnExit?.Invoke();
+    }
+
+    public static void EtcPointEnter(MoreInfoUIData data, RectTransform rect)
+    {
+        OnEtcBtnEnter?.Invoke(data, rect);
+    }
+
+    public static void EtcPointExit()
+    {
+        OnEtcBtnExit?.Invoke();
     }
 }

@@ -10,18 +10,21 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     [SerializeField] TextMeshProUGUI HealValueText;
     [SerializeField] private int AddMaxHealthValue = 10;
-
-    [SerializeField] private int _price = 0;
+    [SerializeField] private int Price = 0;
+    [SerializeField] private float UpSize = 1.3f;
     private Button _button;
     private Tween _failTween;
+    private Vector3 _scale;
+
     public void Init()
     {
+        _scale = gameObject.transform.localScale;
         _button = GetComponent<Button>();
-        HealValueText.text = $"+{AddMaxHealthValue}";
+        HealValueText.text = AddMaxHealthValue.ToString();
     }
     public void BuyBttonClick()
     {
-        if (PlayerManager.Instance.SpendGold(_price))
+        if (PlayerManager.Instance.SpendGold(Price))
         {
             PlayerManager.Instance.AddMaxHealth(AddMaxHealthValue);
 
@@ -45,19 +48,19 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!_button.interactable) return;
-
+        gameObject.transform.DOScale(_scale * UpSize, 0.1f);
         MoreInfoUIData infoData = new MoreInfoUIData(
             name: "HealthHeal",
-            price: _price.ToString(),
+            price: "<Sprite=0>" + Price.ToString(),
             description: $"구매 시 체력을 {AddMaxHealthValue}만큼 회복한다."
             );
-        BtnEvents.PointeEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.EtcPointEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
-        BtnEvents.PointeExit();
+        gameObject.transform.DOScale(_scale, 0.1f);
+        BtnEvents.EtcPointExit();
 
     }
 
