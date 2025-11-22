@@ -46,11 +46,6 @@ namespace _01.Script.Lrw.PinBallMap
 
                 pinBallBase.SetPinBallSo(pinBallSo);
                 currentPinBall = pinBallBase;
-                PinBallUIManager.Instance.UsePinBall();
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                Debug.Log("All pinBall Use");
             }
             catch(Exception e)
             {
