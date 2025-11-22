@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab75e4076dade2a43895ea62188bcd6e, type: 3}
+  m_Name: C_EventSO7
+  m_EditorClassIdentifier: 
+  TitleText: "\uAF2C\uB9C8 \uC7A5\uB2D8\uC774\uB2E4."
+  StoryText: "\uADF8\uB2E4\uC9C0 \uC704\uD5D9\uC801\uC774\uC9C4 \uC54A\uC740\uAC70
+    \uAC19\uB2E4."
+  EventSprite: {fileID: 21300000, guid: f6f5119ed3b4a43f98357ff47dcc0ea4, type: 3}
+  Choices:
+  - ButtonText: "\uC870\uB871\uD55C\uB2E4."
+    EffectType: 2
+    EffectValue: -10
+    Items: []
+    PinBalls: []
+    ChoiceText: "\uB098\uBE60."
+  - ButtonText: "\uC77C\uBD80\uB85C \uB2E4\uB978\uACF3\uC5D0 \uC18C\uB9AC\uB97C \uB0B4\uC5B4
+      \uD63C\uB780\uC2A4\uB7FD\uAC8C \uD55C\uB2E4."
+    EffectType: 2
+    EffectValue: 10
+    Items: []
+    PinBalls: []
+    ChoiceText: "\uC790\uC2E0\uC744 \uB180\uC544\uC8FC\uB294\uC904 \uC544\uB294\uC9C0
+      \uC990\uAC70\uC6CC\uD55C\uB2E4."
+  - ButtonText: "\uBB34\uC2DC\uD558\uACE0 \uC9C0\uB098\uAC04\uB2E4."
+    EffectType: 1
+    EffectValue: 0
+    Items: []
+    PinBalls: []
+    ChoiceText: "\uC548\uD0C0\uAE5D\uAD70."
