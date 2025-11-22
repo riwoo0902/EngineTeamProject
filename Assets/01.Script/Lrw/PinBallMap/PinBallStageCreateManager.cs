@@ -34,7 +34,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void ChangeGameManagerState(int a)
         {
-            GameManager.Instance.state = PinBallStates.None;
+            GameManager.Instance.state = PinBallStates.Idle;
         }
 
         private void Start()

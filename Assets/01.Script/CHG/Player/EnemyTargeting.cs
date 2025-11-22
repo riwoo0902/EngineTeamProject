@@ -21,9 +21,7 @@ public class EnemyTargeting : MonoBehaviour
             if (!_contect.TurnManager.CurTurn) return;
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D[] rayHit = Physics2D.OverlapPointAll(pos, monsterLayer);
-            
-            Debug.Log(rayHit.Length);
+            Collider2D[] rayHit = Physics2D.OverlapPointAll(pos);
             
             bool flag = false;
             
