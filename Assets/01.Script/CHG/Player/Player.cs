@@ -63,7 +63,6 @@ public class Player : Agent
 
 
 
-    //���ϴ� ������ ���
     public void AttackDamageCalculation(EnemyType type, int damage)
     {
         AttackDamage += damage;
@@ -106,6 +105,11 @@ public class Player : Agent
     public void TakeDamage(int damage)
     {
         HealthCompo.TakeDamage(damage);
+    }
+
+    public void PlayerHealthReturn()
+    {
+        PlayerManager.Instance.SetHealth(HealthCompo.MaxHp, HealthCompo.CurHp);
     }
 
     #region test

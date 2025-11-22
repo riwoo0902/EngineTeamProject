@@ -26,10 +26,12 @@ public class Enemy : Agent
     private Sequence _moveSeq;
     private Sequence _spriteRenSeq;
     private Sequence _deadSeq;
+
     protected override void Awake()
     {
         base.Awake();
     }
+
     //health, attack따로 두기
     public void Init(EnemyDataSO enemyData, BattleStageContect contect)
     {
@@ -60,32 +62,28 @@ public class Enemy : Agent
 
 
         _contect.UIManager.EnemyHealthBarMove(EnemyInfoBar.transform, transform);
-        _contect.UIManager.EnemyInfoBarShow(_healthBarImg, _healthText, _powerText, _typeImg,_canvasGroup, enemyData);
+        _contect.UIManager.EnemyInfoBarShow(_healthBarImg, _healthText, _powerText, _typeImg, _canvasGroup, enemyData);
 
         _spriteRen.DOFade(1, 0.7f);
 
     }
-    public void EnemyMove(EnemySlot nextSlot, Action onEndMove)
-    {
-        StartCoroutine(EnemyMoved(nextSlot, onEndMove));
-    }
 
-    private IEnumerator EnemyMoved(EnemySlot nextSlot, Action onEndMove)
+    public IEnumerator EnemyMove(EnemySlot nextSlot)
     {
         bool endMove = false;
 
         _moveSeq?.Kill();
         _moveSeq = DOTween.Sequence();
 
+
         _moveSeq.Append(_contect.UIManager.EnemyHealthBarMove(EnemyInfoBar.transform, nextSlot.Pos));
         _moveSeq.Join(gameObject.transform.DOMove(nextSlot.Pos.position, 0.5f));
         _moveSeq.AppendCallback(() => endMove = true);
 
         yield return new WaitUntil(() => endMove);
-
-        onEndMove?.Invoke();
-
     }
+
+
 
     public void OnDamage()
     {
@@ -111,8 +109,9 @@ public class Enemy : Agent
 
         _deadSeq.Append(_contect.UIManager.EnemyInfoBarHide(_canvasGroup));
         _deadSeq.Join(_spriteRen.DOFade(0f, 0.5f));
+
         _deadSeq.AppendCallback(() => OnEnemyDead?.Invoke(this));
- 
+
         HealthCompo.OnDead -= OnDead;
         HealthCompo.OnDamage -= OnDamage;
     }

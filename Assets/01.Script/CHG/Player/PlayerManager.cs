@@ -1,14 +1,18 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoSingleton<PlayerManager>
 {
+    public Action OnValueChanged;
+
+    [field: SerializeField] public List<ItemSO> HaveItem { get; private set; }
     [SerializeField] private int _maxHealth = 0;
     private int _curHealth = 0;
     private int _power = 1;
     private int _gold = 0;
     private Player _stagePlayer;
     private PlayerTurnManager _playerTurnManager;
-
     public int MaxHealth
     {
         get { return _maxHealth; }
@@ -46,38 +50,44 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     public void AddMaxHealth(int value)
     {
         _maxHealth = Mathf.Clamp(_maxHealth + value, 1, 999);
-        _curHealth = Mathf.Clamp(_curHealth, 1, _maxHealth);
+        OnValueChanged?.Invoke();
     }
 
     public void SpendMaxHealth(int value)
     {
         _maxHealth = Mathf.Clamp(_maxHealth - value, 1, 999);
         _curHealth = Mathf.Clamp(_curHealth, 1, _maxHealth);
+        OnValueChanged?.Invoke();
     }
 
     public void AddCurrentHealth(int value)
     {
         _curHealth = Mathf.Clamp(_curHealth + value, 1, _maxHealth);
+        OnValueChanged?.Invoke();
     }
 
     public void SpendCurrentHealth(int value)
     {
         _curHealth = Mathf.Clamp(_curHealth - value, 1, _maxHealth);
+        OnValueChanged?.Invoke();
     }
 
     public void AddPower(int value)
     {
         _power += value;
+        OnValueChanged?.Invoke();
     }
 
     public void SpendPower(int value)
     {
         _power -= value;
+        OnValueChanged?.Invoke();
     }
 
     public void AddGold(int value)
     {
         _gold = Mathf.Clamp(_gold + value, 0, 9999);
+        OnValueChanged?.Invoke();
     }
 
     public bool SpendGold(int value)
@@ -85,16 +95,22 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         if (value <= 0 || _gold < value) return false;
 
         _gold -= value;
-
+        OnValueChanged?.Invoke();
         return true;
+    }
+
+    public void SetHealth(int maxHealth, int curHelath)
+    {
+        _maxHealth = Mathf.Clamp(maxHealth, 1, 999);
+        _curHealth = Mathf.Clamp(curHelath, 1, _maxHealth);
     }
 
     private int itemValue_Health = 0;
     private int itemValue_Gold = 0;
     private int itemValue_Damage = 0;
-    public void AddItemValue(ItemSO[] item)
+    public void AddItemValue(List<ItemSO> item)
     {
-        for(int i = 0; i < item.Length; i++)
+        for(int i = 0; i < item.Count; i++)
         {
             for(int j = 0; j < item[i].itemSetting.Count; j++)
             {
@@ -115,48 +131,59 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         }
         SetItemValue();
     }
-    public void RemoveItemValue(ItemSO[] item)
+    public void RemoveItemValue(List<ItemSO> item)
     {
-        for (int i = 0; i < item.Length; i++)
+        for (int i = 0; i < item.Count; i++)
         {
             for (int j = 0; j < item[i].itemSetting.Count; j++)
             {
                 switch (item[i].itemSetting[j].itemType)
                 {
                     case ItemType.Heal:
+                        Debug.Log("dd");
                         itemValue_Health -= item[i].itemSetting[j].itemValue;
                         break;
                     case ItemType.Gold:
+                        Debug.Log("dd");
                         itemValue_Gold -= item[i].itemSetting[j].itemValue;
                         break;
                     case ItemType.Damage:
+                        Debug.Log("dd");
                         itemValue_Damage -= item[i].itemSetting[j].itemValue;
                         break;
                 }
             }
         }
+        SetItemValue();
     }
 
-    private void SetItemValue()
+    public void SetItemValue()
     {
         AddMaxHealth(itemValue_Health);
         AddCurrentHealth(itemValue_Health);
         AddGold(itemValue_Gold);
         AddPower(itemValue_Damage);
+
+        itemValue_Damage = 0;
+        itemValue_Health = 0;
+        itemValue_Gold = 0;
+
+        OnValueChanged?.Invoke();
+        
     }
 
 
     #region Test
-    [field:SerializeField] public ItemSO[] testItems { get; private set; }
+
     [ContextMenu("SetItemValue")]
     public void TestSetItemValue()
     {
-        AddItemValue(testItems);
+        AddItemValue(HaveItem);
     }
     [ContextMenu("SetItemRemoveValue")]
     public void TestRemoveItemValue()
     {
-        RemoveItemValue(testItems);
+        RemoveItemValue(HaveItem);
     }
     [ContextMenu("AddGold")]
     private void AddGoldTest()

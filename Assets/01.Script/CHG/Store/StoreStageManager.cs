@@ -11,32 +11,46 @@ public class StoreStageManager : MonoBehaviour
     [SerializeField] private GameObject HealBtn;
     private List<StorePinBallBtn> _pinBallBtn; // 버튼 스크립트로 수정
     private List<StoreItemBtn> _itemBtn;
-    
+
+    private ItemSO[] _items;
+    private PinBallSO[] _pinballs;
     public void InIt(ItemSO[] items, PinBallSO[] pinballs)
     {
-
         _pinBallBtn = PinBallGroup.GetComponentsInChildren<StorePinBallBtn>().ToList();
         _itemBtn = ItemGroup.GetComponentsInChildren<StoreItemBtn>().ToList();
-        
 
-        PinBallBtnSetting(_pinBallBtn, pinballs);
-        ItemBtnSetting(_itemBtn, items);
+        _items = items;
+        _pinballs = pinballs;
+
+        PinBallBtnSetting();
+
+        ItemBtnSetting();
 
         HealBtn.GetComponent<StoreHealBtn>().Init();
     }
 
-    private void PinBallBtnSetting(List<StorePinBallBtn> btns, PinBallSO[] datas)
+    public void PinBallBtnSetting()
     {
-        for (int i = 0; i < btns.Count; i++)
+        PinBallSO[] ranPinBalls = _pinballs
+        .OrderBy(item => Random.value)
+        .Take(_pinBallBtn.Count)
+        .ToArray();
+
+        for (int i = 0; i < _pinBallBtn.Count; i++)
         {
-            btns[i].Init(datas[i]);
+            _pinBallBtn[i].Init(ranPinBalls[i]);
         }
     }
-    private void ItemBtnSetting(List<StoreItemBtn> btns, ItemSO[] datas)
+    public void ItemBtnSetting()
     {
-        for (int i = 0; i < btns.Count; i++)
+        ItemSO[] ranItems = _items
+        .OrderBy(item => Random.value)
+        .Take(_pinBallBtn.Count)
+        .ToArray();
+
+        for (int i = 0; i < _itemBtn.Count; i++)
         {
-            btns[i].Init(datas[i]);
+            _itemBtn[i].Init(ranItems[i]);
         }
     }
 }

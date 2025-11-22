@@ -29,11 +29,11 @@ public class StorePinBallInventoryIcon : MonoBehaviour, IPointerEnterHandler, IP
 
         );
 
-        BtnEvents.PinBallEnter(infoData, gameObject.GetComponent<RectTransform>());
+        BtnEvents.PinBallPointEnter(infoData, gameObject.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        BtnEvents.PinBallExit();
+        BtnEvents.PinBallPointExit();
     }
 }

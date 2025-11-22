@@ -1,3 +1,4 @@
+using _01.Script.Lrw.PinBallMap;
 using UnityEngine;
 
 public class BattleStageContect : MonoBehaviour
@@ -9,16 +10,17 @@ public class BattleStageContect : MonoBehaviour
     [field: SerializeField] public Player Player { get; private set; }
     [field: SerializeField] public PlayerTurnManager PlayerTurnManager { get; private set; }
     [field: SerializeField] public BattleTurnButton TurnButton { get; private set; }
-    public void Init(BattleStageDataSO enemyData)
+    [field: SerializeField] public PinBallStageCreateManager PinBallStageCreateManager { get; private set; }
+    public void Init(BattleStageDataSO stageData)
     {
-        EnemyManager.Init(enemyData, this);
+        EnemyManager.Init(stageData, this);
         TurnManager.Init(this);
         Player.Init(this);
         TurnButton.Init(this);
         UIManager.Init();
-
         TurnManager.PlayerTurnSet();
-        
+
+        PinBallStageCreateManager.CreatMap(stageData.PinBallMap);
 
     }
 

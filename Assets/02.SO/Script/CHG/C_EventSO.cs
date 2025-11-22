@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Lrw_PinBall;
 using UnityEngine;
 
 
@@ -10,6 +11,9 @@ public struct ChoiceReaction
     public EventReactionType EffectType; //어떤 Reaction인지
     public int EffectValue; //얼마나 줄지
 
+    public List<ItemSO> Items;
+    public List<PinBallSO> PinBalls;
+
     public string ChoiceText;
 }
 
@@ -18,6 +22,8 @@ public enum EventReactionType
     None, 
     RetouchMaxHealth, //최대체력 수정
     RetouchCurrentHealth, //현재체력 수정
+    RetouchItem,
+    RetouchPinBall
 }
 
 
@@ -44,6 +50,12 @@ public class C_EventSO : ScriptableObject, C_IEventReaction
                 EventReaction.Instance.RetouchCurrentHealth(Reaction.EffectValue);
                 break;
             case EventReactionType.None:
+                case EventReactionType.RetouchItem:
+                EventReaction.Instance.RetouchItem(Reaction.Items, Reaction.EffectValue);
+                    break;
+                case EventReactionType.RetouchPinBall:
+                EventReaction.Instance.RetouchPinBall(Reaction.PinBalls, Reaction.EffectValue);
+                    break;
             default:
                 break;
         }

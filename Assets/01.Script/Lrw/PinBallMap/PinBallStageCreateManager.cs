@@ -39,7 +39,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void Start()
         {
-            CreatMap(testPrefab);
+            //CreatMap(testPrefab);
             _player = FindAnyObjectByType<Player>();
         }
 
