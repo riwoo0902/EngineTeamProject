@@ -99,6 +99,12 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         return true;
     }
 
+    public void SetHealth(int maxHealth, int curHelath)
+    {
+        _maxHealth = Mathf.Clamp(maxHealth, 1, 999);
+        _curHealth = Mathf.Clamp(curHelath, 1, _maxHealth);
+    }
+
     private int itemValue_Health = 0;
     private int itemValue_Gold = 0;
     private int itemValue_Damage = 0;

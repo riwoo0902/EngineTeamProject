@@ -27,12 +27,12 @@ public class BattleUIManager : MonoBehaviour
     private Vector3 _itemInventoryScale;
     private Sequence _itemInventorySeq;
     private bool _itemInventoryShow = false;
-    //[SerializeField] private GameObject PinBallInventory;
-    //[SerializeField] private Transform PinBallInventoryMovePos;
-    //private Vector3 _pinBallInventoryOriginalPos;
-    //private Vector3 _pinBallInventoryScale;
-    //private Sequence _pinBallInventorySeq;
-    //private bool _pinBallInventoryShow = false;
+    [SerializeField] private GameObject PinBallInventory;
+    [SerializeField] private Transform PinBallInventoryMovePos;
+    private Vector3 _pinBallInventoryOriginalPos;
+    private Vector3 _pinBallInventoryScale;
+    private Sequence _pinBallInventorySeq;
+    private bool _pinBallInventoryShow = false;
 
     [Header("EnemyTargeting")]
     [SerializeField] private Image TargetingImg;
@@ -77,10 +77,10 @@ public class BattleUIManager : MonoBehaviour
         _itemInventoryScale = ItemInventory.transform.localScale;
         ItemInventoryUIAdd();
 
-        //_pinBallInventoryOriginalPos = PinBallInventory.transform.position;
-        //_pinBallInventoryScale = PinBallInventory.transform.localScale;
-        //PinBallInventory.transform.position = PinBallInventoryMovePos.transform.position;
-        //PinBallInventory.transform.localScale = Vector3.zero;
+        _pinBallInventoryOriginalPos = PinBallInventory.transform.position;
+        _pinBallInventoryScale = PinBallInventory.transform.localScale;
+        PinBallInventory.transform.position = PinBallInventoryMovePos.transform.position;
+        PinBallInventory.transform.localScale = Vector3.zero;
 
         _levelText.text = "Level:" + (StageManager.Instance.Level + 1);
         _coinText.text = "<sprite=0>" + PlayerManager.Instance.Gold;
@@ -189,7 +189,7 @@ public class BattleUIManager : MonoBehaviour
     #region InvetoryUI
     public void ItemInventoryUIAdd()
     {
-        //占쌩곤옙
+        
 
         foreach (var item in PlayerManager.Instance.HaveItem)
         {
@@ -201,7 +201,7 @@ public class BattleUIManager : MonoBehaviour
         }
 
         ItemInventory.transform.position = ItemInventoryMovePos.position;
-        ItemInventory.transform.localScale = Vector3.zero; //占쌩곤옙 占쏙옙 占쌥깍옙
+        ItemInventory.transform.localScale = Vector3.zero; 
     }
 
     public void ItemInventoryUIShowHide()
@@ -210,7 +210,7 @@ public class BattleUIManager : MonoBehaviour
 
         _itemInventorySeq = DOTween.Sequence();
 
-        if (!_itemInventoryShow) //UI占쏙옙占쏙옙
+        if (!_itemInventoryShow) 
         {
             _itemInventorySeq.Append(ItemInventory.transform.DOMove(_itemInventoryOriginalPos, 0.3f));
             _itemInventorySeq.Join(ItemInventory.transform.DOScale(_itemInventoryScale, 0.3f));
@@ -224,28 +224,28 @@ public class BattleUIManager : MonoBehaviour
 
             _itemInventoryShow = false;
         }
-    } //占싸븝옙占썰리 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌥곤옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
-    //public void PinBallInventoryShowHide()
-    //{
-    //    _pinBallInventorySeq?.Kill();
+    } 
+    public void PinBallInventoryShowHide()
+    {
+        _pinBallInventorySeq?.Kill();
 
-    //    _pinBallInventorySeq = DOTween.Sequence();
+        _pinBallInventorySeq = DOTween.Sequence();
 
-    //    if (!_pinBallInventoryShow) //UI占쏙옙占쏙옙
-    //    {
-    //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
-    //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
+        if (!_pinBallInventoryShow) //UI占쏙옙占쏙옙
+        {
+            _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
+            _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
 
-    //        _pinBallInventoryShow = true;
-    //    }
-    //    else
-    //    {
-    //        _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(PinBallInventoryMovePos.position, 0.3f));
-    //        _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(Vector3.zero, 0.3f));
+            _pinBallInventoryShow = true;
+        }
+        else
+        {
+            _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(PinBallInventoryMovePos.position, 0.3f));
+            _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(Vector3.zero, 0.3f));
 
-    //        _pinBallInventoryShow = false;
-    //    }
-    //}
+            _pinBallInventoryShow = false;
+        }
+    }
 
     #endregion
 
