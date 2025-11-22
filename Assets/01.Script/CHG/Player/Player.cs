@@ -58,7 +58,7 @@ public class Player : Agent
             return;
         }
         PlayerTarget = enemy;
-        AttackDamageCalculation(PlayerTarget.EnemyType, AttackDamage);
+        //AttackDamageCalculation(PlayerTarget.EnemyType, AttackDamage);
     }
 
 
@@ -66,7 +66,7 @@ public class Player : Agent
     //���ϴ� ������ ���
     public void AttackDamageCalculation(EnemyType type, int damage)
     {
-        AttackDamage = damage;
+        AttackDamage += damage;
         _contect.UIManager.DamageTextChange(AttackDamage);
 
     }

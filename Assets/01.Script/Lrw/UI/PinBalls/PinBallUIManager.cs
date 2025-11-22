@@ -62,8 +62,7 @@ namespace _01.Script.Lrw.UI.PinBalls
         {
             CurrentHavePinBalls = PinballInventory.Instance.inventory.ToArray().ToList();
         }
-
-        [ContextMenu("Use PinBall")]
+        
         public void UsePinBall()
         {
             CurrentHavePinBalls.RemoveAt(0);
