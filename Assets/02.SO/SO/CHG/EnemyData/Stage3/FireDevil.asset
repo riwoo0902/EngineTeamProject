@@ -19,4 +19,4 @@ MonoBehaviour:
   <EnemyType>k__BackingField: 2
   <LootCoin>k__BackingField: 87
   <LootPinBall>k__BackingField: {fileID: 11400000, guid: 72592f0ab12524d4a8cbe4a921492288, type: 2}
-  <LootItem>k__BackingField: {fileID: 11400000, guid: 5beb1e35d1d79d3438d02159febbc726, type: 2}
+  <LootItem>k__BackingField: {fileID: 11400000, guid: c8746235ae51bad44ac541512d29926b, type: 2}

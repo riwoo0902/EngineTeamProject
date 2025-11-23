@@ -16,21 +16,21 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Vector3 _scale;
     [SerializeField] private Image _img;
     [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private TextAnimator_TMP _textAnimator;
     private StoreInventory _pinBallInventory;
     [SerializeField] private float UpSize = 1.3f;
     private Tween _failTween;
     private SoundPlayer _soundPlayer;
     public void Init(PinBallSO pinBallData)
     {
+        _button = GetComponent<Button>();
+        _img.gameObject.SetActive(true);
+        _button.interactable = true;
+
         _pinBallData = pinBallData;
         _img.sprite = _pinBallData.PinBallImage;
         _price = _pinBallData.BallPrice;
         _nameText.text = _pinBallData.BallName;
 
-        _button = GetComponent<Button>();
-        _scale = transform.localScale;
-        _button = GetComponent<Button>();
         _scale = transform.localScale;
         _soundPlayer = gameObject.GetComponent<SoundPlayer>();
         _pinBallInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
@@ -47,9 +47,9 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
             BtnEvents.ItemPointeExit();
             _img.gameObject.SetActive(false);
 
-            PinballInventory.Instance.inventory.Add(_pinBallData);
             _pinBallInventory.AddPinBall?.Invoke(_pinBallData);
             _soundPlayer.SoundPlay();
+            PinballInventory.Instance.inventory.Add(_pinBallData);
         }
         else
         {

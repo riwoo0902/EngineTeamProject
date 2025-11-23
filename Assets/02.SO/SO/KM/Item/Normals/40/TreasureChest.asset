@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
-  m_Name: ItemSO 1
+  m_Name: TreasureChest
   m_EditorClassIdentifier: 
-  itemSetting: []
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
-  itemPrice: 0
+  itemSetting:
+  - itemType: 0
+    itemValue: 40
+  itemName: "\uBCF4\uBB3C\uC0C1\uC790"
+  itemIcon: {fileID: -2446285194140060024, guid: 756c8363c4608ac47913d23892c5b467, type: 3}
+  itemDescription: "\uC5EC\uB294 \uAE30\uB2A5\uC740 \uC5C6\uC2B5\uB2C8\uB2E4."
+  itemPrice: 30

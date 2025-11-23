@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StoreItemInventoryIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemInventoryIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [HideInInspector] public ItemSO ItemData;
     private void Start()

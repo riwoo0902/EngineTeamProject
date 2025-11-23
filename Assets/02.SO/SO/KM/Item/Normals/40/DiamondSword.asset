@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
-  m_Name: ItemSO
+  m_Name: DiamondSword
   m_EditorClassIdentifier: 
-  itemSetting: []
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
-  itemPrice: 0
+  itemSetting:
+  - itemType: 1
+    itemValue: 45
+  itemName: "\uB2E4\uC774\uC544\uBAAC\uB4DC \uCE7C"
+  itemIcon: {fileID: -2966200626249415253, guid: 1489550265c19664d912ae0eff3f0889, type: 3}
+  itemDescription: "\uB9C9\uB300\uAE30 \uD558\uB098\uC640 \uB2E4\uC774\uC544\uBAAC\uB4DC
+    \uB450\uAC1C\uB85C \uB9CC\uB4ED\uB2C8\uB2E4."
+  itemPrice: 70

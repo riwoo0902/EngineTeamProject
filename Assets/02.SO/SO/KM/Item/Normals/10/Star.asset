@@ -15,7 +15,7 @@ MonoBehaviour:
   itemSetting:
   - itemType: 0
     itemValue: 5
-  itemName: "\uC791\uC740 \uBCC4"
+  itemName: "\uBCC4"
   itemIcon: {fileID: 3273560194460194940, guid: 4fa977930c928bc4b8f6124ce821b39a, type: 3}
-  itemDescription: "\uBC18\uC9DD \uBC18\uC9DD \uC791\uC740 \uBCC4\uC774\uB2E4."
-  itemPrice: 0
+  itemDescription: "\uB178\uB825 \uBBF8\uB798 \uC5B4 \uBDF0\uD2F0\uD480 \uC2A4\uD0C0"
+  itemPrice: 5

@@ -46,12 +46,6 @@ public class BattleUIManager : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private TextMeshProUGUI _damageText;
 
-    [Header("Spell")]
-    [SerializeField] private Image PlayerSpellImg;
-    [SerializeField] private Image PlayerSpellImgBG;
-    [SerializeField] private Image PinBallSpellImg;
-    [SerializeField] private Image PinBallSpellImgBG;
-
     [Header("Item")]
     [SerializeField] private GameObject InventoryObj;
     [SerializeField] private GameObject ImgPrefab;
@@ -189,12 +183,11 @@ public class BattleUIManager : MonoBehaviour
     #region InvetoryUI
     public void ItemInventoryUIAdd()
     {
-        
-
         foreach (var item in PlayerManager.Instance.HaveItem)
         {
             GameObject obj = Instantiate(ImgPrefab);
             Image img = obj.GetComponent<Image>();
+            obj.GetComponent<ItemInventoryIcon>().ItemData = item;
             img.sprite = item.itemIcon;
             img.transform.SetParent(InventoryObj.transform, true);
 
@@ -231,7 +224,7 @@ public class BattleUIManager : MonoBehaviour
 
         _pinBallInventorySeq = DOTween.Sequence();
 
-        if (!_pinBallInventoryShow) //UI占쏙옙占쏙옙
+        if (!_pinBallInventoryShow) 
         {
             _pinBallInventorySeq.Append(PinBallInventory.transform.DOMove(_pinBallInventoryOriginalPos, 0.3f));
             _pinBallInventorySeq.Join(PinBallInventory.transform.DOScale(_pinBallInventoryScale, 0.3f));
@@ -267,17 +260,6 @@ public class BattleUIManager : MonoBehaviour
         _targetingImgSeq = DOTween.Sequence();
 
         _targetingImgSeq.Append(TargetingImg.DOFade(0, 0.3f));
-    }
-    #endregion
-
-    #region SpellImg
-    public void SpellImgSet(Sprite playerIcon, Sprite pinBallIcon) //占쏙옙占쏙옙 占싱뱄옙占쏙옙 처占쏙옙 占쏙옙占쏙옙
-    {
-        PlayerSpellImg.sprite = playerIcon;
-        PlayerSpellImgBG.sprite = playerIcon;
-
-        PinBallSpellImg.sprite = pinBallIcon;
-        PinBallSpellImgBG.sprite = pinBallIcon;
     }
     #endregion
 

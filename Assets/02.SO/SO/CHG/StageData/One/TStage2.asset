@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b729ffe09b2d64397d167e4404df21, type: 3}
   m_Name: TStage2
   m_EditorClassIdentifier: 
-  <EmergeCount>k__BackingField: 3
+  <EmergeCount>k__BackingField: 4
   <EmergeEnemy>k__BackingField:
-  - {fileID: 11400000, guid: da3e32af4aedf1542a4125d9f54e0fe9, type: 2}
-  - {fileID: 11400000, guid: 1ad9686c3633eec419eeb82350a698fd, type: 2}
-  - {fileID: 11400000, guid: aa136fb5039ac6e44b82a35cc08360a8, type: 2}
-  <StartEnemyCount>k__BackingField: 3
+  - {fileID: 11400000, guid: 40d78b082f8218845af028bb5b5dfd1b, type: 2}
+  - {fileID: 11400000, guid: 019df554043cbcb41ad4f8d53eaa1b19, type: 2}
+  - {fileID: 11400000, guid: ef0570d23269b71479aab071c835bb1e, type: 2}
+  - {fileID: 11400000, guid: d992b31eb4efd7a4baa9a7e2aeca1ba0, type: 2}
+  <StartEnemyCount>k__BackingField: 4
+  <PinBallMap>k__BackingField: {fileID: 0}

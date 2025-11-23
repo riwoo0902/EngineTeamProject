@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: StageDataSO
   m_EditorClassIdentifier: 
   <EmergeCount>k__BackingField: 0
-  <EmergeEnemy>k__BackingField:
-  - {fileID: 0}
-  - {fileID: 0}
+  <EmergeEnemy>k__BackingField: []
   <StartEnemyCount>k__BackingField: 0
+  <PinBallMap>k__BackingField: {fileID: 0}

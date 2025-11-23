@@ -15,8 +15,8 @@ MonoBehaviour:
   <EnemySprite>k__BackingField: {fileID: 21300000, guid: ba3e39a21456e456eaaa5800ad826164, type: 3}
   <EnemyName>k__BackingField: worm
   <EnemyMaxHP>k__BackingField: 8
-  <EnemyPower>k__BackingField: 50
+  <EnemyPower>k__BackingField: 100
   <EnemyType>k__BackingField: 1
-  <LootCoin>k__BackingField: 15
+  <LootCoin>k__BackingField: 50
   <LootPinBall>k__BackingField: {fileID: 11400000, guid: 72592f0ab12524d4a8cbe4a921492288, type: 2}
-  <LootItem>k__BackingField: {fileID: 11400000, guid: 38ab19a98b08a804db0520d5d2892a1b, type: 2}
+  <LootItem>k__BackingField: {fileID: 11400000, guid: d58d8cee00fd7da499f03753ae1d0870, type: 2}

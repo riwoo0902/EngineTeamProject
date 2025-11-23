@@ -22,17 +22,18 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private Tween _failTween;
     public void Init(ItemSO itemData)
     {
+        _button = GetComponent<Button>();
+        _soundPlayer = GetComponent<SoundPlayer>();
+        _itemInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
+        _img.gameObject.SetActive(true);
+        _button.interactable = true;
+
         _itemData = itemData;
         _img.sprite = _itemData.itemIcon;
         _price = _itemData.itemPrice;
         _nameText.text = _itemData.itemName;
 
-        _button = GetComponent<Button>();
         _scale = transform.localScale;
-        _button = GetComponent<Button>();
-        _scale = transform.localScale;
-        _soundPlayer = GetComponent<SoundPlayer>();
-        _itemInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
     }
 
     public void BtnClick()
