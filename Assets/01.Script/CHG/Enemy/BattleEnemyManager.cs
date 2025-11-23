@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-//스테이지 데이터에 있는 에너미들 랜덤 생성, 남는 애들 UI로, 에너미 죽을 시 남은 자리에 푸쉬
 
+//스테이지 데이터에 있는 에너미들 랜덤 생성, 남는 애들 UI로, 에너미 죽을 시 남은 자리에 푸쉬
 public class BattleEnemyManager : MonoBehaviour
 {
     [SerializeField] private Image EnemyUIPrefab;
@@ -21,17 +22,16 @@ public class BattleEnemyManager : MonoBehaviour
 
     public Dictionary<int, EnemySlot> EnemySlots = new(); //Enemy위치들과 위치에 Enemy존재 여부
 
-
     public Player Player { get; private set; }
     private EnemyTurnManager _turnManager;
     private int _enemyKillCount = 0;
 
-    
+    private Queue<Enemy> _deadEnemiesToReplace = new Queue<Enemy>();
+
     //생성되는 애들의 EnemyScript에 정보 넣어주기, ActionSystem에 EnemyTurn연결
     public void Init(BattleStageDataSO stageData, BattleStageContect contect)
     {
         _contect = contect;
-
         Player = contect.Player;
 
         //처음 시작 할 때 Enemy 세팅
@@ -44,9 +44,7 @@ public class BattleEnemyManager : MonoBehaviour
 
         //EnemyUI 생성
         NextEnemyUISetting();
-
-        _enemyKillCount = stageData.EmergeCount-1;
-
+        _enemyKillCount = stageData.EmergeCount - 1;
     }
 
     //Enemy스크립트에 Stagenemy에 있는 EnemyData넣어주기
@@ -55,7 +53,6 @@ public class BattleEnemyManager : MonoBehaviour
         this._stageData = stageData;
         try
         {
-            
             //출현 에너미중 랜덤으로 골라 스테이지 등장 Enemy에 푸쉬
             for (int i = 0; i < _stageData.EmergeCount; i++)
                 _nextEnemy.Push(_stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)]);
@@ -65,7 +62,7 @@ public class BattleEnemyManager : MonoBehaviour
                 _lootCoin += item.LootCoin;
             }
 
-            //Enemy위치 가져오기
+            //EnemyPos 위치 가져오기
             Transform[] enemyPos = EnemyPosGroup.GetComponentsInChildren<Transform>()
                 .Where(t => t != EnemyPosGroup.transform) //PosGroup 자신은 제외 
                 .ToArray();
@@ -96,7 +93,7 @@ public class BattleEnemyManager : MonoBehaviour
                 slot.CurUse = enemy;
                 EnemySlots[i - 1].CurUse = slot.CurUse;
 
-                enemy.OnEnemyDead += EnemyRePlace;
+                enemy.OnEnemyDead += EnemyDeadHandler;
             }
 
         }
@@ -108,8 +105,6 @@ public class BattleEnemyManager : MonoBehaviour
 
         return true;
     }
-
-
 
 
     // EnemyUI 생성 및 Sprite변경, nextEnemyUiStack에 푸쉬
@@ -125,53 +120,71 @@ public class BattleEnemyManager : MonoBehaviour
         }
     }
 
-    //Enemy사망 시 죽은 Enemy스크립트에 새 EnemyData적용, 새 Enemy위치이동 및 슬롯 바꾸기
-    private void EnemyRePlace(Enemy enemy)
+   
+    private void EnemyDeadHandler(Enemy enemy)
     {
-        if (_enemyKillCount <= 0)
+        _deadEnemiesToReplace.Enqueue(enemy);
+
+
+        var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy);
+        if (pairEnemy.Value != null)
         {
+            EnemySlots[pairEnemy.Key].CurUse = null;
             StageClear();
+            
+
         }
-        _enemyKillCount--;
-
-        var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy); //enemy가 현재 있는 칸 key가져오기
-        EnemySlots[pairEnemy.Key].CurUse = null;
-        //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제
-        if (_nextEnemy.Count == 0) return;
+    }
 
 
-        // 위치이동 및 슬롯 바꾸기
-        foreach (var slot in EnemySlots)
+    public IEnumerator HandleReplacementsRoutine()
+    {
+        while (_deadEnemiesToReplace.Count > 0)
         {
-            if (!slot.Value.IsUse) //슬롯에 요소가 없다면
-            {
-                slot.Value.CurUse = enemy;
+            Enemy enemy = _deadEnemiesToReplace.Dequeue();
 
-                enemy.transform.position = slot.Value.Pos.transform.position;
-                break;
+            if (_enemyKillCount <= 0)
+            {
+                StageClear();
+                continue;
+            }
+            _enemyKillCount--;
+
+            if (_nextEnemy.Count == 0) continue;
+
+            EnemySlot targetSlot = null;
+
+            foreach (var slot in EnemySlots)
+            {
+                if (slot.Value.CurUse == null) // 슬롯이 비어 있다면
+                {
+                    targetSlot = slot.Value;
+                    break;
+                }
+            }
+
+            if (targetSlot == null) continue;
+
+ 
+            yield return enemy.EnemyMove(targetSlot);
+
+            targetSlot.CurUse = enemy;
+            enemy.Init(_nextEnemy.Pop(), _contect);
+
+            if (_nextEnemyUI.Count > 0)
+            {
+                Image img = _nextEnemyUI.Pop();
+                Color color = img.color;
+                color.a = 0f;
+                img.color = color;
             }
         }
-
         
-
-        enemy.Init(_nextEnemy.Pop(), _contect);
-
-
-        //생성된 EnemyUI 투명화 
-        if (_nextEnemyUI.Count > 0)
-        {
-            Image img = _nextEnemyUI.Pop();
-            Color color = img.color;
-            color.a = 0f;
-            img.color = color;
-        }
     }
 
     private void StageClear()
     {
         EnemyDataSO data = _stageData.EmergeEnemy[Random.Range(0, _stageData.EmergeEnemy.Count)];
         _contect.UIManager.StageClear(_lootCoin, data.LootItem, data.LootPinBall);
-
-
     }
 }

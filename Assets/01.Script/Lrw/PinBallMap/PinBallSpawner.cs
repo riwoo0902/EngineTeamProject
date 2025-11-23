@@ -1,37 +1,48 @@
 using System;
+using _01.Script.Lrw.Manager;
 using _01.Script.Lrw.PinBallCompo;
+using _01.Script.Lrw.PinBallCompo.FSM;
 using _01.Script.Lrw.UI.PinBalls;
+using Custom.MonoSingleton;
 using Lrw_PinBall;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallMap
 {
-    public class PinBallSpawner : MonoBehaviour
+    public class PinBallSpawner : MonoSingleton<PinBallSpawner>
     {
-        public static PinBallSpawner Instance { get; private set; }
         [SerializeField] private PinBallBase currentPinBall;
-        
-        private void Singleton()
+        private GameObject pinBallGameObject;
+        private bool _canSpawn = true;
+
+        public void SetCanSpawn(bool canSpawn) =>  _canSpawn = canSpawn;
+        protected override void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-        private void Awake()
-        {
-            Singleton();
+            base.Awake();
+            
 
         }
         
         [ContextMenu("Spawn")]
         public void PinBallSpawn()
         {
-            GameObject pinBallGameObject = null;
+            GameManager.Instance.state = PinBallStates.Idle;
+            if (pinBallGameObject != null)
+            {
+                Destroy(pinBallGameObject);
+                pinBallGameObject = null;
+            }
+
+            if (!_canSpawn)
+            {
+                return;
+            }
+            if (PinBallUIManager.Instance.CurrentHavePinBalls.Count == 0)
+            {
+                SlotNull();
+                return;
+            }
+            
             try
             {
                 PinBallSO pinBallSo = PinBallUIManager.Instance.CurrentHavePinBalls[0];
@@ -40,7 +51,7 @@ namespace _01.Script.Lrw.PinBallMap
                 if (pinBallSo.PinBallImage == null) throw new Exception("pinBallSo.PinBallImage is null");
 
                 pinBallGameObject = Instantiate(pinBallSo.BallPrefab, transform);
-
+                
                 PinBallBase pinBallBase = pinBallGameObject.GetComponent<PinBallBase>();
                 if (pinBallBase == null) throw new Exception("pinBallBase is null");
 
@@ -52,8 +63,12 @@ namespace _01.Script.Lrw.PinBallMap
                 Debug.Log(e.Message);
                 currentPinBall = null;
                 if(pinBallGameObject != null) Destroy(pinBallGameObject);
-                return;
             }
+        }
+
+        private void SlotNull()
+        {
+            Debug.Log("PinBall All Use");
         }
         
     }

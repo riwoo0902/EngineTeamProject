@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _01.Script.Lrw.Inventory;
+using _01.Script.Lrw.PinBallMap;
 using _01.Script.Lrw.UI.PinBalls.PinBallSlot;
 using Lrw_PinBall;
 using UnityEngine;
@@ -12,9 +14,9 @@ namespace _01.Script.Lrw.UI.PinBalls
     {
         [field:SerializeField] public List<PinBallSO> CurrentHavePinBalls { get; private set; } = new();
 
-        [SerializeField] private MainPinBallSlot nowPinBallSlot;
-        [SerializeField] private List<SubPinBallSlot> pinballSlots = new();
-        
+        private MainPinBallSlot nowPinBallSlot;
+        private List<SubPinBallSlot> pinballSlots = new();
+        private EnemyTurnManager _enemyTurnManagerl;
         private bool NoHavePinball => CurrentHavePinBalls.Count == 0;
         
         protected override void Awake()
@@ -25,9 +27,21 @@ namespace _01.Script.Lrw.UI.PinBalls
             
         }
 
+        private void Start()
+        {
+            _enemyTurnManagerl = FindAnyObjectByType<EnemyTurnManager>();
+            _enemyTurnManagerl.EnemyTurnEnd += ReSet;
+        }
+
         private void Update()
         {
             SlotSetting();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            _enemyTurnManagerl.EnemyTurnEnd -= ReSet;
         }
 
         private void SlotSetting()
@@ -60,7 +74,9 @@ namespace _01.Script.Lrw.UI.PinBalls
         [ContextMenu("Reset PinBalls")]
         public void ReSet()
         {
+            PinBallSpawner.Instance.SetCanSpawn(true);
             CurrentHavePinBalls = PinballInventory.Instance.inventory.ToArray().ToList();
+            PinBallSpawner.Instance.PinBallSpawn();
         }
         
         public void UsePinBall()

@@ -6,6 +6,7 @@ namespace _01.Script.Lrw.UI
 {
     public class UIOnOff : MonoBehaviour
     {
+        [SerializeField] private bool startState = false;
         [SerializeField] private Transform offTarget;
         [SerializeField] private float duration = 1f;
         [SerializeField] private Ease onease = Ease.OutQuart;
@@ -17,9 +18,15 @@ namespace _01.Script.Lrw.UI
         private bool _isMove = false;
         private void Awake()
         {
+            if (offTarget == null)
+            {
+                Debug.Log("offTarget is null");
+                return;
+            }
             _onPos =  transform.position;
             _offPos = offTarget.position;
-            _isOn = false;
+            _isOn = startState;
+            SetOnOff(!_isOn);
         }
         
         [ContextMenu("ChangeOnOff")]
@@ -30,6 +37,11 @@ namespace _01.Script.Lrw.UI
         
         public void SetOnOff(bool on)
         {
+            if (offTarget == null)
+            {
+                Debug.Log("offTarget is null");
+                return;
+            }
             if(_isMove) return;
             _isOn = on;
             _isMove = true;

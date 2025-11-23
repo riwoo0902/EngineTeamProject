@@ -4,12 +4,13 @@ using System.Linq;
 using _01.Script.Lrw.Inventory;
 using Lrw_PinBall;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [Serializable]
 public class BattleStageDatas
 {
-    public List<BattleStageDataSO> EnemyData;
+    public List<BattleStageDataSO> StageData;
 }
 
 public class StageDataManager : MonoBehaviour
@@ -19,13 +20,14 @@ public class StageDataManager : MonoBehaviour
     public List<C_EventSO> EventData;
     public List<PinBallSO> PinBallData; //사용되는 핀볼
     public List<ItemSO> ItemData; //사용되는 아이템
-
+    public BattleStageDatas BossStageData;
     //현재 레벨에 맞춰 Enemy반환
     public BattleStageDataSO GetBattleData()
     {
-        BattleStageDatas stageDatas = EnemyStageData[StageManager.Instance.Level];
-        int r = Random.Range(0, stageDatas.EnemyData.Count);
-        return stageDatas.EnemyData[r];
+        
+        BattleStageDatas stageDatas = EnemyStageData[StageManager.Instance.Level / 5];
+        int r = Random.Range(0, stageDatas.StageData.Count);
+        return stageDatas.StageData[r];
     }
 
     //랜덤으로 골라서 반환, 반환한 Event는 삭제
@@ -61,5 +63,10 @@ public class StageDataManager : MonoBehaviour
         }
 
         return pinBalls.ToArray();
+    }
+
+    public BattleStageDataSO GetBossData()
+    {
+        return BossStageData.StageData[0];
     }
 }

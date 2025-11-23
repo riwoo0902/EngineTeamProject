@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _01.Script.CHG;
 using UnityEngine;
 
 public class PlayerManager : MonoSingleton<PlayerManager>
@@ -97,6 +98,12 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         _gold -= value;
         OnValueChanged?.Invoke();
         return true;
+    }
+
+    public void SetHealth(int maxHealth, int curHelath)
+    {
+        _maxHealth = Mathf.Clamp(maxHealth, 1, 999);
+        _curHealth = Mathf.Clamp(curHelath, 1, _maxHealth);
     }
 
     private int itemValue_Health = 0;

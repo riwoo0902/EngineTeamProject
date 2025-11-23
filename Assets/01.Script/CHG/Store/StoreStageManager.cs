@@ -9,6 +9,7 @@ public class StoreStageManager : MonoBehaviour
     [SerializeField] private GameObject PinBallGroup;
     [SerializeField] private GameObject ItemGroup;
     [SerializeField] private GameObject HealBtn;
+    [SerializeField] private Button ClearBtn;
     private List<StorePinBallBtn> _pinBallBtn; // 버튼 스크립트로 수정
     private List<StoreItemBtn> _itemBtn;
 
@@ -27,6 +28,8 @@ public class StoreStageManager : MonoBehaviour
         ItemBtnSetting();
 
         HealBtn.GetComponent<StoreHealBtn>().Init();
+        ClearBtn.onClick.AddListener(() => StageManager.Instance.SceneChange(MapType.MapChoice));
+
     }
 
     public void PinBallBtnSetting()

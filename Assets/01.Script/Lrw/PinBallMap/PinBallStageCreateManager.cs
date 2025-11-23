@@ -3,6 +3,7 @@ using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.Manager;
 using _01.Script.Lrw.PinBallCompo.FSM;
+using _01.Script.Lrw.UI.PinBalls;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -39,13 +40,18 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void Start()
         {
-            CreatMap(testPrefab);
+            //CreatMap(testPrefab);
             _player = FindAnyObjectByType<Player>();
         }
 
         private void AddDamage(int damage)
         {
             _player.AttackDamageCalculation(EnemyType.None, damage);
+        }
+
+        private void ReLoadPinBallSlot()
+        {
+            
         }
 
         public void CreatMap(GameObject mapPrefab)

@@ -1,33 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Script.CHG;
 
 public class ActionSystem : MonoSingleton<ActionSystem>
 {
-    private List<GameAction> _reactions = null; //ÇöÀç ½ÇÇàÁßÀÎ »çÀü,½ÇÇà,»çÈÄ¿¡¼­ Ã³¸®ÇÒ GameActionÀ» ´ã´Â ¸®½ºÆ®
-    public bool IsPerforming { get; private set; } = false; //ÇöÀç ´Ù¸¥ Action ½ÇÇà ¿©ºÎ
+    private List<GameAction> _reactions = null; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ GameActionï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    public bool IsPerforming { get; private set; } = false; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ Action ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    //GameActionÀ» »ó¼Ó¹ÞÀº TypeÀÇ ¾×¼ÇÀÌ ½ÇÇàµÉ ¶§ »çÀü¿¡ ½ÇÇàµÉ ÇÔ¼öµé
+    //GameActionï¿½ï¿½ ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ Typeï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
     private static Dictionary<Type, List<Action<GameAction>>> _preSubs = new(); 
 
-    //GameActionÀ» »ó¼Ó¹ÞÀº TypeÀÇ ¾×¼ÇÀÌ ½ÇÇàµÉ ¶§ »çÈÄ¿¡ ½ÇÇàµÉ ÇÔ¼öµé
+    //GameActionï¿½ï¿½ ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ Typeï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
     private static Dictionary<Type, List<Action<GameAction>>> _postSubs = new();
 
-    //GameActionÀ» »ó¼Ó¹ÞÀº TypeÀÇ ¾×¼ÇÀÌ ½ÇÇàµÉ ¶§ ½ÇÇàµÇ´Â ÇÔ¼öµé
-    private static Dictionary<Type, Func<GameAction, IEnumerator>> _performers = new(); //½ÇÇà ½Ã ¼öÇàÇÒ Çàµ¿
+    //GameActionï¿½ï¿½ ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ Typeï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
+    private static Dictionary<Type, Func<GameAction, IEnumerator>> _performers = new(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿
 
     protected override void Awake()
     {
         base.Awake();
     }
 
-    //¿ÜºÎ¿¡¼­ ¾×¼Ç ½ÇÇàÀ» ¿äÃ»
+    //ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
     public void Perform(GameAction action, Action OnPerformFinished = null)
     {
-        if (IsPerforming) return; //¾×¼ÇÁß Áßº¹½ÇÇà ¹æÁö
+        if (IsPerforming) return; //ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         IsPerforming = true; 
 
-        //ÀÔ·Â¹ÞÀº GameActionÀ» Flow·Î ½ÇÇà
+        //ï¿½Ô·Â¹ï¿½ï¿½ï¿½ GameActionï¿½ï¿½ Flowï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(Flow(action, () =>
         {
             IsPerforming = false;
@@ -36,41 +37,41 @@ public class ActionSystem : MonoSingleton<ActionSystem>
         ));
     }
 
-    //½Ç½Ã°£À¸·Î ¹ÝÀÀ Ãß°¡
+    //ï¿½Ç½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     public void AddReaction(GameAction gameAction)
     {
         _reactions?.Add(gameAction);
     }
 
-    //¾×¼Ç ½ÇÇà
+    //ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½
     private IEnumerator Flow(GameAction action, Action OnFlowFinished = null)
     {
-        _reactions = action.PreReactions; //_reactions List¸¦ ÇØ´ç ¾×¼Ç¿¡ ¹Ì¸® Á¤ÇØ³õÀº »çÀü¸®¾×¼ÇÀ¸·Î ÃÊ±âÈ­
-        PerformSubscribers(action, _preSubs); //_preSubs¿¡ µî·ÏµÈ »çÀü ±¸µ¶ÀÚ¸¦ È£Ãâ
-        yield return PerformReactions(); //_reactions¿¡ ´ã±ä ¾×¼Ç ¸ðµÎ ½ÇÇà
+        _reactions = action.PreReactions; //_reactions Listï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½×¼Ç¿ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        PerformSubscribers(action, _preSubs); //_preSubsï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ È£ï¿½ï¿½
+        yield return PerformReactions(); //_reactionsï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        _reactions = action.PerformReactions; //_reactions List¸¦ action.PerformReactions·Î ÃÊ±âÈ­
-        yield return PerformPerformer(action); //_performsµñ¼Å³Ê¸®¿¡¼­ ÀÌ ¾×¼Ç Å¸ÀÔ¿¡ ¸Â´Â ÇÙ½É
-        yield return PerformReactions(); //_reactions¿¡ ´ã±ä ºÎ°¡¾×¼Ç ¸ðµÎ ½ÇÇà
+        _reactions = action.PerformReactions; //_reactions Listï¿½ï¿½ action.PerformReactionsï¿½ï¿½ ï¿½Ê±ï¿½È­
+        yield return PerformPerformer(action); //_performsï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¼ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½Â´ï¿½ ï¿½Ù½ï¿½
+        yield return PerformReactions(); //_reactionsï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Î°ï¿½ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        _reactions = action.PostReactions; //_reactions List¸¦ ÇØ´ç ¾×¼Ç¿¡ ¹Ì¸® Á¤ÇØ³õÀº »çÈÄ¸®¾×¼ÇÀ¸·Î ÃÊ±âÈ­
-        PerformSubscribers(action, _postSubs);  //_preSubs¿¡ µî·ÏµÈ »çÈÄ ±¸µ¶ÀÚ¸¦ È£Ãâ
-        yield return PerformReactions(); //reactions¿¡ ´ã±ä ¾×¼Ç ¸ðµÎ ½ÇÇà
+        _reactions = action.PostReactions; //_reactions Listï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½×¼Ç¿ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        PerformSubscribers(action, _postSubs);  //_preSubsï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ È£ï¿½ï¿½
+        yield return PerformReactions(); //reactionsï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        OnFlowFinished?.Invoke(); //Perform¿¡¼­ ¹ÞÀº ½ÇÇàÁß Ç¥½Ã False·Î ¹Ù²Ù±â
+        OnFlowFinished?.Invoke(); //Performï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ Falseï¿½ï¿½ ï¿½Ù²Ù±ï¿½
     }
 
-    //_performers µñ¼Å³Ê¸®¿¡ µî·ÏµÈ ¸Â´Â Å¸ÀÔÀÇ ÄÚµå ½ÇÇà
+    //_performers ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½Â´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
     private IEnumerator PerformPerformer(GameAction action)
     {
         Type type = action.GetType();
         if (_performers.ContainsKey(type))
         {
-            yield return _performers[type](action); //ÇØ´ç Å¸ÀÔÀÇ action ½ÇÇà
+            yield return _performers[type](action); //ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ action ï¿½ï¿½ï¿½ï¿½
         }
     }
 
-        //Æ¯Á¤ Å¸ÀÌ¹Ö¿¡ µî·ÏµÈ ¸®¾×¼Ç ½ÇÇà
+        //Æ¯ï¿½ï¿½ Å¸ï¿½Ì¹Ö¿ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void PerformSubscribers(GameAction action, Dictionary<Type, List<Action<GameAction>>> subs) 
     {
         Type type = action.GetType();
@@ -78,7 +79,7 @@ public class ActionSystem : MonoSingleton<ActionSystem>
         {
             foreach (var sub in subs[type])
             {
-                sub(action); //pre³ª postµñ¼Å³Ê¸®¿¡ µî·ÏµÈ ÇÔ¼öµé ½ÇÇà
+                sub(action); //preï¿½ï¿½ postï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
         }
     }
@@ -86,60 +87,62 @@ public class ActionSystem : MonoSingleton<ActionSystem>
 
     private IEnumerator PerformReactions()
     {
-        //_reactions ¾È¿¡ GameActionµé ¸ðµÎ ½ÇÇà
+        //_reactions ï¿½È¿ï¿½ GameActionï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         foreach (var reaction in _reactions)
         {
             yield return Flow(reaction);
         }
     }
 
-    //Æ¯Á¤ Å¸ÀÔÀÇ ½ÇÇà ·ÎÁ÷À» _performers µñ¼Å³Ê¸®¿¡ µî·Ï
+    //Æ¯ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ _performers ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public static void AttachPerformer<T>(Func<T, IEnumerator> performer) where T : GameAction
     {
-        //Performerµî·Ï
-        Type type = typeof(T); //Å¸ÀÔ °¡Á®¿À±â
+        //Performerï¿½ï¿½ï¿½
+        Type type = typeof(T); //Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        IEnumerator wrappedPerformer(GameAction action) => performer((T)action); //Æ¯Á¤ Å¸ÀÔÀ» ¹Þ¾Æ¼­ ½ÇÇàÇÏ´Â ÇÔ¼ö
+        IEnumerator wrappedPerformer(GameAction action) => performer((T)action); //Æ¯ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
         
-        //ÇØ´ç Å¸ÀÔÀÌ ÀÌ¹Ì ÀÖÀ¸¸é µ¤¾î¾²±â
+        //ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¾²ï¿½ï¿½
         if (_performers.ContainsKey(type)) _performers[type] = wrappedPerformer; 
-        else _performers.Add(type, wrappedPerformer); //¾ø´Ù¸é »ý¼º
+        else _performers.Add(type, wrappedPerformer); //ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    //_performers¿¡ ÀúÀåµÈ ÇÔ¼ö Á¦°Å
+    //_performersï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
     public static void DetachPerFormer<T>() where T : GameAction
     {
-        Type type = typeof(T); //Å¸ÀÔ °¡Á®¿À±â
-        //ÇØ´ç Å¸ÀÔÀÌ ¸ñ·Ï¿¡ ÀÖÀ¸¸é Remove
+        Type type = typeof(T); //Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ø´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Remove
         if (_performers.ContainsKey(type)) _performers.Remove(type);
     }
 
     
-    //±¸µ¶ÁßÀÎ ÇÔ¼öµéÀ» ÀúÀåÇÏ´Â µñ¼Å³Ê¸®¿¡ ÀÛµ¿ Å¸ÀÌ¹Ö¿¡ µû¶ó ÀúÀåÇÏ±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½Ûµï¿½ Å¸ï¿½Ì¹Ö¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
     public static void SubscribeReaction<T>(Action<T> reaction, ReactionTiming timing) where T : GameAction
     {
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? _preSubs : _postSubs;
 
         void wrappedReaction(GameAction action) => reaction((T)action);
-        if (subs.ContainsKey(typeof(T))) //ÀÖ´Ù¸é Ãß°¡
+        if (subs.ContainsKey(typeof(T))) //ï¿½Ö´Ù¸ï¿½ ï¿½ß°ï¿½
         {
             subs[typeof(T)].Add(wrappedReaction);
         }
-        else //¾ø´Ù¸é »õ·Î ¸¸µé±â
+        else //ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             subs.Add(typeof(T), new());
             subs[typeof(T)].Add(wrappedReaction);
         }
     }
 
-    //±¸µ¶ÀÚ Á¦°Å
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public static void UnsubscribeReaction<T>(Action<T> reaction, ReactionTiming timing) where T :GameAction
     {
+        
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? _preSubs : _postSubs;
-        if (subs.ContainsKey(typeof(T))) //ÀÔ·Â ¹ÞÀº Å¸ÀÔÀÇ µ¿ÀÛÀÌ ÀÖ´Ù¸é »èÁ¦
+        if (subs.ContainsKey(typeof(T))) //ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
             void wrappedReaction(GameAction action) => reaction((T)action);
             subs[typeof(T)].Remove(wrappedReaction);
+            
         }
     }
 }
