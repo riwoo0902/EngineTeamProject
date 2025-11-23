@@ -127,13 +127,11 @@ public class BattleEnemyManager : MonoBehaviour
 
 
         var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy);
-        if (pairEnemy.Value != null)
-        {
-            EnemySlots[pairEnemy.Key].CurUse = null;
-            StageClear();
-            
-
-        }
+        //if (pairEnemy.Value != null)
+        //{
+        //    EnemySlots[pairEnemy.Key].CurUse = null;
+        //    StageClear();
+        //}
     }
 
 
@@ -143,6 +141,7 @@ public class BattleEnemyManager : MonoBehaviour
         {
             Enemy enemy = _deadEnemiesToReplace.Dequeue();
 
+            Debug.Log(_enemyKillCount);
             if (_enemyKillCount <= 0)
             {
                 StageClear();
