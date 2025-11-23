@@ -1,3 +1,5 @@
+using _01.Script.Lrw.Manager;
+using _01.Script.Lrw.PinBallCompo.FSM;
 using UnityEngine;
 
 public class BattleTurnButton : MonoBehaviour
@@ -13,7 +15,7 @@ public class BattleTurnButton : MonoBehaviour
     public void PlayerTurnButton()
     {
         if (!_turnManager.CurTurn || _contect.Player.PlayerTarget == null) return;
-
+        if(GameManager.Instance.state != PinBallStates.Idle) return;
         //Debug.Log($"CurTurn: {(_turnManager.CurTurn ? "Player" : "Enemy")}");
         //PlayerTurnGA playerTurnGA = new();
         //ActionSystem.Instance.Perform(playerTurnGA);
@@ -26,7 +28,7 @@ public class BattleTurnButton : MonoBehaviour
 
         Debug.Log($"CurTurn: {(_turnManager.CurTurn ? "Player" : "Enemy")}");
         EnemyMoveGA enemyMoveGA = new();
-        ActionSystem.Instance.Perform(enemyMoveGA); //EnemyTurn½ÇÇà
+        ActionSystem.Instance.Perform(enemyMoveGA); //EnemyTurnï¿½ï¿½ï¿½ï¿½
 
     }
 }

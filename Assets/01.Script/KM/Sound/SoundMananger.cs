@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -6,13 +7,14 @@ namespace _01.Script.KM.Sound
     public class SoundMananger : MonoBehaviour
     {
         [field:SerializeField] public AudioMixer AudioMixer { get; private set; }
-
+        private int a = 12;
         public static SoundMananger Instacne;
         private void Start()
         {
             if (Instacne == null)
             {
                 Instacne = this;
+                transform.SetParent(null);
                 DontDestroyOnLoad(gameObject);
             }
             else
