@@ -102,5 +102,5 @@ namespace Utils.Toolbar
             }
         }
     }
-#endif
 }
+#endif
