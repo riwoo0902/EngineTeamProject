@@ -16,6 +16,7 @@ namespace _01.Script.Lrw.CustomSoundManager
         {
             _audioSource = GetComponent<AudioSource>();
             _basePitch = _audioSource.pitch;
+            
         }
 
         private void Update()

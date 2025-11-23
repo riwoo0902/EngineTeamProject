@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using _01.Script.KM.Sound;
 using Custom.MonoSingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,20 +10,16 @@ namespace _01.Script.Lrw.CustomSoundManager
     {
         //[SerializeField] private AudioData[] audioDatas;
         //private Dictionary<string, (AudioClip, float, AudioType)> _soundDictionary = new();
-
-        [Header("Volume")]
-        [Range(0, 1)]
-        public float MasterVolume = 1;
-        [Range(0, 1)]
+        
+        /*public float MasterVolume = 1;
         public float BGMVolume = 1;
-        [Range(0, 1)]
-        public float SFXVolume = 1;
-        protected override void Awake()
+        public float SFXVolume = 1;*/
+        /*protected override void Awake()
         {
             base.Awake();
             
             //SetAudioDatas();
-        }
+        }*/
         /*private void SetAudioDatas()
         {
             _soundDictionary.Clear();
@@ -52,9 +48,7 @@ namespace _01.Script.Lrw.CustomSoundManager
         }*/
         public float GetVolume(AudioType a)
         {
-            float volume = MasterVolume;
-            if (a == AudioType.BGM) volume *= BGMVolume;
-            else if (a == AudioType.SFX) volume *= SFXVolume;
+            SoundMananger.Instacne.AudioMixer.GetFloat(a.ToString(),out float volume);
             return volume;
         }
 
@@ -76,31 +70,12 @@ namespace _01.Script.Lrw.CustomSoundManager
             }
             return true;
         }*/
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
 
-        public void ChangeMasterVolume(Slider slider)
-        {
-            MasterVolume = slider.value;
-        }
-        public void ChangeBGMVolume(Slider slider)
-        {
-            BGMVolume = slider.value;
-        }
-        public void ChangeSFXVolume(Slider slider)
-        {
-            SFXVolume = slider.value;
-        }
-        public void SetMasterVolume(float value)
-        {
-            MasterVolume = value;
-        }
-        public void SetBGMVolume(float value)
-        {
-            BGMVolume = value;
-        }
-        public void SetSFXVolume(float value)
-        {
-            SFXVolume = value;
-        }
+        
     }
 
     [Serializable]

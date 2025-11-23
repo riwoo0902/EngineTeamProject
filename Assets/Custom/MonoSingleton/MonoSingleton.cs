@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Custom.MonoSingleton
 {
-    public abstract class MonoSingleton<T> : MonoBehaviour where T : class
+    public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
         [SerializeField] private SingletonSetting singletonSetting;
         public static T Instance { get; private set; }
@@ -17,6 +17,7 @@ namespace Custom.MonoSingleton
             if (Instance == null)
             {
                 Instance = this as T;
+                if(Instance == null) Debug.LogError("T Instance is null");
                 if (singletonSetting.DontDestroyLoadObject)
                 {
                     transform.SetParent(null);

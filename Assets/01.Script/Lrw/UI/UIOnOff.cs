@@ -18,6 +18,11 @@ namespace _01.Script.Lrw.UI
         private bool _isMove = false;
         private void Awake()
         {
+            if (offTarget == null)
+            {
+                Debug.Log("offTarget is null");
+                return;
+            }
             _onPos =  transform.position;
             _offPos = offTarget.position;
             _isOn = startState;
@@ -32,6 +37,11 @@ namespace _01.Script.Lrw.UI
         
         public void SetOnOff(bool on)
         {
+            if (offTarget == null)
+            {
+                Debug.Log("offTarget is null");
+                return;
+            }
             if(_isMove) return;
             _isOn = on;
             _isMove = true;

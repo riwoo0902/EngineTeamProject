@@ -61,7 +61,11 @@ public class Player : Agent
         //AttackDamageCalculation(PlayerTarget.EnemyType, AttackDamage);
     }
 
-
+    public void SetAttackDamage(int a)
+    {
+        AttackDamage = a;
+        _contect.UIManager.DamageTextChange(AttackDamage);
+    }
 
     public void AttackDamageCalculation(AttackType attackType, int baseDamage)
     {
