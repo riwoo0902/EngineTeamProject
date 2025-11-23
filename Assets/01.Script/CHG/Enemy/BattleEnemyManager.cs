@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _01.Script.Lrw.UI.PinBalls;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -140,18 +139,7 @@ public class BattleEnemyManager : MonoBehaviour
 
     public IEnumerator HandleReplacementsRoutine()
     {
-
-        var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy); //enemy가 현재 있는 칸 key가져오기
-        EnemySlots[pairEnemy.Key].CurUse = null;
-        
-        PinBallUIManager.Instance.ReSet();
-        
-        //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제
-        if (_nextEnemy.Count == 0) yield break;
-
-
-        // 위치이동 및 슬롯 바꾸기
-        foreach (var slot2 in EnemySlots)
+        while (_deadEnemiesToReplace.Count > 0)
         {
             Enemy enemy = _deadEnemiesToReplace.Dequeue();
 
