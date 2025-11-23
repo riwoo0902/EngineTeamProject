@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PinBallSo>k__BackingField: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
-  <Damage>k__BackingField: 0
 --- !u!114 &2971569714238444186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +312,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
