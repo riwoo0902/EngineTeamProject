@@ -55,6 +55,8 @@ public class MapManager : MonoBehaviour
         {
             stageTree.Generate(null);
             InitToRoot();
+            Save();
+            Debug.Log("AAAAAAAAAAA");
             _currentStage.GetComponent<SaveStageData>().typeThis = MapType.Battle;
             _currentStage.GetComponent<SaveStageData>().ChoiceStage();
         }
@@ -234,7 +236,6 @@ public class MapManager : MonoBehaviour
         if (playerMarker != null && _currentStage != null)
         {
             playerMarker.DOMove(_currentStage.transform.position,3f);
-            MapButtonMananger.Instance.saveData = _currentStage.GetComponent<SaveStageData>();
         }
     }
 }
