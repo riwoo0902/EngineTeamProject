@@ -16,4 +16,4 @@ MonoBehaviour:
   <EmergeEnemy>k__BackingField:
   - {fileID: 11400000, guid: 90df26dea7be3d34d98083744bd0fb87, type: 2}
   <StartEnemyCount>k__BackingField: 3
-  <PinBallMap>k__BackingField: {fileID: 0}
+  <PinBallMap>k__BackingField: {fileID: 440758252238060653, guid: 572fe9fd818add546be470aa4404b040, type: 3}

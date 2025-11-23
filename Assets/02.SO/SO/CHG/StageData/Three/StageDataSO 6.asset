@@ -38,4 +38,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cfe27d9790163b94e90bb4c6312ee53e, type: 2}
   - {fileID: 11400000, guid: 90df26dea7be3d34d98083744bd0fb87, type: 2}
   <StartEnemyCount>k__BackingField: 3
-  <PinBallMap>k__BackingField: {fileID: 0}
+  <PinBallMap>k__BackingField: {fileID: 440758252238060653, guid: c4305f51ac711ba4ea8ef283ea5b43b0, type: 3}
