@@ -130,32 +130,28 @@ public class BattleEnemyManager : MonoBehaviour
         var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy);
         if (pairEnemy.Value != null)
         {
-<<<<<<< Updated upstream
             EnemySlots[pairEnemy.Key].CurUse = null;
-=======
             StageClear();
             
->>>>>>> Stashed changes
+
         }
     }
 
-<<<<<<< Updated upstream
+
     public IEnumerator HandleReplacementsRoutine()
     {
-        while (_deadEnemiesToReplace.Count > 0)
-=======
+
         var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy); //enemy가 현재 있는 칸 key가져오기
         EnemySlots[pairEnemy.Key].CurUse = null;
         
         PinBallUIManager.Instance.ReSet();
         
         //NextEnemy가 있으면 죽은 Enemy에 NextEnemy를 Pop해서 생성, NextEnemyList도 가장 끝 UI를 삭제
-        if (_nextEnemy.Count == 0) return;
+        if (_nextEnemy.Count == 0) yield break;
 
 
         // 위치이동 및 슬롯 바꾸기
-        foreach (var slot in EnemySlots)
->>>>>>> Stashed changes
+        foreach (var slot2 in EnemySlots)
         {
             Enemy enemy = _deadEnemiesToReplace.Dequeue();
 
