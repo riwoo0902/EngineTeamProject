@@ -8,6 +8,7 @@ public class CreateStageTree : MonoBehaviour
     [SerializeField] private int countZeropercent = 3;
     [SerializeField] private GameObject StagePrefab;
     [SerializeField] private GameObject LinePrefab;
+    [SerializeField] private GameObject cameraObj;
     [SerializeField] private GameObject Parent;
 
     [SerializeField] private int PercentByNormalStage = 50;
@@ -178,6 +179,7 @@ public class CreateStageTree : MonoBehaviour
         {
             line.EndPoint = childStage;
             line.Dir      = dir;
+            line.CameraObj = cameraObj;
             line.CreateLine();
         }
     }

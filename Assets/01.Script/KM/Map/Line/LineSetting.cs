@@ -6,7 +6,7 @@ public class LineSetting : MonoBehaviour
 {
     public GameObject EndPoint;
     public MapDir Dir;
-
+    public GameObject CameraObj;
     [SerializeField] private float duration = 2f;
     private LineRenderer _lineCompo;
     private Vector2 nowVec;
