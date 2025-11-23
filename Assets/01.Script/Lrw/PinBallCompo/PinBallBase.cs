@@ -25,7 +25,7 @@ namespace _01.Script.Lrw.PinBallCompo
         public float BaseDamage { get; private set; }
         public bool IsEnd { get; private set; } = false;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = GetComponentInChildren<PinBallRenderer>();
@@ -105,14 +105,14 @@ namespace _01.Script.Lrw.PinBallCompo
             Destroy(gameObject);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        protected virtual void OnCollisionEnter2D(Collision2D other)
         {
             EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
             Score += Damage;
             EventBus<ScoreAddEvent>.Raise(new ScoreAddEvent(Damage));
         }
 
-        private void OnDisable()
+        protected virtual void OnDestroy()
         {
             GameManager.Instance.InputSo.OnMousePress -= PinBallShoot;
         }

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _01.Script.Lrw.Inventory;
 using Lrw_PinBall;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -16,12 +14,12 @@ public class BattleStageDatas
 public class StageDataManager : MonoBehaviour
 {
     
-    public List<BattleStageDatas> EnemyStageData; //·¹º§ ´ç ½ºÅ×ÀÌÁöData
+    public List<BattleStageDatas> EnemyStageData; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Data
     public List<C_EventSO> EventData;
-    public List<PinBallSO> PinBallData; //»ç¿ëµÇ´Â ÇÉº¼
-    public List<ItemSO> ItemData; //»ç¿ëµÇ´Â ¾ÆÀÌÅÛ
+    public List<PinBallSO> PinBallData; //ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Éºï¿½
+    public List<ItemSO> ItemData; //ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public BattleStageDatas BossStageData;
-    //ÇöÀç ·¹º§¿¡ ¸ÂÃç Enemy¹ÝÈ¯
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Enemyï¿½ï¿½È¯
     public BattleStageDataSO GetBattleData()
     {
         int n;
@@ -35,7 +33,7 @@ public class StageDataManager : MonoBehaviour
         return stageDatas.StageData[r];
     }
 
-    //·£´ýÀ¸·Î °ñ¶ó¼­ ¹ÝÈ¯, ¹ÝÈ¯ÇÑ Event´Â »èÁ¦
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¯, ï¿½ï¿½È¯ï¿½ï¿½ Eventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public C_EventSO GetEventData()
     {
         int r = Random.Range(0, EventData.Count);
@@ -44,7 +42,7 @@ public class StageDataManager : MonoBehaviour
         return data;
     }
 
-    //»óÇ°ÀÌ Áßº¹µÇÁö ¾Ê°Ô ¹ÝÈ¯
+    //ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½È¯
     public ItemSO[] GetItemData(int n)
     {
         return ItemData

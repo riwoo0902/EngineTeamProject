@@ -12360,52 +12360,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1221518469
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1221518471}
-  - component: {fileID: 1221518470}
-  m_Layer: 0
-  m_Name: StageMananger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1221518470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221518469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf63d66e6d602e645aa179dd30cd9c84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Level>k__BackingField: 0
-  _nextMapType: 0
---- !u!4 &1221518471
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221518469}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.0113454, y: -6.0025916, z: 11.286}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228705554
 GameObject:
   m_ObjectHideFlags: 0
@@ -17305,9 +17259,9 @@ MonoBehaviour:
   cameraObj: {fileID: 1034568615}
   Parent: {fileID: 173107548}
   PercentByNormalStage: 50
-  PercentByShopStage: 10
-  PercentByEventStage: 10
-  PercentByChoiceStage: 30
+  PercentByShopStage: 20
+  PercentByEventStage: 15
+  PercentByChoiceStage: 0
   horizontalSpacing: 3
   verticalSpacing: 3
   origin: {x: 0, y: 0, z: 0}
@@ -21017,7 +20971,6 @@ SceneRoots:
   - {fileID: 742390514}
   - {fileID: 1745058759}
   - {fileID: 1030046345}
-  - {fileID: 1221518471}
   - {fileID: 1034568618}
   - {fileID: 260097537}
   - {fileID: 1111004730}

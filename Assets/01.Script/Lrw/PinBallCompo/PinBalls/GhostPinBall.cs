@@ -1,16 +1,17 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo.PinBalls
 {
     public class GhostPinBall : PinBallBase
     {
-        [SerializeField] private LayerMask noCollisionMask;
-
-        protected override void FixedUpdate()
+        [SerializeField] private float upPower = 5;
+        
+        protected override void OnCollisionEnter2D(Collision2D other)
         {
-            base.FixedUpdate();
-            Physics.IgnoreLayerCollision(transform.gameObject.layer, noCollisionMask, Rigid.linearVelocityY > 0);
+            base.OnCollisionEnter2D(other);
+            Rigid.linearVelocityY = upPower;
+            Rigid.linearVelocityX = 0;
         }
+        
     }
 }

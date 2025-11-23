@@ -29,6 +29,7 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
     private void Start()
     {
         StageDataManager = GetComponent<StageDataManager>();
+        BattleStageLoad();
     }
 
     public void SceneChange(MapType type)

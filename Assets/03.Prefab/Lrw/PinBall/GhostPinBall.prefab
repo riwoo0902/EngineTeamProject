@@ -51,9 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PinBallSo>k__BackingField: {fileID: 11400000, guid: 4215dd8d6f25fed41ae7876ed36ad471, type: 2}
   <Damage>k__BackingField: 0
-  noCollisionMask:
-    serializedVersion: 2
-    m_Bits: 1048576
+  upPower: 10
 --- !u!114 &2971569714238444186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +67,7 @@ MonoBehaviour:
   drawDistance: 5
   ObstacleLayer:
     serializedVersion: 2
-    m_Bits: 1572864
+    m_Bits: 3670016
 --- !u!50 &2108079772765357126
 Rigidbody2D:
   serializedVersion: 5

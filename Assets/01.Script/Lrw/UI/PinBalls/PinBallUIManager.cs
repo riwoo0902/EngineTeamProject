@@ -12,8 +12,7 @@ namespace _01.Script.Lrw.UI.PinBalls
 {
     public class PinBallUIManager : Custom.MonoSingleton.MonoSingleton<PinBallUIManager>
     {
-        [field:SerializeField] public List<PinBallSO> CurrentHavePinBalls { get; private set; } = new();
-
+        public List<PinBallSO> CurrentHavePinBalls { get; private set; } = new();
         private MainPinBallSlot nowPinBallSlot;
         private List<SubPinBallSlot> pinballSlots = new();
         private EnemyTurnManager _enemyTurnManagerl;
@@ -33,7 +32,7 @@ namespace _01.Script.Lrw.UI.PinBalls
             _enemyTurnManagerl = FindAnyObjectByType<EnemyTurnManager>();
             _playerTurnManagerl =  FindAnyObjectByType<PlayerTurnManager>();
             _enemyTurnManagerl.EnemyTurnEnd += ReSet;
-            
+            ReSet();
         }
 
         private void Update()
