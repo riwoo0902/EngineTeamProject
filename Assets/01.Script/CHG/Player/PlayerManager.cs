@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _01.Script.CHG;
 using UnityEngine;
 
 public class PlayerManager : MonoSingleton<PlayerManager>

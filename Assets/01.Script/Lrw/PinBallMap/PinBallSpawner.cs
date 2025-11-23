@@ -31,6 +31,8 @@ namespace _01.Script.Lrw.PinBallMap
         [ContextMenu("Spawn")]
         public void PinBallSpawn()
         {
+            
+            
             GameObject pinBallGameObject = null;
             try
             {

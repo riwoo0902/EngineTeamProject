@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _01.Script.Lrw.Inventory;
@@ -14,7 +15,7 @@ namespace _01.Script.Lrw.UI.PinBalls
 
         [SerializeField] private MainPinBallSlot nowPinBallSlot;
         [SerializeField] private List<SubPinBallSlot> pinballSlots = new();
-        
+        private EnemyTurnManager _enemyTurnManagerl;
         private bool NoHavePinball => CurrentHavePinBalls.Count == 0;
         
         protected override void Awake()
@@ -25,9 +26,21 @@ namespace _01.Script.Lrw.UI.PinBalls
             
         }
 
+        private void Start()
+        {
+            _enemyTurnManagerl = FindAnyObjectByType<EnemyTurnManager>();
+            _enemyTurnManagerl.EnemyTurnEnd += ReSet;
+        }
+
         private void Update()
         {
             SlotSetting();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            _enemyTurnManagerl.EnemyTurnEnd -= ReSet;
         }
 
         private void SlotSetting()

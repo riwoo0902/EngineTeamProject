@@ -130,8 +130,12 @@ public class BattleEnemyManager : MonoBehaviour
         if (pairEnemy.Value != null)
         {
             EnemySlots[pairEnemy.Key].CurUse = null;
+            StageClear();
+            
+
         }
     }
+
 
     public IEnumerator HandleReplacementsRoutine()
     {
@@ -175,6 +179,7 @@ public class BattleEnemyManager : MonoBehaviour
                 img.color = color;
             }
         }
+        
     }
 
     private void StageClear()
