@@ -20,7 +20,7 @@ namespace _01.Script.Lrw.PinBallCompo
         public Rigidbody2D Rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
-        [field:SerializeField,ReadOnly] public int Damage { get; private set; }
+        private int Damage => PlayerManager.Instance.Power;
         private FsmBrain _pinBallFsmMachine;
         public float BaseDamage { get; private set; }
         public bool IsEnd { get; private set; } = false;
@@ -29,15 +29,10 @@ namespace _01.Script.Lrw.PinBallCompo
         {
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = GetComponentInChildren<PinBallRenderer>();
-            BaseDamage = PinBallSo.BaseDamage;
-            SetDamage();
+
             if (GameManager.Instance.state == PinBallStates.None) GameManager.Instance.state = PinBallStates.Idle;
         }
-
-        protected virtual void SetDamage()
-        {
-            Damage = PinBallSo.BaseDamage;
-        }
+        
 
         public void PinBallShoot()
         {
@@ -107,7 +102,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         protected virtual void OnCollisionEnter2D(Collision2D other)
         {
-            EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
+            EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage,this));
             Score += Damage;
             EventBus<ScoreAddEvent>.Raise(new ScoreAddEvent(Damage));
         }
