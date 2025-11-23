@@ -15,7 +15,7 @@ public class SaveStageData : MonoBehaviour
 
     public void ChoiceStage()
     {
-        StageManager.Instance.SceneChange(typeThis);
         MapManager.Instance.Save();
+        StageManager.Instance.SceneChange(typeThis);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _01.Script.Lrw.PinBallMap;
 using DG.Tweening;
@@ -55,13 +56,18 @@ public class MapManager : MonoBehaviour
         {
             stageTree.Generate(null);
             InitToRoot();
-            Save();
-            Debug.Log("AAAAAAAAAAA");
-            _currentStage.GetComponent<SaveStageData>().typeThis = MapType.Battle;
-            _currentStage.GetComponent<SaveStageData>().ChoiceStage();
+            StartCoroutine(Waitttt());
         }
 
         UpdateMarkerPosition();
+    }
+
+    private IEnumerator Waitttt()
+    {
+        yield return new WaitForSeconds(2f);
+        Save();
+            _currentStage.GetComponent<SaveStageData>().typeThis = MapType.Battle;
+            _currentStage.GetComponent<SaveStageData>().ChoiceStage();
     }
 
     private void InitToRoot()

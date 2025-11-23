@@ -1,4 +1,6 @@
-﻿using _01.Script.CHG;
+﻿using System;
+using System.Collections;
+using _01.Script.CHG;
 using Custom.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,7 +31,6 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
     private void Start()
     {
         StageDataManager = GetComponent<StageDataManager>();
-        BattleStageLoad();
     }
 
     public void SceneChange(MapType type)
@@ -44,9 +45,24 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
         {
             case MapType.Battle:
                 {
-                    SceneManager.LoadScene("");//여기서부터 다시 테스트
+                    SceneManager.LoadScene("GameScene");//여기서부터 다시 테스트
+                    break;
                 }
-                break;
+            case MapType.Boss:
+                {
+                    SceneManager.LoadScene("C Boss");//여기서부터 다시 테스트
+                    break;
+                }
+            case MapType.Store:
+                {
+                    SceneManager.LoadScene("Store");//여기서부터 다시 테스트
+                    break;
+                }
+            case MapType.Event:
+                {
+                    SceneManager.LoadScene("Event");//여기서부터 다시 테스트
+                    break;
+                }
         }
     }
 
@@ -58,53 +74,85 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
         {
             case MapType.Battle:
                 {
-                    BattleStageLoad();
+                    Invoke("BattleStageLoad", 0.1f);
                 }
                 break;
             case MapType.Store:
                 {
+                    Invoke("StoreStageLoad", 0.1f);
                     StoreStageLoad();
                 }
                 break;
             case MapType.Event:
                 {
+                    Invoke("EventStageLoad", 0.1f);
                     EventStageLoad();
                 }
                 break;
             case MapType.Boss:
                 {
-                    BattleStageLoad();
+                    Invoke("BossStageLoad", 0.1f);
                 }
                 break;
             default:
                 break;
         }
     }
+    private IEnumerator SafeLoad<T>(string objName, Action<T> onLoad)
+{
+    while (true)
+    {
+        try
+        {
+            GameObject go = GameObject.Find(objName);
+            if (go != null)
+            {
+                T comp = go.GetComponent<T>();
+                if (comp != null)
+                {
+                    onLoad(comp);
+                    yield break;
+                }
+            }
+        }
+        catch { /* NullReference 무시하고 재시도 */ }
+
+        yield return null; // 다음 프레임까지 대기 후 재시도
+    }
+}
 
     #region SceneLoad
     [ContextMenu("BattleStageLoad")]
-    private void BattleStageLoad()
-    {
-        GameObject.Find("BattleStageContext").GetComponent<BattleStageContect>().Init(StageDataManager.GetBattleData());
-    }
+private void BattleStageLoad()
+{
+    StartCoroutine(SafeLoad<BattleStageContect>(
+        "BattleStageContext",
+        comp => comp.Init(StageDataManager.GetBattleData())));
+}
 
-    [ContextMenu("BossStageLoad")]
-    private void BossStageLoad()
-    {
-        GameObject.Find("BattleStageContext").GetComponent<BattleStageContect>().Init(StageDataManager.GetBossData());
-    }
+[ContextMenu("BossStageLoad")]
+private void BossStageLoad()
+{
+    StartCoroutine(SafeLoad<BattleStageContect>(
+        "BattleStageContext",
+        comp => comp.Init(StageDataManager.GetBossData())));
+}
 
-    [ContextMenu("EventStageLoad")]
-    private void EventStageLoad()
-    {
-        GameObject.Find("EventStageManager").GetComponent<EventStageManager>().Init(StageDataManager.GetEventData());
-    }
+[ContextMenu("EventStageLoad")]
+private void EventStageLoad()
+{
+    StartCoroutine(SafeLoad<EventStageManager>(
+        "EventStageManager",
+        comp => comp.Init(StageDataManager.GetEventData())));
+}
 
-    [ContextMenu("StoreStageLoad")]
-    private void StoreStageLoad()
-    {
-        GameObject.Find("StoreStageManager").GetComponent<StoreStageManager>().
-            InIt(StageDataManager.ItemData.ToArray(), StageDataManager.PinBallData.ToArray());
-    }
+[ContextMenu("StoreStageLoad")]
+private void StoreStageLoad()
+{
+    StartCoroutine(SafeLoad<StoreStageManager>(
+        "StoreStageManager",
+        comp => comp.InIt(StageDataManager.ItemData.ToArray(),
+                          StageDataManager.PinBallData.ToArray())));
+}
     #endregion
 }
