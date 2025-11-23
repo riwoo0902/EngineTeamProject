@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GhostBall
   m_EditorClassIdentifier: 
   <PinBallType>k__BackingField: 0
-  <PinBallImage>k__BackingField: {fileID: -8350017915244704703, guid: 977759d6fe36d9e41b6067990a306003, type: 3}
+  <PinBallImage>k__BackingField: {fileID: 989123813363763071, guid: 4ee88d5e1a4df1b40893596cd25cf4d6, type: 3}
   <Mass>k__BackingField: 1
   <Friction>k__BackingField: 0.2
   <Bounciness>k__BackingField: 0.925
