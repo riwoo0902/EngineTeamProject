@@ -17,6 +17,7 @@ namespace _01.Script.Lrw.UI.PinBalls
         private MainPinBallSlot nowPinBallSlot;
         private List<SubPinBallSlot> pinballSlots = new();
         private EnemyTurnManager _enemyTurnManagerl;
+        private PlayerTurnManager _playerTurnManagerl;
         private bool NoHavePinball => CurrentHavePinBalls.Count == 0;
         
         protected override void Awake()
@@ -30,7 +31,9 @@ namespace _01.Script.Lrw.UI.PinBalls
         private void Start()
         {
             _enemyTurnManagerl = FindAnyObjectByType<EnemyTurnManager>();
+            _playerTurnManagerl =  FindAnyObjectByType<PlayerTurnManager>();
             _enemyTurnManagerl.EnemyTurnEnd += ReSet;
+            
         }
 
         private void Update()
@@ -43,6 +46,7 @@ namespace _01.Script.Lrw.UI.PinBalls
             base.OnDestroy();
             _enemyTurnManagerl.EnemyTurnEnd -= ReSet;
         }
+
 
         private void SlotSetting()
         {
@@ -74,6 +78,7 @@ namespace _01.Script.Lrw.UI.PinBalls
         [ContextMenu("Reset PinBalls")]
         public void ReSet()
         {
+            PinBallSpawner.Instance.SetCanSpawn(true);
             CurrentHavePinBalls = PinballInventory.Instance.inventory.ToArray().ToList();
             PinBallSpawner.Instance.PinBallSpawn();
         }

@@ -33,7 +33,7 @@ public class BattleTurnManager : MonoBehaviour
     public void PlayerTurnSet()
     {
         StartCoroutine(ChangePlayerTurn());
-        PinBallSpawner.Instance.SetCanSpawn(true);
+        
     }
 
     private IEnumerator ChangePlayerTurn()

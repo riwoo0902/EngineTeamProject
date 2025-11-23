@@ -29,12 +29,14 @@ namespace _01.Script.Lrw.PinBallMap
             GameManager.Instance.state = PinBallStates.Idle;
             if (pinBallGameObject != null)
             {
+                Debug.Log("Destroy PinBallGameObject");
                 Destroy(pinBallGameObject);
                 pinBallGameObject = null;
             }
 
             if (!_canSpawn)
             {
+                Debug.Log("_canSpawn is False");
                 return;
             }
             if (PinBallUIManager.Instance.CurrentHavePinBalls.Count == 0)
