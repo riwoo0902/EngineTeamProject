@@ -15,7 +15,10 @@ namespace _01.Script.Lrw.PinBallMap
         private GameObject pinBallGameObject;
         [SerializeField] private bool _canSpawn = true;
 
-        public void SetCanSpawn(bool canSpawn) =>  _canSpawn = canSpawn;
+        public void SetCanSpawn(bool canSpawn)
+        {
+            _canSpawn = canSpawn;
+        }
         protected override void Awake()
         {
             base.Awake();
