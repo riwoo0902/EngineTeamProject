@@ -52,7 +52,7 @@ namespace _01.Script.Lrw.PinBallCompo
             }
         }
         
-        protected virtual void CreatPinBallBrain()
+        private void CreatPinBallBrain()
         {
             _pinBallFsmMachine = new FsmBrain();
             _pinBallFsmMachine.AddState(PinBallStates.Idle,new PinBallIdleState(this));
@@ -60,7 +60,7 @@ namespace _01.Script.Lrw.PinBallCompo
             _pinBallFsmMachine.SetState(PinBallStates.Idle);
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             GameManager.Instance.InputSo.OnMousePress += PinBallShoot;
             CreatPinBallBrain();
@@ -68,12 +68,12 @@ namespace _01.Script.Lrw.PinBallCompo
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             _pinBallFsmMachine.Update();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             _pinBallFsmMachine.FixedUpdate();
         }
