@@ -74,7 +74,6 @@ namespace _01.Script.Lrw.UI.PinBalls
         [ContextMenu("Reset PinBalls")]
         public void ReSet()
         {
-            PinBallSpawner.Instance.SetCanSpawn(true);
             CurrentHavePinBalls = PinballInventory.Instance.inventory.ToArray().ToList();
             PinBallSpawner.Instance.PinBallSpawn();
         }

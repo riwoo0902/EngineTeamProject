@@ -1,4 +1,5 @@
 using System.Collections;
+using _01.Script.Lrw.PinBallMap;
 using UnityEngine;
 
 public class BattleTurnManager : MonoBehaviour
@@ -32,7 +33,7 @@ public class BattleTurnManager : MonoBehaviour
     public void PlayerTurnSet()
     {
         StartCoroutine(ChangePlayerTurn());
-
+        PinBallSpawner.Instance.SetCanSpawn(true);
     }
 
     private IEnumerator ChangePlayerTurn()
