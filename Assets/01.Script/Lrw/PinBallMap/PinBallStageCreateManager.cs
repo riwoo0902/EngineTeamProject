@@ -46,7 +46,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void AddDamage(int damage)
         {
-            _player.AttackDamageCalculation(EnemyType.None, damage);
+            _player.AttackDamageCalculation(AttackType.None, damage);
         }
 
         private void ReLoadPinBallSlot()

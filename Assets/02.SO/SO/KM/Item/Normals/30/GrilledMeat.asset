@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
+  m_Name: GrilledMeat
+  m_EditorClassIdentifier: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 21
+  itemName: "\uAD6C\uC6B4 \uACE0\uAE30"
+  itemIcon: {fileID: -1485282433491618599, guid: 2d9f4d663b7f7ed4396ecf62f46907ed, type: 3}
+  itemDescription: "\uAD6C\uC6B4 \uACE0\uAE30 \uD558\uB098\uB9CC\uD2C8\uC758 \uB2E8\uBC31\uC9C8\uC774
+    \uB4E4\uC5B4\uC788\uB2E4."
+  itemPrice: 37

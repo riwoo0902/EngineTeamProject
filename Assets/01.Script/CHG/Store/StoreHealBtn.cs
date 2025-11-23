@@ -1,3 +1,4 @@
+using _01.Script.Lrw.CustomSoundManager;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -15,12 +16,14 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private Button _button;
     private Tween _failTween;
     private Vector3 _scale;
+    private SoundPlayer _soundPlayer;
 
     public void Init()
     {
         _scale = gameObject.transform.localScale;
         _button = GetComponent<Button>();
         HealValueText.text = AddMaxHealthValue.ToString();
+        _soundPlayer = GetComponent<SoundPlayer>();
     }
     public void BuyBttonClick()
     {
@@ -30,6 +33,7 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
             HealValueText.text = "SoldOut!";
             _button.interactable = false;
+            _soundPlayer.SoundPlay();
         }
         else
         {

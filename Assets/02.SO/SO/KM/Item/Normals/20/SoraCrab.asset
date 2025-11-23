@@ -20,4 +20,4 @@ MonoBehaviour:
   itemName: "\uC18C\uB77C\uAC1C"
   itemIcon: {fileID: 21300000, guid: ad74e0ac14a4141f78af29263f683716, type: 3}
   itemDescription: "\uC9C4\uC9DC \uC18C\uB77C\uAC1C\uB2E4."
-  itemPrice: 0
+  itemPrice: 20

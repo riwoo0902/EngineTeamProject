@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: C_EventSO9
   m_EditorClassIdentifier: 
   TitleText: "\uACE0\uAE00\uB9B0"
-  StoryText: "\uACE0\uAE00\uC778\uC774\uB2E4!"
+  StoryText: "\uACE0\uAE00\uB9B0\uC774\uB2E4!"
   EventSprite: {fileID: -8408945380318762268, guid: d602e7eb0a7c9904b9123756c732e4d7, type: 3}
   Choices:
   - ButtonText: "\uAC13\uAC9C!"

@@ -13,7 +13,7 @@ public class Enemy : Agent
     public Action<Enemy> OnEnemyDead { get; set; }
     public int Power { get; private set; }
     public EnemyDataSO EnemyData { get; private set; }
-    public EnemyType EnemyType { get; private set; } = EnemyType.Normal;
+    public AttackType EnemyType { get; private set; } = AttackType.Normal;
 
     public GameObject EnemyInfoBar { get; set; }
     private Image _healthBarImg;

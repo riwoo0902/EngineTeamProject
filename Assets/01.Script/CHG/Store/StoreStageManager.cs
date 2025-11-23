@@ -46,6 +46,7 @@ public class StoreStageManager : MonoBehaviour
     }
     public void ItemBtnSetting()
     {
+
         ItemSO[] ranItems = _items
         .OrderBy(item => Random.value)
         .Take(_pinBallBtn.Count)
@@ -53,6 +54,7 @@ public class StoreStageManager : MonoBehaviour
 
         for (int i = 0; i < _itemBtn.Count; i++)
         {
+          
             _itemBtn[i].Init(ranItems[i]);
         }
     }

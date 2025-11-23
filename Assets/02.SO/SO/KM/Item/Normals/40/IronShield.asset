@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
+  m_Name: IronShield
+  m_EditorClassIdentifier: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 30
+  itemName: "\uCCA0 \uBC29\uD328"
+  itemIcon: {fileID: 7571068671740948714, guid: e8ea7f179e8da7c43be7f8ff82d5d93c, type: 3}
+  itemDescription: "\uB208\uB3C4 \uAE5C\uC9DD \uC548 \uD560 \uC218 \uC788\uAC8C \uB429\uB2C8\uB2E4."
+  itemPrice: 50

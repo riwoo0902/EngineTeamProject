@@ -1995,7 +1995,7 @@ PrefabInstance:
     - target: {fileID: 775818920997632121, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: 'EnemyStageData.Array.data[0].StageData.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: a927ca24f0fa1c448a7a556ca7ba637b, type: 2}
+      objectReference: {fileID: 11400000, guid: e03f804b767eb9d41a7b224d9402e67e, type: 2}
     - target: {fileID: 1199388723125871201, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_Name
       value: CHG

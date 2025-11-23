@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using _01.Script.Lrw.CustomSoundManager;
 using DG.Tweening;
 using Febucci.UI;
 using TMPro;
@@ -16,21 +17,23 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
     private StoreInventory _itemInventory;
+    private SoundPlayer _soundPlayer;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
     private Tween _failTween;
     public void Init(ItemSO itemData)
     {
+        _button = GetComponent<Button>();
+        _soundPlayer = GetComponent<SoundPlayer>();
+        _itemInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
+        _img.gameObject.SetActive(true);
+        _button.interactable = true;
+
         _itemData = itemData;
         _img.sprite = _itemData.itemIcon;
         _price = _itemData.itemPrice;
         _nameText.text = _itemData.itemName;
 
-        _button = GetComponent<Button>();
         _scale = transform.localScale;
-        _button = GetComponent<Button>();
-        _scale = transform.localScale;
-
-        _itemInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
     }
 
     public void BtnClick()
@@ -45,6 +48,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
             PlayerManager.Instance.AddItemValue(new System.Collections.Generic.List<ItemSO> { _itemData });
             _itemInventory.AddItem?.Invoke(_itemData);
+            _soundPlayer.SoundPlay();
         }
         else
         {

@@ -19,12 +19,11 @@ public class StoreInventory : MonoBehaviour
         AddItem += Add;
         AddPinBall += Add;
 
-        //RemoveItem += Remove;
     }
 
     private void Add(ItemSO item)
     {
-        Instantiate(IconPrefab, ItemParent).GetComponent<StoreItemInventoryIcon>().ItemData = item;
+        Instantiate(IconPrefab, ItemParent).GetComponent<ItemInventoryIcon>().ItemData = item;
     }
     private void Add(PinBallSO pinBall)
     {
@@ -36,8 +35,4 @@ public class StoreInventory : MonoBehaviour
         AddItem -= Add;
         AddPinBall -= Add;
     }
-    //private void Remove(ItemSO item)
-    //{
-
-    //}
 }
