@@ -58,7 +58,7 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] private Sprite WaterImg;
 
     [Header("ClearStage")]
-    [SerializeField] private GameObject ClearUI;
+    public GameObject ClearUI;
 
 
     [SerializeField] private Image GameOverImg;

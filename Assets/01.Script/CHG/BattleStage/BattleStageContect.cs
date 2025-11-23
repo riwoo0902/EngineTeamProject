@@ -27,10 +27,11 @@ public class BattleStageContect : MonoBehaviour
 
         PinBallStageCreateManager.CreatMap(stageData.PinBallMap);
         if (ClearBtn != null) ClearBtn.onClick.AddListener(() => StageManager.Instance.SceneChange(MapType.MapChoice));
-    }   
+    }
 
     public void ChoiceMapCreate()
     {
+        UIManager.ClearUI.gameObject.SetActive(false);  
         PinBallStageCreateManager.CreatMap(StageChoiceMap);
     }
 

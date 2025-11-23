@@ -8,13 +8,14 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
     [RequireComponent(typeof(BoxCollider2D))]
     public class ChoiceMap : MonoBehaviour
     {
-
+        [SerializeField] private bool Left;
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent<ICanTriggerEvent>(out ICanTriggerEvent iCanTriggerEvent))
             {
-                
-                //MapDir.
+                if (Left)
+                    MapManager.Instance.OnMapeDir?.Invoke(MapDir.Left);
+                else MapManager.Instance.OnMapeDir?.Invoke(MapDir.Right);
             }
         }
     }
