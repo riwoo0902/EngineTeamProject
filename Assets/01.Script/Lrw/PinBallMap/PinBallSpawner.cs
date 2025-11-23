@@ -13,7 +13,9 @@ namespace _01.Script.Lrw.PinBallMap
     {
         [SerializeField] private PinBallBase currentPinBall;
         private GameObject pinBallGameObject;
+        private bool _canSpawn = true;
 
+        public void SetCanSpawn(bool canSpawn) =>  _canSpawn = canSpawn;
         protected override void Awake()
         {
             base.Awake();
@@ -29,6 +31,11 @@ namespace _01.Script.Lrw.PinBallMap
             {
                 Destroy(pinBallGameObject);
                 pinBallGameObject = null;
+            }
+
+            if (!_canSpawn)
+            {
+                return;
             }
             if (PinBallUIManager.Instance.CurrentHavePinBalls.Count == 0)
             {
