@@ -56,6 +56,7 @@ public class MapManager : MonoBehaviour
         {
             stageTree.Generate(null);
             InitToRoot();
+            Debug.Log("aaaaa");
             StartCoroutine(Waitttt());
         }
 

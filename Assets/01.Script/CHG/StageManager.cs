@@ -21,6 +21,7 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
+        
     }
 
     public StageDataManager StageDataManager { get; private set; }
@@ -31,6 +32,7 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
     private void Start()
     {
         StageDataManager = GetComponent<StageDataManager>();
+        BattleStageLoad();
     }
 
     public void SceneChange(MapType type)

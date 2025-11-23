@@ -10,6 +10,10 @@ public class SaveStageData : MonoBehaviour
 
     private void Start()
     {
+        if (typeThis == MapType.MapChoice)
+        {
+            typeThis = MapType.Battle;
+        }
         imgae.sprite = stageSprites[(int)typeThis - 1];
     }
 
