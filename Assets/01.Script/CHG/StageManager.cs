@@ -28,7 +28,6 @@ public class StageManager : MonoSingleton<StageManager>
     private void Start()
     {
         StageDataManager = GetComponent<StageDataManager>();
-
     }
 
     public void SceneChange(MapType type)
@@ -43,7 +42,7 @@ public class StageManager : MonoSingleton<StageManager>
         {
             case MapType.Battle:
                 {
-                    SceneManager.LoadScene("");
+                    SceneManager.LoadScene("");//여기서부터 다시 테스트
                 }
                 break;
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _01.Script.Lrw.PinBallMap;
+using DG.Tweening;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
@@ -54,6 +55,8 @@ public class MapManager : MonoBehaviour
         {
             stageTree.Generate(null);
             InitToRoot();
+            _currentStage.GetComponent<SaveStageData>().typeThis = MapType.Battle;
+            _currentStage.GetComponent<SaveStageData>().ChoiceStage();
         }
 
         UpdateMarkerPosition();
@@ -75,7 +78,7 @@ public class MapManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Save();
+        MapSaveSystem.Delete();
     }
 
     public void Save()
@@ -144,17 +147,6 @@ public class MapManager : MonoBehaviour
         OnMapeDir?.Invoke(MapDir.Right);
     }
 
-    [ContextMenu("Reset Map")]
-    public void ResetMap()
-    {
-        MapSaveSystem.Delete();
-        _isMoving = false;
-
-        stageTree.Generate(null);
-        InitToRoot();
-        UpdateMarkerPosition();
-    }
-
     private void MapMove(MapDir dir)
     {
         if (_isMoving) return;
@@ -169,9 +161,11 @@ public class MapManager : MonoBehaviour
         {
             return;
         }
+
         LineSetting[] lines = _currentStage.GetComponentsInChildren<LineSetting>(true);
         LineSetting selectedLine = null;
 
+        // 1차: 입력된 방향으로 가는 라인 우선 탐색
         foreach (var line in lines)
         {
             if (line != null && line.Dir == dir)
@@ -181,9 +175,25 @@ public class MapManager : MonoBehaviour
             }
         }
 
+        // 2차: 없으면 반대 방향으로 탐색
         if (selectedLine == null)
         {
-            return;
+            MapDir opposite = (dir == MapDir.Left) ? MapDir.Right : MapDir.Left;
+
+            foreach (var line in lines)
+            {
+                if (line != null && line.Dir == opposite)
+                {
+                    selectedLine = line;
+                    break;
+                }
+            }
+
+            // 반대 방향도 없으면 이동 불가
+            if (selectedLine == null)
+            {
+                return;
+            }
         }
 
         _isMoving = true;
@@ -194,6 +204,7 @@ public class MapManager : MonoBehaviour
             _isMoving = false;
             return;
         }
+
         _currentStage = nextStage;
         UpdateCurrentIndicesFromStage(_currentStage);
         UpdateMarkerPosition();
@@ -219,10 +230,11 @@ public class MapManager : MonoBehaviour
     }
 
     private void UpdateMarkerPosition()
-    {
+    {   
         if (playerMarker != null && _currentStage != null)
         {
-            playerMarker.position = _currentStage.transform.position;
+            playerMarker.DOMove(_currentStage.transform.position,3f);
+            MapButtonMananger.Instance.saveData = _currentStage.GetComponent<SaveStageData>();
         }
     }
 }
