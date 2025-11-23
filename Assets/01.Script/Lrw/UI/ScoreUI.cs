@@ -1,7 +1,5 @@
-using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
-using _01.Script.Lrw.Manager;
 using TMPro;
 using UnityEngine;
 

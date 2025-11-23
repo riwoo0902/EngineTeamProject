@@ -82,7 +82,7 @@ public class BattleEnemyManager : MonoBehaviour
             for (int i = _startEnemyCount; i > 0; i--)
             {
                 if (_nextEnemy.Count <= 0) continue;
-                var slot = EnemySlots[i - 2];
+                var slot = EnemySlots[i - 1];
 
                 GameObject enemyObj = Instantiate(EnemyPrefab, slot.Pos.position, Quaternion.identity);
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
