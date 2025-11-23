@@ -1902,7 +1902,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonSetting:
     <DontDestroyLoadObject>k__BackingField: 0
-  <CurrentHavePinBalls>k__BackingField: []
 --- !u!1 &582436445
 GameObject:
   m_ObjectHideFlags: 0
@@ -3291,12 +3290,12 @@ PrefabInstance:
       objectReference: {fileID: 100272407}
     - target: {fileID: 8700869321567358274, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       propertyPath: inventory.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8700869321567358274, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       propertyPath: 'inventory.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 28c690d068b22074cb9a76bb6a461739, type: 2}
+      objectReference: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
     - target: {fileID: 8700869321567358274, guid: b926371fcd9165143a55351bd142f65e, type: 3}
       propertyPath: 'inventory.Array.data[1]'
       value: 
