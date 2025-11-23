@@ -14,7 +14,6 @@ namespace _01.Script.Lrw.PinBallMap
         public UnityEvent<int> onBallScoreTrigger;
         public PinBallMap CurrentPinBallMap {get; private set;}
         
-        public GameObject testPrefab;
         private Player _player;
         public static PinBallStageCreateManager Instance { get; private set; }
         private void Awake()
@@ -40,7 +39,6 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void Start()
         {
-            //CreatMap(testPrefab);
             _player = FindAnyObjectByType<Player>();
         }
 
