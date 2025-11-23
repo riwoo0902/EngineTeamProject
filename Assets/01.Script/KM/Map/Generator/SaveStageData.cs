@@ -12,8 +12,10 @@ public class SaveStageData : MonoBehaviour
     {
         imgae.sprite = stageSprites[(int)typeThis - 1];
     }
+
     public void ChoiceStage()
     {
         StageManager.Instance.SceneChange(typeThis);
+        MapManager.Instance.Save();
     }
 }

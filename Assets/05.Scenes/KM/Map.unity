@@ -17305,9 +17305,9 @@ MonoBehaviour:
   cameraObj: {fileID: 1034568615}
   Parent: {fileID: 173107548}
   PercentByNormalStage: 50
-  PercentByShopStage: 10
-  PercentByEventStage: 10
-  PercentByChoiceStage: 30
+  PercentByShopStage: 20
+  PercentByEventStage: 15
+  PercentByChoiceStage: 0
   horizontalSpacing: 3
   verticalSpacing: 3
   origin: {x: 0, y: 0, z: 0}
