@@ -91,7 +91,7 @@ public class BattleEnemyManager : MonoBehaviour
                 enemy.Init(_nextEnemy.Pop(), _contect); //EnemyData 넣어주기
 
                 slot.CurUse = enemy;
-                EnemySlots[i - 2].CurUse = slot.CurUse;
+                EnemySlots[i - 1].CurUse = slot.CurUse;
 
                 enemy.OnEnemyDead += EnemyDeadHandler;
             }
