@@ -130,7 +130,9 @@ public class BattleEnemyManager : MonoBehaviour
         var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy);
         if (pairEnemy.Value != null)
         {
+<<<<<<< Updated upstream
             EnemySlots[pairEnemy.Key].CurUse = null;
+=======
             StageClear();
             
 >>>>>>> Stashed changes
