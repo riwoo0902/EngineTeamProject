@@ -12,6 +12,7 @@ namespace _01.Script.KM.Sound.Uis.Value.Ui
         BackGround
     }
 
+    [DefaultExecutionOrder(1)]
     public class ValueChangeApply : MonoBehaviour
     {
         [SerializeField] private TMP_Text valueText;

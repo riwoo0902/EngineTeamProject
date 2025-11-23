@@ -12,7 +12,8 @@ public class BattleStageContect : MonoBehaviour
     [field: SerializeField] public Player Player { get; private set; }
     [field: SerializeField] public PlayerTurnManager PlayerTurnManager { get; private set; }
     [field: SerializeField] public BattleTurnButton TurnButton { get; private set; }
-    [field: SerializeField] public PinBallStageCreateManager PinBallStageCreateManager { get; private set; }
+    
+    public PinBallStageCreateManager PinBallStageCreateManager => PinBallStageCreateManager.Instance;
     [field: SerializeField] public Button ClearBtn;
     public void Init(BattleStageDataSO stageData)
     {

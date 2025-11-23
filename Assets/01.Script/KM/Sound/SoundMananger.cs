@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -5,14 +6,15 @@ namespace _01.Script.KM.Sound
 {
     public class SoundMananger : MonoBehaviour
     {
-        [SerializeField] AudioMixer audioMixer;
-
+        [field:SerializeField] public AudioMixer AudioMixer { get; private set; }
+        private int a = 12;
         public static SoundMananger Instacne;
         private void Start()
         {
             if (Instacne == null)
             {
                 Instacne = this;
+                transform.SetParent(null);
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -21,16 +23,16 @@ namespace _01.Script.KM.Sound
 
         public void MasterChange(float value)
         {
-            audioMixer.SetFloat("Master", Mathf.Log10(value) * 40);
+            AudioMixer.SetFloat("Master", Mathf.Log10(value) * 40);
             Debug.Log(value);
         }
         public void SFXChange(float value)
         {
-            audioMixer.SetFloat("SFX", Mathf.Log10(value) * 40);
+            AudioMixer.SetFloat("SFX", Mathf.Log10(value) * 40);
         }
         public void BackGroundChange(float value)
         {
-            audioMixer.SetFloat("BackGround", Mathf.Log10(value) * 40); 
+            AudioMixer.SetFloat("BackGround", Mathf.Log10(value) * 40); 
         }
     }
 }

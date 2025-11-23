@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b729ffe09b2d64397d167e4404df21, type: 3}
   m_Name: StageDataSO
   m_EditorClassIdentifier: 
-  <EmergeCount>k__BackingField: 0
+  <EmergeCount>k__BackingField: 3
   <EmergeEnemy>k__BackingField:
-  - {fileID: 0}
-  - {fileID: 0}
-  <StartEnemyCount>k__BackingField: 0
+  - {fileID: 11400000, guid: 8af3d32d6663ea5408858c3dfa758707, type: 2}
+  - {fileID: 11400000, guid: 40d78b082f8218845af028bb5b5dfd1b, type: 2}
+  <StartEnemyCount>k__BackingField: 2
+  <PinBallMap>k__BackingField: {fileID: 440758252238060653, guid: 9733b77ff12ae524680c505f8029a63c, type: 3}

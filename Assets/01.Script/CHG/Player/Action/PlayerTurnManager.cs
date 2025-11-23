@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _01.Script.Lrw.UI.PinBalls;
 using UnityEngine;
 
 
@@ -41,7 +42,8 @@ public class PlayerTurnManager : MonoBehaviour
 
         _player.PlayerTarget.HealthCompo.TakeDamage(_player.AttackDamage);
         _player.AttackDamageCalculation(EnemyType.None, 0);
-
+        _player.SetAttackDamage(0);
+        
         yield return new WaitForSeconds(0.5f);
 
         
