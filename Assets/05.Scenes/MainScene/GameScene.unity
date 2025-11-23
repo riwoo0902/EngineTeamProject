@@ -2410,6 +2410,8 @@ MonoBehaviour:
   HealthText: {fileID: 1380777658}
   ItemInventory: {fileID: 2077247942}
   ItemInventoryMovePos: {fileID: 947663482}
+  PinBallInventory: {fileID: 0}
+  PinBallInventoryMovePos: {fileID: 0}
   TargetingImg: {fileID: 236538211}
   _levelText: {fileID: 1675189657}
   _coinText: {fileID: 1932925748}
@@ -2462,6 +2464,7 @@ MonoBehaviour:
   <Player>k__BackingField: {fileID: 70378048}
   <PlayerTurnManager>k__BackingField: {fileID: 509868752}
   <TurnButton>k__BackingField: {fileID: 1784859837}
+  <PinBallStageCreateManager>k__BackingField: {fileID: 973013863}
 --- !u!1 &531449134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,19 +3022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eda938165c968e499b1ca401f3d2490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDatas:
-  - <AudioClipType>k__BackingField: 0
-    <AudioClipName>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-    volume: 0
-  - <AudioClipType>k__BackingField: 0
-    <AudioClipName>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-    volume: 0
-  - <AudioClipType>k__BackingField: 0
-    <AudioClipName>k__BackingField: 
-    <AudioClip>k__BackingField: {fileID: 0}
-    volume: 0
+  singletonSetting:
+    <DontDestroyLoadObject>k__BackingField: 0
   MasterVolume: 1
   BGMVolume: 1
   SFXVolume: 1
@@ -3561,6 +3553,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947663481}
   m_CullTransparentMesh: 1
+--- !u!114 &973013863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6732783175094719938, guid: b926371fcd9165143a55351bd142f65e, type: 3}
+  m_PrefabInstance: {fileID: 990826207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4492ec94c348a584e8de568c1a10262d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &990826207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5165,6 +5168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 1
+  nextMapType: 0
 --- !u!114 &1006423782 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2572002991892403706, guid: b926371fcd9165143a55351bd142f65e, type: 3}
@@ -5933,6 +5937,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5869c93508f040ee81e25301e4d0c87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singletonSetting:
+    <DontDestroyLoadObject>k__BackingField: 0
   <MouseOn>k__BackingField: 0
 --- !u!1 &1274473751
 GameObject:
@@ -10291,11 +10297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754de2aa22657a141ba45286bb26dc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HaveItem>k__BackingField: []
   _maxHealth: 200
-  <testItems>k__BackingField:
-  - {fileID: 11400000, guid: 5cbf768802fabf049b15311af70de0df, type: 2}
-  - {fileID: 11400000, guid: 0bcd2eabcd8415e46b4e99f124d58bdb, type: 2}
-  - {fileID: 11400000, guid: 60f5cc24baa291a4dbb2ed7f68cc2198, type: 2}
 --- !u!1 &1865048255
 GameObject:
   m_ObjectHideFlags: 0

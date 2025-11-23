@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _01.Script.CHG;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum MapType

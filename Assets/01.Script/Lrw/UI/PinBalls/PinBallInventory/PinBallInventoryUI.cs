@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _01.Script.Lrw.Inventory;
 using _01.Script.Lrw.UI.PinBalls.PinBallSlot;
+using Custom.MonoSingleton;
 using Lrw_PinBall;
 using UnityEngine;
 

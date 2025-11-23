@@ -1,6 +1,7 @@
 using _01.Script.Lrw.PinBallMap;
 using UnityEngine;
 
+[DefaultExecutionOrder(1)]
 public class BattleStageContect : MonoBehaviour
 {
     [field: SerializeField] public BattleEnemyManager EnemyManager { get; private set; }
