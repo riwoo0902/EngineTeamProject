@@ -1,3 +1,4 @@
+using _01.Script.Lrw.CustomSoundManager;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -10,13 +11,14 @@ public class StoreReRollBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private StoreStageManager _stageStoreManager;
     [SerializeField] private TextMeshProUGUI PriceText;
     private Vector3 _scale;
-
+    private SoundPlayer _soundPlayer;
     [SerializeField] private bool ThisItemButton;
 
     private void Start()
     {
         _scale = gameObject.transform.localScale;
         PriceText.text = "<sprite=0>" + Price.ToString();
+        _soundPlayer = gameObject.GetComponent<SoundPlayer>();
     }
 
     private Tween _failTween;
@@ -27,6 +29,8 @@ public class StoreReRollBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             if (ThisItemButton)
                 _stageStoreManager.ItemBtnSetting();
             else _stageStoreManager.PinBallBtnSetting();
+
+            _soundPlayer.SoundPlay();
         }
         else
         {

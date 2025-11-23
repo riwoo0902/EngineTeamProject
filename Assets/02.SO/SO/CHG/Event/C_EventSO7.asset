@@ -22,7 +22,7 @@ MonoBehaviour:
     EffectValue: -10
     Items: []
     PinBalls: []
-    ChoiceText: "\uB098\uBE60."
+    ChoiceText: "\uC640 \uC9C4\uC9DC \uB098\uBE74\uB2E4."
   - ButtonText: "\uC77C\uBD80\uB85C \uB2E4\uB978\uACF3\uC5D0 \uC18C\uB9AC\uB97C \uB0B4\uC5B4
       \uD63C\uB780\uC2A4\uB7FD\uAC8C \uD55C\uB2E4."
     EffectType: 2

@@ -1,3 +1,4 @@
+using _01.Script.Lrw.CustomSoundManager;
 using _01.Script.Lrw.Inventory;
 using DG.Tweening;
 using Febucci.UI;
@@ -19,7 +20,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private StoreInventory _pinBallInventory;
     [SerializeField] private float UpSize = 1.3f;
     private Tween _failTween;
-
+    private SoundPlayer _soundPlayer;
     public void Init(PinBallSO pinBallData)
     {
         _pinBallData = pinBallData;
@@ -31,7 +32,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _scale = transform.localScale;
         _button = GetComponent<Button>();
         _scale = transform.localScale;
-
+        _soundPlayer = gameObject.GetComponent<SoundPlayer>();
         _pinBallInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
     }
 
@@ -48,6 +49,7 @@ public class StorePinBallBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
             PinballInventory.Instance.inventory.Add(_pinBallData);
             _pinBallInventory.AddPinBall?.Invoke(_pinBallData);
+            _soundPlayer.SoundPlay();
         }
         else
         {

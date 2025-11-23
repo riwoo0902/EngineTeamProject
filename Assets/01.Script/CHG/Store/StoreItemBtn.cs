@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using _01.Script.Lrw.CustomSoundManager;
 using DG.Tweening;
 using Febucci.UI;
 using TMPro;
@@ -16,6 +17,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextAnimator_TMP _textAnimator;
     private StoreInventory _itemInventory;
+    private SoundPlayer _soundPlayer;
     [field: SerializeField] private float UpSize { get; set; } = 1.3f;
     private Tween _failTween;
     public void Init(ItemSO itemData)
@@ -29,7 +31,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _scale = transform.localScale;
         _button = GetComponent<Button>();
         _scale = transform.localScale;
-
+        _soundPlayer = GetComponent<SoundPlayer>();
         _itemInventory = GameObject.Find("Inventorys").GetComponent<StoreInventory>();
     }
 
@@ -45,6 +47,7 @@ public class StoreItemBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
             PlayerManager.Instance.AddItemValue(new System.Collections.Generic.List<ItemSO> { _itemData });
             _itemInventory.AddItem?.Invoke(_itemData);
+            _soundPlayer.SoundPlay();
         }
         else
         {

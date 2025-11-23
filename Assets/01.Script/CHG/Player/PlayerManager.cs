@@ -92,7 +92,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     public bool SpendGold(int value)
     {
-        if (value <= 0 || _gold < value) return false;
+        if (value < 0 || _gold < value) return false;
 
         _gold -= value;
         OnValueChanged?.Invoke();

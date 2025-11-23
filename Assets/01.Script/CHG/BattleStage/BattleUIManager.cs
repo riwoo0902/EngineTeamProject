@@ -313,16 +313,16 @@ public class BattleUIManager : MonoBehaviour
         powerText.text = enemyData.EnemyPower.ToString();
         switch (enemyData.EnemyType)
         {
-            case EnemyType.Normal:
+            case AttackType.Normal:
                 typeImg.sprite = NomalImg;
                 break;
-            case EnemyType.Fire:
+            case AttackType.Fire:
                 typeImg.sprite = FireImg;
                 break;
-            case EnemyType.Water:
+            case AttackType.Water:
                 typeImg.sprite = WaterImg;
                 break;
-            case EnemyType.Gress:
+            case AttackType.Grass:
                 typeImg.sprite = GressImg;
                 break;
         }

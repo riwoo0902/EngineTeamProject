@@ -18,4 +18,4 @@ MonoBehaviour:
   itemName: "\uB9CC\uB144\uD544"
   itemIcon: {fileID: -4364912660946350683, guid: 5b2fb868608722e4ebbb342fe88d7557, type: 3}
   itemDescription: "\uD39C\uC740 \uCE7C\uBCF4\uB2E4 \uAC15\uD558\uB2E4!"
-  itemPrice: 0
+  itemPrice: 70

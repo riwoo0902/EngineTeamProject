@@ -40,7 +40,7 @@ public class PlayerTurnManager : MonoBehaviour
         //int damage = 
 
         _player.PlayerTarget.HealthCompo.TakeDamage(_player.AttackDamage);
-        _player.AttackDamageCalculation(EnemyType.None, 0);
+        _player.AttackDamageCalculation(AttackType.None, 0);
 
         yield return new WaitForSeconds(0.5f);
 

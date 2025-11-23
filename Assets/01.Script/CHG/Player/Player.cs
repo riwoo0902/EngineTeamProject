@@ -63,11 +63,61 @@ public class Player : Agent
 
 
 
-    public void AttackDamageCalculation(EnemyType type, int damage)
+    public void AttackDamageCalculation(AttackType attackType, int baseDamage)
     {
-        AttackDamage += damage;
-        _contect.UIManager.DamageTextChange(AttackDamage);
+        if (PlayerTarget == null || PlayerTarget.HealthCompo == null)
+        {
+            Debug.LogError("공격 대상(PlayerTarget)이 없거나 체력 컴포넌트가 없습니다.");
+            return;
+        }
 
+        AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
+
+ 
+        float powerMultiplier = 1.0f + ((float)_power / 200f);
+
+        float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
+
+        float calculatedDamage = baseDamage * powerMultiplier * typeMultiplier;
+
+        int finalDamage = Mathf.RoundToInt(calculatedDamage);
+
+        AttackDamage = finalDamage;
+
+        PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
+
+        _contect.UIManager.DamageTextChange(AttackDamage);
+    }
+
+    private float GetTypeEffectiveness(AttackType attackType, AttackType defenseType)
+    {
+        // None/Normal/Same 타입은 상성 영향을 주지 않음
+        if (attackType == AttackType.None || defenseType == AttackType.None ||
+            attackType == AttackType.Normal || defenseType == AttackType.Normal ||
+            attackType == defenseType)
+        {
+            return 1.0f;
+        }
+
+        switch (attackType)
+        {
+            case AttackType.Fire:
+                if (defenseType == AttackType.Grass) return 1.5f; 
+                if (defenseType == AttackType.Water) return 0.5f; 
+                break;
+
+            case AttackType.Water:
+                if (defenseType == AttackType.Fire) return 1.5f;  
+                if (defenseType == AttackType.Grass) return 0.5f; 
+                break;
+
+            case AttackType.Grass: 
+                if (defenseType == AttackType.Water) return 1.5f; 
+                if (defenseType == AttackType.Fire) return 0.5f;  
+                break;
+        }
+
+        return 1.0f;
     }
 
     private void OnDead()
@@ -116,7 +166,7 @@ public class Player : Agent
     [ContextMenu("AddPower")]
     public void AddPower()
     {
-        AttackDamageCalculation(EnemyType.Normal, 400);
+        AttackDamageCalculation(AttackType.Normal, 400);
     }
     #endregion
 }
