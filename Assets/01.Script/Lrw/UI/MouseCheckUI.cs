@@ -1,3 +1,4 @@
+using Custom.MonoSingleton;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

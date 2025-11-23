@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Script.CHG;
 
 public class ActionSystem : MonoSingleton<ActionSystem>
 {

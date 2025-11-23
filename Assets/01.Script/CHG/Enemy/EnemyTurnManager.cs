@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class EnemyTurnManager : MonoBehaviour
     private BattleEnemyManager _enemyManger;
     private Player _player;
     private BattleTurnManager _turnManager;
-
+    public Action EnemyTurnEnd;
     public void Init(BattleEnemyManager enemyManager, BattleTurnManager turnManager)
     {
         _enemyManger = enemyManager;
@@ -69,7 +70,8 @@ public class EnemyTurnManager : MonoBehaviour
         // 2. 🔄 1차 이동 완료 후, 죽은 적 재생성 및 재배치 처리
         // BattleEnemyManager에게 재생성 대기열을 처리하도록 요청하고 완료를 기다립니다.
         yield return _enemyManger.HandleReplacementsRoutine();
-
+        
+        EnemyTurnEnd?.Invoke();
         // 3. 턴 종료
         if (!attack)
         {
