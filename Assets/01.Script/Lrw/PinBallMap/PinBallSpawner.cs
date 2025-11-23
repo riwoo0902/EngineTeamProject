@@ -13,17 +13,15 @@ namespace _01.Script.Lrw.PinBallMap
     {
         [SerializeField] private PinBallBase currentPinBall;
         private GameObject pinBallGameObject;
-        private bool _canSpawn = true;
+        [SerializeField] private bool _canSpawn = true;
 
         public void SetCanSpawn(bool canSpawn) =>  _canSpawn = canSpawn;
         protected override void Awake()
         {
             base.Awake();
-            
 
         }
         
-        [ContextMenu("Spawn")]
         public void PinBallSpawn()
         {
             GameManager.Instance.state = PinBallStates.Idle;
