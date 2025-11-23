@@ -120,18 +120,15 @@ public class BattleEnemyManager : MonoBehaviour
         }
     }
 
-   
+
     private void EnemyDeadHandler(Enemy enemy)
     {
         _deadEnemiesToReplace.Enqueue(enemy);
 
 
         var pairEnemy = EnemySlots.FirstOrDefault(fod => fod.Value.CurUse == enemy);
-        //if (pairEnemy.Value != null)
-        //{
-        //    EnemySlots[pairEnemy.Key].CurUse = null;
-        //    StageClear();
-        //}
+        EnemySlots[pairEnemy.Key].CurUse = null;
+
     }
 
 
@@ -141,7 +138,6 @@ public class BattleEnemyManager : MonoBehaviour
         {
             Enemy enemy = _deadEnemiesToReplace.Dequeue();
 
-            Debug.Log(_enemyKillCount);
             if (_enemyKillCount <= 0)
             {
                 StageClear();
@@ -164,7 +160,7 @@ public class BattleEnemyManager : MonoBehaviour
 
             if (targetSlot == null) continue;
 
- 
+
             yield return enemy.EnemyMove(targetSlot);
 
             targetSlot.CurUse = enemy;
@@ -178,7 +174,7 @@ public class BattleEnemyManager : MonoBehaviour
                 img.color = color;
             }
         }
-        
+
     }
 
     private void StageClear()
