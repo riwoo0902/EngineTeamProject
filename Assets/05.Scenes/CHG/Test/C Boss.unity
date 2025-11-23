@@ -1387,6 +1387,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 775818920997632121, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: ItemData.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 775818920997632121, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: BossStageData.StageData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 775818920997632121, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: 'BossStageData.StageData.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ab7e9f091dae67146b12588accc999bb, type: 2}
+    - target: {fileID: 958346124719589828, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: singletonSetting.<DontDestroyLoadObject>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1199388723125871201, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_Name
       value: CHG
@@ -1983,7 +1999,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1455512417}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455512418}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ef358fb3f2f482b8a959bc8b53e4f9b, type: 3}
   m_Name: 

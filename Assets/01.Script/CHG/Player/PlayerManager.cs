@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using _01.Script.CHG;
+using Custom.MonoSingleton;
 using UnityEngine;
 
-public class PlayerManager : MonoSingleton<PlayerManager>
+public class PlayerManager : Custom.MonoSingleton.MonoSingleton<PlayerManager>
 {
     public Action OnValueChanged;
 

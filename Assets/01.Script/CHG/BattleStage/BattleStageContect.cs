@@ -15,6 +15,7 @@ public class BattleStageContect : MonoBehaviour
     
     public PinBallStageCreateManager PinBallStageCreateManager => PinBallStageCreateManager.Instance;
     [field: SerializeField] public Button ClearBtn;
+    [field: SerializeField] public GameObject StageChoiceMap;
     public void Init(BattleStageDataSO stageData)
     {
         EnemyManager.Init(stageData, this);
@@ -26,6 +27,11 @@ public class BattleStageContect : MonoBehaviour
 
         PinBallStageCreateManager.CreatMap(stageData.PinBallMap);
         if (ClearBtn != null) ClearBtn.onClick.AddListener(() => StageManager.Instance.SceneChange(MapType.MapChoice));
+    }   
+
+    public void ChoiceMapCreate()
+    {
+        PinBallStageCreateManager.CreatMap(StageChoiceMap);
     }
 
 

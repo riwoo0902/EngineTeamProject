@@ -7030,7 +7030,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 94.41332, y: 0, z: 56.464005, w: 17.30662}
+  m_margin: {x: 94.41332, y: 0, z: 56.464005, w: 28.274607}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7565,7 +7565,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -30.466896, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8223,7 +8223,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -26.675276, y: 0, z: -2.7359126, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9895,6 +9895,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72592f0ab12524d4a8cbe4a921492288, type: 2}
   - {fileID: 11400000, guid: 485989e6748bdd249853c52a0f7407a8, type: 2}
   - {fileID: 11400000, guid: b68328345a550d549a1f73ea27f6d329, type: 2}
+  - {fileID: 11400000, guid: 4215dd8d6f25fed41ae7876ed36ad471, type: 2}
+  - {fileID: 11400000, guid: c4f906ea9af44744b9a7f147046f1830, type: 2}
+  - {fileID: 11400000, guid: 28c690d068b22074cb9a76bb6a461739, type: 2}
   ItemData:
   - {fileID: 11400000, guid: 4e6addba8d7635d4bbf5291c36604a88, type: 2}
   - {fileID: 11400000, guid: 3581609e74958664198b5e27ff78c0e7, type: 2}
@@ -9950,6 +9953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf63d66e6d602e645aa179dd30cd9c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singletonSetting:
+    <DontDestroyLoadObject>k__BackingField: 0
   <Level>k__BackingField: 0
   _nextMapType: 0
 --- !u!114 &1905832231
@@ -9964,6 +9969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754de2aa22657a141ba45286bb26dc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  singletonSetting:
+    <DontDestroyLoadObject>k__BackingField: 0
   <HaveItem>k__BackingField: []
   _maxHealth: 0
 --- !u!114 &1905832232
@@ -9980,9 +9987,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonSetting:
     <DontDestroyLoadObject>k__BackingField: 0
-  MasterVolume: 1
-  BGMVolume: 1
-  SFXVolume: 1
 --- !u!82 &1905832233
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11717,7 +11721,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -20.54059, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

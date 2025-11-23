@@ -31,7 +31,7 @@ public class StoreHealBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             PlayerManager.Instance.AddMaxHealth(AddMaxHealthValue);
 
-            HealValueText.text = "SoldOut!";
+            HealValueText.text = "0";
             _button.interactable = false;
             _soundPlayer.SoundPlay();
         }

@@ -150,6 +150,7 @@ public class BattleUIManager : MonoBehaviour
     #region TurnText
     public void TurnTextSet(int turn, Action OnEndMove)
     {
+        Debug.Log("TurnTextSet");
         if (ClearUI.activeSelf) return;
 
         MoveTurnText.text = $"Turn {turn}";

@@ -151,10 +151,10 @@ public class Player : Agent
         _contect.UIManager.DamageTextChange(AttackDamage);
         
     }
-    public void PlayerTurnStart()
-    {
-        _contect.TurnManager.PlayerTurnSet();
-    }
+    //public void PlayerTurnStart()
+    //{
+    //    _contect.TurnManager.PlayerTurnSet();
+    //}
 
 
     public void TakeDamage(int damage)

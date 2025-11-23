@@ -1,4 +1,5 @@
 ﻿using _01.Script.CHG;
+using Custom.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public enum MapType
     MapChoice
 }
 
-public class StageManager : MonoSingleton<StageManager>
+public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
 {
     protected override void Awake()
     {
