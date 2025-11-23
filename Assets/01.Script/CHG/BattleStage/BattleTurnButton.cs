@@ -19,7 +19,6 @@ public class BattleTurnButton : MonoBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(PinBallSpawnFalse);
     }
 
     private void PinBallSpawnFalse()
@@ -37,6 +36,7 @@ public class BattleTurnButton : MonoBehaviour
         //PlayerTurnGA playerTurnGA = new();
         //ActionSystem.Instance.Perform(playerTurnGA);
         _contect.Player.AgentAnimatorCompo.AttackPlay();
+        PinBallSpawnFalse();
     }
 
     public void EnemyTurnButton()
@@ -67,10 +67,5 @@ public class BattleTurnButton : MonoBehaviour
         }
         
         
-    }
-
-    private void OnDestroy()
-    {
-        _button.onClick.RemoveAllListeners();
     }
 }

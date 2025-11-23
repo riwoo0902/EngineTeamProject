@@ -62,8 +62,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void OnDestroy()
         {
-            onBallScoreTrigger.RemoveListener(ChangeGameManagerState);
-            onBallScoreTrigger.RemoveListener(AddDamage);
+            onBallScoreTrigger.RemoveAllListeners();
             EventBus<OrbMapReset>.OnEvent -= ReSet;
         }
         
