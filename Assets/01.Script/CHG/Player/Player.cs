@@ -75,12 +75,12 @@ public class Player : Agent
         }
         AttackDamage += baseDamage;
 
+        float powerMultiplier = 1.0f + ((float)_power / 200f);
         
         //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
 
  
         _contect.UIManager.DamageTextChange(AttackDamage);
-        //float powerMultiplier = 1.0f + ((float)_power / 200f);
 
         //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
 

@@ -16,8 +16,11 @@ public class BattleStageContect : MonoBehaviour
     public PinBallStageCreateManager PinBallStageCreateManager => PinBallStageCreateManager.Instance;
     [field: SerializeField] public Button ClearBtn;
     [field: SerializeField] public GameObject StageChoiceMap;
+    private bool _load = false;
     public void Init(BattleStageDataSO stageData)
     {
+        if (_load) return;
+        _load = true;
         EnemyManager.Init(stageData, this);
         TurnManager.Init(this);
         Player.Init(this);
