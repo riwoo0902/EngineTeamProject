@@ -48,7 +48,7 @@ namespace _01.Script.Lrw.CustomSoundManager
         }*/
         public float GetVolume(AudioType a)
         {
-            SoundMananger.Instacne.AudioMixer.GetFloat(a.ToString(),out float volume);
+            SoundMananger2.Instance.AudioMixer.GetFloat(a.ToString(),out float volume);
             return volume;
         }
 
@@ -70,12 +70,6 @@ namespace _01.Script.Lrw.CustomSoundManager
             }
             return true;
         }*/
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-        }
-
-        
     }
 
     [Serializable]

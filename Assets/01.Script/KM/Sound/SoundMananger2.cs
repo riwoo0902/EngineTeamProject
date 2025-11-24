@@ -1,24 +1,14 @@
+ using Custom.MonoSingleton;
  using UnityEngine;
 using UnityEngine.Audio;
 
 namespace _01.Script.KM.Sound
 {
-    public class SoundMananger : MonoBehaviour
+    public class SoundMananger2 : MonoSingleton<SoundMananger2>
     {
         [field:SerializeField] public AudioMixer AudioMixer { get; private set; }
         private int a = 12;
-        public static SoundMananger Instacne;
-        private void Start()
-        {
-            if (Instacne == null)
-            {
-                Instacne = this;
-                transform.SetParent(null);
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-                Destroy(gameObject);
-        }
+
 
         public void MasterChange(float value)
         {

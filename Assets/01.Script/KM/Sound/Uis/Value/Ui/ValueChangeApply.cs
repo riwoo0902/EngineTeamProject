@@ -60,17 +60,17 @@ namespace _01.Script.KM.Sound.Uis.Value.Ui
         {
             if (targetEnum == SetValueTarget.Master)
             {
-                SoundMananger.Instacne.MasterChange(value);
+                SoundMananger2.Instance.MasterChange(value);
             }
 
             if (targetEnum == SetValueTarget.SFX)
             {
-                SoundMananger.Instacne.SFXChange(value);
+                SoundMananger2.Instance.SFXChange(value);
             }
 
             if (targetEnum == SetValueTarget.BackGround)
             {
-                SoundMananger.Instacne.BackGroundChange(value);
+                SoundMananger2.Instance.BackGroundChange(value);
             }
         }
     }
