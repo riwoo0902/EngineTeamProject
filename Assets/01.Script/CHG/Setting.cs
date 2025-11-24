@@ -14,6 +14,7 @@ public class Setting : MonoBehaviour
         Scale = transform.localScale;
         transform.localScale = Vector3.zero;
         SettingBtn.onClick.AddListener(SettingShow);
+        SettingBtn.onClick.AddListener(() => Debug.Log("aaa"));
     }
     public void SettingShow()
     {
