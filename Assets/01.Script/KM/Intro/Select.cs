@@ -27,7 +27,6 @@ public class Select : MonoBehaviour
         Collider2D collider = Physics2D.OverlapCircle(nowPos, 0.01f, mask);
         if (collider)
         {
-            Debug.Log(collider.gameObject.name);
             NowSelect = collider.gameObject;
         }
         else
