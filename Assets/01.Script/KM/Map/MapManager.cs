@@ -48,6 +48,7 @@ public class MapManager : MonoBehaviour
         Start();
         if(itHasDir)
         {
+            _isMoving = false;
             MapMove(saveDir);
         }
     }
