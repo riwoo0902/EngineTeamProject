@@ -77,7 +77,7 @@ public class Player : Agent
         }
         
 
-        float powerMultiplier = 1.0f + ((float)_power / 200f);
+        float powerMultiplier = 1 + (_power / 200);
         
         //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
 
