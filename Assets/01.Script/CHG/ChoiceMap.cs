@@ -13,6 +13,8 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
         {
             if (collision.TryGetComponent<ICanTriggerEvent>(out ICanTriggerEvent iCanTriggerEvent))
             {
+                StageManager.Instance.Level++;
+
                 if (Left)
                     MapManager.Instance.OnMapeDir?.Invoke(MapDir.Left);
                 else MapManager.Instance.OnMapeDir?.Invoke(MapDir.Right);
