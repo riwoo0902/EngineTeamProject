@@ -29,14 +29,23 @@ public class MapManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
         OnMapeDir += MapMove;
         SceneManager.sceneLoaded += OnSceneEnter;
     }
 
     private void OnSceneEnter(Scene scene, LoadSceneMode loadScene)
     {
+        if(scene.name != "Map")
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            return;
+        }
+        
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
         stageTree = FindAnyObjectByType<CreateStageTree>();
         playerMarker = GameObject.Find("playerMarker").transform;
+        if(MapSaveSystem.Load() == null) return;
         Start();
     }
 
