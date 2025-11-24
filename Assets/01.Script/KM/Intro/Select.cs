@@ -21,6 +21,10 @@ public class Select : MonoBehaviour
     private Vector2 nowPos;
     [SerializeField] private List<ObjSaves> chains = new List<ObjSaves>();
     [SerializeField] private GameObject blackFrame;
+    private void Start()
+    {
+        select = false;
+    }
     void FixedUpdate()
     {
         nowPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -75,7 +79,7 @@ public class Select : MonoBehaviour
             arrow = null;
         }
     }
-
+    private bool select = false;
     private IEnumerator DownDarkFrame()
     {
         yield return new WaitForSeconds(1f);
@@ -84,6 +88,8 @@ public class Select : MonoBehaviour
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
+            if(select) return;
+            select = true;
             if (nowSelectNum == 0)
             {
                 SceneManager.LoadScene("Map");
