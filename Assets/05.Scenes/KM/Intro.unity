@@ -5555,8 +5555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singletonSetting:
     <DontDestroyLoadObject>k__BackingField: 1
-  <HaveItem>k__BackingField:
-  - {fileID: 11400000, guid: bd42a779ed79a4241bbaa2fec634c220, type: 2}
+  <HaveItem>k__BackingField: []
   _maxHealth: 100
 --- !u!114 &1264422623
 MonoBehaviour:

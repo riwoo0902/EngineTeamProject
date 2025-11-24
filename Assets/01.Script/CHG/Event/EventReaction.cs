@@ -52,7 +52,6 @@ public class EventReaction : MonoBehaviour
             {
                 int r = Random.Range(0, PlayerManager.Instance.HaveItem.Count);
                 removeItems.Add(PlayerManager.Instance.HaveItem[r]);
-                PlayerManager.Instance.HaveItem.RemoveAt(r);
             }
 
             PlayerManager.Instance.RemoveItemValue(removeItems);
@@ -70,7 +69,7 @@ public class EventReaction : MonoBehaviour
         }
         else
         {
-            int removeCount = PinballInventory.Instance.inventory.Count > value ? value : PlayerManager.Instance.HaveItem.Count;
+            int removeCount = PinballInventory.Instance.inventory.Count > value ? value : PinballInventory.Instance.inventory.Count;
 
             for (int i = 0; i < removeCount; i++)
             {

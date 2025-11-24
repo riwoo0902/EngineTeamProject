@@ -112,7 +112,12 @@ public class PlayerManager : Custom.MonoSingleton.MonoSingleton<PlayerManager>
     private int itemValue_Damage = 0;
     public void AddItemValue(List<ItemSO> item)
     {
-        for(int i = 0; i < item.Count; i++)
+        foreach (var item1 in item)
+        {
+            HaveItem.Add(item1);
+        }
+
+        for (int i = 0; i < item.Count; i++)
         {
             for(int j = 0; j < item[i].itemSetting.Count; j++)
             {
@@ -135,6 +140,10 @@ public class PlayerManager : Custom.MonoSingleton.MonoSingleton<PlayerManager>
     }
     public void RemoveItemValue(List<ItemSO> item)
     {
+        foreach (var item1 in item)
+        {
+            HaveItem.Remove(item1);
+        }
         for (int i = 0; i < item.Count; i++)
         {
             for (int j = 0; j < item[i].itemSetting.Count; j++)
