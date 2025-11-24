@@ -96,7 +96,7 @@ public class Select : MonoBehaviour
             }
             else if (nowSelectNum == 1)
             {
-                //설정창
+                SceneManager.LoadScene("Tutorial");
             }
             else if (nowSelectNum == 2)
             {
