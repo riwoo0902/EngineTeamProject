@@ -74,14 +74,14 @@ public class Player : Agent
         //AttackDamage += baseDamage;
         _contect.UIManager.DamageTextChange(AttackDamage);
 
-        float powerMultiplier = 1 + (_power / 200);
+        float powerMultiplier = 1 + (_power / 200f);
 
         float calculatedDamage = baseDamage * powerMultiplier;
 
         int finalDamage = Mathf.RoundToInt(calculatedDamage);
 
         AttackDamage = finalDamage;
-        _contect.UIManager.DamageTextChange(AttackDamage);
+        _contect.UIManager.DamageTextChange(finalDamage);
 
         //PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
 
