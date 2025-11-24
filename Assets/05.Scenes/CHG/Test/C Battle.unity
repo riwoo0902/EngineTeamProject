@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1067602747}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067602749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ef358fb3f2f482b8a959bc8b53e4f9b, type: 3}
   m_Name: 
@@ -2120,6 +2120,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3421841354152385929, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: m_SortingOrder
+      value: 102
+      objectReference: {fileID: 0}
     - target: {fileID: 3674366069005535800, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -2251,6 +2255,10 @@ PrefabInstance:
     - target: {fileID: 6971155446175051239, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7190940982739899787, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7477221886215037708, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2400,7 +2408,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6036959844443586585, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
-      insertIndex: -1
+      insertIndex: 21
       addedObject: {fileID: 1103751963}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5572136798415477729, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
