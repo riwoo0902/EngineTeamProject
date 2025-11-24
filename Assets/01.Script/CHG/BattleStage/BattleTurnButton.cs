@@ -2,32 +2,38 @@ using System;
 using _01.Script.Lrw.Manager;
 using _01.Script.Lrw.PinBallCompo.FSM;
 using _01.Script.Lrw.PinBallMap;
+using Custom.MonoSingleton;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleTurnButton : MonoBehaviour
+public class BattleTurnButton : MonoSingleton<BattleTurnButton>
 {
     private BattleTurnManager _turnManager;
     private BattleStageContect _contect;
     private Button _button;
+    [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
+    public bool ShowText { get; set; }  = false;
+
     public void Init(BattleStageContect contect)
     {
         _contect = contect;
         _turnManager = contect.TurnManager;
     }
-
-    private void Awake()
+    
+    protected override void Awake()
     {
+        base.Awake();
         _button = GetComponent<Button>();
     }
 
     private void PinBallSpawnFalse()
     {
-        PinBallSpawner.Instance.SetCanSpawn(false
-            );
+        PinBallSpawner.Instance.SetCanSpawn(false);
         Debug.Log("pinballSpawnFalse");
     }
-    
+
+
     public void PlayerTurnButton()
     {
         if (!_turnManager.CurTurn || _contect.Player.PlayerTarget == null) return;
@@ -51,6 +57,15 @@ public class BattleTurnButton : MonoBehaviour
 
     private void Update()
     {
+        if (_contect.Player.PlayerTarget == null)
+        {
+            _textMeshProUGUI.color = new Color(_textMeshProUGUI.color.r,_textMeshProUGUI.color.g,_textMeshProUGUI.color.b,1f);
+        }
+        else
+        {
+            _textMeshProUGUI.color = new Color(_textMeshProUGUI.color.r, _textMeshProUGUI.color.g, _textMeshProUGUI.color.b, 0f);
+        }
+        
         try
         {
             if ((!_turnManager.CurTurn || _contect.Player.PlayerTarget == null) ||

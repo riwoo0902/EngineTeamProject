@@ -69,34 +69,36 @@ public class Player : Agent
 
     public void AttackDamageCalculation(AttackType attackType, int baseDamage)
     {
+        AttackDamage += baseDamage;
+        _contect.UIManager.DamageTextChange(AttackDamage);
         if (PlayerTarget == null || PlayerTarget.HealthCompo == null)
         {
             return;
         }
-        AttackDamage += baseDamage;
+        
 
-        float powerMultiplier = 1.0f + ((float)_power / 200f);
+        float powerMultiplier = 1 + (_power / 200);
         
         //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
 
+        //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
  
         _contect.UIManager.DamageTextChange(AttackDamage);
+        float calculatedDamage = baseDamage * powerMultiplier;
 
-        //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
+        int finalDamage = Mathf.RoundToInt(calculatedDamage);
 
-        //float calculatedDamage = baseDamage * powerMultiplier * typeMultiplier;
 
-        //int finalDamage = Mathf.RoundToInt(calculatedDamage);
 
-        //AttackDamage = finalDamage;
+        AttackDamage = finalDamage;
 
-        //PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
+        PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
 
     }
 
     //private float GetTypeEffectiveness(AttackType attackType, AttackType defenseType)
     //{
-    //    // None/Normal/Same Å¸ÀÔÀº »ó¼º ¿µÇâÀ» ÁÖÁö ¾ÊÀ½
+    //    // None/Normal/Same Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     //    if (attackType == AttackType.None || defenseType == AttackType.None ||
     //        attackType == AttackType.Normal || defenseType == AttackType.Normal ||
     //        attackType == defenseType)
@@ -151,10 +153,10 @@ public class Player : Agent
         _contect.UIManager.DamageTextChange(AttackDamage);
         
     }
-    //public void PlayerTurnStart()
-    //{
-    //    _contect.TurnManager.PlayerTurnSet();
-    //}
+    public void PlayerTurnStart()
+    {
+        _contect.TurnManager.PlayerTurnSet();
+    }
 
 
     public void TakeDamage(int damage)

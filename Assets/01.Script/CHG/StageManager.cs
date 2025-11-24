@@ -25,7 +25,7 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
     }
 
     public StageDataManager StageDataManager { get; private set; }
-    [field: SerializeField] public int Level { get; private set; } = 0;
+    [field: SerializeField] public int Level { get; set; } = 0;
 
     [SerializeField] private MapType _nextMapType;
 
@@ -37,7 +37,6 @@ public class StageManager : Custom.MonoSingleton.MonoSingleton<StageManager>
 
     public void SceneChange(MapType type)
     {
-        Level++;
         _nextMapType = type;
 
         SceneManager.sceneLoaded += OnSceneLoaded;

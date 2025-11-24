@@ -6,6 +6,7 @@ public class CBattleLoad : MonoBehaviour
     {
         //StageManager.Instance.SceneChange(MapType.Event);
         //StageManager.Instance.SceneChange(MapType.Store);
-        StageManager.Instance.SceneChange(MapType.Battle);
+        //StageManager.Instance.SceneChange(MapType.Battle);
+        StageManager.Instance.SceneChange(MapType.Boss);
     }
 }
