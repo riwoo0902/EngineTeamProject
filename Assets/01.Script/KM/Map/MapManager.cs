@@ -20,6 +20,7 @@ public class MapManager : MonoBehaviour
     private int _currentStageIndex;
     private bool _isMoving = false;
 
+    private Scene currentScene;
     private void Awake()
     {
         if (Instance)
@@ -36,17 +37,19 @@ public class MapManager : MonoBehaviour
 
     private void OnSceneEnter(Scene scene, LoadSceneMode loadScene)
     {
+        currentScene = scene;
         if(scene.name != "Map")
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
             return;
         }
-        
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
         stageTree = FindAnyObjectByType<CreateStageTree>();
         playerMarker = GameObject.Find("playerMarker").transform;
-        if(MapSaveSystem.Load() == null) return;
         Start();
+        if(itHasDir)
+        {
+            MapMove(saveDir);
+        }
     }
 
     [ContextMenu("Reset")]
@@ -175,17 +178,28 @@ public class MapManager : MonoBehaviour
     [ContextMenu("Left")]
     public void MoveLeft()
     {
+        saveDir = MapDir.Left;
         OnMapeDir?.Invoke(MapDir.Left);
     }
 
     [ContextMenu("Right")]
     public void MoveRight()
     {
+        saveDir = MapDir.Right;
         OnMapeDir?.Invoke(MapDir.Right);
     }
 
+    private MapDir saveDir;
+    private bool itHasDir = false;
     private void MapMove(MapDir dir)
     {
+        if(currentScene.name != "Map")
+        {
+            SceneManager.LoadScene("Map");
+            itHasDir = true;
+            return;
+        }
+        itHasDir = false;
         if (_isMoving) return;
 
         if (_currentStage == null)
