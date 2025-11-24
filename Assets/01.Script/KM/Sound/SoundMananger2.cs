@@ -10,6 +10,7 @@ namespace _01.Script.KM.Sound
         private int a = 12;
 
 
+        
         public void MasterChange(float value)
         {
             AudioMixer.SetFloat("Master", Mathf.Log10(value) * 40);

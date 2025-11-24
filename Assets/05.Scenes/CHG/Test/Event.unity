@@ -2051,7 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -3176,7 +3176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -3426,7 +3426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -3588,6 +3588,10 @@ PrefabInstance:
     - target: {fileID: 4096019865571988510, guid: a8644376b49126a439083c7b884270dd, type: 3}
       propertyPath: m_Name
       value: PlayerInfoBG
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852931251299897328, guid: a8644376b49126a439083c7b884270dd, type: 3}
+      propertyPath: soundType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5409598390492951488, guid: a8644376b49126a439083c7b884270dd, type: 3}
       propertyPath: m_Pivot.x

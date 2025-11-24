@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: fcad7d2908b3dbf4caf9c998c47b6b1f, type: 3}
   volume: 1
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 0
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 1f7bdf2a80fb8194f8520a3525f321bd, type: 3}
   volume: 1
@@ -2608,7 +2608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: fcad7d2908b3dbf4caf9c998c47b6b1f, type: 3}
   volume: 1
@@ -3609,7 +3609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: fcad7d2908b3dbf4caf9c998c47b6b1f, type: 3}
   volume: 1
@@ -4688,7 +4688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -4971,6 +4971,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 162572499}
     m_Modifications:
+    - target: {fileID: 518327056571319582, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 669349354025422928, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
       propertyPath: m_Name
       value: ItemButton 4
@@ -6360,6 +6364,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 162572499}
     m_Modifications:
+    - target: {fileID: 518327056571319582, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 669349354025422928, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
       propertyPath: m_Name
       value: ItemButton 3
@@ -6477,6 +6485,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 162572499}
     m_Modifications:
+    - target: {fileID: 518327056571319582, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 669349354025422928, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
       propertyPath: m_Name
       value: ItemButton 2
@@ -8514,6 +8526,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1249188376}
     m_Modifications:
+    - target: {fileID: 3753467028590018980, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8005315212229321409, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
       propertyPath: m_Name
       value: PinBallButton 2
@@ -9644,6 +9660,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1249188376}
     m_Modifications:
+    - target: {fileID: 3753467028590018980, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8005315212229321409, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
       propertyPath: m_Name
       value: PinBallButton 4
@@ -10359,7 +10379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -10469,6 +10489,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1249188376}
     m_Modifications:
+    - target: {fileID: 3753467028590018980, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8005315212229321409, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
       propertyPath: m_Name
       value: PinBallButton 3
@@ -11197,7 +11221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 0
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 1f7bdf2a80fb8194f8520a3525f321bd, type: 3}
   volume: 1
@@ -11884,6 +11908,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1249188376}
     m_Modifications:
+    - target: {fileID: 3753467028590018980, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8005315212229321409, guid: 2de08c4d8cd004f488db999dae5b0e26, type: 3}
       propertyPath: m_Name
       value: PinBallButton 1
@@ -11981,6 +12009,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 162572499}
     m_Modifications:
+    - target: {fileID: 518327056571319582, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
+      propertyPath: soundType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 669349354025422928, guid: a895edd92a3f4fa4191a836f8ebd462c, type: 3}
       propertyPath: m_Name
       value: ItemButton 1

@@ -17,6 +17,6 @@ MonoBehaviour:
   <EnemyMaxHP>k__BackingField: 70
   <EnemyPower>k__BackingField: 44
   <EnemyType>k__BackingField: 2
-  <LootCoin>k__BackingField: 87
-  <LootPinBall>k__BackingField: {fileID: 11400000, guid: 72592f0ab12524d4a8cbe4a921492288, type: 2}
+  <LootCoin>k__BackingField: 120
+  <LootPinBall>k__BackingField: {fileID: 11400000, guid: 4215dd8d6f25fed41ae7876ed36ad471, type: 2}
   <LootItem>k__BackingField: {fileID: 11400000, guid: c8746235ae51bad44ac541512d29926b, type: 2}

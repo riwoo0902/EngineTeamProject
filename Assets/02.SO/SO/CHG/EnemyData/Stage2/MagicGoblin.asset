@@ -15,8 +15,8 @@ MonoBehaviour:
   <EnemySprite>k__BackingField: {fileID: 21300000, guid: be02c6d2fae254386be4f786a577091d, type: 3}
   <EnemyName>k__BackingField: MagicGoblin
   <EnemyMaxHP>k__BackingField: 54
-  <EnemyPower>k__BackingField: 37
+  <EnemyPower>k__BackingField: 27
   <EnemyType>k__BackingField: 4
-  <LootCoin>k__BackingField: 45
-  <LootPinBall>k__BackingField: {fileID: 11400000, guid: b68328345a550d549a1f73ea27f6d329, type: 2}
+  <LootCoin>k__BackingField: 85
+  <LootPinBall>k__BackingField: {fileID: 11400000, guid: c4f906ea9af44744b9a7f147046f1830, type: 2}
   <LootItem>k__BackingField: {fileID: 11400000, guid: 47abd00526abdd44daedc4d7fdba51bc, type: 2}

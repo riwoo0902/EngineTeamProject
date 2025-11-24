@@ -23,10 +23,10 @@ public class StageDataManager : MonoBehaviour
     public BattleStageDataSO GetBattleData()
     {
         int n;
-        if (StageManager.Instance.Level / 6 > 2)
+        if (StageManager.Instance.Level / 4 > 2)
             n = 3;
         else
-            n = StageManager.Instance.Level / 6;
+            n = StageManager.Instance.Level / 4;
 
             BattleStageDatas stageDatas = EnemyStageData[n];
         int r = Random.Range(0, stageDatas.StageData.Count);

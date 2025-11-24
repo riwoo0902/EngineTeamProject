@@ -563,13 +563,17 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 321690883896994283, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 668348454769142469, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.650505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 668348454769142469, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 745519224195718426, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_fontAsset
@@ -589,15 +593,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1075259689810011031, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1556909690944687025, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.4868687
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1556909690944687025, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1642381481664366685, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_Pivot.x
@@ -701,39 +705,39 @@ PrefabInstance:
       objectReference: {fileID: 127863514}
     - target: {fileID: 2824186577752086609, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.35050505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2824186577752086609, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2824186577752086609, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.35050505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3258813264120927369, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.4868687
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3258813264120927369, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3258813264120927369, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.4868687
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3507822199830922621, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.650505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3507822199830922621, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3507822199830922621, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.650505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3907339333568005998, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -741,6 +745,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4011369960361365250, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154826961655314108, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495719255615502907, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590370452981357584, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599454761341311999, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
@@ -755,13 +771,21 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7902428910278971288, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8413873985704898577, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.35050505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8413873985704898577, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702780236467812792, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -985,11 +1009,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 127863518}
     - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 127863515}
+    - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
@@ -998,6 +1034,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _01.Script.Lrw.CustomSoundManager.SoundPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: _01.Script.Lrw.CustomSoundManager.SoundPlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2612789080899047427, guid: 7a2febaab930b6e4f88542f33ed10630, type: 3}
@@ -1551,7 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -1665,7 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -3666,7 +3706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -5001,7 +5041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 1
   audioClips:
   - {fileID: 8300000, guid: 175aba5195a47314687dac30c8fa2c52, type: 3}
   volume: 1

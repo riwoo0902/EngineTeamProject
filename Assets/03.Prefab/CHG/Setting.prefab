@@ -853,7 +853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 5283562652361183623}
   writeValueText: {fileID: 4154826961655314108}
-  targetEnum: 2
+  audioType: 0
 --- !u!1 &2835329445982895147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2884,7 +2884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea4310c5a28664ab1da72d39d64ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioType: 1
+  soundType: 0
   audioClips:
   - {fileID: 8300000, guid: 5906c2772c5d5f84ba9550d6c2e2186b, type: 3}
   volume: 1
@@ -3430,7 +3430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 6267499707580491990}
   writeValueText: {fileID: 6590370452981357584}
-  targetEnum: 1
+  audioType: 1
 --- !u!1 &7187339890247614819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,7 +3662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 4208342182089211459}
   writeValueText: {fileID: 8702780236467812792}
-  targetEnum: 0
+  audioType: 2
 --- !u!1 &7449974203384283570
 GameObject:
   m_ObjectHideFlags: 0

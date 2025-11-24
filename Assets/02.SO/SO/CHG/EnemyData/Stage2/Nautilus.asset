@@ -15,8 +15,8 @@ MonoBehaviour:
   <EnemySprite>k__BackingField: {fileID: 21300000, guid: 77af8719b2c82495fa16fe4b122bbeaa, type: 3}
   <EnemyName>k__BackingField: Nautilus
   <EnemyMaxHP>k__BackingField: 43
-  <EnemyPower>k__BackingField: 32
+  <EnemyPower>k__BackingField: 26
   <EnemyType>k__BackingField: 3
-  <LootCoin>k__BackingField: 35
-  <LootPinBall>k__BackingField: {fileID: 11400000, guid: b68328345a550d549a1f73ea27f6d329, type: 2}
+  <LootCoin>k__BackingField: 75
+  <LootPinBall>k__BackingField: {fileID: 11400000, guid: c4f906ea9af44744b9a7f147046f1830, type: 2}
   <LootItem>k__BackingField: {fileID: 11400000, guid: 2f0373690cc08914f9c500bade9410f6, type: 2}

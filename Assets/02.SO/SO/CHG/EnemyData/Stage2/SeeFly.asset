@@ -15,8 +15,8 @@ MonoBehaviour:
   <EnemySprite>k__BackingField: {fileID: 21300000, guid: f6c5f721b85a74b2c8b676ac59ad9ad1, type: 3}
   <EnemyName>k__BackingField: SeeFly
   <EnemyMaxHP>k__BackingField: 36
-  <EnemyPower>k__BackingField: 34
+  <EnemyPower>k__BackingField: 27
   <EnemyType>k__BackingField: 3
-  <LootCoin>k__BackingField: 33
-  <LootPinBall>k__BackingField: {fileID: 11400000, guid: 72592f0ab12524d4a8cbe4a921492288, type: 2}
+  <LootCoin>k__BackingField: 73
+  <LootPinBall>k__BackingField: {fileID: 11400000, guid: c616737fa5026a14581f4edc8a303a27, type: 2}
   <LootItem>k__BackingField: {fileID: 11400000, guid: dadbf44bba1e4a64d8f9567b5bbc094b, type: 2}
