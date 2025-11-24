@@ -7223,7 +7223,7 @@ GameObject:
   - component: {fileID: 742390515}
   - component: {fileID: 742390518}
   m_Layer: 5
-  m_Name: Map
+  m_Name: MapMananger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7324,8 +7324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6467a2926a62c4593329d4a6ee469c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageTree: {fileID: 1745058755}
-  playerMarker: {fileID: 1030046345}
 --- !u!1 &745645640
 GameObject:
   m_ObjectHideFlags: 0
@@ -10382,7 +10380,7 @@ GameObject:
   - component: {fileID: 1030046345}
   - component: {fileID: 1030046344}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: playerMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17234,7 +17232,7 @@ GameObject:
   - component: {fileID: 1745058756}
   - component: {fileID: 1745058755}
   m_Layer: 5
-  m_Name: MapIcons
+  m_Name: stageTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17261,7 +17259,6 @@ MonoBehaviour:
   PercentByNormalStage: 50
   PercentByShopStage: 20
   PercentByEventStage: 15
-  PercentByChoiceStage: 0
   horizontalSpacing: 3
   verticalSpacing: 3
   origin: {x: 0, y: 0, z: 0}
