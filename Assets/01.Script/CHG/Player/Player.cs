@@ -73,10 +73,6 @@ public class Player : Agent
 
         //AttackDamage += baseDamage;
         _contect.UIManager.DamageTextChange(AttackDamage);
-        if (PlayerTarget == null || PlayerTarget.HealthCompo == null)
-        {
-            return;
-        }
 
         float powerMultiplier = 1 + (_power / 200);
 
