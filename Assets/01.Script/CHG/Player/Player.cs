@@ -70,9 +70,7 @@ public class Player : Agent
     public void AttackDamageCalculation(AttackType attackType, int baseDamage)
     {
 
-
         //AttackDamage += baseDamage;
-        _contect.UIManager.DamageTextChange(AttackDamage);
 
         float powerMultiplier = 1 + (_power / 200f);
 
@@ -81,42 +79,12 @@ public class Player : Agent
         int finalDamage = Mathf.RoundToInt(calculatedDamage);
 
         AttackDamage = finalDamage;
+        Debug.Log($"[Damage Calc] Base: {baseDamage} x Mult: {powerMultiplier} (P:{_power}) = Final: {finalDamage}");
         _contect.UIManager.DamageTextChange(finalDamage);
 
-        //PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
 
     }
 
-    //private float GetTypeEffectiveness(AttackType attackType, AttackType defenseType)
-    //{
-    //    // None/Normal/Same Ÿ���� �� ������ ���� ����
-    //    if (attackType == AttackType.None || defenseType == AttackType.None ||
-    //        attackType == AttackType.Normal || defenseType == AttackType.Normal ||
-    //        attackType == defenseType)
-    //    {
-    //        return 1.0f;
-    //    }
-
-    //    switch (attackType)
-    //    {
-    //        case AttackType.Fire:
-    //            if (defenseType == AttackType.Grass) return 1.5f; 
-    //            if (defenseType == AttackType.Water) return 0.5f; 
-    //            break;
-
-    //        case AttackType.Water:
-    //            if (defenseType == AttackType.Fire) return 1.5f;  
-    //            if (defenseType == AttackType.Grass) return 0.5f; 
-    //            break;
-
-    //        case AttackType.Grass: 
-    //            if (defenseType == AttackType.Water) return 1.5f; 
-    //            if (defenseType == AttackType.Fire) return 0.5f;  
-    //            break;
-    //    }
-
-    //    return 1.0f;
-    //}
 
     private void OnDead()
     {

@@ -10,6 +10,8 @@ public class EnemyTurnManager : MonoBehaviour
     public Action EnemyTurnEnd;
     public void Init(BattleEnemyManager enemyManager, BattleTurnManager turnManager)
     {
+        OnDeatachPerFormer();
+
         _enemyManger = enemyManager;
         _player = _enemyManger.Player;
         _turnManager = turnManager;
@@ -19,6 +21,7 @@ public class EnemyTurnManager : MonoBehaviour
 
     private void AttachPerformer()
     {
+        Debug.Log("Enemy구독");
         ActionSystem.AttachPerformer<EnemyAttackGA>(EnemyAttack);
         ActionSystem.AttachPerformer<EnemyMoveGA>(SlotCheck);
     }
@@ -27,9 +30,14 @@ public class EnemyTurnManager : MonoBehaviour
     {
         OnDeatachPerFormer();
     }
-
+    private void OnDisable()
+    {
+        // OnDestroy가 호출되기 전/후의 파괴 과정에서 문제가 있을 경우를 대비
+        OnDeatachPerFormer();
+    }
     private void OnDeatachPerFormer()
     {
+        Debug.Log("Enemy구독 해제");
         ActionSystem.DetachPerFormer<EnemyMoveGA>();
         ActionSystem.DetachPerFormer<EnemyAttackGA>();
     }
@@ -54,7 +62,6 @@ public class EnemyTurnManager : MonoBehaviour
             else
             {
                 int next = cur + 1;
-                Debug.Log($"현재 칸: {cur}, 다음 칸: {next}, 움직이는 enemy: {_enemyManger.EnemySlots[cur]}");
                 if (next < _enemyManger.EnemySlots.Count && _enemyManger.EnemySlots[next].CurUse == null)
                 {
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using _01.Script.Lrw.UI.PinBalls;
+﻿using System.Collections;
 using UnityEngine;
 
 
@@ -12,6 +10,7 @@ public class PlayerTurnManager : MonoBehaviour
     private BattleTurnManager _turnManager;
     public void Init(Player player, EnemyTargeting enemyTargeting, BattleTurnManager turnManager)
     {
+        Deatach();
         _player = player;
         _enemyTargeting = enemyTargeting;
         _turnManager = turnManager;
@@ -22,7 +21,7 @@ public class PlayerTurnManager : MonoBehaviour
     private void AttachPerformer()
     {
         ActionSystem.AttachPerformer<PlayerTurnGA>(PlayerAttack);
-        
+
     }
 
     private void SubscribeReaction()
@@ -39,18 +38,19 @@ public class PlayerTurnManager : MonoBehaviour
 
         //데미지 계산
         //int damage = 
-
+        Debug.Log($"공격 AttackDamage = {_player.AttackDamage}");
         _player.PlayerTarget.HealthCompo.TakeDamage(_player.AttackDamage);
-        
+
         _player.SetAttackDamage(0);
-    
+
         yield return new WaitForSeconds(0.5f);
 
-        
+
     }
 
     private void PlayerTurnEnd(PlayerTurnGA playerTurnGA)
     {
+        Debug.Log("PlayerTUrnEnd");
         _enemyTargeting.TargetClear();
         _turnManager.EnemyTurnSet();
 
@@ -60,7 +60,18 @@ public class PlayerTurnManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        ActionSystem.UnsubscribeReaction<PlayerTurnGA>(PlayerTurnEnd, ReactionTiming.POST);
-        ActionSystem.DetachPerFormer<PlayerTurnGA>(); 
+        Deatach();
+    }
+
+    private void OnDisable()
+    {
+        Deatach();
+    }
+
+    private void Deatach()
+    {
+        ActionSystem.ClearSubscribers<PlayerTurnGA>(ReactionTiming.POST);
+        //ActionSystem.UnsubscribeReaction<PlayerTurnGA>(PlayerTurnEnd, ReactionTiming.POST);
+        ActionSystem.DetachPerFormer<PlayerTurnGA>();
     }
 }

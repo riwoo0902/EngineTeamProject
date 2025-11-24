@@ -38,7 +38,6 @@ public class BattleTurnManager : MonoBehaviour
 
     private IEnumerator ChangePlayerTurn()
     {
-        Debug.Log("ChangePlayerTurn");
         if (_contect.Player.HealthCompo.CurHp <= 0) goto End;
         bool textMoveEnd = false;
 
