@@ -69,32 +69,25 @@ public class Player : Agent
 
     public void AttackDamageCalculation(AttackType attackType, int baseDamage)
     {
-        AttackDamage += baseDamage;
+
+
+        //AttackDamage += baseDamage;
         _contect.UIManager.DamageTextChange(AttackDamage);
         if (PlayerTarget == null || PlayerTarget.HealthCompo == null)
         {
             return;
         }
-        
 
-        /*
         float powerMultiplier = 1 + (_power / 200);
-        
-        //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
 
-        //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
- 
-        _contect.UIManager.DamageTextChange(AttackDamage);
         float calculatedDamage = baseDamage * powerMultiplier;
 
         int finalDamage = Mathf.RoundToInt(calculatedDamage);
-        */
 
+        AttackDamage = finalDamage;
+        _contect.UIManager.DamageTextChange(AttackDamage);
 
-
-        //AttackDamage = finalDamage;
-
-        PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
+        //PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
 
     }
 

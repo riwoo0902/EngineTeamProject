@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2021d674a743cfe4b8c9772e7e203e5e, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  <EnemySprite>k__BackingField: {fileID: 21300000, guid: 39b012b44a1a3475395d8141b1bf0981, type: 3}
+  <EnemySprite>k__BackingField: {fileID: 21300000, guid: 2be3b85eac62940de9d521496fc70e8a, type: 3}
   <EnemyName>k__BackingField: Boss
   <EnemyMaxHP>k__BackingField: 3000
   <EnemyPower>k__BackingField: 50

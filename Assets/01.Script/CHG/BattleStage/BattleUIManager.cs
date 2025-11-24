@@ -123,7 +123,7 @@ public class BattleUIManager : MonoBehaviour
 
         _lootBtns[1].onClick.AddListener(() =>
         {
-            PlayerManager.Instance.HaveItem.Add(item);
+            PlayerManager.Instance.AddItemValue(new System.Collections.Generic.List<ItemSO> { item});
             foreach (Transform child in _lootBtns[1].transform)
                 Destroy(child.gameObject);
             Destroy(btnBG[2]);
