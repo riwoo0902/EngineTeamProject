@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fish
   m_EditorClassIdentifier: 
   <PinBallType>k__BackingField: 0
-  <PinBallImage>k__BackingField: {fileID: 8102358098348255977, guid: 211d01794ee21e942866788baf447310, type: 3}
+  <PinBallImage>k__BackingField: {fileID: -5750353039905602045, guid: f048c37f067696643803f62a711d82e0, type: 3}
   <Mass>k__BackingField: 2
   <Friction>k__BackingField: 0.2
   <Bounciness>k__BackingField: 0.925
@@ -22,5 +22,5 @@ MonoBehaviour:
   <BallExplanation>k__BackingField: This is Fish
   <BallLinearDamping>k__BackingField: 0
   <BallShootPower>k__BackingField: 6
-  <BallPrefab>k__BackingField: {fileID: 4058439538221762748, guid: a7f8755f799977c449cf289e7c760732, type: 3}
+  <BallPrefab>k__BackingField: {fileID: 4058439538221762748, guid: 93d60e20c038ed34f974512f67b5dcf7, type: 3}
   <BallPrice>k__BackingField: 5
