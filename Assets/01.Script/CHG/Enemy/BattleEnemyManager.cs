@@ -145,7 +145,9 @@ public class BattleEnemyManager : MonoBehaviour
             }
             _enemyKillCount--;
 
-            if (_nextEnemy.Count == 0) continue;
+            if (_nextEnemy.Count == 0){
+                Destroy(enemy.gameObject);
+                continue; }
 
             EnemySlot targetSlot = null;
 
