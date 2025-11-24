@@ -40,17 +40,11 @@ public class MapManager : MonoBehaviour
         currentScene = scene;
         if(scene.name != "Map")
         {
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             return;
         }
         stageTree = FindAnyObjectByType<CreateStageTree>();
         playerMarker = GameObject.Find("playerMarker").transform;
         Start();
-        if(itHasDir)
-        {
-            _isMoving = false;
-            MapMove(saveDir);
-        }
     }
 
     [ContextMenu("Reset")]
@@ -272,7 +266,16 @@ public class MapManager : MonoBehaviour
     {   
         if (playerMarker != null && _currentStage != null)
         {
-            playerMarker.DOMove(_currentStage.transform.position,3f);
+            Sequence seq = DOTween.Sequence();
+            seq.Append(playerMarker.DOMove(_currentStage.transform.position,3f));
+            seq.AppendCallback(() =>
+            {
+                if(itHasDir)
+                {
+                    _isMoving = false;
+                    MapMove(saveDir);
+                }
+            });
         }
     }
 }
