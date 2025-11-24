@@ -9,7 +9,7 @@ namespace _01.Script.Lrw.PinBallMap.PinBallEvent
 {
     public class BallTriggers : MonoBehaviour
     {
-        public event Action<int> OnBallScoreTrigger;
+        public  Action<int> OnBallScoreTrigger;
         private int _finalScore = 0;
         public int NeedAddScoreCounter { get; set; }
         
