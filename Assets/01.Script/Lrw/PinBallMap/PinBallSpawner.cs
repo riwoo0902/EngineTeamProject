@@ -71,6 +71,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void SlotNull()
         {
+            BattleTurnButton.Instance.ShowText = true;
             Debug.Log("PinBall All Use");
         }
         

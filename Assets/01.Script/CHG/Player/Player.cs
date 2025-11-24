@@ -69,18 +69,20 @@ public class Player : Agent
 
     public void AttackDamageCalculation(AttackType attackType, int baseDamage)
     {
+        AttackDamage += baseDamage;
+        _contect.UIManager.DamageTextChange(AttackDamage);
         if (PlayerTarget == null || PlayerTarget.HealthCompo == null)
         {
             return;
         }
-        AttackDamage += baseDamage;
+        
 
         float powerMultiplier = 1.0f + ((float)_power / 200f);
         
         //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
 
  
-        _contect.UIManager.DamageTextChange(AttackDamage);
+        
 
         //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
 
@@ -96,7 +98,7 @@ public class Player : Agent
 
     //private float GetTypeEffectiveness(AttackType attackType, AttackType defenseType)
     //{
-    //    // None/Normal/Same Å¸ÀÔÀº »ó¼º ¿µÇâÀ» ÁÖÁö ¾ÊÀ½
+    //    // None/Normal/Same Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     //    if (attackType == AttackType.None || defenseType == AttackType.None ||
     //        attackType == AttackType.Normal || defenseType == AttackType.Normal ||
     //        attackType == defenseType)
