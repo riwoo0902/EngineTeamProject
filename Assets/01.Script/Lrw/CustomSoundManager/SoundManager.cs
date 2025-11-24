@@ -91,6 +91,6 @@ namespace _01.Script.Lrw.CustomSoundManager
     }
     public enum AudioType
     {
-        BGM, SFX, None
+        BackGround, SFX, Master
     }
 }
