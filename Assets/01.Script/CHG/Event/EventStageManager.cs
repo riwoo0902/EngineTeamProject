@@ -38,8 +38,15 @@ public class EventStageManager : MonoBehaviour
         StoryText.text = eventData.StoryText;
         StoryImage.sprite = eventData.EventSprite;
 
-        LeftEndButton.GetComponent<Button>().onClick.AddListener(() => MapManager.Instance.OnMapeDir?.Invoke(MapDir.Left));
-        RightEndButton.GetComponent<Button>().onClick.AddListener(() => MapManager.Instance.OnMapeDir?.Invoke(MapDir.Right));
+        LeftEndButton.GetComponent<Button>().onClick.AddListener(() => {
+            MapManager.Instance.OnMapeDir?.Invoke(MapDir.Left);
+            StageManager.Instance.Level++;
+            });
+        RightEndButton.GetComponent<Button>().onClick.AddListener(() => {
+            MapManager.Instance.OnMapeDir?.Invoke(MapDir.Right);
+            StageManager.Instance.Level++;
+        });
+        
     }
 
     private void ButtonAddReaction(C_EventSO eventData, int i)

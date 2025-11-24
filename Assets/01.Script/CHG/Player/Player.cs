@@ -79,18 +79,18 @@ public class Player : Agent
         
         //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
 
+        //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
  
         _contect.UIManager.DamageTextChange(AttackDamage);
+        float calculatedDamage = baseDamage * powerMultiplier;
 
-        //float typeMultiplier = GetTypeEffectiveness(attackType, enemyDefenseType);
+        int finalDamage = Mathf.RoundToInt(calculatedDamage);
 
-        //float calculatedDamage = baseDamage * powerMultiplier * typeMultiplier;
 
-        //int finalDamage = Mathf.RoundToInt(calculatedDamage);
 
-        //AttackDamage = finalDamage;
+        AttackDamage = finalDamage;
 
-        //PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
+        PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
 
     }
 
@@ -151,10 +151,10 @@ public class Player : Agent
         _contect.UIManager.DamageTextChange(AttackDamage);
         
     }
-    //public void PlayerTurnStart()
-    //{
-    //    _contect.TurnManager.PlayerTurnSet();
-    //}
+    public void PlayerTurnStart()
+    {
+        _contect.TurnManager.PlayerTurnSet();
+    }
 
 
     public void TakeDamage(int damage)

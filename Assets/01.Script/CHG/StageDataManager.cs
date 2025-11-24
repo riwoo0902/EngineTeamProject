@@ -22,7 +22,6 @@ public class StageDataManager : MonoBehaviour
     //���� ������ ���� Enemy��ȯ
     public BattleStageDataSO GetBattleData()
     {
-        Debug.Log("호출");
         int n;
         if (StageManager.Instance.Level / 6 > 2)
             n = 3;

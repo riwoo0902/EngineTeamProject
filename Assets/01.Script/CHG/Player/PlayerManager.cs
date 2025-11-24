@@ -177,6 +177,13 @@ public class PlayerManager : Custom.MonoSingleton.MonoSingleton<PlayerManager>
 
     #region Test
 
+    [ContextMenu("StateLog")]
+    public void StateLog()
+    {
+        Debug.Log($"Power: {Power}, MaxHealth: {MaxHealth}, curHelath: {CurrentHealth}, coin: {Gold}");
+    }
+
+
     [ContextMenu("SetItemValue")]
     public void TestSetItemValue()
     {

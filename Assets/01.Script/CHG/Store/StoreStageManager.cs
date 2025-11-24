@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using _01.Script.Lrw.PinBallMap;
 using Lrw_PinBall;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,8 @@ public class StoreStageManager : MonoBehaviour
     [SerializeField] private GameObject PinBallGroup;
     [SerializeField] private GameObject ItemGroup;
     [SerializeField] private GameObject HealBtn;
-    [SerializeField] private Button ClearBtn;
+    [SerializeField] private Button LeftEndButton;
+    [SerializeField] private Button RightEndButton;
     private List<StorePinBallBtn> _pinBallBtn; // 버튼 스크립트로 수정
     private List<StoreItemBtn> _itemBtn;
 
@@ -28,8 +30,14 @@ public class StoreStageManager : MonoBehaviour
         ItemBtnSetting();
 
         HealBtn.GetComponent<StoreHealBtn>().Init();
-        ClearBtn.onClick.AddListener(() => StageManager.Instance.SceneChange(MapType.MapChoice));
-
+        LeftEndButton.GetComponent<Button>().onClick.AddListener(() => {
+            MapManager.Instance.OnMapeDir?.Invoke(MapDir.Left);
+            StageManager.Instance.Level++;
+        });
+        RightEndButton.GetComponent<Button>().onClick.AddListener(() => {
+            MapManager.Instance.OnMapeDir?.Invoke(MapDir.Right);
+            StageManager.Instance.Level++;
+        });
     }
 
     public void PinBallBtnSetting()
