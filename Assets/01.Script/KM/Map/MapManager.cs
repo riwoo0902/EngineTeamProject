@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using _01.Script.Lrw.PinBallMap;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
     public Action<MapDir> OnMapeDir;
 
-    [SerializeField] private CreateStageTree stageTree;
-    [SerializeField] private Transform playerMarker;
+    private CreateStageTree stageTree;
+    private Transform playerMarker;
 
     private GameObject _currentStage;
 
@@ -29,6 +30,20 @@ public class MapManager : MonoBehaviour
 
         Instance = this;
         OnMapeDir += MapMove;
+        SceneManager.sceneLoaded += OnSceneEnter;
+    }
+
+    private void OnSceneEnter(Scene scene, LoadSceneMode loadScene)
+    {
+        stageTree = FindAnyObjectByType<CreateStageTree>();
+        playerMarker = GameObject.Find("playerMarker").transform;
+        Start();
+    }
+
+    [ContextMenu("Reset")]
+    private void ASDFHEH()
+    {
+        MapSaveSystem.Delete();
     }
 
     private void Start()
@@ -60,6 +75,11 @@ public class MapManager : MonoBehaviour
         }
 
         UpdateMarkerPosition();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneEnter;
     }
 
     private IEnumerator Waitttt()

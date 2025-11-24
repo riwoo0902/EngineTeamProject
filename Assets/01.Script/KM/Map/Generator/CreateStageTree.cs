@@ -14,7 +14,6 @@ public class CreateStageTree : MonoBehaviour
     [SerializeField] private int PercentByNormalStage = 50;
     [SerializeField] private int PercentByShopStage = 10;
     [SerializeField] private int PercentByEventStage = 10;
-    [SerializeField] private int PercentByChoiceStage = 30;
 
     [SerializeField] private float horizontalSpacing = 3f;
     [SerializeField] private float verticalSpacing = 3f;
@@ -185,7 +184,7 @@ public class CreateStageTree : MonoBehaviour
     }
     private MapType GetRandomStageType()
     {
-        int total = PercentByNormalStage + PercentByShopStage + PercentByEventStage + PercentByChoiceStage;
+        int total = PercentByNormalStage + PercentByShopStage + PercentByEventStage;
         if (total <= 0)
             return MapType.Battle;
 
@@ -198,9 +197,7 @@ public class CreateStageTree : MonoBehaviour
         if (r < PercentByShopStage)
             return MapType.Store;
 
-        r -= PercentByShopStage;
-        if (r < PercentByEventStage)
-            return MapType.Event;
-        return MapType.MapChoice;
+        
+        return MapType.Event; 
     }
 }
