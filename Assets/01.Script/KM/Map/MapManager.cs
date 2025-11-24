@@ -175,20 +175,6 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("Left")]
-    public void MoveLeft()
-    {
-        saveDir = MapDir.Left;
-        OnMapeDir?.Invoke(MapDir.Left);
-    }
-
-    [ContextMenu("Right")]
-    public void MoveRight()
-    {
-        saveDir = MapDir.Right;
-        OnMapeDir?.Invoke(MapDir.Right);
-    }
-
     private MapDir saveDir;
     private bool itHasDir = false;
     private void MapMove(MapDir dir)
@@ -197,6 +183,7 @@ public class MapManager : MonoBehaviour
         {
             SceneManager.LoadScene("Map");
             itHasDir = true;
+            saveDir = dir;
             return;
         }
         itHasDir = false;
