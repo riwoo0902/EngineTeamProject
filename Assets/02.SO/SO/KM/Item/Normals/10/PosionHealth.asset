@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
+  m_Name: PosionHealth
+  m_EditorClassIdentifier: 
+  itemSetting:
+  - itemType: 1
+    itemValue: 35
+  itemName: "\uB3C5 \uD558\uD2B8\uAD6C\uB984"
+  itemIcon: {fileID: -1801089751923644158, guid: 05be6ea1d773fc74189a54b2e6b3e4f2, type: 3}
+  itemDescription: "\uD68C\uBCF5\uD560\uAC70 \uAC19\uC9C0\uB9CC \uC758\uC678\uB85C
+    \uB370\uBBF8\uC9C0\uAC00 \uC99D\uAC00\uB41C\uB2E4."
+  itemPrice: 65

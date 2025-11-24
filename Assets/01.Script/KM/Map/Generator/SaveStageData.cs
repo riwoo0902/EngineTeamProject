@@ -1,0 +1,25 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SaveStageData : MonoBehaviour
+{
+    public MapType typeThis;
+    [SerializeField] private Image imgae;
+    [SerializeField] private List<Sprite> stageSprites = new List<Sprite>();
+
+    private void Start()
+    {
+        if (typeThis == MapType.MapChoice)
+        {
+            typeThis = MapType.Battle;
+        }
+        imgae.sprite = stageSprites[(int)typeThis - 1];
+    }
+
+    public void ChoiceStage()
+    {
+        MapManager.Instance.Save();
+        StageManager.Instance.SceneChange(typeThis);
+    }
+}

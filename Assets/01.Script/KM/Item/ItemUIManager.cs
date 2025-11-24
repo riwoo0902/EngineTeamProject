@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ItemUIManager : MonoBehaviour
 {
-    public Action<ItemSO> AddItem;
-    public Action<ItemSO> RemoveItem;
+    public Action<ItemSO> AddItem; //add
+    public Action<ItemSO> RemoveItem; //remove
 
     public Transform ItemParent;
     public GameObject ItemPrefab;
@@ -18,11 +18,12 @@ public class ItemUIManager : MonoBehaviour
 
     private void Add(ItemSO item)
     {
+        Debug.Log("Add");
         Instantiate(ItemPrefab, ItemParent).GetComponent<ItemSetting>().MyitemSO = item;
     }
 
     [ContextMenu("Test Add Items")]
-    private void TestAdd()
+    public void TestAdd()
     {
         AddItem?.Invoke(TestItem);
     }

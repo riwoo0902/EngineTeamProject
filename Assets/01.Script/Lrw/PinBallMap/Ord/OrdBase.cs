@@ -1,6 +1,7 @@
 using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
+using _01.Script.Lrw.PinBallCompo;
 using _01.Script.Lrw.PinBallMap.Ord;
 using UnityEngine;
 
@@ -10,8 +11,8 @@ namespace Lrw_Ord
     {
         [SerializeField] protected float hp;
         protected float currentHp = 2;
-        protected Action OnHitEvent;
-        protected Action OnDestroyEvent;
+        protected Action<PinBallBase> OnHitEvent;
+        protected Action<PinBallBase> OnDestroyEvent;
         public Collider2D Collider { get; set; }
         
         
@@ -21,13 +22,13 @@ namespace Lrw_Ord
             Collider = gameObject.GetComponent<Collider2D>();
         }
         
-        public virtual void Hit(float a)
+        public virtual void Hit(float a,PinBallBase b)
         {
             currentHp -= a;
-            OnHitEvent?.Invoke();
+            OnHitEvent?.Invoke(b);
             if (currentHp <= 0)
             {
-                OnDestroyEvent?.Invoke();
+                OnDestroyEvent?.Invoke(b);
                 gameObject.SetActive(false);
             }
         }

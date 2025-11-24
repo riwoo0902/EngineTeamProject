@@ -1,39 +1,43 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class EnemyTargeting : MonoBehaviour
 {
-    [SerializeField] private GameObject TargetTriangle; //타겟 표시용, 이름 바꿔야함
-    private SpriteRenderer _spren; //이름 바꿔야함
-    private Color _sprenColor; //이름 바꿔야함
+    [SerializeField]
+    private LayerMask monsterLayer;
     private Player _player;
-
-    public void Init(Player player)
+    private BattleStageContect _contect;
+    public void Init(Player player, BattleStageContect contect)
     {
         _player = player;
-        _spren = TargetTriangle.GetComponent<SpriteRenderer>();
-        _sprenColor = _spren.color;
-        _sprenColor.a = 0;
-        _spren.color = _sprenColor;
+        _contect = contect;
     }
-
-
 
     private void Update()
     {
-        if (!C_StageManager.Instance.CurTurn) return;
-
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
+            if (!_contect.TurnManager.CurTurn) return;
 
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D rayHit = Physics2D.Raycast(pos, Vector2.zero, 0f);
-
-            if (rayHit.collider != null && rayHit.collider.TryGetComponent<C_Enemy>(out C_Enemy enemy))
+            Collider2D[] rayHit = Physics2D.OverlapPointAll(pos);
+            
+            bool flag = false;
+            
+            if (rayHit.Length > 0)
             {
-                TargetSet(enemy);
+                rayHit.ToList().ForEach((c) =>
+                {
+                    if (c.TryGetComponent<Enemy>(out Enemy enemy))
+                    {
+                        TargetSet(enemy);
+                        flag = true;
+                    }
+                });
+                
+                if(!flag)
+                    TargetClear();
             }
             else
             {
@@ -44,18 +48,14 @@ public class EnemyTargeting : MonoBehaviour
 
     public void TargetClear()
     {
-        _sprenColor.a = 0;
-        _spren.color = _sprenColor;
+        _contect.UIManager.TargetingImgHide();
         _player.ChangeTarget(null);
     }
 
-    private void TargetSet(C_Enemy enemy)
+    private void TargetSet(Enemy enemy)
     {
-        _sprenColor.a = 1;
-        _spren.color = _sprenColor;  
-        Vector3 targetPos = enemy.transform.position;
-        TargetTriangle.transform.position = new Vector3(targetPos.x, targetPos.y -1, 1);
-        
+        _contect.UIManager.TargetingImgShow(enemy.transform);
+
         _player.ChangeTarget(enemy);
     }
 }

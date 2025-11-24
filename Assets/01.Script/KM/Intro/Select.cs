@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class ObjSaves
@@ -20,13 +21,16 @@ public class Select : MonoBehaviour
     private Vector2 nowPos;
     [SerializeField] private List<ObjSaves> chains = new List<ObjSaves>();
     [SerializeField] private GameObject blackFrame;
+    private void Start()
+    {
+        select = false;
+    }
     void FixedUpdate()
     {
         nowPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Collider2D collider = Physics2D.OverlapCircle(nowPos, 0.01f, mask);
         if (collider)
         {
-            Debug.Log(collider.gameObject.name);
             NowSelect = collider.gameObject;
         }
         else
@@ -34,25 +38,28 @@ public class Select : MonoBehaviour
             NowSelect = null;
         }
     }
-
+    private int nowSelectNum = -1;
     private void Update()
     {
         if(Mouse.current.leftButton.isPressed && NowSelect != null)
         {
-            if (NowSelect.CompareTag("Start"))
+            if (NowSelect.CompareTag("Start") && nowSelectNum == -1)
             {
                 Destroy(chains[0].ChainLeft);
                 Destroy(chains[0].ChainRight);
+                nowSelectNum = 0;
             }
-            else if (NowSelect.CompareTag("Setting"))
+            else if (NowSelect.CompareTag("Setting") && nowSelectNum == -1)
             {
                 Destroy(chains[1].ChainLeft);
                 Destroy(chains[1].ChainRight);
+                nowSelectNum = 1;
             }
-            else if (NowSelect.CompareTag("Exit"))
+            else if (NowSelect.CompareTag("Exit") && nowSelectNum == -1)
             {
                 Destroy(chains[2].ChainLeft);
                 Destroy(chains[2].ChainRight);
+                nowSelectNum = 2;
             }
             StartCoroutine(DownDarkFrame());
         }
@@ -72,11 +79,30 @@ public class Select : MonoBehaviour
             arrow = null;
         }
     }
-
+    private bool select = false;
     private IEnumerator DownDarkFrame()
     {
         yield return new WaitForSeconds(1f);
-        blackFrame.transform.DOMoveY(0,1);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(blackFrame.transform.DOMoveY(0,1));
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() =>
+        {
+            if(select) return;
+            select = true;
+            if (nowSelectNum == 0)
+            {
+                SceneManager.LoadScene("Map");
+            }
+            else if (nowSelectNum == 1)
+            {
+                SceneManager.LoadScene("Tutorial");
+            }
+            else if (nowSelectNum == 2)
+            {
+                Application.Quit();
+            }
+        });
     }
 
     private void OnDrawGizmos()

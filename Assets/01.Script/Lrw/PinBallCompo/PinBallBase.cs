@@ -1,13 +1,13 @@
-using System;
 using System.Collections;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.Manager;
 using _01.Script.Lrw.PinBallCompo.FSM;
 using _01.Script.Lrw.PinBallCompo.FSM.PinBallState;
+using _01.Script.Lrw.UI;
+using _01.Script.Lrw.UI.PinBalls;
 using Lrw_CustomReadonly;
 using Lrw_PinBall;
-using UnityEditor.AssetImporters;
 using UnityEngine;
 
 namespace _01.Script.Lrw.PinBallCompo
@@ -20,27 +20,23 @@ namespace _01.Script.Lrw.PinBallCompo
         public Rigidbody2D Rigid { get; private set; }
         private PinBallRenderer _pinBallRenderer;
         private PinBallDrawShootLine _pinBallDrawShootLine;
-        [field:SerializeField,ReadOnly] public float Damage { get; private set; }
+        private int Damage => PlayerManager.Instance.Power;
         private FsmBrain _pinBallFsmMachine;
         public float BaseDamage { get; private set; }
+        public bool IsEnd { get; private set; } = false;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Rigid = GetComponent<Rigidbody2D>();
             _pinBallRenderer = GetComponentInChildren<PinBallRenderer>();
-            BaseDamage = PinBallSo.BaseDamage;
-            SetDamage();
+
             if (GameManager.Instance.state == PinBallStates.None) GameManager.Instance.state = PinBallStates.Idle;
         }
-
-        protected virtual void SetDamage()
-        {
-            Damage = PinBallSo.BaseDamage;
-        }
+        
 
         public void PinBallShoot()
         {
-            if (GameManager.Instance.state == PinBallStates.Idle)
+            if (GameManager.Instance.state == PinBallStates.Idle && !IsEnd && MouseCheckUI.Instance.MouseOn)
             {
                 GameManager.Instance.state = PinBallStates.Shooting;
                 Vector2 force = (GameManager.Instance.InputSo.MousePos - (Vector2)transform.position).normalized *
@@ -50,7 +46,7 @@ namespace _01.Script.Lrw.PinBallCompo
             }
         }
         
-        protected virtual void CreatPinBallBrain()
+        private void CreatPinBallBrain()
         {
             _pinBallFsmMachine = new FsmBrain();
             _pinBallFsmMachine.AddState(PinBallStates.Idle,new PinBallIdleState(this));
@@ -58,7 +54,7 @@ namespace _01.Script.Lrw.PinBallCompo
             _pinBallFsmMachine.SetState(PinBallStates.Idle);
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             GameManager.Instance.InputSo.OnMousePress += PinBallShoot;
             CreatPinBallBrain();
@@ -66,29 +62,31 @@ namespace _01.Script.Lrw.PinBallCompo
             EventBus<AddNeedTriggerCountEvent>.Raise(new AddNeedTriggerCountEvent(1));
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             _pinBallFsmMachine.Update();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             _pinBallFsmMachine.FixedUpdate();
         }
 
         public void SetPinBallSo(PinBallSO a)
         {
+            Rigid = GetComponent<Rigidbody2D>();
             PinBallSo = a;
             Rigid.gravityScale = a.Mass;
+            _pinBallRenderer = GetComponentInChildren<PinBallRenderer>();
             _pinBallRenderer.SetSprite(a.PinBallImage);
             Rigid.sharedMaterial.friction = a.Friction;
             Rigid.sharedMaterial.bounciness = a.Bounciness;
             Rigid.linearDamping = a.BallLinearDamping;
         }
 
-        public float Score { get; set; }
+        public int Score { get; set; }
 
-        public float GetScore()
+        public int GetScore()
         {
             StartCoroutine(ActiveFalse());
             return Score;
@@ -96,17 +94,20 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private IEnumerator ActiveFalse()
         {
+            IsEnd = true;
             yield return new WaitForSeconds(1);
-            gameObject.SetActive(false);
+            PinBallUIManager.Instance.UsePinBall();
+            Destroy(gameObject);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        protected virtual void OnCollisionEnter2D(Collision2D other)
         {
-            EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage));
+            EventBus<OrdHitEvent>.Raise(new OrdHitEvent(other.collider,Damage,this));
             Score += Damage;
+            EventBus<ScoreAddEvent>.Raise(new ScoreAddEvent(Damage));
         }
 
-        private void OnDisable()
+        protected virtual void OnDestroy()
         {
             GameManager.Instance.InputSo.OnMousePress -= PinBallShoot;
         }

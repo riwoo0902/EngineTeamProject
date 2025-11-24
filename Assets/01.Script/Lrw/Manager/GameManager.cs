@@ -1,4 +1,3 @@
-using System;
 using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.PinBallCompo.FSM;
@@ -11,9 +10,7 @@ namespace _01.Script.Lrw.Manager
     public class GameManager : MonoBehaviour
     {
         [field:SerializeField] public InputSO InputSo { get; private set; }
-
-        public PinBallStates state = PinBallStates.Idle;
-        
+        public PinBallStates state = PinBallStates.None;
         public static GameManager Instance { get; private set; }
 
         private void Awake()
@@ -21,7 +18,6 @@ namespace _01.Script.Lrw.Manager
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -38,6 +34,7 @@ namespace _01.Script.Lrw.Manager
             EventBus<MousePosEvent>.Raise(new MousePosEvent(InputSo.MouseScreenPos,InputSo.MousePos));
             
         }
+
 
         private void OnDestroy()
         {

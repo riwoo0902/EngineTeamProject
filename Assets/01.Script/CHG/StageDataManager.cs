@@ -1,34 +1,75 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Lrw_PinBall;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [Serializable]
 public class BattleStageDatas
 {
-    public List<BattleStageDataSO> EnemyData; 
+    public List<BattleStageDataSO> StageData;
 }
 
 public class StageDataManager : MonoBehaviour
 {
-    private int _level = 0;
-    public List<BattleStageDatas> EnemyStageData; //·¹º§ ´ç ½ºÅ×ÀÌÁöData
+    
+    public List<BattleStageDatas> EnemyStageData; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Data
     public List<C_EventSO> EventData;
-
-    //ÇöÀç ·¹º§¿¡ 
+    public List<PinBallSO> PinBallData; //ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Éºï¿½
+    public List<ItemSO> ItemData; //ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public BattleStageDatas BossStageData;
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Enemyï¿½ï¿½È¯
     public BattleStageDataSO GetBattleData()
     {
-        BattleStageDatas stageDatas = EnemyStageData[_level];
-        int r = Random.Range(0,stageDatas.EnemyData.Count);
-        return stageDatas.EnemyData[r];
+        int n;
+        if (StageManager.Instance.Level / 6 > 2)
+            n = 3;
+        else
+            n = StageManager.Instance.Level / 6;
+
+            BattleStageDatas stageDatas = EnemyStageData[n];
+        int r = Random.Range(0, stageDatas.StageData.Count);
+        return stageDatas.StageData[r];
     }
 
-    //·£´ýÀ¸·Î °ñ¶ó¼­ ¹ÝÈ¯, ¹ÝÈ¯ÇÑ Event´Â »èÁ¦
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¯, ï¿½ï¿½È¯ï¿½ï¿½ Eventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public C_EventSO GetEventData()
     {
-        int r = Random.Range(0,EventData.Count);
+        int r = Random.Range(0, EventData.Count);
         C_EventSO data = EventData[r];
         EventData.RemoveAt(r);
         return data;
+    }
+
+    //ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½È¯
+    public ItemSO[] GetItemData(int n)
+    {
+        return ItemData
+        .OrderBy(item => Random.value)
+        .Take(n)
+        .ToArray();
+    }
+
+
+    public PinBallSO[] GetPinBallData(int n)
+    {
+        List<PinBallSO> pinBalls = new List<PinBallSO>();
+        while (pinBalls.Count < n)
+
+        {
+            int r = Random.Range(0, PinBallData.Count);
+            if (pinBalls.Contains(PinBallData[r]))
+            {
+                pinBalls.Add(PinBallData[r]);
+            }
+        }
+
+        return pinBalls.ToArray();
+    }
+
+    public BattleStageDataSO GetBossData()
+    {
+        return BossStageData.StageData[0];
     }
 }

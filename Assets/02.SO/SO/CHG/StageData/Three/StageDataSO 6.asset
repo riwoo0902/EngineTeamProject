@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b729ffe09b2d64397d167e4404df21, type: 3}
+  m_Name: StageDataSO 6
+  m_EditorClassIdentifier: 
+  <EmergeCount>k__BackingField: 9
+  <EmergeEnemy>k__BackingField:
+  - {fileID: 11400000, guid: a9ac949424d0e6945839df7188e40d64, type: 2}
+  - {fileID: 11400000, guid: 8af3d32d6663ea5408858c3dfa758707, type: 2}
+  - {fileID: 11400000, guid: 3ed0cb5012ba16146a0d36aa03af9a97, type: 2}
+  - {fileID: 11400000, guid: f49360fc8e36c3141b4abc7327a1f0de, type: 2}
+  - {fileID: 11400000, guid: e6c78634b99b9f74093459f30d0d83b6, type: 2}
+  - {fileID: 11400000, guid: 54c131c36b1abd74bab4318a8857c966, type: 2}
+  - {fileID: 11400000, guid: c5d486d621045064ab41820703b9bb20, type: 2}
+  - {fileID: 11400000, guid: fa0dca021e83deb489b09642c51bee65, type: 2}
+  - {fileID: 11400000, guid: 4f45faf2122221b4ebed1849d36e49e0, type: 2}
+  - {fileID: 11400000, guid: 8a345f6823666ad46ba95d1349510e74, type: 2}
+  - {fileID: 11400000, guid: 15444bd92b9ce0d4792648ee3854ce83, type: 2}
+  - {fileID: 11400000, guid: f8c00684e911ff6459e7778eb3da4586, type: 2}
+  - {fileID: 11400000, guid: 1af687ace18ed4d439c869842f8e9f01, type: 2}
+  - {fileID: 11400000, guid: a93f4c23bea3e86408e4404917eb417f, type: 2}
+  - {fileID: 11400000, guid: 0945b65042eb3244ab0bac088ec9f057, type: 2}
+  - {fileID: 11400000, guid: d4470ec755c5d184f8e2ef14845bff3e, type: 2}
+  - {fileID: 11400000, guid: 40d78b082f8218845af028bb5b5dfd1b, type: 2}
+  - {fileID: 11400000, guid: 019df554043cbcb41ad4f8d53eaa1b19, type: 2}
+  - {fileID: 11400000, guid: ef0570d23269b71479aab071c835bb1e, type: 2}
+  - {fileID: 11400000, guid: d992b31eb4efd7a4baa9a7e2aeca1ba0, type: 2}
+  - {fileID: 11400000, guid: 8c3814594d7bfd04f8ce7180b22c2f92, type: 2}
+  - {fileID: 11400000, guid: cfe27d9790163b94e90bb4c6312ee53e, type: 2}
+  - {fileID: 11400000, guid: 90df26dea7be3d34d98083744bd0fb87, type: 2}
+  <StartEnemyCount>k__BackingField: 3
+  <PinBallMap>k__BackingField: {fileID: 440758252238060653, guid: c4305f51ac711ba4ea8ef283ea5b43b0, type: 3}

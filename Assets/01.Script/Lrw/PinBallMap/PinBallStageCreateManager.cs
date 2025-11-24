@@ -3,6 +3,7 @@ using _01.Script.Lrw.EventBus.EventBusSystem.CoreSystem;
 using _01.Script.Lrw.EventBus.EventBusSystem.Events;
 using _01.Script.Lrw.Manager;
 using _01.Script.Lrw.PinBallCompo.FSM;
+using _01.Script.Lrw.UI.PinBalls;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,11 +11,10 @@ namespace _01.Script.Lrw.PinBallMap
 {
     public class PinBallStageCreateManager : MonoBehaviour
     {
-        public UnityEvent<float> onBallScoreTrigger;
+        public UnityEvent<int> onBallScoreTrigger;
         public PinBallMap CurrentPinBallMap {get; private set;}
         
-        public GameObject testPrefab;
-        
+        private Player _player;
         public static PinBallStageCreateManager Instance { get; private set; }
         private void Awake()
         {
@@ -28,17 +28,28 @@ namespace _01.Script.Lrw.PinBallMap
             }
 
             onBallScoreTrigger.AddListener(ChangeGameManagerState);
+            onBallScoreTrigger.AddListener(AddDamage);
             EventBus<OrbMapReset>.OnEvent += ReSet;
         }
 
-        private void ChangeGameManagerState(float a)
+        private void ChangeGameManagerState(int a)
         {
             GameManager.Instance.state = PinBallStates.Idle;
         }
 
         private void Start()
         {
-            CreatMap(testPrefab);
+            _player = FindAnyObjectByType<Player>();
+        }
+
+        private void AddDamage(int damage)
+        {
+            _player.AttackDamageCalculation(AttackType.None, damage);
+        }
+
+        private void ReLoadPinBallSlot()
+        {
+            
         }
 
         public void CreatMap(GameObject mapPrefab)
@@ -49,6 +60,7 @@ namespace _01.Script.Lrw.PinBallMap
 
         private void OnDestroy()
         {
+            onBallScoreTrigger.RemoveAllListeners();
             EventBus<OrbMapReset>.OnEvent -= ReSet;
         }
         

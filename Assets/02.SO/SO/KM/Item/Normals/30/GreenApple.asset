@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
+  m_Name: GreenApple
+  m_EditorClassIdentifier: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 13
+  itemName: "\uADF8\uB9B0\uC560\uD50C"
+  itemIcon: {fileID: -1783808350427418317, guid: b38a22f5d39725741b679e8c223c9d9b, type: 3}
+  itemDescription: "\uBBF8\uC138\uC2A4 \uCCAD\uC0AC\uACFC\uB2E4. "
+  itemPrice: 24

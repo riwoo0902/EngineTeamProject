@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
+  m_Name: Enkephalin
+  m_EditorClassIdentifier: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 15
+  itemName: "\uC5D4\uCF00\uD314\uB9B0"
+  itemIcon: {fileID: 5379824893481949807, guid: 2147877dfbf245e419ea6d258dccd206, type: 3}
+  itemDescription: "\uC5C4\uCCAD\uB09C \uC5D0\uB108\uC9C0\uC6D0\uC785\uB2C8\uB2E4. "
+  itemPrice: 30

@@ -23,7 +23,7 @@ namespace _01.Script.Lrw.PinBallCompo
 
         private void DrawLine(MousePosEvent mousePos)
         {
-            if (GameManager.Instance.state == PinBallStates.Shooting)
+            if (GameManager.Instance.state != PinBallStates.Idle || _pinBallBase.IsEnd)
             {
                 _lineRenderer.positionCount = 0;
                 return;

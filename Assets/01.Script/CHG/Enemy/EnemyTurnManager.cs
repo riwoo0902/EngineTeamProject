@@ -1,54 +1,49 @@
+using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine;
 
 public class EnemyTurnManager : MonoBehaviour
 {
-    private EnemyStageManager _enemyManger;
+    private BattleEnemyManager _enemyManger;
     private Player _player;
-    //°ø°İ ´ë»ó
-    public void Init(EnemyStageManager enemyManager)
+    private BattleTurnManager _turnManager;
+    public Action EnemyTurnEnd;
+    public void Init(BattleEnemyManager enemyManager, BattleTurnManager turnManager)
     {
         _enemyManger = enemyManager;
-
         _player = _enemyManger.Player;
+        _turnManager = turnManager;
 
-        SubscribeReaction();
         AttachPerformer();
     }
 
-    private void SubscribeReaction() //»çÀü ±¸µ¶
+    private void AttachPerformer()
     {
-        ActionSystem.SubscribeReaction<EnemyMoveGA>(StartEnemyTurn, ReactionTiming.PRE); //¿òÁ÷ÀÌ±â Àü ÅÏ ¹Ù²Ù±â
-    }
-
-    private void AttachPerformer() //Çàµ¿ µî·Ï
-    {
-        ActionSystem.AttachPerformer<EnemyMoveGA>(SlotCheck);
-
         ActionSystem.AttachPerformer<EnemyAttackGA>(EnemyAttack);
-
+        ActionSystem.AttachPerformer<EnemyMoveGA>(SlotCheck);
     }
 
-    //ÅÏ ½ÃÀÛ ½Ã »çÀü¿¡ ÇöÀç ÅÏ ¹Ù²ã³õ±â
-    private void StartEnemyTurn(EnemyMoveGA enemyMoveGA)
+    private void OnDestroy()
     {
-        C_StageManager.Instance.EnemyTurnSet();
+        OnDeatachPerFormer();
     }
+
+    private void OnDeatachPerFormer()
+    {
+        ActionSystem.DetachPerFormer<EnemyMoveGA>();
+        ActionSystem.DetachPerFormer<EnemyAttackGA>();
+    }
+
 
     private IEnumerator SlotCheck(EnemyMoveGA enemyMoveGA)
     {
         bool attack = false;
-        Debug.Log("SlotCheck ½ÇÇà");
-        //Dirtionary¿¡¼­ µ¹¸é¼­ Àû ¹ß°ß -> Àû ¾Õ¿¡ Ä­ÀÌ ÀÖ´Â°¡? -> ÀÖÀ¸¸é ÀÌµ¿, ¾øÀ¸¸é ±×´ë·Î
-
-        //¸¶Áö¸· Ä­ÀÌ¶ó¸é Enemy °ø°İ, ¾Æ´Ï¶ó¸é Enemy ÀÌµ¿
         for (int cur = _enemyManger.EnemySlots.Count - 1; cur >= 0; cur--)
         {
             EnemySlot slot = _enemyManger.EnemySlots[cur];
-            if (slot.CurUse == null) continue; //ÀÚ¸®¿¡ Enemy°¡ ¾ø´Ù¸é ´Ù½Ã
+            if (slot.CurUse == null) continue;
 
-            //¸¶Áö¸·Ä­ÀÏ °æ¿ì °ø°İ
+            // ê°€ì¥ ì• ì¹¸ì¼ ê²½ìš° ê³µê²©
             if (cur == _enemyManger.EnemySlots.Count - 1)
             {
                 EnemyAttackGA enemyAttackGA = new(_enemyManger.EnemySlots[_enemyManger.EnemySlots.Count - 1].CurUse);
@@ -56,53 +51,46 @@ public class EnemyTurnManager : MonoBehaviour
                 attack = true;
                 continue;
             }
-            else //¾Æ´Ò°æ¿ì ÀÌµ¿
+            else
             {
-                //¾ÕÀÚ¸®°¡ ÀÖ°í ¾ÕÀÚ¸®¿¡ Enemy°¡ ¾ø´Ù¸é ÀÌµ¿
                 int next = cur + 1;
+                Debug.Log($"í˜„ì¬ ì¹¸: {cur}, ë‹¤ìŒ ì¹¸: {next}, ì›€ì§ì´ëŠ” enemy: {_enemyManger.EnemySlots[cur]}");
                 if (next < _enemyManger.EnemySlots.Count && _enemyManger.EnemySlots[next].CurUse == null)
                 {
-                    Debug.Log($"{_enemyManger.EnemySlots[cur].CurUse}, {cur}, {next}");
+
                     yield return EnemyMove(_enemyManger.EnemySlots[cur].CurUse, cur, next);
                 }
-
             }
         }
 
-        if (!attack) //EnemyµéÀÌ °ø°İÀ» ÇÏÁö ¾Ê¾ÒÀ» °æ¿ì ÇÃ·¹ÀÌ¾î ÅÏÀ¸·Î ÀüÈ¯
-            C_StageManager.Instance.PlayerTurnSet();
+        yield return _enemyManger.HandleReplacementsRoutine();
+        
+        EnemyTurnEnd?.Invoke();
+
+        if (!attack)
+        {
+            _turnManager.PlayerTurnSet();
+        }
     }
 
-    //                        ÇöÀç Ä­ÀÇ Enemy, ÇöÀç Ä­ ¹øÈ£, ´ÙÀ½ Ä­ ¹øÈ£
-    private IEnumerator EnemyMove(C_Enemy enemy, int cur, int next)
+    private IEnumerator EnemyMove(Enemy enemy, int cur, int next)
     {
-        bool endMove = false;
-        Debug.Log("Enemy Move ½ÇÇà");
-
         EnemySlot curSlot = _enemyManger.EnemySlots[cur];
         EnemySlot nextSlot = _enemyManger.EnemySlots[next];
 
-        Debug.Log($"Enemy Pos: {enemy.gameObject.transform.position}, next Pos: {nextSlot.Pos.position}");
-        //ÀÌµ¿ ÀÌÈÄ True·Î ¸¸µé¾î ÁøÇà
-        enemy.gameObject.transform.DOMove(nextSlot.Pos.position, 0.3f)
-            .OnComplete(() => endMove = true);
-        Debug.Log("Move ½ÇÇàµÊ");
-
-        yield return new WaitUntil(() => endMove); //Move°¡ ³¡³ª¸é ½ÇÇà
+        yield return enemy.EnemyMove(nextSlot);
 
 
-        //Slot ¹Ù²Ù±â
         _enemyManger.EnemySlots[next].CurUse = enemy;
         _enemyManger.EnemySlots[cur].CurUse = null;
     }
 
-    //°ø°İ ½ÇÇà ÀÓ½Ã
+
     private IEnumerator EnemyAttack(EnemyAttackGA enemyAttackGA)
     {
-        Debug.Log($"Attack Enemy: {enemyAttackGA.AttackEnemy.name}");
-        _player.HealthCompo.TakeDamage(10);
+        _player.TakeDamage(enemyAttackGA.AttackEnemy.Power);
+        _player.AgentAnimatorCompo.HurtPlay();
         yield return new WaitForSeconds(1f);
-        Debug.Log("End Enemy Turn");
-        C_StageManager.Instance.PlayerTurnSet();
+
     }
 }

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedad8933a63a54419bc1865eb2f965a, type: 3}
   m_Name: I5
   m_EditorClassIdentifier: 
-  itemSetting: []
-  itemName: 
+  itemSetting:
+  - itemType: 2
+    itemValue: 123412
+  itemName: 55555555 asdfasdf
   itemIcon: {fileID: 294196505406494439, guid: b6825ef847a32b54eb2d1e42706bb45b, type: 3}
-  itemDescription: 
+  itemDescription: assasasas
+  itemPrice: 333333

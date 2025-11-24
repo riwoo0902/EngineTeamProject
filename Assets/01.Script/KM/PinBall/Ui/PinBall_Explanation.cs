@@ -1,7 +1,6 @@
-using Lrw_PinBall;
+using _01.Script.Lrw.UI.PinBalls;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PinBall_Explanation : MonoBehaviour
 {
@@ -9,20 +8,17 @@ public class PinBall_Explanation : MonoBehaviour
     [SerializeField] private TMP_Text pinBallName;
     [SerializeField] private TMP_Text pinBall_Explanation;
     
-    [Space(5)]
     [Header("PinBall Values")]
     [SerializeField] private TMP_Text pinBall_Mass;
     [SerializeField] private TMP_Text pinBall_Friction;
     [SerializeField] private TMP_Text pinBall_Bounciless;
     [SerializeField] private float spaceDistance = 5f;
     
-    private string _pinBallName;
-    private string _pinBall_Explanation;
-    private float _pinBall_Mass;
-    private float _pinBall_Friction;
-    private float _pinBall_Bounciless;
-
+    [SerializeField] private PinBallUISetting pinBallUISetting;
+    
+    [SerializeField] private Vector2 offset;
     private RectTransform _rectCompo;
+    private CanvasGroup  _canvasGroup;
     private void Awake()
     {
         if (Instance == null)
@@ -33,36 +29,33 @@ public class PinBall_Explanation : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        _canvasGroup = GetComponent<CanvasGroup>();
         _rectCompo = GetComponent<RectTransform>();
         PointerOnExit();
     }
 
-    public void PointerOnEnter(PinBallSO pinball)
+    public void PointerOnEnter(PinBallUISetting pinball,Transform target)
     {
+        _canvasGroup.alpha = 1;
         SettingSOinUi(pinball);
-        _rectCompo.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        _rectCompo.position = new Vector3(_rectCompo.position.x + spaceDistance, _rectCompo.position.y, 0);
+        _rectCompo.position = target.position;
+        _rectCompo.position += (Vector3)offset;
 
     }
-
+    
     public void PointerOnExit()
     {
-        _rectCompo.position = new Vector3(10000, 10000, 0);
+        _canvasGroup.alpha = 0;
     }
 
-    private void SettingSOinUi(PinBallSO pinball)
+    private void SettingSOinUi(PinBallUISetting pinball)
     {
-        _pinBallName = pinball.BallName;
-        _pinBall_Explanation = pinball.BallExplanation;
-        _pinBall_Mass = pinball.Friction;
-        _pinBall_Friction = pinball.Mass;
-        _pinBall_Bounciless = pinball.Bounciness;
+        pinBallUISetting =  pinball;
 
-        pinBallName.text = _pinBallName;
-        pinBall_Explanation.text = _pinBall_Explanation;
-        pinBall_Mass.text = _pinBall_Mass.ToString();
-        pinBall_Friction.text = _pinBall_Friction.ToString();
-        pinBall_Bounciless.text = _pinBall_Bounciless.ToString();
+        pinBallName.text = pinBallUISetting.pinBallName;
+        pinBall_Explanation.text = pinBallUISetting.pinBallExplanation;
+        pinBall_Mass.text = pinBallUISetting.pinBallMass;
+        pinBall_Friction.text = pinBallUISetting.pinBallFriction;
+        pinBall_Bounciless.text = pinBallUISetting.pinBallBounce;
     }
 }

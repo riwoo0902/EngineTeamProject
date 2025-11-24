@@ -5,7 +5,6 @@ using UnityEngine;
 public enum ItemType
 {
     Gold,
-    Defense,
     Damage,
     Heal
 }
@@ -29,4 +28,5 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public Sprite itemIcon;
     public string itemDescription;
+    public int itemPrice;
 }

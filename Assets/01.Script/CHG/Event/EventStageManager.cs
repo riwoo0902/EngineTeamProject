@@ -1,21 +1,24 @@
 using System.Collections.Generic;
+using _01.Script.Lrw.PinBallMap;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EventStageManager : MonoBehaviour
 {
+    [Header("Event")]
     [SerializeField] private List<Button> Buttons;
-    [SerializeField] private GameObject EndButton;
 
+    [SerializeField] private GameObject LeftEndButton;
+    [SerializeField] private GameObject RightEndButton;
     [SerializeField] private Image StoryImage;
     [SerializeField] private TextMeshProUGUI TitleText;
     [SerializeField] private TextMeshProUGUI StoryText;
 
-
     public void Init(C_EventSO eventData)
     {
-        EndButton.SetActive(false);
+        LeftEndButton.SetActive(false);
+        RightEndButton.SetActive(false);
         int choiceCount = eventData.Choices.Count;
 
         for (int i = 0; i < Buttons.Count; i++)
@@ -34,6 +37,16 @@ public class EventStageManager : MonoBehaviour
         TitleText.text = eventData.TitleText;
         StoryText.text = eventData.StoryText;
         StoryImage.sprite = eventData.EventSprite;
+
+        LeftEndButton.GetComponent<Button>().onClick.AddListener(() => {
+            MapManager.Instance.OnMapeDir?.Invoke(MapDir.Left);
+            StageManager.Instance.Level++;
+            });
+        RightEndButton.GetComponent<Button>().onClick.AddListener(() => {
+            MapManager.Instance.OnMapeDir?.Invoke(MapDir.Right);
+            StageManager.Instance.Level++;
+        });
+        
     }
 
     private void ButtonAddReaction(C_EventSO eventData, int i)
@@ -42,7 +55,7 @@ public class EventStageManager : MonoBehaviour
         btnText.text = eventData.Choices[i].ButtonText;
         Buttons[i].onClick.RemoveAllListeners();
         Buttons[i].onClick.AddListener(() => eventData.AddListener(i));
-        Buttons[i].onClick.AddListener(() =>  ButtonChoice(eventData, i));
+        Buttons[i].onClick.AddListener(() => ButtonChoice(eventData, i));
     }
 
     private void ButtonChoice(C_EventSO eventData, int n)
@@ -51,7 +64,8 @@ public class EventStageManager : MonoBehaviour
         foreach (var item in Buttons)
         {
             item.gameObject.SetActive(false);
-            EndButton.SetActive(true);
         }
+        LeftEndButton.SetActive(true);
+        RightEndButton.SetActive(true);
     }
 }
