@@ -6,25 +6,25 @@ namespace Custom.MonoSingleton
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
         [SerializeField] private SingletonSetting singletonSetting;
-        public static T Instance { get; private set; }
+        public static T Instance { get; private set; }  
         protected virtual void Awake()
         {
-            Singleton();
+            InitializeSingleton();
         }
         
-        private void Singleton()
+        private void InitializeSingleton()
         {
             if (Instance == null)
             {
                 Instance = this as T;
-                if(Instance == null) Debug.LogError("T Instance is null");
+                
                 if (singletonSetting.DontDestroyLoadObject)
                 {
                     transform.SetParent(null);
                     DontDestroyOnLoad(gameObject);
                 }
             }
-            else
+            else if (Instance != this)
             {
                 Destroy(gameObject);
             }
@@ -32,7 +32,10 @@ namespace Custom.MonoSingleton
 
         protected virtual void OnDestroy()
         {
-            Instance = null;
+            if (Instance == this)
+            {
+                Instance = null;
+            }
         }
 
         [Serializable]

@@ -6,10 +6,10 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject first;
     [SerializeField] private GameObject secound;
 
-    private bool isFirst = true;
+    private bool isFirst = false;
     private void Start()
     {
-        isFirst = true;
+        isFirst = false;
         first.SetActive(true);
         secound.SetActive(false);
     }
