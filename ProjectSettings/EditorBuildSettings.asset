@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/05.Scenes/CHG/Test/Event.unity
     guid: c2e8ae0a9c1d327479a5503f1f71f925
   - enabled: 1
+    path: Assets/05.Scenes/KM/Tutorial.unity
+    guid: 542fdc45c74d8d147a0e299d616579ab
+  - enabled: 1
     path: Assets/05.Scenes/CHG/Test/Store.unity
     guid: 1001d3536d099104084bc8bb072b4d53
   m_configObjects:
