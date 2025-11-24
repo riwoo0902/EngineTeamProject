@@ -108,7 +108,6 @@ public class BattleUIManager : MonoBehaviour
             texts[0].text = lootCoin.ToString();
             texts[1].text = item.itemName;
             texts[2].text = pinBall.BallName;
-            Debug.Log("dd");
 
             _lootBtns[0].onClick.AddListener(() =>
             {

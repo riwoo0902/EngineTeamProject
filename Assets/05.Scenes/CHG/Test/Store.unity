@@ -1142,7 +1142,7 @@ GameObject:
   - component: {fileID: 169442639}
   - component: {fileID: 169442638}
   m_Layer: 5
-  m_Name: LeftClearBtn
+  m_Name: RightClearBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11092,8 +11092,8 @@ MonoBehaviour:
   PinBallGroup: {fileID: 1249188375}
   ItemGroup: {fileID: 162572498}
   HealBtn: {fileID: 632748297}
-  LeftEndButton: {fileID: 169442635}
-  RightEndButton: {fileID: 2072183203}
+  LeftEndButton: {fileID: 2072183203}
+  RightEndButton: {fileID: 169442635}
 --- !u!4 &2060048646
 Transform:
   m_ObjectHideFlags: 0
@@ -11160,7 +11160,7 @@ GameObject:
   - component: {fileID: 2072183202}
   - component: {fileID: 2072183201}
   m_Layer: 5
-  m_Name: 'RightClearBtn '
+  m_Name: 'LeftClearBtn '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
