@@ -2072,6 +2072,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Setting
       objectReference: {fileID: 0}
+    - target: {fileID: 1075259689810011031, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1556909690944687025, guid: 53f23343ab0135848af8530a78b1fd84, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -11092,8 +11096,8 @@ MonoBehaviour:
   PinBallGroup: {fileID: 1249188375}
   ItemGroup: {fileID: 162572498}
   HealBtn: {fileID: 632748297}
-  LeftClearBtn: {fileID: 169442635}
-  RightClearBtn: {fileID: 2072183203}
+  LeftEndButton: {fileID: 0}
+  RightEndButton: {fileID: 0}
 --- !u!4 &2060048646
 Transform:
   m_ObjectHideFlags: 0
