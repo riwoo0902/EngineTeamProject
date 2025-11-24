@@ -40,7 +40,6 @@ public class MapManager : MonoBehaviour
         currentScene = scene;
         if(scene.name != "Map")
         {
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             return;
         }
         stageTree = FindAnyObjectByType<CreateStageTree>();
