@@ -77,6 +77,7 @@ public class Player : Agent
         }
         
 
+        /*
         float powerMultiplier = 1 + (_power / 200);
         
         //AttackType enemyDefenseType = PlayerTarget.EnemyData.EnemyType;
@@ -87,10 +88,11 @@ public class Player : Agent
         float calculatedDamage = baseDamage * powerMultiplier;
 
         int finalDamage = Mathf.RoundToInt(calculatedDamage);
+        */
 
 
 
-        AttackDamage = finalDamage;
+        //AttackDamage = finalDamage;
 
         PlayerTarget.HealthCompo.TakeDamage(AttackDamage);
 
